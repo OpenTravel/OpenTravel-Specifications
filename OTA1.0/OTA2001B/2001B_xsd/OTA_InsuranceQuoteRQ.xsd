@@ -1,0 +1,1270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:element name="Activities" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Activities that traveler(s) will engage in while on their journey.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AdditionalCharges">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A container for any additional charges to the cost of the insurance plan.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Charge" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Address">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines a physical address</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StreetNmbr" minOccurs="0"/>
+				<xs:element ref="BldgRoom" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AddressLine" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="CityName" minOccurs="0"/>
+				<xs:element ref="StateProv" minOccurs="0"/>
+				<xs:element ref="CountryName" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddressLine">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Additional line of an address as needed to define a physical location.  May be repeated</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="ParsedInd">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Yes"/>
+								<xs:enumeration value="No"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Affiliations">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines the organizations that provide travel services and facilitate insurance sales with which the customer has contact</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Organization" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Employer" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="TravelArranger" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="TravelClub" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Insurance" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AgentSine" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies the in-house travel agent making the request (GDS)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Annual">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines coverage options specific to annual and multi-trip plans</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Coverage" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="InsureTripQty" minOccurs="0"/>
+				<xs:element ref="MaxTripLength"/>
+				<xs:element ref="InsureTripCost" minOccurs="0"/>
+				<xs:element ref="TripFeatures" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="EffectiveDate" type="xs:string"/>
+			<xs:attribute name="AutoRenew">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BankAcct">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Customer bank accounts for payments, either for paper checks or electronic funds transfers.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="BankAcctName" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="BankId" type="xs:string"/>
+			<xs:attribute name="AcctType" type="xs:string"/>
+			<xs:attribute name="BankAcctNumber" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BankAcctName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of the individuals listed on the bank account.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Beneficiaries">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies the individuals a traveler would like to name as beneficiaries for his/her insurance coverage.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Beneficiary" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Beneficiary">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Contains information about a single beneficiary</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PersonName"/>
+				<xs:element ref="Address" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="Relation" type="xs:string"/>
+			<xs:attribute name="BenefitPercent" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BldgRoom" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Building name, room, apartment, or suite number</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="BookingChannel">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies the type of channel used for connectivity that the request is coming through</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="Type">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="GDS"/>
+								<xs:enumeration value="ADS"/>
+								<xs:enumeration value="SCS"/>
+								<xs:enumeration value="PMS"/>
+								<xs:enumeration value="CRS"/>
+								<xs:enumeration value="TOS"/>
+								<xs:enumeration value="All"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="Primary">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Yes"/>
+								<xs:enumeration value="No"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CardHolderName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of the individual cardholder as embossed on the credit/debit card.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CardIssuerName">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of bank or organization issuing the card.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="IssuingBankId" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Charge">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Contains a description and value of a single additional charge to the cost of the plan.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ChargeAmount"/>
+				<xs:element ref="ChargeDescription" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="ChargeName" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ChargeAmount" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Currency amount of the additional charge</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ChargeDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Description of the additional charge</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CitizenCountryName">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Country of citizenship for the individual requesting to be covered by the insurance policy.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="DefaultInd">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Yes"/>
+								<xs:enumeration value="No"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="CountryCode" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CityName">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of city or town.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PostalCode" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ClubMemberName">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of the individual registered with the club.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PersonName"/>
+			</xs:sequence>
+			<xs:attribute name="ClubMemberID" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CompanyName">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a company by name and/or company code that may be associated with a membership or loyalty program, organization, or provider.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="CompanyCode" type="xs:string"/>
+					<xs:attribute name="CodeContext" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Contact">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines contact information for an individual or company.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ContactPerson" minOccurs="0"/>
+				<xs:element ref="ContactTelephone" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="ContactAddress" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="ContactEmail" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="ContactURL" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="ContactCompany" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="DefaultInd">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ContactType" type="xs:string"/>
+			<xs:attribute name="EmergencyFlag" type="xs:string"/>
+			<xs:attribute name="RPH" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ContactAddress">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Address of person/company to contact.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Address"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ContactCompany">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of company to contact.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CompanyName"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ContactEmail">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Email of person/company to contact</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="DefaultInd">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Yes"/>
+								<xs:enumeration value="No"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="EmailType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ContactPerson">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of person to contact.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PersonName"/>
+			</xs:sequence>
+			<xs:attribute name="Relation" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ContactTelephone">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Telephone number of person/company to contact.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Telephone"/>
+			</xs:sequence>
+			<xs:attribute name="DefaultInd">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PhoneUseType" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ContactURL">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">URL of person/company to contact.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="DefaultInd">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Yes"/>
+								<xs:enumeration value="No"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="URL_Type" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CountryName">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of the country specified in the address.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="CountryCode" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Coverage">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Information about the type of insurance coverage that applies to all travelers.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Deductible" minOccurs="0"/>
+				<xs:element ref="PolicyLimit" minOccurs="0"/>
+				<xs:element ref="IndividualLimit" minOccurs="0"/>
+				<xs:element ref="DeliveryType" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="CoverageType" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="TripCancel"/>
+						<xs:enumeration value="TripInterruption"/>
+						<xs:enumeration value="Collision"/>
+						<xs:enumeration value="BaggageDamageLoss"/>
+						<xs:enumeration value="BaggageDelay"/>
+						<xs:enumeration value="Medical"/>
+						<xs:enumeration value="TripProtection"/>
+						<xs:enumeration value="SingleTripCov"/>
+						<xs:enumeration value="MultiTripCov"/>
+						<xs:enumeration value="HazardousActivity"/>
+						<xs:enumeration value="Preexisting"/>
+						<xs:enumeration value="FAP"/>
+						<xs:enumeration value="Dental"/>
+						<xs:enumeration value="Evacuate"/>
+						<xs:enumeration value="TravelAssist"/>
+						<xs:enumeration value="TravelDelay"/>
+						<xs:enumeration value="AccDandD"/>
+						<xs:enumeration value="FamilyCoverage"/>
+						<xs:enumeration value="OtherPlan"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="EffectiveDate" type="xs:string"/>
+			<xs:attribute name="Covered">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Unlimited">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CoveredLuggage">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Contains descriptions of luggage or equipment for which the traveler has requested additional baggage/equipment coverage (if offered by the insurance plan).</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="LuggageItem" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CoveredPerson">
+		<xs:annotation>
+			<xs:documentation xml:lang="en"> Identifies the individual requesting to be covered by the insurance policy.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PersonName"/>
+			</xs:sequence>
+			<xs:attribute name="Relation" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CoveredTraveler">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Contains identifying information as well as coverage requirements and journey information for each individual requesting coverage by the insurance plan.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CoveredPerson"/>
+				<xs:element ref="Email" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Address" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Telephone" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="CitizenCountryName" minOccurs="0"/>
+				<xs:element ref="Document" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Contact" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Beneficiaries" minOccurs="0"/>
+				<xs:element ref="TravelerCoverageReqs" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CreditCard">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Payment accounts authorizing purchases represented by plastic cards often with magnetic strips with data for identification.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CardHolderName" minOccurs="0"/>
+				<xs:element ref="CardIssuerName" minOccurs="0"/>
+				<xs:element ref="Address"/>
+			</xs:sequence>
+			<xs:attribute name="CardType">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Credit"/>
+						<xs:enumeration value="Debit"/>
+						<xs:enumeration value="CentralBill"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="CreditCardCode" type="xs:string"/>
+			<xs:attribute name="CardNumber" type="xs:string" use="required"/>
+			<xs:attribute name="SeriesCode" type="xs:string"/>
+			<xs:attribute name="EffectiveDate" type="xs:string"/>
+			<xs:attribute name="ExpireDate" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Deductible" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The amount of out-of-pocket expense the covered individual must pay per claim</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DeliveryType" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Method by which the confirmation materials will be sent to the customer.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DepartureDate" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Date traveler(s) first depart on their journey.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DepositDate" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Date traveler(s) made their initial monetary deposit towards their journey.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Destination">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a single destination point of the traveler(s) journey as well as arrival and departure dates.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Address"/>
+			</xs:sequence>
+			<xs:attribute name="DestArrivalDate" type="xs:string"/>
+			<xs:attribute name="DestDepartureDate" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Destinations">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Container for any number of destinations that the traveler(s) will reach during their journey. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Destination" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DirectBill">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Company name and location for sending invoice for remittances for travel services.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CompanyName"/>
+				<xs:element ref="Address"/>
+			</xs:sequence>
+			<xs:attribute name="DirectBill_Id" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DocHolderName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of person as given on the document.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DocIssueAuthority" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Government authority issuing the document.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DocIssueLocation" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">City, state/province, and/or country in which document was issued.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Document">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Contains information about documents used for travel, such as passports, driver's licenses or social security numbers.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DocHolderName" minOccurs="0"/>
+				<xs:element ref="DocIssueAuthority" minOccurs="0"/>
+				<xs:element ref="DocIssueLocation" minOccurs="0"/>
+				<xs:element ref="DocumentLimits" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="DocID" type="xs:string"/>
+			<xs:attribute name="DocType" type="xs:string"/>
+			<xs:attribute name="Gender">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Male"/>
+						<xs:enumeration value="Female"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="BirthDate" type="xs:string"/>
+			<xs:attribute name="EffectiveDate" type="xs:string"/>
+			<xs:attribute name="ExpireDate" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DocumentLimits" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Limitations on travel documents.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Email">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Electronic mail address.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="DefaultInd">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Yes"/>
+								<xs:enumeration value="No"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="EmailType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EmplTravelSrvcVendor">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies travel arrangers which employer uses to provide travel services.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CompanyName"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EmployeeName">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of employee requesting insurance coverage by the identified employer.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PersonName"/>
+			</xs:sequence>
+			<xs:attribute name="EmployeeId" type="xs:string"/>
+			<xs:attribute name="EmployeeLevel" type="xs:string"/>
+			<xs:attribute name="EmployeeTitle" type="xs:string"/>
+			<xs:attribute name="EmployeeStatusType">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Active"/>
+						<xs:enumeration value="Retired"/>
+						<xs:enumeration value="Leave"/>
+						<xs:enumeration value="Terminated"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Employer">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Company or organization that employs the customer.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="EmployerName" minOccurs="0"/>
+				<xs:element ref="RelatedEmployerName" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="EmployeeName" minOccurs="0"/>
+				<xs:element ref="InternalRefNmbr" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="EmplTravelSrvcVendor" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="EmployerLoyalty" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EmployerLoyalty">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Loyalty programs with travel service vendors to which the employer subscribes.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="LoyaltyRPH" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EmployerName">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of the company or organization that employs the customer.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CompanyName"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FAP_Amt" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Amount of flight accident protection (FAP) requested by the traveler (if offered by the insurance plan).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FinalPayDate" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Date traveler(s) made their last payment towards their journey.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GivenName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Given name, first name or names.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IndividualLimit" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The dollar amount of available coverage for an individual.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Insurance">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Insurance for travel already carried by customer</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="InsuredName" minOccurs="0"/>
+				<xs:element ref="InsuranceCompany" minOccurs="0"/>
+				<xs:element ref="Underwriter" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="InsuranceType" type="xs:string"/>
+			<xs:attribute name="PolicyNumber" type="xs:string"/>
+			<xs:attribute name="EffectiveDate" type="xs:string"/>
+			<xs:attribute name="ExpireDate" type="xs:string"/>
+			<xs:attribute name="RPH" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InsuranceCompany">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identification of the insurance company providing existing coverage.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true"/>
+	</xs:element>
+	<xs:element name="InsuranceCustomer">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Contains data on the buyer and others covered by the requested insurance services.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PersonName"/>
+				<xs:element ref="Email"/>
+				<xs:element ref="Address" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Telephone" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="CoveredTraveler" maxOccurs="unbounded"/>
+				<xs:element ref="Contact" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Payment" minOccurs="0"/>
+				<xs:element ref="Affiliations" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InsureTripCost" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Estimated trip cost, or the total price of the journey for the traveler.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="InsureTripQty" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The number of trips the traveler(s) plan on taking during the year.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="InsuredName">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The customer's name as it appears on his/her current insurance policy.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true"/>
+	</xs:element>
+	<xs:element name="InternalRefNmbr" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Accounting code(s) assigned to travel for employee.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LuggageDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A detailed description of what the piece of luggage/equipment contains.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LuggageItem">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Contains a description and estimated value for a specific piece of luggage/equipment for which the traveler would like additional insurance.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="LuggageDescription"/>
+				<xs:element ref="LuggageValue"/>
+				<xs:element ref="LuggagePremium" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="LuggageType" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LuggagePremium" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Additional cost to insure luggage/equipment.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LuggageValue" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Estimated value of the piece of luggage/equipment.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MaxTripLength" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The maximum trip length the traveler(s) plan on taking during the year.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MiddleName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Middle name or names.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NamePrefix" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Salutation or honorific (e.g. Mr., Mrs., Ms., Miss, Dr., etc).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NameSuffix" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Suffix that follows surname.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NameTitle" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Degree or honors often used with a person's name.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="OTA_InsuranceQuoteRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Container for one or more insurance plan quote request.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PlanForQuoteRQ" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrgMemberName">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of the member of the organization</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PersonName"/>
+			</xs:sequence>
+			<xs:attribute name="OrgMemberID" type="xs:string"/>
+			<xs:attribute name="OrgLevel" type="xs:string"/>
+			<xs:attribute name="OrgMemberTitle" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrgName">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of the organization.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CompanyName"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrgTravelSrvcVendor">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies travel service suppliers to organization providing benefits, privaleges, or discounts.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CompanyName"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Organization">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Membership organization or agency associated with customer.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="OrgMemberName" minOccurs="0"/>
+				<xs:element ref="OrgName" minOccurs="0"/>
+				<xs:element ref="RelatedOrgName" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="OrgTravelSrvcVendor" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="POS">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a single or multiple source that represents a company or person.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Position"/>
+				<xs:element ref="BookingChannel"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="PseudoCityCode"/>
+					<xs:element ref="AgentSine"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute name="ISOCountry" type="xs:string"/>
+			<xs:attribute name="ISOCurrency" type="xs:string"/>
+			<xs:attribute name="AgentDutyCode" type="xs:string"/>
+			<xs:attribute name="CarrierCode" type="xs:string"/>
+			<xs:attribute name="FirstDepartPoint" type="xs:string"/>
+			<xs:attribute name="AirportCode" type="xs:string"/>
+			<xs:attribute name="UniqueId" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Package">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines coverage options specific to package plans.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Coverage" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="InsureTripCost" minOccurs="0"/>
+				<xs:element ref="TripFeatures" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="EffectiveDate" type="xs:string"/>
+			<xs:attribute name="ExpireDate" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Payment">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Contains payment information for the individual requesting the insurance product.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PaymentForm"/>
+				<xs:element ref="PlanCost" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PaymentForm">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Method of paying for insurance plan.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CreditCard" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="BankAcct" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="DirectBill" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Voucher" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="CostCenterId" type="xs:string"/>
+			<xs:attribute name="RPH" type="xs:string"/>
+			<xs:attribute name="ISOCurrency" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PersonName">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Names of an individual.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="NamePrefix" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="GivenName" minOccurs="0"/>
+				<xs:element ref="MiddleName" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Surname"/>
+				<xs:element ref="NameSuffix" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="NameTitle" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="DefaultInd">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="NameType" type="xs:string"/>
+			<xs:attribute name="Gender">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Male"/>
+						<xs:enumeration value="Female"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="BirthDate" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PlanCost">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Contains information about the total price of the insurance plan.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Premium" minOccurs="0"/>
+				<xs:element ref="AdditionalCharges" minOccurs="0"/>
+				<xs:element ref="TotalPlanCost"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PlanForQuoteRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Contains a quote request for a single insurance plan.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="InsuranceCustomer"/>
+				<xs:element ref="PlanType"/>
+				<xs:element ref="POS" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="ISOCurrency" type="xs:string"/>
+			<xs:attribute name="PlanID" type="xs:string"/>
+			<xs:attribute name="Type" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PlanOption">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies information or requirements that may be unique to the particular plan.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="OptionName" type="xs:string"/>
+			<xs:attribute name="OptionValue" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PlanType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides vendor with information about the type of plan being booked.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="Annual"/>
+				<xs:element ref="Package"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PolicyLimit" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The dollar amount of available coverage for the policy.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Position">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Geographic position of server that sends booking request.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Latitude" type="xs:string"/>
+			<xs:attribute name="Longitude" type="xs:string"/>
+			<xs:attribute name="Altitude" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PreX_Cond">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Contains information on a single pre-existing condition.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="DiagnosisDate" type="xs:string"/>
+					<xs:attribute name="LastTreatmentDate" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PreX_Conds">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Contains a description of the traveler's pre-existing conditions, the diagnosis date of the condition, and the date of last treatment.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PreX_Cond"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Premium" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Cost for the insurance coverage alone (minus any fees/taxes).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PseudoCityCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies the location or city code of the office making the request.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RelatedEmployerName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of a company that is related to the employer for which the customer works.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RelatedOrgName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a subsidiary, or entity related to the organization.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ReturnDate" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Date traveler(s) return home from their journey.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="StateProv">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">State, province, or region name or code that identifies a location.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="StateCode" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="StreetNmbr">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Street name; number on street.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PO_Box" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SupplementalData">
+		<xs:annotation>
+			<xs:documentation/>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="Surname" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">surname, last name or names.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Telephone">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a telephone number.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="PhoneTechType" type="xs:string"/>
+			<xs:attribute name="PhoneUseType" type="xs:string"/>
+			<xs:attribute name="CountryAccessCode" type="xs:string"/>
+			<xs:attribute name="AreaCityCode" type="xs:string" use="required"/>
+			<xs:attribute name="PhoneNumber" type="xs:string" use="required"/>
+			<xs:attribute name="Extension" type="xs:string"/>
+			<xs:attribute name="PIN" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TotalPlanCost" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Total cost of the insurance plan (premium + any additional charges).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TravelArranger">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a travel arranger associated with insurance booking.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="DefaultInd">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Yes"/>
+								<xs:enumeration value="No"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="TravelArrangerType" type="xs:string"/>
+					<xs:attribute name="ContactRPH" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TravelClub">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Special-privalege club room and related services offered by travel vendors.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TravelClubName"/>
+				<xs:element ref="ClubMemberName" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="ExpireDate" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TravelClubName">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of special-privalege club.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CompanyName"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TravelerAge" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Age of the individual traveler.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TravelerCoverageReqs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Contains certain traveler-specific information required for quoting or booking an insurance plan.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="InsureTripCost" minOccurs="0"/>
+				<xs:element ref="FAP_Amt" minOccurs="0"/>
+				<xs:element ref="CoveredLuggage" minOccurs="0"/>
+				<xs:element ref="PreX_Conds" minOccurs="0"/>
+				<xs:element ref="TravelerAge" minOccurs="0"/>
+				<xs:element ref="PlanOption" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TripFeatures">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Information about the traveler(s) journey that is necessary for quoting/booking the insurance.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DepartureDate" minOccurs="0"/>
+				<xs:element ref="ReturnDate" minOccurs="0"/>
+				<xs:element ref="DepositDate" minOccurs="0"/>
+				<xs:element ref="FinalPayDate" minOccurs="0"/>
+				<xs:element ref="Destinations" minOccurs="0"/>
+				<xs:element ref="Activities" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="TripOperator" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TripOperator">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Company or organization operating the trip/tour/cruise</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CompanyName"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="URL">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Web site address.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="URL_Type" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Underwriter" type="xs:string"/>
+	<xs:element name="Voucher">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="EffectiveDate" type="xs:string"/>
+					<xs:attribute name="ExpireDate" type="xs:string"/>
+					<xs:attribute name="SeriesCode" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

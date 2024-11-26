@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="HotelReservation.xsd"/>
+	<xs:include schemaLocation="RoutingHop.xsd"/>
+	<xs:element name="OTA_HotelResNotifRS">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UniqueId"/>
+				<xs:choice>
+					<xs:sequence>
+						<xs:element ref="Success"/>
+						<xs:element ref="Warnings" minOccurs="0"/>
+						<xs:element ref="HotelReservations" minOccurs="0"/>
+					</xs:sequence>
+					<xs:element ref="Errors"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			<xs:attribute name="ResResponseType">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Initiate"/>
+						<xs:enumeration value="Ignore"/>
+						<xs:enumeration value="Modify"/>
+						<xs:enumeration value="Commit"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelReservations">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelReservation" maxOccurs="unbounded"/>
+				<xs:element ref="RQRouting" minOccurs="0"/>
+				<xs:element ref="RoutingHops" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RoutingHops">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RoutingHop" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RQRouting">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RoutingHop" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

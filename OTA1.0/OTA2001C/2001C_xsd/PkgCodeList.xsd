@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.0 (http://www.xmlspy.com) by Derek Williams (Travel Technology Initiative Ltd) -->
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:simpleType name="AgeQualifyingCode">
+		<xs:annotation>
+			<xs:documentation>AgeQualifyingCode : A code representing a business rule that determines the charges for a Customer based upon age range.  This attribute allows for an increase in rate by occupant class.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Adult"/>
+			<xs:enumeration value="Child"/>
+			<xs:enumeration value="Infant"/>
+			<xs:enumeration value="Free Adult"/>
+			<xs:enumeration value="Free Child"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CurrencyCode">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="FFR"/>
+			<xs:enumeration value="GBP"/>
+			<xs:enumeration value="USD"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LanguageCode">
+		<xs:annotation>
+			<xs:documentation>ISO 639 codes</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EN"/>
+			<xs:enumeration value="FR"/>
+			<xs:enumeration value="GR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NationalityCode">
+		<xs:annotation>
+			<xs:documentation>A code to identify the country of origin of a person by birth or naturalisation.(UNICORN U269). ISO 3166 - use code set for 3207 Country, coded.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ES"/>
+			<xs:enumeration value="FR"/>
+			<xs:enumeration value="GB"/>
+			<xs:enumeration value="US"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgAccommodationType">
+		<xs:annotation>
+			<xs:documentation>Type of accommodation e.g Hotel, Villa, Tent.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="All-Inclusive Resort"/>
+			<xs:enumeration value="Apartment"/>
+			<xs:enumeration value="Bed and Breakfast"/>
+			<xs:enumeration value="Cabin or Bungalow"/>
+			<xs:enumeration value="Corporate"/>
+			<xs:enumeration value="Hostel"/>
+			<xs:enumeration value="Inn"/>
+			<xs:enumeration value="Health Spa"/>
+			<xs:enumeration value="Holiday Resort"/>
+			<xs:enumeration value="Hotel"/>
+			<xs:enumeration value="Lodge"/>
+			<xs:enumeration value="Condominium"/>
+			<xs:enumeration value="Conference Center"/>
+			<xs:enumeration value="Chalet"/>
+			<xs:enumeration value="Campground"/>
+			<xs:enumeration value="Guest House Limited Service"/>
+			<xs:enumeration value="Guest Farm"/>
+			<xs:enumeration value="Meeting Resort"/>
+			<xs:enumeration value="Monastary"/>
+			<xs:enumeration value="Motel"/>
+			<xs:enumeration value="Ranch"/>
+			<xs:enumeration value="Self-Catering Accommodation"/>
+			<xs:enumeration value="Vacation Home"/>
+			<xs:enumeration value="Villa"/>
+			<xs:enumeration value="Wildlife Reserve"/>
+			<xs:enumeration value="Cruise"/>
+			<xs:enumeration value="Sailing ship"/>
+			<xs:enumeration value="Ferry"/>
+			<xs:enumeration value="Mobile-Home"/>
+			<xs:enumeration value="Tent"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgAccommodationUnitCode">
+		<xs:annotation>
+			<xs:documentation>Type of accommodation unit in code form eg room type (UNICORN U394)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SINGLE"/>
+			<xs:enumeration value="TWIN"/>
+			<xs:enumeration value="TRIPLE"/>
+			<xs:enumeration value="QUAD"/>
+		</xs:restriction>
+		<!-- HWG - RoomCategoryCode -->
+	</xs:simpleType>
+	<xs:simpleType name="PkgAirportCode">
+		<xs:annotation>
+			<xs:documentation>A code identifying an airport - controlling authority IATA</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="LHR"/>
+			<xs:enumeration value="BHX"/>
+			<xs:enumeration value="LAX"/>
+			<xs:enumeration value="ORD"/>
+			<xs:enumeration value="LGW"/>
+			<xs:enumeration value="PMI"/>
+			<xs:enumeration value="MAN"/>
+			<xs:enumeration value="LTN"/>
+			<xs:enumeration value="MIA"/>
+			<xs:enumeration value="LCA"/>
+			<xs:enumeration value="PFO"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgBoardCode">
+		<xs:annotation>
+			<xs:documentation>The code for a meal plan e.g. HB (Half Board)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AB"/>
+			<xs:enumeration value="AI"/>
+			<xs:enumeration value="BB"/>
+			<xs:enumeration value="FB"/>
+			<xs:enumeration value="HB"/>
+			<xs:enumeration value="RO"/>
+			<xs:enumeration value="SC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgCarHireGroupCode">
+		<xs:annotation>
+			<xs:documentation>The code identifying a car hire group</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="C"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgGenderCode">
+		<xs:annotation>
+			<xs:documentation>A code indicating the gender of a passenger. (UNICORN U266) M=Male, F=Female, U=Unknown</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="F"/>
+			<xs:enumeration value="U"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgPersonalInsuranceCode">
+		<xs:annotation>
+			<xs:documentation>A coded identification of a type of insurance. This element could be equivalent to UN/EDIFACT 4497 Insurance cover type, coded)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Ski"/>
+			<xs:enumeration value="Worldwide"/>
+			<xs:enumeration value="Europe"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgProductType">
+		<xs:annotation>
+			<xs:documentation>Describes a type of TTL product, e.g. flight only, air package etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Flight Only"/>
+			<xs:enumeration value="Fly Drive"/>
+			<xs:enumeration value="Motor Inclusive"/>
+			<xs:enumeration value="Air Inclusive"/>
+			<xs:enumeration value="Ferry Inclusive"/>
+			<xs:enumeration value="Rail Inclusive"/>
+			<xs:enumeration value="Accommodation Only"/>
+			<xs:enumeration value="Sport"/>
+			<xs:enumeration value="Sailing"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgTitleCode">
+		<xs:annotation>
+			<xs:documentation>Passenger title eg Mr, Mrs, Miss, Ms, Lord, Lady, Sir, Madam, Herr, Mme. (UNICORN U264 4AN and U368 25AN)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Mr"/>
+			<xs:enumeration value="Mrs."/>
+			<xs:enumeration value="Mstr"/>
+			<xs:enumeration value="Miss"/>
+			<xs:enumeration value="Ms"/>
+			<xs:enumeration value="Lord"/>
+			<xs:enumeration value="Lady"/>
+			<xs:enumeration value="Sir"/>
+			<xs:enumeration value="Dr"/>
+			<xs:enumeration value="Rev"/>
+			<xs:enumeration value="Mme"/>
+			<xs:enumeration value="Herr"/>
+			<xs:enumeration value="Frau"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgTransportServiceClassCode">
+		<xs:annotation>
+			<xs:documentation>Class of travel or services. (UNICORN U259)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="D"/>
+			<xs:enumeration value="E"/>
+			<xs:enumeration value="F"/>
+			<xs:enumeration value="G"/>
+			<xs:enumeration value="H"/>
+			<xs:enumeration value="J"/>
+			<xs:enumeration value="K"/>
+			<xs:enumeration value="L"/>
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="P"/>
+			<xs:enumeration value="Q"/>
+			<xs:enumeration value="R"/>
+			<xs:enumeration value="S"/>
+			<xs:enumeration value="T"/>
+			<xs:enumeration value="U"/>
+			<xs:enumeration value="V"/>
+			<xs:enumeration value="W"/>
+			<xs:enumeration value="Y"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PortCode">
+		<xs:annotation>
+			<xs:documentation>A code identifying a departure place/location (UNICORN U271 - UN LOCODES) or Place of departure, codes as specified in the Service Agreement (UNICORN U273.)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="8"/>
+			<xs:enumeration value="DOVE"/>
+			<xs:enumeration value="CALA"/>
+			<xs:enumeration value="NEWH"/>
+			<xs:enumeration value="DIEP"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PromotionCode">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Promotion code is the identifier used by the host to link directly with a specific named advertising campaign. By including the required code, the client is able to gain access to special offers which may have been created for a specifically targeted group via a CRM system or for a wider advertising campaign using Television or press adverts.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+</xs:schema>

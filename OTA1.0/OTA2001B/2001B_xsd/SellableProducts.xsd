@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="ProductDescriptions.xsd"/>
+	<xs:element name="SellableProduct">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ProductDescriptions"/>
+			</xs:sequence>
+			<xs:attribute name="SellableProductRPH" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This is a reference placeholder, used as an index for this object.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InvCodeType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type that identifies whether the InvCode is a single inventorialble item or a group of inventoriable items.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: Does Not Apply, Inv Code, Inv Grouping Code.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="DoesNotApply"/>
+						<xs:enumeration value="InvCode"/>
+						<xs:enumeration value="InvGroupingCode"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="InvCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification of the inventory being blocked.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SellableProducts">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The SellableProduct class defines the inventoriable item for this rate plan.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="SellableProduct" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA/2002/11" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA/2002/11" elementFormDefault="qualified" version="2002B">
+	<xs:include schemaLocation="OTA_AirCommonTypes.xsd"/>
+	<xs:element name="OTA_AirRulesRQ">
+		<xs:annotation>
+			<xs:documentation>
+	The Rules Request message requests text rules for a specific fare class code for an airline and city pair on a specific date. Optional information 	negotiated fare contract codes to be included in the message.
+	The rules request contains similar to a Fare Rules entry on an airline CRS or GDS.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="POS" type="POS_Type">
+					<xs:annotation>
+						<xs:documentation>Point of sale object. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="RuleReqInfo">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="FareRuleInfoType">
+								<xs:sequence minOccurs="0">
+									<xs:element name="SubSection" minOccurs="0" maxOccurs="99">
+										<xs:complexType>
+											<xs:attribute name="SubTitle" type="StringLength32" use="optional"/>
+											<xs:attribute name="SubCode" type="StringLength16" use="optional"/>
+											<xs:attribute name="SubSectionNumber" type="StringLength8" use="optional"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="Profile.xsd"/>
+	<xs:include schemaLocation="ProfileRef.xsd"/>
+	<xs:include schemaLocation="ProfileType.xsd"/>
+	<xs:element name="BookingChannelCode" type="xs:string"/>
+	<xs:element name="BookingChannelCodes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collections of strings that identify booking channels, such as GDSs or Internet sites, etc., associated with this viewership record. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="BookingChannelCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="ChannelCodesInclusive" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates whether the collection of Channel Codes for booking channels is inclusive or exclusive.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: false=Exclusive, true=Inclusive.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LocationCode" type="xs:string"/>
+	<xs:element name="LocationCodes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collections of strings that identify the locations, such as regions or countries, etc., associated with this viewership record. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="LocationCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="LocationCodesInclusive" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates whether the collection of Location Codes is inclusive or exclusive.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: false=Exclusive, true=Inclusive.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProfileTypes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ProfileType" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProfileRefs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ProfileRef" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Profiles">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Profile" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SystemCode" type="xs:string"/>
+	<xs:element name="SystemCodes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of strings that identify the systems associated with this viewership record. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="SystemCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="SystemCodesInclusive" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates whether the collection of System Codes is inclusive or exclusive.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: false=Exclusive, true=Inclusive.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Viewership">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Viewership defines a system that is allowed to view the rateplan identified in a Hotel Rate Plan Notification message.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ViewershipCodes"/>
+				<xs:element ref="SystemCodes"/>
+				<xs:element ref="ProfileTypes" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="ProfileRefs" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Profiles" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="LocationCodes" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="BookingChannelCodes" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="ViewershipRPH" type="xs:byte" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This integer is a reference placeholder, used as an index for multiple Viewership classes.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ViewOnly" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates whether this rate plan is bookable by the entity having viewership. Values: false= Bookable, true= View Only (not bookable).  </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ViewershipCode" type="xs:string"/>
+	<xs:element name="ViewershipCodes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ViewershipCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Viewerships">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Viewerships determine  the distribution channel(s) for a rate plan. As an optional element, the absence of Viewerships implies a generally available rate, while the presence of a Viewerships collection implies qualifications on the rate.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Viewership" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

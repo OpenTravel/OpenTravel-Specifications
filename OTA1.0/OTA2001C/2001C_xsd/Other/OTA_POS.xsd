@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="UniqueId.xsd"/>
+	<xs:element name="POS">
+		<xs:annotation>
+			<xs:documentation>POS defines the identity of the party that is connecting to the system and is making a
+request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Source" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Source">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UniqueId" maxOccurs="5"/>
+				<xs:element ref="Position" minOccurs="0"/>
+				<xs:element ref="BookingChannel" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="AgentSine" type="xs:string"/>
+			<xs:attribute name="PseudoCityCode" type="xs:string"/>
+			<xs:attribute name="ISOCountry" type="xs:string"/>
+			<xs:attribute name="ISOCurrency" type="xs:string"/>
+			<xs:attribute name="AgentDutyCode" type="xs:string"/>
+			<xs:attribute name="CarrierCode" type="xs:string"/>
+			<xs:attribute name="AirportCode" type="xs:string"/>
+			<xs:attribute name="FirstDepartPoint" type="xs:string"/>
+			<xs:attribute name="ERSPUserId" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Position">
+		<xs:complexType>
+			<xs:attribute name="Latitude" type="xs:string"/>
+			<xs:attribute name="Longitude" type="xs:string"/>
+			<xs:attribute name="Altitude" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BookingChannel">
+		<xs:complexType>
+			<xs:attribute name="Type" use="required">
+				<xs:annotation>
+					<xs:documentation>The type of booking channel. Valid Values: Global Distribution System (GDS), Alternative Distribution System (ADS), Sales and Catering System (SCS), Property Management System (PMS), Central Reservation System (CRS), Tour Operator System (TOS), Internet and ALL</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="GDS"/>
+						<xs:enumeration value="ADS"/>
+						<xs:enumeration value="SCS"/>
+						<xs:enumeration value="PMS"/>
+						<xs:enumeration value="CRS"/>
+						<xs:enumeration value="TOS"/>
+						<xs:enumeration value="Internet"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Primary" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the enumerated booking channel is the primary means of connectivity used by the source.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

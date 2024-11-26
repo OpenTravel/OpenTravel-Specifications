@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="GetGroundOffers"
+    targetNamespace="http://www.opentravel.org/OTM/product/Ground/v1"
+    xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2msg="http://opentravel.org/common/message/v02"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:pgt-0100="http://www.opentravel.org/OTM/product/Ground/v1"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.opentravel.org/OTM/product/Ground/v1">
+            <xsd:annotation>
+                <xsd:appinfo>
+                    <otm:Library>
+                        <otm:ProjectName>Groundv3.otp</otm:ProjectName>
+                        <otm:ServiceName>GetGroundOffers</otm:ServiceName>
+                        <otm:LibraryName>Ground</otm:LibraryName>
+                        <otm:LibraryVersion>1.0.0</otm:LibraryVersion>
+                        <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                        <otm:SourceFile>/Ground_1_0_0.otm</otm:SourceFile>
+                        <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                        <otm:CompileDate>2017-05-24T10:16:59.823-04:00</otm:CompileDate>
+                    </otm:Library>
+                </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:include schemaLocation="Ground_1_0_0_Trim.xsd"/>
+            <xsd:import
+                namespace="http://schemas.xmlsoap.org/soap/envelope/" schemaLocation="built-ins/SOAP_envelope.xsd"/>
+            <xsd:import
+                namespace="http://opentravel.org/common/message/v02" schemaLocation="built-ins/OTA2_Message_v2.0.0.xsd"/>
+            <xsd:import
+                namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="GetGroundOffersRQ">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="pgt-0100:GetGroundOffersRQ" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="GetGroundOffersRS">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="pgt-0100:GetGroundOffersRS" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="GetGroundOffersNotif">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="pgt-0100:GetGroundOffersNotif" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="GetGroundOffersFault">
+        <wsdl:part element="env:Fault" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:portType name="GetGroundOffersPortType">
+        <wsdl:operation name="GetGroundOffers">
+            <wsdl:input message="pgt-0100:GetGroundOffersRQ"/>
+            <wsdl:output message="pgt-0100:GetGroundOffersRS"/>
+            <wsdl:fault message="pgt-0100:GetGroundOffersFault" name="GetGroundOffersFault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    
+</wsdl:definitions>

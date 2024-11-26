@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="Golf"
+    targetNamespace="http://www.opentravel.org/OTM/organization/golf/v1"
+    xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:orggf-0100="http://www.opentravel.org/OTM/organization/golf/v1"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2msg="http://opentravel.org/common/message/v02"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.opentravel.org/OTM/organization/golf/v1">
+            <xsd:annotation>
+                <xsd:appinfo>
+                    <otm:Library>
+                        <otm:ProjectName>GolfProjectOTM022417_Publication2.otp</otm:ProjectName>
+                        <otm:ServiceName>Golf</otm:ServiceName>
+                        <otm:LibraryName>OrganizationGolf</otm:LibraryName>
+                        <otm:LibraryVersion>1.0.0</otm:LibraryVersion>
+                        <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                        <otm:SourceFile>/OrganizationGolf_1_0_0.otm</otm:SourceFile>
+                        <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                        <otm:CompileDate>2017-02-24T17:20:54.448-05:00</otm:CompileDate>
+                    </otm:Library>
+                </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:include schemaLocation="OrganizationGolf_1_0_0_Trim.xsd"/>
+            <xsd:import
+                namespace="http://schemas.xmlsoap.org/soap/envelope/" schemaLocation="built-ins/SOAP_envelope.xsd"/>
+            <xsd:import
+                namespace="http://opentravel.org/common/message/v02" schemaLocation="built-ins/OTA2_Message_v2.0.0.xsd"/>
+            <xsd:import
+                namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="SearchFacilityRQ">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="orggf-0100:SearchFacilityRQ" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="SearchFacilityRS">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="orggf-0100:SearchFacilityRS" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="SearchFacilityNotif">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="orggf-0100:SearchFacilityNotif" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="SearchFacilityFault">
+        <wsdl:part element="env:Fault" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="ReadFacilityRQ">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="orggf-0100:ReadFacilityRQ" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="ReadFacilityRS">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="orggf-0100:ReadFacilityRS" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="ReadFacilityNotif">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="orggf-0100:ReadFacilityNotif" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="ReadFacilityFault">
+        <wsdl:part element="env:Fault" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:portType name="GolfPortType">
+        <wsdl:operation name="SearchFacility">
+            <wsdl:input message="orggf-0100:SearchFacilityRQ"/>
+            <wsdl:output message="orggf-0100:SearchFacilityRS"/>
+            <wsdl:fault message="orggf-0100:SearchFacilityFault" name="SearchFacilityFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="ReadFacility">
+            <wsdl:input message="orggf-0100:ReadFacilityRQ"/>
+            <wsdl:output message="orggf-0100:ReadFacilityRS"/>
+            <wsdl:fault message="orggf-0100:ReadFacilityFault" name="ReadFacilityFault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    
+</wsdl:definitions>

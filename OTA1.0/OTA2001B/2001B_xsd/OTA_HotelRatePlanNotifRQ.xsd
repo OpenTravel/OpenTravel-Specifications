@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="DateTimeSpan.xsd"/>
+	<xs:include schemaLocation="ArrivalDaysOfWeek.xsd"/>
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:include schemaLocation="Viewership.xsd"/>
+	<xs:include schemaLocation="SellableProducts.xsd"/>
+	<xs:include schemaLocation="InvBlockCode.xsd"/>
+	<xs:element name="RatePlanCode">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The RatePlanCodeassigned by the receiving system for the inventory item in response to a new rate plan notification. (Implementation Notes:  This would only be returned when the notification is of type New and the sender is translating RatePlanCode values. On subsequent transactions for this rate plan, the sender would populate the RatePlanCode attribute with this value returned by the receiver.)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:string">
+					<xs:attribute name="RatePlanCodeType" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Values: Does Not Apply, Rate Plan Code, Rate Plan Grouping Code.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="DoesNotApply"/>
+								<xs:enumeration value="RatePlanCode"/>
+								<xs:enumeration value="RatePlanGroupingCode"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RatePlanGroupingCode">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The identification of the rate plan grouping.  Whether to use the sending/querying or the receiving/responding system’s identification depends on which system is doing the translating. If RatePlanCodeType = "RatePlanGroupingCode", this could be the parent of the grouping. (This allows for nested grouping.) </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:string">
+					<xs:attribute name="RatePlanCodeType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Values: Does Not Apply, Rate Plan Code, Rate Plan Grouping Code.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="DoesNotApply"/>
+								<xs:enumeration value="RatePlanCode"/>
+								<xs:enumeration value="RatePlanGroupingCode"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OTA_HotelRatePlanNotifRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_HotelRatePlanNotifRQ is the message that sends the notification of a new inventory item, such as a room type or service type created for the hotel that did not previously exist.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelReference"/>
+				<xs:element ref="RatePlanCode"/>
+				<xs:element ref="RatePlanGroupingCode" minOccurs="0"/>
+				<xs:element ref="AvailableDaysOfWeek"/>
+				<xs:element ref="ArrivalDaysOfWeek"/>
+				<xs:element ref="RequiredDaysOfWeek"/>
+				<xs:element ref="StayDateRange"/>
+				<xs:element ref="InvBlockCodes" minOccurs="0"/>
+				<xs:element ref="RatePlanShoulders" minOccurs="0"/>
+				<xs:element ref="SellableProducts"/>
+				<xs:element ref="Viewerships" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This element defines standard attributes that appear on the root element for all OTA payloads.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+			<xs:attribute name="NmbrRequiredNights" type="xs:byte" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Nmbr of nights required to a stay using this rate plan.  Note: This attribute applies only to the RequiredDOW.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RatePlanNotifType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type that indicates whether this is a new rate plan or an update of an existing rate plan.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: New, Delta Modification, Full Overlay Modification.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="New"/>
+						<xs:enumeration value="Delta"/>
+						<xs:enumeration value="Overlay"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="RatePlanStatusType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type that indicates the status of the rate plan, ie: whether this notification is an initial announcement of a new rate plan, an update of an active (bookable) rate plan, or a notification of a rate plan that is no longer in effect.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: Initial, Active, Deactivated.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Initial"/>
+						<xs:enumeration value="Active"/>
+						<xs:enumeration value="Deactivated"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="GenerallyBookable" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates whether this rate plan can be booked by those not in the viewership collection.  If this attribute is False (0), then the viewerships collection lists those who have view-only or bookable status for this rate plan.  If this attribute is True (1), then the viewerships collection lists those who have view-only or not-viewable status for this rate plan. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PriceViewable" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates whether the price for this rate plan can be viewed, or whether the guest must contact another entity to obtain price information. </xs:documentation>
+					<xs:documentation xml:lang="en">Valid values: 0 = (No) Price Not Viewable, 1 = (Yes) Price Viewable.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RatePlanName" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The overall descriptive name of the rate plan. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ValidBookingMinOffset" type="xs:duration" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Minimum offset of time required prior to guest's arrival during which this inventory block can be booked. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ValidBookingMaxOffset" type="xs:duration" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Maximum offset of time required prior to guest's arrival during which this rate plan can be booked.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RatePlanShoulder">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The Rate Plan Shoulder defines the allowable dates and where to take inventory during the shoulder seasons for this rate plan.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="SellableProducts"/>
+			</xs:sequence>
+			<xs:attribute name="ShoulderRPH" type="xs:int" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This is a reference placeholder, used as an index for this object.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PreShoulderSellLimit" type="xs:byte" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Limit of inventory that can be sold before the StayDateRange.  It should be understood that any stay must book at least one date in the StayDateRange.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PostShoulderSellLimit" type="xs:byte" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Limit of inventory that can be sold after the StayDateRange. It should be understood that any stay must book at least one date in the StayDateRange.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PreShoulderStartDate" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The earliest stay date that this rate plan/inventory block can be sold.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PostShoulderEndDate" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The latest stay date that this rate plan/inventory block can be sold.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RatePlanShoulders">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RatePlanShoulder"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="StayDateRange">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Date range covered by this rate plan.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DateTimeSpan"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

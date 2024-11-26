@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/order/v4"
+    version="4.0.0"
+    xmlns:order-0400="http://www.opentravel.org/OTM/order/v4"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0400="http://www.opentravel.org/OTM/Common/v4"
+    xmlns:ota2-0500="http://www.opentravel.org/OTM/Common/v5"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:pgt-0300="http://www.opentravel.org/OTM/product/Ground/v3" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:LibraryName>Order</otm:LibraryName>
+                <otm:LibraryVersion>4.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>DRAFT</otm:LibraryStatus>
+                <otm:SourceFile>/Order_4_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2019-10-30T13:33:14.839-04:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/Ground/v3" schemaLocation="Ground_3_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v4" schemaLocation="CodeList_4_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v5" schemaLocation="Common_5_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element name="GuaranteesAccepted" type="order-0400:GuaranteesAccepted"/>
+    <xsd:element name="PaymentsAccepted" type="order-0400:GuaranteesAccepted"/>
+    
+    <xsd:complexType name="GuaranteesAccepted">
+        <xsd:annotation>
+            <xsd:documentation source="Description">TODO- (split between type accepted in location and guest provided)GuaranteeAccepted</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GuaranteesAccepted</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="50" minOccurs="0" name="Type" type="ota2-0400:PaymentType_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Describes the forms of guarantee that are acceptable.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="30" minOccurs="0"
+                name="PaymentCardCode" type="ota2-0400:PaymentCardCode_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Describes the acceptable forms of payment cards.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="noCardHolderInfoReqInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">If true, no credit card holder information is required. If false, it is not required.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="nameReqInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">If true, the credit card holder name is required. If false, it is not required.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="addressReqInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">If true, credit card holder address is required. If false, it is not required.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="phoneReqInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">If true, credit card holder phone number is required. If false, it is not required.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="interbankNbrReqInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">If true, the credit card interbank number is required. If false, it is not required.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="bookingSourceAllowedInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, the booking source may be used to guarantee the booking.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="corpDiscountNbrAllowedInd"
+            type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, the corporate discount number may be used to guarantee the booking.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="Deadline" type="order-0400:Deadline">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Allows a choice between a time period range, an absolute date or a date range for the appication of a cancellation penalty.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Deadline</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="DeadlineTimePeriod"
+        substitutionGroup="order-0400:Deadline" type="order-0400:Deadline_TimePeriod"/>
+    <xsd:element name="DeadlineAbsoluteDate"
+        substitutionGroup="order-0400:Deadline" type="order-0400:Deadline_AbsoluteDate"/>
+    
+    <xsd:complexType abstract="true" name="Deadline">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Deadline</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Shared"/>
+        </xsd:sequence>
+        <xsd:attribute name="deadlineType"
+            type="pgt-0300:DeadlineDropTime_Enum" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">An enumerated list of deadline types e.g.Before Arrival.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Deadline_TimePeriod">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Deadline</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="order-0400:Deadline">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+                <xsd:attribute name="minPeriod" type="xsd:integer" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The minimum time period.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="maxPeriod" type="xsd:integer" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The maximum time period</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="timePeriod"
+                    type="ota2-0500:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Minute, Hour, Day,Week:: find the existing enumerated list.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Deadline_AbsoluteDate">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Deadline</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="order-0400:Deadline">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+                <xsd:attribute name="absoluteDateTime"
+                    type="ota2-0500:DateTime" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A specific date after which a cancellation penalty will be applied.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+</xsd:schema>

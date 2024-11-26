@@ -1,0 +1,207 @@
+{
+  "swagger": "2.0",
+  "x-otm-resource": {
+    "namespace": "http://www.opentravel.org/OTM/resources/GlobalResources/v1",
+    "localName": "FacilityResource"
+  },
+  "info": {
+    "title": "FacilityResource",
+    "x-otm-library": {
+      "ResourceName": "FacilityResource",
+      "LibraryName": "FacilityResource",
+      "LibraryVersion": "1.0.0",
+      "LibraryStatus": "DRAFT",
+      "SourceFile": "/FacilityResource_1_0_0.otm",
+      "CompilerVersion": "4.0-SNAPSHOT",
+      "CompileDate": "2020-05-15T11:16:18.638-0500"
+    },
+    "description": "RESTful service to access all types of facilities.",
+    "version": "1.0.0"
+  },
+  "host": "example.com",
+  "basePath": "/resource/v1_0",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/Facilities": {
+      "post": {
+        "summary": "FacilityResource - Post",
+        "description": "Add a facility to the facilities collection.",
+        "operationId": "Post",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "FacilityID",
+            "in": "body",
+            "description": "Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.",
+            "required": true,
+            "schema": {
+              "$ref": "Organization_4_1_0_Trim.schema.json#/definitions/FacilityID"
+            },
+            "x-xml-schema": {
+              "$ref": "Organization_4_1_0_Trim.xsd#/Facility"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "402": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "403": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "FacilityResource_1_0_0_Trim.schema.json#/definitions/FacilityList"
+            },
+            "x-xml-schema": {
+              "$ref": "FacilityResource_1_0_0_Trim.xsd#/FacilityList"
+            }
+          }
+        }
+      }
+    },
+    "/Facilities/{Identifier}": {
+      "get": {
+        "summary": "FacilityResource - Get",
+        "operationId": "Get",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Identifier",
+            "in": "path",
+            "description": "A unique identifier defined by an external authority for this object.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "402": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "403": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "200": {
+            "description": "Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.",
+            "schema": {
+              "$ref": "Organization_4_1_0_Trim.schema.json#/definitions/FacilityID"
+            },
+            "x-xml-schema": {
+              "$ref": "Organization_4_1_0_Trim.xsd#/Facility"
+            }
+          }
+        }
+      }
+    }
+  }
+}

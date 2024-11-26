@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:element name="Criteria">
+		<xs:annotation>
+			<xs:documentation>Criteria is a repeating set of features that are desired in the search for a golf course.  The Name and Value pair define the criteria for the search.  If the requestor demands that the result be filtered on a particular criterion, then the Required boolean is set to "Yes".  If the Required boolean is not set to "Yes", then the response can include courses that do not meet those exact criteria.  Examples would be:
+				 Name="Architect", Value="Robert Trent Jones", Required="Yes".
+				 Name="Location", Value="Myrtle Beach", Required="Yes".  
+				 Name="Caddies", Value="Yes", Required="No".
+				 Name="Length", Value="6600 Yds", Required="Yes", Operation=">".
+				 The Name, Value, and Required attributres are required, but the Operation is optional.
+				</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>A code representing the specific Criterium on which the search is to filter.  </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Value" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The value of the Criterium.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Required" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>A flag establishing if this criterium must be met in a successful candidate.  If "Yes", then all responses must meet the specified criterium. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Operation" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Where a test against a criterium value is not an equality, this represents the operation to be used as the filter.  Examples would be GT (Greater Than), LT (Less Than), etc.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OTA_CourseSearchRQ">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Criteria" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			<xs:attribute name="GolfCourseID" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>If a GolfCourseID is included in the request, then the response will be for only that golf course.  If no GolfCourseID is included, the response will include all golf couses that are deemed to meet the requested criteria.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DetailResponse" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>If the requestor desires a response that includes all the traits associated with the golf course(s) in the resposne, this boolean is set to "Yes".  In that case, all the traits of the course will be returned.  Where the DetailResponse is set to "No", the response will be required to send only the traits that match the criteria being sent.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

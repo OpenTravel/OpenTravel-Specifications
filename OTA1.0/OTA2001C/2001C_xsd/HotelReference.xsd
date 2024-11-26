@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:element name="HotelReference">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">HotelReference: The hotel reference identifies a specific hotel by using the Chain Code, the Brand Code, and the Hotel Code.  The codes used are agreed upon by trading partners.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="ChainCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code that identifies a hotel chain or management group. The hotel chain code is decided between vendors.  This attribute is optional if the hotel is an independent property that can be identified by the HotelCode attribute.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="BrandCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A code that identifies the brand or flag of a hotel, often used for independently-owned or franchised properties who are known by a specific brand.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="HotelCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code that uniquely identifies a single hotel property. The hotel code is decided between vendors.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AreaCode" type="xs:string" use="optional"/>
+			<xs:attribute name="HotelCityCode" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

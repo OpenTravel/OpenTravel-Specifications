@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:include schemaLocation="DateTimeSpan.xsd"/>
+	<xs:element name="OTA_GetMsgRQ">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UniqueId" minOccurs="0"/>
+				<xs:element ref="Message" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Message">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">If StartSeqNmbr and EndSeqNmbr are not sent, the request will be assumed to be for the last sequence number.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="OriginalPayloadStdAttributes" minOccurs="0"/>
+				<xs:element ref="Request" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="MessageType" type="xs:string" use="optional"/>
+			<xs:attribute name="SeqNmbr" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OriginalPayloadStdAttributes">
+		<xs:complexType>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelReference"/>
+				<xs:element ref="DateTimeSpan" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="RequestCode" type="xs:string" use="required"/>
+			<xs:attribute name="ReasonForRequest" type="xs:string" use="optional"/>
+			<xs:attribute name="UserName" type="xs:string" use="optional"/>
+			<xs:attribute name="RatePlanCode" type="xs:string" use="optional"/>
+			<xs:attribute name="ConfirmationID" type="xs:string" use="optional"/>
+			<xs:attribute name="ReservationID" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

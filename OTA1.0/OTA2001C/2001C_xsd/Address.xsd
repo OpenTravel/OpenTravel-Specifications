@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="Privacy.xsd"/>
+	<xs:annotation>
+		<xs:documentation xml:lang="en">Defines a physical address of parties in the profile.</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="Address">
+		<xs:sequence>
+			<xs:element ref="StreetNmbr" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Street Number within the address</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BldgRoom" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Building name, room, apartment, or suite number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="AddressLine" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="CityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">City name eg. Dublin</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="StateProv" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">State name eg. Texas</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="CountryName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Country name eg. Ireland</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PrivacyDetails" type="Privacy">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Privacy details for this address. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="AddressType">
+			<xs:simpleType>
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Defines what the purpose of the address is, such as home, business, mailing, delivery, 
+						shipping/receiving address, etc.</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Home"/>
+					<xs:enumeration value="Business"/>
+					<xs:enumeration value="Delivery"/>
+					<xs:enumeration value="Mailing"/>
+					<xs:enumeration value="Billing"/>
+					<xs:enumeration value="CreditCard"/>
+					<xs:enumeration value="Other"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="DefaultInd">
+			<xs:simpleType>
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates that the receiving system should assume the default value if the user specifies no overriding 
+						value or action.</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Yes"/>
+					<xs:enumeration value="No"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="StreetNmbr">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Street name; number on street.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PO_Box" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Defines a Post Office Box number.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddressLine">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AddressLine" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Each individual address line within the address</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="ParsedInd" type="xs:boolean" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CityName">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Name of city or town.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PostalCode" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Identifier for location assigned by postal authorities.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="StateProv">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">State, province, or region name or code needed to identify location.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="StateCode" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The postal service standard code or abbreviation for the state, province, or region.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CountryName">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The name of the country specified in the address.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="CountryCode" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">ISO 3166 code for country in address.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

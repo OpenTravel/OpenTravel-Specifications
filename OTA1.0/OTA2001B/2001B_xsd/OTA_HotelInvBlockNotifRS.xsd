@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:element name="OTA_HotelInvBlockNotifRS">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_HotelInvBlockNotifRS message returns an indication of the status of processing the OTA_HotelInvBlockNotifRQ message.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element ref="Success"/>
+					<xs:element ref="Warnings" minOccurs="0"/>
+					<xs:element ref="InventoryCrossRef" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:element ref="Errors"/>
+			</xs:choice>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This element defines standard attributes that appear on the root element for all OTA payloads.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InventoryCrossRef">
+		<xs:complexType>
+			<xs:attribute name="RequestInvBlockCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification of the inventory block. The InventoryBlock Code assigned by the sending system for the inventory item upon creation of a new inventory item.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RequestInvBlockGroupingCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification of the inventory group. The Inventory Block Grouping Code assigned by the sending system for the inventory item upon creation of a new inventory grouping.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ResponseInvBlockCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification of the inventory. The InventoryBlockCode assigned by the receiving system for the inventory item in response to a new inventory block notification. (Implementation Notes:  This would only be returned when the notification is of type New and the sender is translating InventoryBlockCode values. On subsequent transactions for this inventory block, the sender would populate the InventoryBlockCode attribute with this value returned by the receiver.)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ResponseInvBlockGroupingCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification of the inventory Block group. The Inventory Block Grouping Code assigned by the receiving system  in response to a notification of a new inventory block grouping.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

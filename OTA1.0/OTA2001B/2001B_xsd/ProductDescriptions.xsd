@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:element name="LongDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">An extensive description of the product at this lodging facility generally used for marketing or advertising purposes.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ShortDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A brief description of the product at this lodging facility generally used by central reservations offices or travel agents.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ProductDescription">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The ProductDescription class provides a description of the product.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ShortDescription" minOccurs="0"/>
+				<xs:element ref="LongDescription" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="ProductDescriptionRPH" type="xs:int">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This is a reference placeholder, used as an index for this object.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LanguageCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The identification of the language of the description. ISO 639 standard for human languages.  </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProductDescriptions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ProductDescription" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

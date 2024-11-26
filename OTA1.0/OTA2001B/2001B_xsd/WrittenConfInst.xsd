@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.1 (http://www.xmlspy.com) by Marcel Jemio (OTA) -->
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="Profile.xsd"/>
+	<xs:element name="WrittenConfInst">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Method by which confirmations should be delivered</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="SupplementalData"/>
+				<xs:element ref="Email"/>
+			</xs:sequence>
+			<xs:attribute name="LanguageID" type="xs:string" use="optional"/>
+			<xs:attribute name="AddresseeName" type="xs:string" use="optional"/>
+			<xs:attribute name="Address" type="xs:string" use="optional"/>
+			<xs:attribute name="Telephone" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SupplementalData">
+		<xs:annotation>
+			<xs:documentation>Additional data that will be sent with the confirmation.  This could be used to include a map, pictures, or any other information that the reservation source wishes to include with the confirmation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

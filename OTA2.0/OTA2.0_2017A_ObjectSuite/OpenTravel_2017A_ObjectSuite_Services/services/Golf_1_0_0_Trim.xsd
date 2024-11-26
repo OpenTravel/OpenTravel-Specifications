@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/product/golf/v1"
+    version="1.0.0"
+    xmlns:order-0100="http://www.opentravel.org/OTM/order/v1"
+    xmlns:org-0100="http://www.opentravel.org/OTM/organization/v1"
+    xmlns:orggf-0100="http://www.opentravel.org/OTM/organization/golf/v1"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0200="http://www.opentravel.org/OTM/Common/v2"
+    xmlns:ota2msg="http://opentravel.org/common/message/v02"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:pg-0100="http://www.opentravel.org/OTM/product/golf/v1"
+    xmlns:prod-0200="http://www.opentravel.org/OTM/product/v2" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:ProjectName>GolfProjectOTM022417_Publication2.otp</otm:ProjectName>
+                <otm:LibraryName>Golf</otm:LibraryName>
+                <otm:LibraryVersion>1.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                <otm:SourceFile>/Golf_1_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2017-02-24T17:20:55.830-05:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://opentravel.org/common/message/v02" schemaLocation="built-ins/OTA2_Message_v2.0.0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/order/v1" schemaLocation="Order_1_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/product/v2" schemaLocation="Product_2_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v2" schemaLocation="ota2-0200_imports.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/v1" schemaLocation="Organization_1_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v2" schemaLocation="ota2-0200_imports.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/golf/v1" schemaLocation="OrganizationGolf_1_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element abstract="true" name="GolfActivitySubGrp" type="pg-0100:GolfActivity">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Information associated with a tee time round reservation request.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GolfActivity</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="GolfActivity"
+        substitutionGroup="pg-0100:GolfActivitySubGrp" type="pg-0100:GolfActivity"/>
+    <xsd:element name="GolfActivitySummary" type="pg-0100:GolfActivity"/>
+    <xsd:element name="GolfActivityDetail"
+        substitutionGroup="pg-0100:GolfActivitySubGrp" type="pg-0100:GolfActivity_Detail"/>
+    
+    <xsd:complexType name="GolfActivity">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Information associated with a tee time round reservation request.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GolfActivity</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="numberOfHoles" type="xsd:positiveInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The number of holes that the golfers wish to play within one round. If this differs by day, separate messages must be sent.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}positiveInteger</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="pg">18</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="replayRoundQty" type="xsd:positiveInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">(Example) If a foursome wants to play two separate rounds within one day, the number of tee times would be 2.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}positiveInteger</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="maxGolferCount" type="xsd:positiveInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The maximum number of golfers represented in this tee time round.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="pg">4</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="GolfActivity_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Information associated with a tee time round reservation request.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GolfActivity</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="pg-0100:GolfActivity">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="orggf-0100:CourseSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The course for this golf activity.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="1" ref="orggf-0100:GolfFacilitySubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The golf facility for this golf activity.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="startingHole"
+                    type="xsd:positiveInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The tee on which the round will start. This could be a hole number, or a course designation where there are multiple courses.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to8</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pg">1</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="TeeTimeSubGrp" type="pg-0100:TeeTime">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Tee time information associated with an availability request.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">TeeTime</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="TeeTime"
+        substitutionGroup="pg-0100:TeeTimeSubGrp" type="pg-0100:TeeTime"/>
+    <xsd:element name="TeeTimeSummary" type="pg-0100:TeeTime"/>
+    <xsd:element name="TeeTimeDetail"
+        substitutionGroup="pg-0100:TeeTimeSubGrp" type="pg-0100:TeeTime_Detail"/>
+    
+    <xsd:complexType name="TeeTime">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Tee time information associated with an availability request.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">TeeTime</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="1" ref="ota2-0200:DateTimeSpanWindowsSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The date and time for which the tee time round is reserved.</xsd:documentation>
+                    <xsd:documentation source="Implementer">AttributeGroup: DateTimeSpanGroup</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="99" minOccurs="0" name="Discount" type="ota2-0200:RateQualifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Promotions and other rate qualifying discounts requested for this tee time round. Note that promotions may be tied to individual golfers or to the tee time as a whole.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="99" minOccurs="0" ref="ota2-0200:LoyaltyProgram">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Membership program(s) associated with a golfer.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}MembershipProgram</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="5" minOccurs="1" name="GolferCount" type="pg-0100:GolferCount">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Summary golfer type qualifying information.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="1" ref="orggf-0100:CourseIdentifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies the golf course for this tee time.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="roundID" type="ota2-0200:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier applied to this tee time round.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}positiveInteger</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="pg">12181631</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="packageID" type="ota2-0200:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">An identification of a package of which this tee time round is a part of.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to8</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="numberOfHoles" type="xsd:positiveInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The number of holes that the golfers wish to play within one round. If this differs by day, separate messages must be sent.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}positiveInteger</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="pg">18</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="carQty" type="xsd:positiveInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The number of carts/buggies requested.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}positiveInteger</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="pg">1</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="replayRoundQty" type="xsd:positiveInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">(Example) If a foursome wants to play two separate rounds within one day, the number of tee times would be 2.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}positiveInteger</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="pg">2</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="TeeTime_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Tee time information associated with an availability request.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">TeeTime</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="pg-0100:TeeTime">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="10" minOccurs="0"
+                        name="NineHoleName" type="ota2-0200:StringShort">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Name for nine holes within this course.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="99" minOccurs="0" ref="ota2-0200:SpecifiedAmenity">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Amenities requested for this tee time round. Note that amenities may be tied to individual golfers or to the tee time as a whole.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="TeeTimeAvailability" type="pg-0100:TeeTimeAvailability"/>
+    
+    <xsd:complexType name="TeeTimeAvailability">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Golf facility and tee time search criteria.</xsd:documentation>
+            <xsd:documentation source="Description">Golf facility and tee time search criteria.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">TeeTimeAvailability</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="1" ref="org-0100:FacilityGolf">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The identifier for a golf facility. This includes id and name.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="99" minOccurs="1" ref="pg-0100:TeeTimeSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Tee time information associated with an availability request.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0200:PriceModifiers">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Allow for the request of a special rate.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="GolferCount">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The number of golfers in this age group.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">GolferCount</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:positiveInteger">
+                <xsd:attribute name="ageQualifyingCode"
+                    type="ota2-0200:AgeQualifyingCode_Enum_Base" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">An age qualifying code for this golfer. From the OpenTravel Age Qualifying Code List (AQC).</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="ageQualifyingCodeExtension" type="ota2:String_EnumExtension"/>
+                <xsd:attribute name="golferType"
+                    type="pg-0100:GolferType_Enum" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Summary golfer type qualifying information.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="handicap"
+                    type="ota2-0200:NonNegativeInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A numerical value used  to identify the golfer's potential ability.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pg">18</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="accessibleInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, tee time rounds that accommodate accessibility needs are requested.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="GolferType_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Golfer types with an "Other" value to support open enumeration list.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">GolferType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ClubMember">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">TBC...</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="GuestOfMember">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">TBC...</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="GuestOfResort">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">TBC...</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="LocalResident">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">TBC...</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="LoyaltyProgramMember">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">TBC...</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:element name="GetOffersRQ"
+        substitutionGroup="ota2msg:OTA2_Request_Payload" type="pg-0100:GetOffers_RQ"/>
+    
+    <xsd:complexType name="GetOffers_RQ">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Golf_GetOffers</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Request_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0200:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0200:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of Sale (POS) identifies the party or connection channel making the request.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="ProcessingInfo" type="ota2-0200:ProcessingInfo">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Transaction processing directives, including display currency overrides. If no display currency information is provided, the display and pricing currency will default to the value in POS/Source/@ISOCurrency.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="prod-0200:ProductQueriesGolf">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Golf facility and tee time search criteria.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="GetOffersRS"
+        substitutionGroup="ota2msg:OTA2_Response_Payload" type="pg-0100:GetOffers_RS"/>
+    
+    <xsd:complexType name="GetOffers_RS">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Golf_GetOffers</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Response_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0200:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="ProcessingInfo" type="ota2-0200:ProcessingInfo">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Transaction processing directives, including display currency overrides. If no display currency information is provided, the display and pricing currency will default to the value in POS/Source/@ISOCurrency.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0200:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="order-0100:OfferSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A description of the facility and offers.  The offers include ancillaries (amenities).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="GetOffersNotif"
+        substitutionGroup="ota2msg:OTA2_Notif_Payload" type="pg-0100:GetOffers_Notif"/>
+    
+    <xsd:complexType name="GetOffers_Notif">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Golf_GetOffers</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Notif_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0200:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0200:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of Sale (POS) identifies the party or connection channel sending the Notification.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0200:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="order-0100:OfferSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A description of the facility and offers.  The offers include ancillaries (amenities).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+</xsd:schema>

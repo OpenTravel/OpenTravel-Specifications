@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/services/HospitalityServices/v1"
+    version="1.0.0"
+    xmlns:order-0400="http://www.opentravel.org/OTM/order/v4"
+    xmlns:org-0400="http://www.opentravel.org/OTM/organization/v4"
+    xmlns:orghs-0400="http://www.opentravel.org/OTM/organization/hospitality/v4"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0400="http://www.opentravel.org/OTM/Common/v4"
+    xmlns:ota2-0500="http://www.opentravel.org/OTM/Common/v5"
+    xmlns:ota2msg="http://opentravel.org/common/message/v02"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:pgt-0300="http://www.opentravel.org/OTM/product/Ground/v3"
+    xmlns:ph-0200="http://www.opentravel.org/OTM/product/hospitality/v2"
+    xmlns:sh="http://www.opentravel.org/OTM/services/HospitalityServices/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:ProjectName>HotelDescriptiveContent 103019.otp</otm:ProjectName>
+                <otm:LibraryName>HospitalityContent</otm:LibraryName>
+                <otm:LibraryVersion>1.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>DRAFT</otm:LibraryStatus>
+                <otm:SourceFile>/HospitalityContent_1_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2019-10-30T13:51:26.757-04:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://opentravel.org/common/message/v02" schemaLocation="built-ins/OTA2_Message_v2.0.0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/order/v4" schemaLocation="Order_4_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/hospitality/v2" schemaLocation="Hospitality_2_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/hospitality/v4" schemaLocation="OrganizationHospitality_4_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/Ground/v3" schemaLocation="Ground_3_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v4" schemaLocation="CodeList_4_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/v4" schemaLocation="Organization_4_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v5" schemaLocation="Common_5_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element name="HospitalityDescriptiveContentNotifRQ"
+        substitutionGroup="ota2msg:OTA2_Request_Payload" type="sh:HospitalityDescriptiveContentNotif_RQ"/>
+    
+    <xsd:complexType name="HospitalityDescriptiveContentNotif_RQ">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Used to push hotel content for one or more properties.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">HospitalityDescriptiveContent_HospitalityDescriptiveContentNotif</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Request_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0500:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0500:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Identifies the party sending the information.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" ref="orghs-0400:HotelDescriptiveContentSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Query information for retreival of hotel descriptive content for one or more properties.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="HospitalityDescriptiveContentNotifRS"
+        substitutionGroup="ota2msg:OTA2_Response_Payload" type="sh:HospitalityDescriptiveContentNotif_RS"/>
+    
+    <xsd:complexType name="HospitalityDescriptiveContentNotif_RS">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Used to acknowlege receipt of the request message.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">HospitalityDescriptiveContent_HospitalityDescriptiveContentNotif</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Response_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0500:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0500:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Absence of this object indicates a successful transaction. When this object is present, it generally indicates that an error or warning occurred but may also be used to explicitly indicate a successful transaction.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="HospitalityDescriptiveContentNotifNotif"
+        substitutionGroup="ota2msg:OTA2_Notif_Payload" type="sh:HospitalityDescriptiveContentNotif_Notif"/>
+    
+    <xsd:complexType name="HospitalityDescriptiveContentNotif_Notif">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Used to push hotel content when connecting with guaranteed delivery no option to respond (fire and forget).</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">HospitalityDescriptiveContent_HospitalityDescriptiveContentNotif</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Notif_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0500:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0500:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Identifies the party sending the information.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" ref="orghs-0400:HotelDescriptiveContentSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Descriptive content details for a hospitality facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="HospitalityDescriptiveInfoRQ"
+        substitutionGroup="ota2msg:OTA2_Request_Payload" type="sh:HospitalityDescriptiveInfo_RQ"/>
+    
+    <xsd:complexType name="HospitalityDescriptiveInfo_RQ">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">HospitalityDescriptiveContent_HospitalityDescriptiveInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Request_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0500:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0500:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of Sale (POS) identifies the party or connection channel making the request.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="ProcessingInfo" type="ota2-0500:ProcessingInfo">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Transaction processing directives, including display currency overrides. If no display currency information is provided, the display and pricing currency will default to the value in POS/Source/@ISOCurrency.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="orghs-0400:HotelDescriptiveRequestInfo">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies the hotel content to be returned.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="HospitalityDescriptiveInfoRS"
+        substitutionGroup="ota2msg:OTA2_Response_Payload" type="sh:HospitalityDescriptiveInfo_RS"/>
+    
+    <xsd:complexType name="HospitalityDescriptiveInfo_RS">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">HospitalityDescriptiveContent_HospitalityDescriptiveInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Response_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0500:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0500:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Absence of this object indicates a successful transaction. When this object is present, it generally indicates that an error or warning occurred but may also be used to explicitly indicate a successful transaction.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" ref="orghs-0400:HotelDescriptiveContentSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Descriptive content details for a hospitality facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+</xsd:schema>

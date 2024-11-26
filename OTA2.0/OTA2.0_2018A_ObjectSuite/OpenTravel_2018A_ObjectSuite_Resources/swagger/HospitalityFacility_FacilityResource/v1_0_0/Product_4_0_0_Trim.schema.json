@@ -1,0 +1,225 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Product",
+  "x-otm-library": {
+    "LibraryName": "Product",
+    "LibraryVersion": "4.0.0",
+    "LibraryStatus": "FINAL",
+    "SourceFile": "/Product_4_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2018-04-05T08:59:58.182-0400"
+  },
+  "definitions": {
+    "PropertyInfo": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "PropertyInfo"
+      },
+      "description": "Identifies a property.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0400:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Site": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "PropertyInfo"
+      },
+      "description": "Identifies a property.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0400:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "PropertyInfoDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "PropertyInfo"
+      },
+      "description": "Identifies a property.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PropertyInfo"
+        },
+        {
+          "properties": {
+            "name": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "cityCode": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "chainCode": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "chainName": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "brandCode": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "brandName": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "SiteDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "PropertyInfo"
+      },
+      "description": "Identifies a property.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PropertyInfo"
+        },
+        {
+          "properties": {
+            "name": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "cityCode": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "chainCode": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "chainName": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "brandCode": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "brandName": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "GuestCount": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "GuestCount"
+      },
+      "description": "Identifies the number of guests for the reservation.",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ageQualifyingCode": {
+          "description": "Assigned Type: ota2-0400:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "age": {
+          "description": "Specifies the specific age of the guest.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "PropertyInfoSummary": {
+          "$ref": "#/definitions/PropertyInfo"
+        }
+      },
+      "required": [
+        "PropertyInfoSummary"
+      ]
+    },
+    {
+      "properties": {
+        "SiteSummary": {
+          "$ref": "#/definitions/PropertyInfo"
+        }
+      },
+      "required": [
+        "SiteSummary"
+      ]
+    },
+    {
+      "properties": {
+        "PropertyInfoDetail": {
+          "$ref": "#/definitions/PropertyInfoDetail"
+        }
+      },
+      "required": [
+        "PropertyInfoDetail"
+      ]
+    },
+    {
+      "properties": {
+        "SiteDetail": {
+          "$ref": "#/definitions/PropertyInfoDetail"
+        }
+      },
+      "required": [
+        "SiteDetail"
+      ]
+    }
+  ]
+}

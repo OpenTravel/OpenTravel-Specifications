@@ -1,0 +1,156 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema xmlns="http://www.opentravel.org/OTA/2003/05" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.opentravel.org/OTA/2003/05" elementFormDefault="qualified" version="1.005" id="OTA2007B">
+	
+	
+	
+	<xs:annotation>
+		<xs:documentation xml:lang="en">All Schema files in the OTA specification are made available according to the terms defined by the OTA License Agreement at http://www.opentravel.org/ota_downloads_form.cfm</xs:documentation>
+	</xs:annotation>
+	<xs:element name="OTA_PingRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_PingRQ message may be used for testing application connectivity,
+sending some specific text and determining if the receiving application is
+able to echo back that same text.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="EchoData" type="xs:string">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The free-text data that is expected to be echoed back in the response
+message.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+<!-- OTA_SimpleTypes.xsd --><xs:simpleType name="StringLength1to128">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 128</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="128"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="StringLength1to32">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 32</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType><!-- OTA_CommonTypes.xsd --><xs:attributeGroup name="AltLangID_Group">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies the alternate language for a customer or message. The human language is identified by ISO 639 codes.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="AltLangID" type="xs:language" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies the alternate language for a customer or message. The human language is identified by ISO 639 codes.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="OTA_PayloadStdAttributes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_PayloadStdAttributes defines the standard attributes that appear on the root element for all OTA payloads.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="EchoToken" type="StringLength1to128" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A reference for additional message identification, assigned by the requesting host system. When a request message includes an echo token the corresponding response message MUST include an echo token with an identical value.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TimeStamp" type="xs:dateTime" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates the creation date and time of the message in UTC using the following format specified by ISO 8601; YYYY-MM-DDThh:mm:ssZ with time values using the 24 hour clock (e.g. 20 November 2003, 1:59:38 pm UTC becomes 2003-11-20T13:59:38Z).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Target" use="optional" default="Production">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to indicate whether the request is for the Test or Production system.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Test"/>
+					<xs:enumeration value="Production"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Version" type="xs:decimal" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">For all OTA versioned messages, the version of the message is indicated by a decimal value.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TransactionIdentifier" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A unique identifier to relate all messages within a transaction (e.g. this would be sent in all request and response messages that are part of an on-going transaction).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SequenceNmbr" type="xs:nonNegativeInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to identify the sequence number of the transaction as assigned by the sending system; allows for an application to process messages in a certain order or to request a resynchronization of messages in the event that a system has been off-line and needs to retrieve messages that were missed. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TransactionStatusCode" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">This indicates where this message falls within a sequence of messages. </xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Start">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This is the first message within a transaction.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="End">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This is the last message within a transaction.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Rollback">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This indicates that all messages within the current transaction must be ignored.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="InSeries">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This is any message that is not the first or last message within a transaction.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Continuation">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Specifies that this is a followup request asking for more of what was requested in the previous request.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Subsequent">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This request message is a subsequent request based on the previous message sent in this transaction.
+</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attributeGroup ref="PrimaryLangID_Group">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifes the primary language for the message.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attributeGroup ref="AltLangID_Group">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifes the alternate language for the message.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attribute name="RetransmissionIndicator" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">When true, indicates the message is being re-sent after a failure. It is recommended that this attribute is used (i.e., set to TRUE) only when a message is retransmitted.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="PrimaryLangID_Group">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifes the primary language preference for the message.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="PrimaryLangID" type="xs:language" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifes the primary language preference for the message.  The human language is identified by ISO 639 codes.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup></xs:schema>

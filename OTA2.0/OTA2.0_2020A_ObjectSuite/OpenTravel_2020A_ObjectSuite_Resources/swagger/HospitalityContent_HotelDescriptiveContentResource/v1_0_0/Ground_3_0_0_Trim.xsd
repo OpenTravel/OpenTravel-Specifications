@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/product/Ground/v3"
+    version="3.0.0" xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0400="http://www.opentravel.org/OTM/Common/v4"
+    xmlns:ota2-0500="http://www.opentravel.org/OTM/Common/v5"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:pgt-0300="http://www.opentravel.org/OTM/product/Ground/v3" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:LibraryName>Ground</otm:LibraryName>
+                <otm:LibraryVersion>3.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>DRAFT</otm:LibraryStatus>
+                <otm:SourceFile>/Ground_3_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2019-10-30T13:33:14.895-04:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v4" schemaLocation="CodeList_4_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v5" schemaLocation="Common_5_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:simpleType name="DeadlineDropTime_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An enumerated type indicating when the deadline drop time goes into effect.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">DeadlineDropTime_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="BeforeArrival"/>
+            <xsd:enumeration value="AfterBooking"/>
+            <xsd:enumeration value="AfterConfirmation">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The deadline information applies from when the reservation was confirmed.  In some systems the confirmation time will differ from the booking time.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="AfterArrival">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The deadline applies after the scheduled arrival time.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="AfterDeparture">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The deadline applies after the scheduled departure time.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="BeforeDeparture">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The deadline applies before departure.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+</xsd:schema>

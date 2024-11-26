@@ -1,0 +1,141 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Common",
+  "x-otm-library": {
+    "ProjectName": "OTA_FacilityResource.otp",
+    "LibraryName": "Common",
+    "LibraryVersion": "5.1.0",
+    "LibraryStatus": "DRAFT",
+    "SourceFile": "/Common_5_1_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2020-05-15T11:16:10.193-0500"
+  },
+  "definitions": {
+    "NoticeID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Notice"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0500:Identifier",
+          "$ref": "Common_5_0_0.schema.json#/definitions/Identifier"
+        },
+        "NoticeRef": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Notice": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Notice"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NoticeID"
+        },
+        {
+          "properties": {
+            "created": {
+              "description": "Date this notice was created.",
+              "type": "string",
+              "format": "date"
+            },
+            "Message": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_5_0_0.schema.json#/definitions/TextFree"
+              },
+              "maxItems": 100,
+              "minItems": 1
+            },
+            "EffectiveDates": {
+              "description": "Assigned Type: ota2-0500:DateEffectiveExpire",
+              "$ref": "Common_5_0_0.schema.json#/definitions/DateEffectiveExpire"
+            },
+            "Type": {
+              "description": "Assigned Type: ota2-0501:NoticeEnum",
+              "$ref": "#/definitions/NoticeEnum"
+            },
+            "RelatedURL": {
+              "description": "Assigned Type: ota2-0500:URL",
+              "$ref": "Common_5_0_0.schema.json#/definitions/URL"
+            },
+            "RelatedResource": {
+              "description": "Assigned Type: ota2-0500:Identifier",
+              "$ref": "Common_5_0_0.schema.json#/definitions/Identifier"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          },
+          "required": [
+            "Message"
+          ]
+        }
+      ]
+    },
+    "NoticeEnum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "NoticeEnum"
+      },
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/NoticeEnum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "NoticeEnum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "NoticeEnum"
+      },
+      "type": "string",
+      "enum": [
+        "Alert",
+        "Notification",
+        "Promotion",
+        "Other_"
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "NoticeIdentifier": {
+          "$ref": "#/definitions/NoticeID"
+        }
+      },
+      "required": [
+        "NoticeIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "NoticeSummary": {
+          "$ref": "#/definitions/Notice"
+        }
+      },
+      "required": [
+        "NoticeSummary"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="PkgTravelSegment.xsd"/>
+	<xs:include schemaLocation="PkgRoomProfile.xsd"/>
+	<xs:complexType name="PkgPackageSegment">
+		<xs:annotation>
+			<xs:documentation>Defines a component of a package e.g. accommodation</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="DestinationInformation" minOccurs="0"/>
+			<xs:element ref="AccommodationInformation" minOccurs="0"/>
+			<xs:element ref="TransportInformation" minOccurs="0"/>
+		</xs:choice>
+		<xs:attribute name="ItinerarySequence" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>The position of this item in the package itinerary.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ChronologicalSequence" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>The position of this item in the package in time sequence.  Note: it is possible for more than one inventory item to have the same ChronologicalSequence value e.g. Car Hire and Hotel Stay.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- ==================================================================================================================================== -->
+	<xs:element name="AccommodationInformation">
+		<xs:annotation>
+			<xs:documentation>Defines an accommodation component</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DateRange" type="PkgDateRange"/>
+				<xs:element ref="RoomProfiles" minOccurs="0"/>
+				<xs:element ref="MealPlans" minOccurs="0"/>
+				<xs:element name="Information" type="PkgInformation" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="RPH" type="RPH_Type"/>
+			<xs:attribute name="HotelName" use="required">
+				<xs:simpleType>
+					<xs:annotation>
+						<xs:documentation>Text describing an accommodation (UNICORN U440)</xs:documentation>
+					</xs:annotation>
+					<xs:restriction base="xs:string"/>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ResortName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Describes the resort or area containing a property.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DestinationInformation">
+		<xs:annotation>
+			<xs:documentation>Defines the applicability of an item of information for a destination.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Information" type="PkgInformation" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="ResortName" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MealPlans">
+		<xs:annotation>
+			<xs:documentation>A collection of MealPlan elements</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="MealPlan" type="PkgMealPlanType" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RoomProfiles">
+		<xs:annotation>
+			<xs:documentation>A collection of RoomProfile elements</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="RoomProfile" type="PkgRoomProfile" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TransportInformation">
+		<xs:annotation>
+			<xs:documentation>Defines an item of information for a transport component.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Travel" type="PkgTravelSegment"/>
+				<xs:element name="Information" type="PkgInformation" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

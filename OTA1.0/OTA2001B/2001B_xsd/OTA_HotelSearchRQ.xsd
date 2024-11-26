@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:element name="OTA_HotelSearchRQ">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelSearchCriterion" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			<xs:attribute name="MaxResponses" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Address">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StreetNmbr" minOccurs="0"/>
+				<xs:element ref="BldgRoom" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AddressLine" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="CityName" minOccurs="0"/>
+				<xs:element ref="StateProv" minOccurs="0"/>
+				<xs:element ref="CountryName" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddressLine">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="ParsedInd">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="Yes"/>
+								<xs:enumeration value="No"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Area">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Position" maxOccurs="unbounded"/>
+				<xs:element ref="Radius" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BldgRoom" type="xs:string"/>
+	<xs:element name="CityName">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PostalCode" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CodeRef">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="Code" type="xs:string"/>
+					<xs:attribute name="CodeContext" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CountryName">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="CountryCode" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelSearchCriterion">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelSearchValue" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="Type" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Area"/>
+						<xs:enumeration value="HotelName"/>
+						<xs:enumeration value="HotelRef"/>
+						<xs:enumeration value="Address"/>
+						<xs:enumeration value="Telephone"/>
+						<xs:enumeration value="RefPoint"/>
+						<xs:enumeration value="CodeRef"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="MatchType" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Exact"/>
+						<xs:enumeration value="Partial"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ImportanceType">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Mandatory"/>
+						<xs:enumeration value="High"/>
+						<xs:enumeration value="Medium"/>
+						<xs:enumeration value="Low"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelSearchValue">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Area"/>
+				<xs:element ref="HotelReference"/>
+				<xs:element ref="Address"/>
+				<xs:element ref="Telephone"/>
+				<xs:element ref="RefPoint"/>
+				<xs:element ref="CodeRef"/>
+			</xs:choice>
+			<xs:attribute name="HotelName" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Position">
+		<xs:complexType>
+			<xs:attribute name="Latitude" type="xs:string"/>
+			<xs:attribute name="Longitude" type="xs:string"/>
+			<xs:attribute name="Altitude" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Radius">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="Distance" type="xs:string"/>
+					<xs:attribute name="DistanceMeasure" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RefPoint">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="Distance" type="xs:string"/>
+					<xs:attribute name="DistanceMeasure" type="xs:string"/>
+					<xs:attribute name="Direction" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="StateProv">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="StateCode" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="StreetNmbr">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="POBox" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Telephone">
+		<xs:complexType>
+			<xs:attribute name="PhoneTechType" type="xs:string"/>
+			<xs:attribute name="CountryAccessCode" type="xs:string"/>
+			<xs:attribute name="AreaCityCode" type="xs:string" use="required"/>
+			<xs:attribute name="PhoneNumber" type="xs:string" use="required"/>
+			<xs:attribute name="Extension" type="xs:string"/>
+			<xs:attribute name="PIN" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

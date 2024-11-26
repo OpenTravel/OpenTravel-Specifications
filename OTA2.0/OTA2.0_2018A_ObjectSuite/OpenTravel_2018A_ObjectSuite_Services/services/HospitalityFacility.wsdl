@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="HospitalityFacility"
+    targetNamespace="http://www.opentravel.org/OTM/services/HospitalityServices/v1"
+    xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2msg="http://opentravel.org/common/message/v02"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:sh="http://www.opentravel.org/OTM/services/HospitalityServices/v1"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.opentravel.org/OTM/services/HospitalityServices/v1">
+            <xsd:annotation>
+                <xsd:appinfo>
+                    <otm:Library>
+                        <otm:ProjectName>HospitalityProject_030918.otp</otm:ProjectName>
+                        <otm:ServiceName>HospitalityFacility</otm:ServiceName>
+                        <otm:LibraryName>HospitalityFacility</otm:LibraryName>
+                        <otm:LibraryVersion>1.0.0</otm:LibraryVersion>
+                        <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                        <otm:SourceFile>/HospitalityFacility_1_0_0.otm</otm:SourceFile>
+                        <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                        <otm:CompileDate>2018-04-05T08:57:52.072-04:00</otm:CompileDate>
+                    </otm:Library>
+                </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:include schemaLocation="HospitalityFacility_1_0_0_Trim.xsd"/>
+            <xsd:import
+                namespace="http://schemas.xmlsoap.org/soap/envelope/" schemaLocation="built-ins/SOAP_envelope.xsd"/>
+            <xsd:import
+                namespace="http://opentravel.org/common/message/v02" schemaLocation="built-ins/OTA2_Message_v2.0.0.xsd"/>
+            <xsd:import
+                namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="FindHospitalityAvailabilityRQ">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="sh:FindHospitalityAvailabilityRQ" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="FindHospitalityAvailabilityRS">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="sh:FindHospitalityAvailabilityRS" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="FindHospitalityAvailabilityFault">
+        <wsdl:part element="env:Fault" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="FindHospitalityFacilitiesRQ">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="sh:FindHospitalityFacilitiesRQ" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="FindHospitalityFacilitiesRS">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="sh:FindHospitalityFacilitiesRS" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="FindHospitalityFacilitiesFault">
+        <wsdl:part element="env:Fault" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="RetrieveHospitalityAvailabilityRQ">
+        <wsdl:documentation>Used to retreive availability for specific hotels identified in the request.  This is not an offer request, but simply a high level availability request.</wsdl:documentation>
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="sh:RetrieveHospitalityAvailabilityRQ" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="RetrieveHospitalityAvailabilityRS">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="sh:RetrieveHospitalityAvailabilityRS" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="RetrieveHospitalityAvailabilityFault">
+        <wsdl:part element="env:Fault" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:portType name="HospitalityFacilityPortType">
+        <wsdl:operation name="FindHospitalityAvailability">
+            <wsdl:input message="sh:FindHospitalityAvailabilityRQ"/>
+            <wsdl:output message="sh:FindHospitalityAvailabilityRS"/>
+            <wsdl:fault message="sh:FindHospitalityAvailabilityFault" name="FindHospitalityAvailabilityFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="FindHospitalityFacilities">
+            <wsdl:input message="sh:FindHospitalityFacilitiesRQ"/>
+            <wsdl:output message="sh:FindHospitalityFacilitiesRS"/>
+            <wsdl:fault message="sh:FindHospitalityFacilitiesFault" name="FindHospitalityFacilitiesFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="RetrieveHospitalityAvailability">
+            <wsdl:input message="sh:RetrieveHospitalityAvailabilityRQ"/>
+            <wsdl:output message="sh:RetrieveHospitalityAvailabilityRS"/>
+            <wsdl:fault
+                message="sh:RetrieveHospitalityAvailabilityFault" name="RetrieveHospitalityAvailabilityFault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    
+</wsdl:definitions>

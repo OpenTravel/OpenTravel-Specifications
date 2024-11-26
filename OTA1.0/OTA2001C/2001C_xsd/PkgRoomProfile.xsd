@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="PkgCodeList.xsd"/>
+	<xs:include schemaLocation="PkgCommonElements.xsd"/>
+	<xs:complexType name="PkgRoomProfile">
+		<xs:annotation>
+			<xs:documentation>Describes the occupancy of a room or cabin.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CustomerCounts" type="CustomerCounts"/>
+			<xs:element name="PassengerRPHs" type="PkgPassengerRPHs" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="RPH" type="RPH_Type"/>
+		<xs:attribute name="Code" type="PkgAccommodationUnitCode"/>
+		<xs:attribute name="Description" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>A short description of the room/apartment etc.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Qty" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>The number of accommodation units required</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CotQty" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>The number of cots required in a room/apartment etc.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RoomId" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Identification of a room eg room number or name (UNICORN U398)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

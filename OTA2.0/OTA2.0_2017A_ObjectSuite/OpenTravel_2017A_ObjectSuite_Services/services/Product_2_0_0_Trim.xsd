@@ -1,0 +1,1523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/product/v2"
+    version="2.0.0" xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0200="http://www.opentravel.org/OTM/Common/v2"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:pg-0100="http://www.opentravel.org/OTM/product/golf/v1"
+    xmlns:prod-0200="http://www.opentravel.org/OTM/product/v2" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:ProjectName>GolfProjectOTM022417_Publication2.otp</otm:ProjectName>
+                <otm:LibraryName>Product</otm:LibraryName>
+                <otm:LibraryVersion>2.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                <otm:SourceFile>/Product_2_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2017-02-24T17:20:55.903-05:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/golf/v1" schemaLocation="Golf_1_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v2" schemaLocation="ota2-0200_imports.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element abstract="true" name="BasicPropertyInfoSubGrp" type="prod-0200:BasicPropertyInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Identifies a property.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">BasicPropertyInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="BasicPropertyInfo"
+        substitutionGroup="prod-0200:BasicPropertyInfoSubGrp" type="prod-0200:BasicPropertyInfo"/>
+    <xsd:element name="BasicPropertyInfoSummary" type="prod-0200:BasicPropertyInfo"/>
+    <xsd:element name="BasicPropertyInfoDetail"
+        substitutionGroup="prod-0200:BasicPropertyInfoSubGrp" type="prod-0200:BasicPropertyInfo_Detail"/>
+    
+    <xsd:element abstract="true" name="SiteSubGrp" type="prod-0200:BasicPropertyInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Identifies a property.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">BasicPropertyInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="Site" substitutionGroup="prod-0200:SiteSubGrp" type="prod-0200:BasicPropertyInfo"/>
+    <xsd:element name="SiteSummary" type="prod-0200:BasicPropertyInfo"/>
+    <xsd:element name="SiteDetail"
+        substitutionGroup="prod-0200:SiteSubGrp" type="prod-0200:BasicPropertyInfo_Detail"/>
+    
+    <xsd:complexType name="BasicPropertyInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Identifies a property.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">BasicPropertyInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="code" type="ota2-0200:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Uniquely identifies a single property for a reservation.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="product">CHIDT</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="BasicPropertyInfo_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Identifies a property.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">BasicPropertyInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:BasicPropertyInfo">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="ota2-0200:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the proper name of the property.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="product">ABC Hotel</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="cityCode"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the three character IATA city code.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="product">CHI</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="chainCode"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Identifies the chain.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="product">AA</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="chainName"
+                    type="ota2-0200:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the proper name of the chain.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="product">XYZ Chain</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="brandCode"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Identifies a brand with in a chain (e.g. Courtyard, Hampton Inn).  This code is optional if the hotel is an independent property that can be identified by a propert code alone.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="product">BB</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="brandName"
+                    type="ota2-0200:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Identifies the proper name of the brand.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="product">BB Brand</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="GuestCount">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Identifies the number of guests for the reservation.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">GuestCount</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:positiveInteger">
+                <xsd:attribute name="ageQualifyingCode"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">TBD - Should this use the AgeQualifyingCode Code List? Specifies the age type of the guest.  (e.g. Adult, Child, Infant).</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="age" type="xsd:positiveInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the specific age of the guest.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="JourneySubGrp" type="prod-0200:Journey_ID">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Journey</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="JourneyID"
+        substitutionGroup="prod-0200:JourneySubGrp" type="prod-0200:Journey_ID"/>
+    <xsd:element name="JourneyIdentifier" type="prod-0200:Journey_ID"/>
+    <xsd:element name="Journey"
+        substitutionGroup="prod-0200:JourneySubGrp" type="prod-0200:Journey"/>
+    <xsd:element name="JourneySummary" type="prod-0200:Journey"/>
+    <xsd:element name="JourneyQueryProduct" type="prod-0200:Journey_Query_Product"/>
+    
+    <xsd:complexType name="Journey_ID">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Journey</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0200:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="JourneyRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Journey">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Journey</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:Journey_ID">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="6" minOccurs="1" ref="prod-0200:SegmentSubGrp"/>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+                <xsd:attribute name="duration" type="xsd:duration" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Journey_Query_Product">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Journey</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="1" ref="prod-0200:ArrivalPointSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">An identifier for the departure point.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="1" ref="prod-0200:DeparturePointSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">An identifier for the arrival point.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="TransportNumber" type="prod-0200:TransportNumber">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A tiny string  
+Minimum length of 0 and a maximum length of 32</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="departureDateTime" type="xsd:time" use="required">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Date and time of the departure.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="Meal" type="prod-0200:Meal"/>
+    
+    <xsd:complexType name="Meal">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">Meal</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="1" name="ClassOfService" type="prod-0200:ClassOfService">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Product that includes these meals</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="mealCode" type="prod-0200:Meal_Enum" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Meal(s) served</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="MealsIncluded">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies which meals are included with this rate plan.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">MealsIncluded</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="mealPlanCodes"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Identifies the type of meal plans included with this rate plan.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="breakfastInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, indicates that breakfast is included with this rate plan.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="lunchInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, indicates that lunch is included with this rate plan.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="dinnerInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, indicates dinner is included with this rate plan.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="ProductSubGrp" type="prod-0200:Product_ID">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Product</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="ProductID"
+        substitutionGroup="prod-0200:ProductSubGrp" type="prod-0200:Product_ID"/>
+    <xsd:element name="ProductIdentifier" type="prod-0200:Product_ID"/>
+    <xsd:element name="Product"
+        substitutionGroup="prod-0200:ProductSubGrp" type="prod-0200:Product"/>
+    <xsd:element name="ProductSummary" type="prod-0200:Product"/>
+    <xsd:element name="ProductTransportation"
+        substitutionGroup="prod-0200:ProductSubGrp" type="prod-0200:Product_Transportation"/>
+    <xsd:element name="ProductHospitality"
+        substitutionGroup="prod-0200:ProductSubGrp" type="prod-0200:Product_Hospitality"/>
+    <xsd:element name="ProductAncillary"
+        substitutionGroup="prod-0200:ProductSubGrp" type="prod-0200:Product_Ancillary"/>
+    <xsd:element name="ProductActivity"
+        substitutionGroup="prod-0200:ProductSubGrp" type="prod-0200:Product_Activity"/>
+    <xsd:element name="ProductQueryAvailability" type="prod-0200:Product_Query_Availability"/>
+    
+    <xsd:complexType name="Product_ID">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Product</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0200:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="ProductRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Product">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Product</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:Product_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="prod-0200:ProductIdentifier">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A associated  product.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Product_Transportation">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Product</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:Product">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" ref="prod-0200:JourneySubGrp"/>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Product_Hospitality">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Product</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:Product">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" ref="prod-0200:RoomStaySubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A hospitality guest room product.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Product_Ancillary">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Product</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:Product">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" ref="ota2-0200:Ancillary">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Amentities and services available with a product(either included in the price of the tee time or available for an extra fee), such as power carts. Note, includes pricing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Product_Activity">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Product</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:Product">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="prod-0200:Activity">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">An activity product.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Product_Query_Availability">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Product</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="1" ref="prod-0200:ProductQueriesSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="ProductQueriesSubGrp" type="prod-0200:ProductQueries_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">ProductQueries</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="ProductQueriesID"
+        substitutionGroup="prod-0200:ProductQueriesSubGrp" type="prod-0200:ProductQueries_ID"/>
+    <xsd:element name="ProductQueriesIdentifier" type="prod-0200:ProductQueries_ID"/>
+    <xsd:element name="ProductQueries"
+        substitutionGroup="prod-0200:ProductQueriesSubGrp" type="prod-0200:ProductQueries"/>
+    <xsd:element name="ProductQueriesSummary" type="prod-0200:ProductQueries"/>
+    <xsd:element name="ProductQueriesTransportation"
+        substitutionGroup="prod-0200:ProductQueriesSubGrp" type="prod-0200:ProductQueries_Transportation"/>
+    <xsd:element name="ProductQueriesHospitality"
+        substitutionGroup="prod-0200:ProductQueriesSubGrp" type="prod-0200:ProductQueries_Hospitality"/>
+    <xsd:element name="ProductQueriesGolf"
+        substitutionGroup="prod-0200:ProductQueriesSubGrp" type="prod-0200:ProductQueries_Golf"/>
+    
+    <xsd:complexType name="ProductQueries_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">ProductQueries</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0200:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="ProductQueriesRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="ProductQueries">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">ProductQueries</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:ProductQueries_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2-0200:PriceModifiers">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Discounts or promotions that are applied to a calculate the rate.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="ProductQueries_Transportation">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">ProductQueries</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:ProductQueries">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="prod-0200:JourneyQueryProduct"/>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="ProductQueries_Hospitality">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">ProductQueries</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:ProductQueries">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="prod-0200:RoomStayQueryProduct"/>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="ProductQueries_Golf">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">ProductQueries</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:ProductQueries">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="pg-0100:TeeTimeAvailability">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Golf facility and tee time search criteria.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="RatePlanSubGrp" type="prod-0200:RatePlan_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies information regarding a rate plan.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RatePlan</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="RatePlanID"
+        substitutionGroup="prod-0200:RatePlanSubGrp" type="prod-0200:RatePlan_ID"/>
+    <xsd:element name="RatePlanIdentifier" type="prod-0200:RatePlan_ID"/>
+    <xsd:element name="RatePlan"
+        substitutionGroup="prod-0200:RatePlanSubGrp" type="prod-0200:RatePlan"/>
+    <xsd:element name="RatePlanSummary" type="prod-0200:RatePlan"/>
+    <xsd:element name="RatePlanDetail"
+        substitutionGroup="prod-0200:RatePlanSubGrp" type="prod-0200:RatePlan_Detail"/>
+    
+    <xsd:complexType name="RatePlan_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies information regarding a rate plan.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RatePlan</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0200:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="RatePlanRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RatePlan">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies information regarding a rate plan.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RatePlan</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:RatePlan_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+                </xsd:sequence>
+                <xsd:attribute name="ratePlanCode"
+                    type="ota2-0200:StringTiny" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the code that identifies this rate plan.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RatePlan_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies information regarding a rate plan.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RatePlan</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:RatePlan">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="20" minOccurs="0" ref="ota2-0200:Comment">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies information regarding this rate plan.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="MealsIncluded" type="prod-0200:MealsIncluded">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies the meals that are included with this rate plan.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="RestStopSubGrp" type="prod-0200:RestStop_ID">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RestStop</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="RestStopID"
+        substitutionGroup="prod-0200:RestStopSubGrp" type="prod-0200:RestStop_ID"/>
+    <xsd:element name="RestStopIdentifier" type="prod-0200:RestStop_ID"/>
+    <xsd:element name="RestStop"
+        substitutionGroup="prod-0200:RestStopSubGrp" type="prod-0200:RestStop"/>
+    <xsd:element name="RestStopSummary" type="prod-0200:RestStop"/>
+    <xsd:element name="RestStopDetail"
+        substitutionGroup="prod-0200:RestStopSubGrp" type="prod-0200:RestStop_Detail"/>
+    
+    <xsd:complexType name="RestStop_ID">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RestStop</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:attribute name="code" type="ota2-0200:StringTiny" use="required">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A tiny string  
+Minimum length of 0 and a maximum length of 32</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RestStop">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RestStop</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:RestStop_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="ota2-0200:StringShort" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A short string  
+Minimum length of 0 and a maximum length of 128</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RestStop_Detail">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RestStop</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:RestStop">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="description"
+                    type="ota2-0200:StringLong" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A long string  
+Minimum length of 0 and a maximum length of 4096</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="RoomRateSubGrp" type="prod-0200:RoomRate_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of a room rate.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomRate</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="RoomRateID"
+        substitutionGroup="prod-0200:RoomRateSubGrp" type="prod-0200:RoomRate_ID"/>
+    <xsd:element name="RoomRateIdentifier" type="prod-0200:RoomRate_ID"/>
+    <xsd:element name="RoomRate"
+        substitutionGroup="prod-0200:RoomRateSubGrp" type="prod-0200:RoomRate"/>
+    <xsd:element name="RoomRateSummary" type="prod-0200:RoomRate"/>
+    <xsd:element name="RoomRateDetail"
+        substitutionGroup="prod-0200:RoomRateSubGrp" type="prod-0200:RoomRate_Detail"/>
+    <xsd:element name="RoomRateQueryRange" type="prod-0200:RoomRate_Query_Range"/>
+    
+    <xsd:complexType name="RoomRate_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of a room rate.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomRate</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0200:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="RoomRateRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RoomRate">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of a room rate.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomRate</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:RoomRate_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="Rate2" type="ota2-0200:RoomPrice">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies the rate for the room.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="prod-0200:BasicPropertyInfoSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies the property for the reservation.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+                </xsd:sequence>
+                <xsd:attribute name="effectiveDate" type="xsd:date" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the starting date for this room rate.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="expireDate" type="xsd:date" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the end date for this room rate.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="expireDateExclusiveInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, the ExpireDate is the first day after the applicable period (e.g. when expire date is Oct 15  the last date of the period is Oct 14).</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RoomRate_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of a room rate.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomRate</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:RoomRate">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="promotionCode"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Identifyies host to link directly with a specific named advertising campaign. By including the code, the client is able to gain access to special offers which MAY have been created for a specifically targeted group via a CRM system or for a wider advertising campaign using Television or press adverts.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="ratePlanCode"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the rate plan code for the product.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="roomTypeCode"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the system room type code (ex: A1K, A1Q).</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RoomRate_Query_Range">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of a room rate.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomRate</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="StartRate" type="ota2-0200:RoomPrice">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Starting price for the rate range query.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="EndRate" type="ota2-0200:RoomPrice">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Ending price for the rate range query.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="RoomStaySubGrp" type="prod-0200:RoomStay_ID">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomStay</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="RoomStayID"
+        substitutionGroup="prod-0200:RoomStaySubGrp" type="prod-0200:RoomStay_ID"/>
+    <xsd:element name="RoomStayIdentifier" type="prod-0200:RoomStay_ID"/>
+    <xsd:element name="RoomStay"
+        substitutionGroup="prod-0200:RoomStaySubGrp" type="prod-0200:RoomStay"/>
+    <xsd:element name="RoomStaySummary" type="prod-0200:RoomStay"/>
+    <xsd:element name="RoomStayQueryProduct" type="prod-0200:RoomStay_Query_Product"/>
+    <xsd:element name="RoomStayQueryCandidate" type="prod-0200:RoomStay_Query_Candidate"/>
+    
+    <xsd:complexType name="RoomStay_ID">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomStay</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0200:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="RoomStayRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RoomStay">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomStay</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:RoomStay_ID">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="30" minOccurs="0" ref="prod-0200:RoomTypeSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies the details of the room type for this product.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="30" minOccurs="0" ref="prod-0200:RatePlanSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies information regarding this rate plan.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="30" minOccurs="0" ref="prod-0200:RoomRateSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies the room rate for this room stay.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="10" minOccurs="0"
+                        name="GuestCount" type="prod-0200:GuestCount">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies the number of guests for this room stay.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="prod-0200:BasicPropertyInfoSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Identifies the property for the room stay.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RoomStay_Query_Product">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomStay</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="prod-0200:BasicPropertyInfoSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies property information for the query.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="arrivalDate" type="ota2-0200:DateTime" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Specifies the arrival date for the query.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="departureDate" type="ota2-0200:DateTime" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Specifies the departure date for the query.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RoomStay_Query_Candidate">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomStay</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="ArrivalDepartureDates" type="ota2-0200:DateEffectiveExpire">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies the start and/or end dates.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="prod-0200:BasicPropertyInfoSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies a specific hotel or city for which the availability search applies.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="1" ref="prod-0200:RoomTypeSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies a type of room.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="GuestCount" type="prod-0200:GuestCount">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies the number of guests and the ages of the guests.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="prod-0200:RoomRateQueryRange">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The rate range for the query.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="RoomTypeSubGrp" type="prod-0200:RoomType_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of the room type.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomType</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="RoomTypeID"
+        substitutionGroup="prod-0200:RoomTypeSubGrp" type="prod-0200:RoomType_ID"/>
+    <xsd:element name="RoomTypeIdentifier" type="prod-0200:RoomType_ID"/>
+    <xsd:element name="RoomType"
+        substitutionGroup="prod-0200:RoomTypeSubGrp" type="prod-0200:RoomType"/>
+    <xsd:element name="RoomTypeSummary" type="prod-0200:RoomType"/>
+    
+    <xsd:complexType name="RoomType_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of the room type.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomType</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0200:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="RoomTypeRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RoomType">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of the room type.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomType</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:RoomType_ID">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="20" minOccurs="0" ref="ota2-0200:Comment">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies information regarding the room type.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+                <xsd:attribute name="roomTypeCode"
+                    type="ota2-0200:StringTiny" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Identifies the specific system room type code for this room type (e.g. A1K, A1Q).</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="product">STD</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="bedTypeCode"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Indicates the type of bed(s) found in the room. Typical values would be Double, Twin, Queen, or King.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="product">K1</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="nonSmokingInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true indicates that the room type is non-smoking.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="SegmentSubGrp" type="prod-0200:Segment_ID">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Segment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="SegmentID"
+        substitutionGroup="prod-0200:SegmentSubGrp" type="prod-0200:Segment_ID"/>
+    <xsd:element name="SegmentIdentifier" type="prod-0200:Segment_ID"/>
+    <xsd:element name="Segment"
+        substitutionGroup="prod-0200:SegmentSubGrp" type="prod-0200:Segment"/>
+    <xsd:element name="SegmentSummary" type="prod-0200:Segment"/>
+    <xsd:element name="SegmentAir"
+        substitutionGroup="prod-0200:SegmentSubGrp" type="prod-0200:Segment_Air"/>
+    <xsd:element name="SegmentRail"
+        substitutionGroup="prod-0200:SegmentSubGrp" type="prod-0200:Segment_Rail"/>
+    <xsd:element name="SegmentGround"
+        substitutionGroup="prod-0200:SegmentSubGrp" type="prod-0200:Segment_Ground"/>
+    
+    <xsd:complexType name="Segment_ID">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Segment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0200:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="SegmentRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="1" ref="prod-0200:LocationPointSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">TODO - this object needs to be reviewed and potentially reworked.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="1" name="TransportNumber" type="prod-0200:TransportNumber">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A tiny string  
+Minimum length of 0 and a maximum length of 32</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="departureDateTime"
+            type="ota2-0200:DateTimeLocal" use="required">
+            <xsd:annotation>
+                <xsd:documentation source="Description">ISO date time type without UTC offset or Z for Zulu restriction indicating it is representing Local Time
+Example: 2010-12-31T11:55:00</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type:
+				{http://www.w3.org/2001/XMLSchema}dateTime</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Segment">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Segment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:Segment_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" ref="prod-0200:LocationPointSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">TODO - this object needs to be reviewed and potentially reworked.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="26" minOccurs="1"
+                        name="ClassOfService" type="prod-0200:ClassOfService"/>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+                </xsd:sequence>
+                <xsd:attribute name="arrivalDateTime"
+                    type="ota2-0200:DateTimeLocal" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">ISO date time type without UTC offset or Z for Zulu restriction indicating it is representing Local Time
+Example: 2010-12-31T11:55:00</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type:
+				{http://www.w3.org/2001/XMLSchema}dateTime</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="numberOfStops"
+                    type="xsd:positiveInteger" use="required"/>
+                <xsd:attribute name="duration" type="xsd:duration" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Segment_Air">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Segment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:Segment">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="10" minOccurs="0" ref="prod-0200:Meal"/>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Segment_Rail">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Segment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:Segment">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+                <xsd:attribute name="service"
+                    type="prod-0200:Service_Enum" use="optional"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Segment_Ground">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Segment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:Segment">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="5" minOccurs="0" ref="prod-0200:RestStopSubGrp"/>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="Meal_Enum">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">Meal_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="B">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Breakfast</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="L">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Lunch</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="D">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Dinner</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="Service_Enum">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">Service_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="M">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Meal at Seat</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="D">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Dinning Car</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="B">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Bar Car</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="C">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Meal Cart</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:element abstract="true" name="Activity" type="prod-0200:Activity">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A golf activity.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Activity</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="ActivityGolf"
+        substitutionGroup="prod-0200:Activity" type="prod-0200:Activity_Golf"/>
+    
+    <xsd:complexType abstract="true" name="Activity">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A golf activity.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Activity</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Shared"/>
+        </xsd:sequence>
+        <xsd:attribute name="start" type="xsd:dateTime" use="required">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The start date and or time of the activity.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Activity_Golf">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A golf activity.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Activity</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:Activity">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="pg-0100:GolfActivitySubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A golf activity.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="ClassOfService">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">ClassOfService</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="count" type="xsd:positiveInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Number available for sale or that have been sold</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="code" type="ota2-0200:StringTiny" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Used to identify this product programmatically.  EG "F" for First Class</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="name" type="ota2-0200:StringShort" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Display name for this product.  EG "First Class"</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="LocationPointSubGrp" type="prod-0200:LocationPoint">
+        <xsd:annotation>
+            <xsd:documentation source="Description">TODO - this object needs to be reviewed and potentially reworked.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">LocationPoint</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="LocationPoint"
+        substitutionGroup="prod-0200:LocationPointSubGrp" type="prod-0200:LocationPoint"/>
+    <xsd:element name="LocationPointSummary" type="prod-0200:LocationPoint"/>
+    <xsd:element name="LocationPointDetail"
+        substitutionGroup="prod-0200:LocationPointSubGrp" type="prod-0200:LocationPoint_Detail"/>
+    
+    <xsd:element abstract="true" name="ArrivalPointSubGrp" type="prod-0200:LocationPoint">
+        <xsd:annotation>
+            <xsd:documentation source="Description">TODO - this object needs to be reviewed and potentially reworked.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">LocationPoint</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="ArrivalPoint"
+        substitutionGroup="prod-0200:ArrivalPointSubGrp" type="prod-0200:LocationPoint"/>
+    <xsd:element name="ArrivalPointSummary" type="prod-0200:LocationPoint"/>
+    <xsd:element name="ArrivalPointDetail"
+        substitutionGroup="prod-0200:ArrivalPointSubGrp" type="prod-0200:LocationPoint_Detail"/>
+    
+    <xsd:element abstract="true" name="DeparturePointSubGrp" type="prod-0200:LocationPoint">
+        <xsd:annotation>
+            <xsd:documentation source="Description">TODO - this object needs to be reviewed and potentially reworked.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">LocationPoint</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="DeparturePoint"
+        substitutionGroup="prod-0200:DeparturePointSubGrp" type="prod-0200:LocationPoint"/>
+    <xsd:element name="DeparturePointSummary" type="prod-0200:LocationPoint"/>
+    <xsd:element name="DeparturePointDetail"
+        substitutionGroup="prod-0200:DeparturePointSubGrp" type="prod-0200:LocationPoint_Detail"/>
+    
+    <xsd:complexType name="LocationPoint">
+        <xsd:annotation>
+            <xsd:documentation source="Description">TODO - this object needs to be reviewed and potentially reworked.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">LocationPoint</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="code" type="ota2-0200:StringTiny" use="required">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A tiny string  
+Minimum length of 0 and a maximum length of 32</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="kioskInd" type="xsd:boolean" use="optional"/>
+        <xsd:attribute name="curbSideBaggageCheckInd" type="xsd:boolean" use="optional"/>
+    </xsd:complexType>
+    
+    <xsd:complexType name="LocationPoint_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">TODO - this object needs to be reviewed and potentially reworked.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">LocationPoint</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0200:LocationPoint">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="openingTime" type="xsd:time" use="required"/>
+                <xsd:attribute name="closingTime" type="xsd:time" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="TransportNumber">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A tiny string  
+Minimum length of 0 and a maximum length of 32</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">TransportNumber</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:StringTiny">
+                <xsd:attribute name="carrier"
+                    type="ota2-0200:StringTiny" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A tiny string  
+Minimum length of 0 and a maximum length of 32</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="operatingCarrier"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A tiny string  
+Minimum length of 0 and a maximum length of 32</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+</xsd:schema>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="DestinationSystemCodes.xsd"/>
+	<xs:include schemaLocation="DOWPattern.xsd"/>
+	<xs:include schemaLocation="DateTimeSpan.xsd"/>
+	<xs:element name="StatusApplicationControl">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The StatusApplicationControl class is used to indicate to which block codes/rate plans/inventory codes a status should be applied. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DestinationSystemCodes" minOccurs="0"/>
+				<xs:element ref="DateTimeSpan" minOccurs="0"/>
+				<xs:element ref="DOWPattern" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="InvBlockCodeType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type that defines whether the status control applies to a block or a block grouping code, or does not apply to blocks.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: Does Not Apply, Block Code, Block Grouping Code.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="DoesNotApply"/>
+						<xs:enumeration value="BlockCode"/>
+						<xs:enumeration value="BlockGroupingCode"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="RatePlanCodeType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Values: Does Not Apply, Rate Plan Code, Rate Plan Grouping Code.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="DoesNotApply"/>
+						<xs:enumeration value="RatePlanCode"/>
+						<xs:enumeration value="RatePlanGroupingCode"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="RatePlanCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The RatePlanCode assigned by the receiving system for the inventory item in response to a new rate plan notification. (Implementation Notes:  This would only be returned when the notification is of type New and the sender is translating RatePlanCode values. On subsequent transactions for this rate plan, the sender would populate the RatePlanCode attribute with this value returned by the receiver.)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InvCodeType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type that identifies whether the InvCode is a single inventorialble item or a group of inventoriable items.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: Does Not Apply, Inventory Code, Inventory Grouping Code.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="DoesNotApply"/>
+						<xs:enumeration value="InvCode"/>
+						<xs:enumeration value="InvGroupingCode"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="InvCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Code that identifies an inventory item.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InvBlockCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Code that identifies an inventory block.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Override" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Mechanism to allow the user to override settings at the reservation system and to allow the RMS to replace this overridden values: If value = 0 (No), the reservations system may ignore the settings passed and keep values overridden by the user. If value = 1 (Yes), the reservations system must replace values overridden by the user.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

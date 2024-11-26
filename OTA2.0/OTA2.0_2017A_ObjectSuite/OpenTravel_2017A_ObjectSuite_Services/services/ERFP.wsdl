@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ERFP"
+    targetNamespace="http://www.opentravel.org/OTM/product/eRFP/v2"
+    xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2msg="http://opentravel.org/common/message/v02"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:rfp-0200="http://www.opentravel.org/OTM/product/eRFP/v2"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.opentravel.org/OTM/product/eRFP/v2">
+            <xsd:annotation>
+                <xsd:appinfo>
+                    <otm:Library>
+                        <otm:ProjectName>GolfProjectOTM022417_Publication2.otp</otm:ProjectName>
+                        <otm:ServiceName>ERFP</otm:ServiceName>
+                        <otm:LibraryName>eRFP</otm:LibraryName>
+                        <otm:LibraryVersion>2.0.0</otm:LibraryVersion>
+                        <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                        <otm:SourceFile>/eRFP_2_0_0.otm</otm:SourceFile>
+                        <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                        <otm:CompileDate>2017-02-24T17:20:54.811-05:00</otm:CompileDate>
+                    </otm:Library>
+                </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:include schemaLocation="eRFP_2_0_0_Trim.xsd"/>
+            <xsd:import
+                namespace="http://schemas.xmlsoap.org/soap/envelope/" schemaLocation="built-ins/SOAP_envelope.xsd"/>
+            <xsd:import
+                namespace="http://opentravel.org/common/message/v02" schemaLocation="built-ins/OTA2_Message_v2.0.0.xsd"/>
+            <xsd:import
+                namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="CreateRQ">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="rfp-0200:CreateRQ" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="CreateRS">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="rfp-0200:CreateRS" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="CreateNotif">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="rfp-0200:CreateNotif" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="CreateFault">
+        <wsdl:part element="env:Fault" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="DeleteRQ">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="rfp-0200:DeleteRQ" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="DeleteRS">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="rfp-0200:DeleteRS" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="DeleteNotif">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="rfp-0200:DeleteNotif" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="DeleteFault">
+        <wsdl:part element="env:Fault" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="ReadRQ">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="rfp-0200:ReadRQ" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="ReadRS">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="rfp-0200:ReadRS" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="ReadNotif">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="rfp-0200:ReadNotif" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="ReadFault">
+        <wsdl:part element="env:Fault" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="UpdateRQ">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="rfp-0200:UpdateRQ" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="UpdateRS">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="rfp-0200:UpdateRS" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="UpdateNotif">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="rfp-0200:UpdateNotif" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="UpdateFault">
+        <wsdl:part element="env:Fault" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:portType name="ERFPPortType">
+        <wsdl:operation name="Create">
+            <wsdl:input message="rfp-0200:CreateRQ"/>
+            <wsdl:output message="rfp-0200:CreateRS"/>
+            <wsdl:fault message="rfp-0200:CreateFault" name="CreateFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="Delete">
+            <wsdl:input message="rfp-0200:DeleteRQ"/>
+            <wsdl:output message="rfp-0200:DeleteRS"/>
+            <wsdl:fault message="rfp-0200:DeleteFault" name="DeleteFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="Read">
+            <wsdl:input message="rfp-0200:ReadRQ"/>
+            <wsdl:output message="rfp-0200:ReadRS"/>
+            <wsdl:fault message="rfp-0200:ReadFault" name="ReadFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="Update">
+            <wsdl:input message="rfp-0200:UpdateRQ"/>
+            <wsdl:output message="rfp-0200:UpdateRS"/>
+            <wsdl:fault message="rfp-0200:UpdateFault" name="UpdateFault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    
+</wsdl:definitions>

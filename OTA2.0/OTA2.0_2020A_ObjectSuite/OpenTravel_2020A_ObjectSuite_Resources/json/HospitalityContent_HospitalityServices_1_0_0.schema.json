@@ -1,0 +1,226 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "HospitalityContent",
+  "x-otm-library": {
+    "ProjectName": "HotelDescriptiveContent 103019.otp",
+    "LibraryName": "HospitalityContent",
+    "LibraryVersion": "1.0.0",
+    "LibraryStatus": "DRAFT",
+    "SourceFile": "/HospitalityContent_1_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2019-10-30T13:33:14.789-0400"
+  },
+  "definitions": {
+    "HospitalityDescriptiveContentNotifRQ": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "HospitalityDescriptiveContent_HospitalityDescriptiveContentNotif"
+      },
+      "description": "Used to push hotel content for one or more properties.",
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Request_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0500:PayloadStdAttributes",
+              "$ref": "Common_5_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "POS": {
+              "description": "Assigned Type: ota2-0500:POS",
+              "$ref": "Common_5_0_0.schema.json#/definitions/POS"
+            },
+            "HotelDescriptiveContent": {
+              "type": "array",
+              "items": {
+                "$ref": "OrganizationHospitality_4_0_0.schema.json#/definitions/HotelDescriptiveContentID"
+              }
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "HospitalityDescriptiveContentNotifRS": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "HospitalityDescriptiveContent_HospitalityDescriptiveContentNotif"
+      },
+      "description": "Used to acknowlege receipt of the request message.",
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Response_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0500:PayloadStdAttributes",
+              "$ref": "Common_5_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "Result": {
+              "description": "Assigned Type: ota2-0500:Result",
+              "$ref": "Common_5_0_0.schema.json#/definitions/Result"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "HospitalityDescriptiveContentNotifNotif": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "HospitalityDescriptiveContent_HospitalityDescriptiveContentNotif"
+      },
+      "description": "Used to push hotel content when connecting with guaranteed delivery no option to respond (fire and forget).",
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Notif_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0500:PayloadStdAttributes",
+              "$ref": "Common_5_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "POS": {
+              "description": "Assigned Type: ota2-0500:POS",
+              "$ref": "Common_5_0_0.schema.json#/definitions/POS"
+            },
+            "HotelDescriptiveContent": {
+              "type": "array",
+              "items": {
+                "$ref": "OrganizationHospitality_4_0_0.schema.json#/definitions/HotelDescriptiveContentID"
+              }
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "HospitalityDescriptiveInfoRQ": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "HospitalityDescriptiveContent_HospitalityDescriptiveInfo"
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Request_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0500:PayloadStdAttributes",
+              "$ref": "Common_5_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "POS": {
+              "description": "Assigned Type: ota2-0500:POS",
+              "$ref": "Common_5_0_0.schema.json#/definitions/POS"
+            },
+            "ProcessingInfo": {
+              "description": "Assigned Type: ota2-0500:ProcessingInfo",
+              "$ref": "Common_5_0_0.schema.json#/definitions/ProcessingInfo"
+            },
+            "HotelDescriptiveRequestInfo": {
+              "description": "Assigned Type: orghs-0400:HotelDescriptiveRequestInfo",
+              "$ref": "OrganizationHospitality_4_0_0.schema.json#/definitions/HotelDescriptiveRequestInfo"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "HospitalityDescriptiveInfoRS": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "HospitalityDescriptiveContent_HospitalityDescriptiveInfo"
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Response_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0500:PayloadStdAttributes",
+              "$ref": "Common_5_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "Result": {
+              "description": "Assigned Type: ota2-0500:Result",
+              "$ref": "Common_5_0_0.schema.json#/definitions/Result"
+            },
+            "HotelDescriptiveContent": {
+              "type": "array",
+              "items": {
+                "$ref": "OrganizationHospitality_4_0_0.schema.json#/definitions/HotelDescriptiveContentID"
+              }
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "HospitalityDescriptiveContentNotifRQ": {
+          "$ref": "#/definitions/HospitalityDescriptiveContentNotifRQ"
+        }
+      },
+      "required": [
+        "HospitalityDescriptiveContentNotifRQ"
+      ]
+    },
+    {
+      "properties": {
+        "HospitalityDescriptiveContentNotifRS": {
+          "$ref": "#/definitions/HospitalityDescriptiveContentNotifRS"
+        }
+      },
+      "required": [
+        "HospitalityDescriptiveContentNotifRS"
+      ]
+    },
+    {
+      "properties": {
+        "HospitalityDescriptiveContentNotifNotif": {
+          "$ref": "#/definitions/HospitalityDescriptiveContentNotifNotif"
+        }
+      },
+      "required": [
+        "HospitalityDescriptiveContentNotifNotif"
+      ]
+    },
+    {
+      "properties": {
+        "HospitalityDescriptiveInfoRQ": {
+          "$ref": "#/definitions/HospitalityDescriptiveInfoRQ"
+        }
+      },
+      "required": [
+        "HospitalityDescriptiveInfoRQ"
+      ]
+    },
+    {
+      "properties": {
+        "HospitalityDescriptiveInfoRS": {
+          "$ref": "#/definitions/HospitalityDescriptiveInfoRS"
+        }
+      },
+      "required": [
+        "HospitalityDescriptiveInfoRS"
+      ]
+    }
+  ]
+}

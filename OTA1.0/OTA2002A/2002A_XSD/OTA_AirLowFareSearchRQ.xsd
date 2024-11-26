@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema targetNamespace="http://www.opentravel.org/OTA/2002/08" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA/2002/08" elementFormDefault="qualified" version="2002A">	<xs:include schemaLocation="OTA_AirCommonTypes.xsd"/>
+	<xs:element name="OTA_AirLowFareSearchRQ">
+		<xs:annotation>
+			<xs:documentation>
+	The Low Fare Search Request message requests priced itinerary options for flights between specific city pairs on specific dates for specific 	numbers and types of passengers. Optional request information can include:
+	- Time / Time Window
+	- Connecting cities.
+	- Client Preferences (airlines, cabin, flight types etc.)
+	The Low Fare Search request contains similar information to a Low Fare Search entry on an airline CRS or GDS.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="POS" type="POS_Type">
+					<xs:annotation>
+						<xs:documentation>Point of sale object. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="OriginDestinationInformation" type="OriginDestinationInformationType" maxOccurs="10"/>
+				<xs:element name="SpecificFlightInfo" type="SpecificFlightInfoType" minOccurs="0"/>
+				<xs:element name="TravelPreferences" type="AirSearchPrefsType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Air Availability Request preference information.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="TravelerInfoSummary" type="TravelerInfoSummaryType" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			<xs:attribute name="DesiredOptionQuantity" type="xs:positiveInteger" use="optional" default="10">
+				<xs:annotation>
+					<xs:documentation> Maximum number of reponses desired in the reponse message. This defaults to 10.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DirectFlightsOnly" type="xs:boolean" use="optional" default="false">
+				<xs:annotation>
+					<xs:documentation> Request direct flights on between the given locations.This defaults to false.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

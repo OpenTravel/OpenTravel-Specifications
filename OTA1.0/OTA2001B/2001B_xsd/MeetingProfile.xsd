@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:element name="MeetingProfile">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Container for the Meeting Profile.  Meeting Profiles messages can describe the following business objects: RFP,Lead,Booking,FutureBooking, and History.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="BudgetAmount" minOccurs="0"/>
+				<xs:element ref="Dates" minOccurs="0"/>
+				<xs:element ref="Events" minOccurs="0"/>
+				<xs:element ref="Guestrooms" minOccurs="0"/>
+				<xs:element ref="HotelReference" minOccurs="0"/>
+				<xs:element ref="AccountDescriptiveContent" minOccurs="0"/>
+				<xs:element ref="Organizations" minOccurs="0"/>
+				<xs:element ref="RecipientResponse" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="MeetingID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Vendor specific unique Identifier</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MeetingProfileTypeCode">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Meeting Profile can be: RFP,Lead,Booking,FutureBooking, and History</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="RFP"/>
+						<xs:enumeration value="Lead"/>
+						<xs:enumeration value="Booking"/>
+						<xs:enumeration value="FutureBooking"/>
+						<xs:enumeration value="History"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="MeetingAbbrevText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Booking Code</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MeetingControlID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Booking Control ID (18 char unique ID)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ReservationID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This may be an ID assigned by a PMS system.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PostAsText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Name or the posting name of the meeting.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ReservationTypeCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This code describes the type of reservation used when creating this meeting (code values are TBD )</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MarketSegmentCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code of the market segment that the meeting belongs to (code values are TBD).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StatusCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Code describing the status of the booking.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ContractTypeCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Code describing the type of contract employed in creating the meeting.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StatusReasonText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A free form text field to describe the disposition of the status for the meeting.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="GuestQuantity" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Total amount of guests attending the meeting.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SpecialRequestText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Free form text to communicate any special requests for the meeting.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CommentText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Free form text to communicate additional information about the meeting.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="KeyDates">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Collection of KeyDate</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="KeyDate" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="KeyDate">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A date and/or time in the following format "2000-05-21T00:00:00"</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="KeyDateCode" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Code defining the usage of the KeyDate (DecisionDue | CutOff | DateBooked | HoldSpaceUntil | OfferIsValidUntil)</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="DecisionDue"/>
+								<xs:enumeration value="CutOff"/>
+								<xs:enumeration value="DateBooked"/>
+								<xs:enumeration value="HoldSpaceUntil"/>
+								<xs:enumeration value="OfferIsValidUntil"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Phones">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Phone" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Phone">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="UsageCode" type="xs:string" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A code that that identifies what kind of Phone this is. (eg. Home, Office, ...)</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Emails">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Email" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Email">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="UsageCode" type="xs:string" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A code that that identifies what kind of Email this is. (eg. Home, Office, ...)</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Addresses">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Address" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Address">
+		<xs:complexType>
+			<xs:attribute name="UsageCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A code that that identifies what kind of Address this is. (eg. Home, Office, ...)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Address1Text" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This first line of address information.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Address2Text" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This second line of address information.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CityText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The city portion of the address.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StateText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The state portion of the address.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PostalCodeText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The zip code portion of the address.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Organizations">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of  Organization</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Organization" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Organization">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">These are related organizations such as agencies, vendors, supliers, …</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Addresses" minOccurs="0"/>
+				<xs:element ref="Contacts" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="OrgNameText" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Name of the Organization.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OrgCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A unique code that identifies an organization.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="UsageCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A code that describes the contextual relationship of this address.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="URLText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Name of the URL that uniquely identifies the Organization.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="UsageCodeContextText" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A code that describes the contextual relationship of this organization.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Contacts">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Collection of Contacts</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Contact" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Contact">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">People associated with the Hotel, Account, or related Oragnizations.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Addresses" minOccurs="0"/>
+				<xs:element ref="Phones" minOccurs="0"/>
+				<xs:element ref="Emails" minOccurs="0"/>
+				<xs:element ref="Organizations" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="PrefixText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">eg. "Mrs, Mr, Dr, ..."</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="GivenNameText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A person's first name.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MiddleNameText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A person's middle name.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SurnameText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A person's last name.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SuffixText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">eg. "Esq, ..."</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TitleText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A person's professional title.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="UsageCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A code that describes the contextual relationship of this person.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="UsageCodeContextText" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The context by which the Usage code is defined.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ContactID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">a unique identifier used to represent the account.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Guestrooms">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This collection of Guestroom classes holds all the guest room block details for the meeting.  The attributes on the base collection class represent the aggregates across all days of the meeting.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Guestroom" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="TotalAgreedQuantity" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Total agreed quantity of guestrooms for the meeting.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TotalBlockQuantity" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Total blocked quantity of guestrooms for the meeting.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TotalPickUpQuantity" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Total picked up quantity of guestrooms for the meeting.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TotalForecastQuantity" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Total forcast quantity of guestrooms for the meeting.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TotalGuestQuantity" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Number of guests in the corresponding guestrooms for the meeting.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AverageRateAmount" type="xs:float">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">rate for the guestrooms for the entire meeting defined in the Rooms Quoted Currency code.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PeakRoomsQuantity" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The highest number or rooms, by night, for this booking.  If the pattern is 50/50/65/50 the peak rooms are 65.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RoomsQuotedCurrencyCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The ISO standard code representing currency amounts.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Guestroom">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">this represents detailed information about  particular guestroom inventory on a specific date.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="DateNumber" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This number represents the actual day within the stay.  For example, if the number was 1 , this would indicate the guestroom block for the first day of the stay.  This is also optional if the actual date is specified in 
+
+</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RoomTypeCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Code defining the room type specified for this meeting.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RoomTypeCodeContext" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Text name of the room specified for this meeting.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OccupancyCode" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Occupancy code for the guestrooms in this meeting.  (Single, Double, Triple, Quad, XChild, XAdult, Total)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Single"/>
+						<xs:enumeration value="Double"/>
+						<xs:enumeration value="Triple"/>
+						<xs:enumeration value="Quad"/>
+						<xs:enumeration value="XChild"/>
+						<xs:enumeration value="XAdult"/>
+						<xs:enumeration value="Total"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="AgreedQuantity" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The number of guestrooms agreed to by the client and the property.  Commonly displayed on a contact.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="BlockQuantity" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">number of guestrooms blocked by the property.  This number is based on the agreed number and client history.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PickUpQuantity" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Number of guestrooms that were actually utilized or "picked up" by the client.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ForecastQuantity" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">ForecastQuantity a field where a user can define a subjective forecast for the number of guestrooms.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RateAmount" type="xs:float">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Currency amount assigned to each of the rooms by type.  This number is expressed in a currency defined by the RoomsQuotedCurrencyCode. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="GuestNumber" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Number of guests in the corresponding guestrooms, by date.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StayDate" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Date specific to a guestroom that is blocked.  This is optional if the sender specifies the DateNumber instead.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Revenues">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">collection of revenues</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Revenue" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Revenue">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A revenue amount, denominated in the defined currency.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="RevCode" type="xs:string" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A Revenue category code that describes the source of the revenue.  Categories provide a way to classify hotel financial statistics to show all spending in a specific category (e.g., food and beverage, room, etc.)</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="RevTypeCode" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Type of revenue (Actual | Projected | Forecast).</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Actual"/>
+								<xs:enumeration value="Projected"/>
+								<xs:enumeration value="Forecast"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="CurrencyCode" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The ISO standard code representing currency amounts.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Events">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">a collection of catering events</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Event" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Event">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">catering events that are part of this meeting  (breakfast, breakout, dinner, etc.)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="FunctionRooms" minOccurs="0"/>
+				<xs:element ref="Revenues" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="PostAsText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">or the posting name of the event.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EventNameText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The name of the event.  This name may appear different than the posting name.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EventStatusCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The status code of the event normally defined by the acceptance of a proposal or contract.  (The code values are TBD).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StartDateTime" type="xs:time">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Start time of the event using the format specified by ISO 8601:YYY-MM-DDThh: mm: ssZ with time values using the 24-hour (military) clock. For example: March-31-2001, 4:10:00 pm UTC becomes 2001-03-31T16:10:00Z.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EndDateTime" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">End time of the event. Same time format as StartTime.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EventTypeCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code that defines the type of event.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SetupTypeCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code that defines the setup of the event.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SpecialSetupTypeCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">code that defines the special setup of the event. A special setup is normally defined as a setup the decreases a setup's capacity. (eg. Rear Projection)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AgreedAttendanceQuantity" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Attendance for and event as agreed upon with the client.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ActualAttendanceQuantity" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The actual attendance of an event as define during/after an event is taking place.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ExpectedAttendanceQuantity" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Expected attendance is the attendance figure that is subjective and usually derived from the agreed figure and past experiences.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="GuaranteedAttendanceQuantity" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Guarantee attendance is the attendance figure that is contractually agreed upon by the client and the property.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Moveable" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Can the event be moved to another function room ? (Yes|No)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SetupTime" type="xs:time">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Total amount of time that is required to Setup an event.  This time is considered above and beyond the event start and end times.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TeardownTime" type="xs:time">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Total amount of time that is required to teardown an event.  This time is considered above and beyond the event start and end times.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SpecialRequestText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This field allows for a free form textual description of any Special Requests regarding the setup of the event.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ExhibitBoothsQuantity" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Total amount of booths required.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EventID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">a unique identifier for this event.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FunctionRooms">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">collection of FunctionRoom</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="FunctionRoom" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FunctionRoom">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">a Hitis Function room class that represents an area.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="StayInformation">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This element describes the beginning, ending, and duration of a stay in units of time.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ArrivalInfo" minOccurs="0"/>
+				<xs:element ref="AlternateDates" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ArrivalInfo">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This is the preferred start and end date of the meeting</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="ArrivalDate" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Preferred specific arrival date.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DepartureDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Preferred specific departure date.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AlternateDate">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This represents optional starting and ending dates.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="AltDate"/>
+				<xs:element ref="AltRange"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AltRange">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">If a particualr date alternative is too specific then a range of desired alternative dates can be supplied</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="AltStartDate" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Alternative start date used when the preferred dates are deemed unacceptable.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AltEndDate" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Alternative end date used when the preferred dates are deemed unacceptable.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DOWCode">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Day of the week code works in conjunction with alternative start/end dates offering arrivals that extend for a specific period beginning on the day of the week represented by this code; (Mon | Tue | Wed | Thu | Fri | Sat | Sun).</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Mon"/>
+						<xs:enumeration value="Tue"/>
+						<xs:enumeration value="Wed"/>
+						<xs:enumeration value="Thu"/>
+						<xs:enumeration value="Fri"/>
+						<xs:enumeration value="Sat"/>
+						<xs:enumeration value="Sun"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="TotalStayDaysQuantity" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The total amount of days for entire stay.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PreferenceID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An alphanumeric field used to identify ranking of an alternative arrival date. (First Option, Second Option, etc...)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AltDate">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Altdate specifies a particular start and end date.  Multiples can be specified along with an indication of the desirability of the alternative</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Date" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A date and/or time in the following format "2000-05-21T00:00:00"</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TotalStayDaysQuantity" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The total amount of days for entire stay.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PreferenceID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An alphanumeric field used to identify ranking of an alternative arrival date. (First Option, Second Option, etc...)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RecipientResponse">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Response generated after receiving an RFP.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Dates" minOccurs="0"/>
+				<xs:element ref="Commission" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="StatusCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The status code of the recipient response defines the acceptance or rejection of the Lead (code values are TBD).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StatusReasonText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The recipient responders reason for choosing a particular status code.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ResponseExplanationText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Text field providing additional information about the status reason.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OperationalDates">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Collection of OperationalDate.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="OperationalDate" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OperationalDate">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">An operational date is defined as an action (Booked By, Created By, etc.)  taken by an individual.  The contact information defines that person and the date component defines when that action happened.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Contact" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="Date" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A date and/or time in the following format "2000-05-21T00:00:00"</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OperationalDateCode" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This code describes the nature of the operational date (code values are TBD).</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="AssignedWhen"/>
+						<xs:enumeration value="Received"/>
+						<xs:enumeration value="Sent"/>
+						<xs:enumeration value="Update"/>
+						<xs:enumeration value="StatusUpdate"/>
+						<xs:enumeration value="Created"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Dates">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This element houses all the dates associated with this meeting.  The date classes contained within are Operational dates, Key Dates, and the actual meeting stay information.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="OperationalDates" minOccurs="0"/>
+				<xs:element ref="KeyDates" minOccurs="0"/>
+				<xs:element ref="StayInformation" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AccountDescriptiveContent">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The Account is the sponsor or "client" for whom the meeting is help</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Addresses" minOccurs="0"/>
+				<xs:element ref="Contacts" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="OrgNameText" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Name of the Account.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="URLText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Name of the URL that uniquely identifies the Account.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DandBCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Dun and Bradstreet number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DivisionCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code of the division that the account belongs to (code values are TBD).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IATACode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">International Assoc. of Travel Agencies reference number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IndustryCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code used to define a type of industry as represented by the SIC and NAIC codes (code values are TBD).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="GeoMarketCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code of the geographic market that the account belongs to (code values are TBD).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LanguageCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code of the language used by the account (code values are TBD).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MarketSegmentCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code of the market segment that the account belongs to (code values are TBD).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OrgID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">a unique identifier used to represent the account.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Commission">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The Commission element contains the data for a commission amount to be paid.  The amount represents the total amount.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="CommCode" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Code determined between vendors that indicates the reason for this commission.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="CurrencyCode" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The ISO standard code representing currency amounts.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Percent" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Percent is used to calculate the commission amount.  Percent is represented using the base datatype, decimal.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AlternateDates">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This is a collection of alternate arrival dates.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AlternateDate" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BudgetAmount">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The amount that the meeting sponsors are willing to spend on the meeting. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:float">
+					<xs:attribute name="CurrencyCode" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The ISO standard code representing currency amounts.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelReference">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A Hotel Reference that contains the hotel chain, hotel brand or flag, and individual hotel code that identifies a lodging facility this meeting is targeted for.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Contacts" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="ChainCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code for the Chain to which this hotel belongs.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="BrandCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The Brand or Flag under which this hotel operates .</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="HotelCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A unique code within the Chain and/or Brand.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

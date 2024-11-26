@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="Privacy.xsd"/>
+	<xs:annotation>
+		<xs:documentation xml:lang="en">Electronic email addresses, in IETF specified format.</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="Email">
+		<xs:sequence>
+			<xs:element name="Email" type="xs:string"/>
+			<xs:element name="PrivacyDetails" type="Privacy">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Privacy details for this address. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="DefaultInd">
+			<xs:simpleType>
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates that the receiving system should assume the default value if the user specifies no overriding value or action.</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Yes"/>
+					<xs:enumeration value="No"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="EmailType" type="xs:string">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Defines the purpose of the Email address, such as personal, business, listserve, etc.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

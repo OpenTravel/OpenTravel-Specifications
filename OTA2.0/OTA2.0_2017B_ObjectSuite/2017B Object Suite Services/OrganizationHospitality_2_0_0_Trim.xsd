@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/organization/hospitality/v2"
+    version="2.0.0"
+    xmlns:org-0200="http://www.opentravel.org/OTM/organization/v2"
+    xmlns:orghs-0200="http://www.opentravel.org/OTM/organization/hospitality/v2"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0200="http://www.opentravel.org/OTM/Common/v2"
+    xmlns:ota2-0201="http://www.opentravel.org/OTM/Common/v2_1"
+    xmlns:ota2-0300="http://www.opentravel.org/OTM/Common/v3"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:ProjectName>Groundv3.otp</otm:ProjectName>
+                <otm:LibraryName>OrganizationHospitality</otm:LibraryName>
+                <otm:LibraryVersion>2.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                <otm:SourceFile>/OrganizationHospitality_2_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2017-05-24T10:17:03.089-04:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v2_1" schemaLocation="CodeList_2_1_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v2" schemaLocation="CodeList_2_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/v2" schemaLocation="Organization_2_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v3" schemaLocation="Common_3_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element abstract="true" name="HotelFacilitySubGrp" type="orghs-0200:HotelFacility">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An abbreviated short summary of hotel descriptive information.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">HotelFacility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="HotelFacility"
+        substitutionGroup="orghs-0200:HotelFacilitySubGrp" type="orghs-0200:HotelFacility"/>
+    <xsd:element name="HotelFacilitySummary" type="orghs-0200:HotelFacility"/>
+    <xsd:element name="HotelFacilityDetail"
+        substitutionGroup="orghs-0200:HotelFacilitySubGrp" type="orghs-0200:HotelFacility_Detail"/>
+    
+    <xsd:complexType name="HotelFacility">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An abbreviated short summary of hotel descriptive information.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">HotelFacility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="1000" minOccurs="0" ref="ota2-0300:Features">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies features of a property.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}HotelFeature</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="SegmentCategory" type="ota2-0201:SegmentCategory_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies the segment (e.g., luxury, upscale, extended stay) of the property. Refer to OpenTravel Codelist Segment Category Code (SEG).</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}OTA_CodeType</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="chainCode" type="ota2-0300:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The code that identifies a hotel chain or management group. The hotel chain code is decided between vendors. This attribute is optional if the hotel is an independent property that can be identified by the HotelCode attribute.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="brandCode" type="ota2-0300:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A code that identifies the brand or flag of a hotel, often used for independently-owned or franchised properties who are k</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="hotelCode" type="ota2-0300:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The code that uniquely identifies a single hotel property. The hotel code is decided between vendors.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="brandName" type="ota2-0300:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The name of a brand of hotels (e.g., Courtyard, Hampton Inn).</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="chainName" type="ota2-0300:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The name of the hotel chain (e.g., Hilton, Marriott, Hyatt, Starwood).</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="HotelFacility_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An abbreviated short summary of hotel descriptive information.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">HotelFacility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="orghs-0200:HotelFacility">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0"
+                        name="Recreation" type="orghs-0200:Recreation">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Identifies recreation facilities or amenities of interest.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}Recreation</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0"
+                        name="BusinessService" type="org-0200:BusinessService">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Identifies business services of interest.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}Service</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="Policy" type="orghs-0200:HotelPolicy">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Policy information for this hotel.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}Policy</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0"
+                        name="MeetingCenter" type="org-0200:MeetingCenter">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Identifies property meeting facility information for a property.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}HotelMeetingFacility</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" ref="ota2-0300:Amenity">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Property-level amenities (pool, etc) for searching.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}HotelAmenity</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0300:Ancillary">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Property level ancillaries that have a cost associated with them.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="supplierIntegrationLevel"
+                    type="ota2-0300:NonNegativeInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The level of integration of a property to provide automated transaction information. The lower the number, the higher the integration (e.g., a 1 means the supplier has the highest level of integration automation).</xsd:documentation>
+                        <xsd:documentation source="Implementer">Changed type from {http://www.w3.org/2001/XMLSchema}nonNegativeInteger.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="maxGroupRoomQuantity"
+                    type="ota2-0300:NonNegativeInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Provides the maximum number of rooms that can be booked in a property for a group.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Changed type from {http://www.w3.org/2001/XMLSchema}nonNegativeInteger.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="currencyCode"
+                    type="ota2-0300:CurrencyCode_ISO4217" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The code specifying a monetary unit. Use ISO 4217, three alpha code.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}AlphaLength3</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="hotelCodeContext"
+                    type="ota2-0300:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A text field used to communicate the context (or source of - ex Sabre, Galileo, Worldspan, Amadeus) the Hotel.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="tTICode" type="xsd:positiveInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Note:   This code is maintained by the Travel Technology Initiative (TTI) and provides a unique way to identify a property across a multiplicity of channels, service providers, tour companies, representation companies and third parties involved in the booking, administration and fulfillment of travel within the hospitality industry. For more information: http://www.tti.org/tticodes.html.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Recreation">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Name of the recreation.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">Recreation</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0300:StringShort">
+                <xsd:attribute name="code" type="ota2-0300:OTA_Code" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Used to identify a specific recreation activity. Refer to OpenTravel Code list Recreation Srvc Type (RST).</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}OTA_CodeType</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="HotelPolicy">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">HotelPolicy</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="checkInTime" type="xsd:time" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The checkin time required by this hotel for a room stay.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}time</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="checkOutTime" type="xsd:time" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The checkout time required by this hotel for a room stay.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}time</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:element name="SecurityFeatures" type="orghs-0200:SecurityFeatures"/>
+    
+    <xsd:simpleType name="SecurityFeatures_Simple">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A short string  
+Minimum length of 0 and a maximum length of 128</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">SecurityFeatures</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2-0300:StringShort"/>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="SecurityFeatures_Simple_List">
+        <xsd:list itemType="orghs-0200:SecurityFeatures_Simple"/>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="SecurityFeatures">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Name of the feature.</xsd:documentation>
+            <xsd:documentation source="Description">Name of the feature.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">SecurityFeatures</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="100" minOccurs="0"
+                name="SecurityFeature" type="ota2-0200:SecurityFeature_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies a security feature at a propetry. Refer to OpenTravel Code list Security Feature Code (SEC).</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}OTA_CodeType</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+</xsd:schema>

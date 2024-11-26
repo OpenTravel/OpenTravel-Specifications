@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/Common/v5_1"
+    version="5.1.0" xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0500="http://www.opentravel.org/OTM/Common/v5"
+    xmlns:ota2-0501="http://www.opentravel.org/OTM/Common/v5_1"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:LibraryName>Common</otm:LibraryName>
+                <otm:LibraryVersion>5.1.0</otm:LibraryVersion>
+                <otm:LibraryStatus>DRAFT</otm:LibraryStatus>
+                <otm:SourceFile>/Common_5_1_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2020-05-15T11:16:18.696-05:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v5" schemaLocation="Common_5_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element abstract="true" name="NoticeSubGrp" type="ota2-0501:Notice_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Temporary or time constrained messages relating to a resource or information object.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Notice</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="NoticeID"
+        substitutionGroup="ota2-0501:NoticeSubGrp" type="ota2-0501:Notice_ID"/>
+    <xsd:element name="NoticeIdentifier" type="ota2-0501:Notice_ID"/>
+    <xsd:element name="Notice"
+        substitutionGroup="ota2-0501:NoticeSubGrp" type="ota2-0501:Notice"/>
+    <xsd:element name="NoticeSummary" type="ota2-0501:Notice"/>
+    
+    <xsd:complexType name="Notice_ID">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Notice</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0500:Identifier"/>
+            <xsd:element minOccurs="0" name="NoticeRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:appinfo>
+                        <otm:OTA2EntityReference type="IDREF">Notice</otm:OTA2EntityReference>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional"/>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Notice">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Notice</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2-0501:Notice_ID">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="100" minOccurs="1"
+                        name="Message" type="ota2-0500:TextFree">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Message text with optional language code.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="EffectiveDates" type="ota2-0500:DateEffectiveExpire">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Date range this notice is in effect.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="Type" type="ota2-0501:NoticeEnum">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Type classification of this notice.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="RelatedURL" type="ota2-0500:URL">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">URL for more information.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="RelatedResource" type="ota2-0500:Identifier">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The resource or object this notice applies to.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+                <xsd:attribute name="created" type="xsd:date" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Date this notice was created.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="NoticeEnum">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">NoticeEnum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0501:NoticeEnum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="NoticeEnum_Base">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">NoticeEnum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Alert"/>
+            <xsd:enumeration value="Notification"/>
+            <xsd:enumeration value="Promotion"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+</xsd:schema>

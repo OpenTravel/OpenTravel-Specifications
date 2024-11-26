@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/product/v5_1"
+    version="5.1.0"
+    xmlns:order-0400="http://www.opentravel.org/OTM/order/v4"
+    xmlns:org-0400="http://www.opentravel.org/OTM/organization/v4"
+    xmlns:orggf-0300="http://www.opentravel.org/OTM/organization/golf/v3"
+    xmlns:orghs-0400="http://www.opentravel.org/OTM/organization/hospitality/v4"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0400="http://www.opentravel.org/OTM/Common/v4"
+    xmlns:ota2-0500="http://www.opentravel.org/OTM/Common/v5"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:pg-0300="http://www.opentravel.org/OTM/product/golf/v3"
+    xmlns:pgt-0300="http://www.opentravel.org/OTM/product/Ground/v3"
+    xmlns:ph-0200="http://www.opentravel.org/OTM/product/hospitality/v2"
+    xmlns:prod-0500="http://www.opentravel.org/OTM/product/v5"
+    xmlns:prod-0501="http://www.opentravel.org/OTM/product/v5_1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:ProjectName>OTA_FacilityResource.otp</otm:ProjectName>
+                <otm:LibraryName>Product</otm:LibraryName>
+                <otm:LibraryVersion>5.1.0</otm:LibraryVersion>
+                <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                <otm:SourceFile>/Product_5_1_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2020-05-15T11:15:59.773-05:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/golf/v3" schemaLocation="OrganizationGolf_3_0_0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/order/v4" schemaLocation="Order_4_0_0.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/hospitality/v4" schemaLocation="OrganizationHospitality_4_0_0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v4" schemaLocation="CodeList_4_0_0.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/hospitality/v2" schemaLocation="Hospitality_2_0_0.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/v4" schemaLocation="Organization_4_0_0.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/Ground/v3" schemaLocation="Ground_3_0_0.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/golf/v3" schemaLocation="Golf_3_0_0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/product/v5" schemaLocation="Product_5_0_0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v5" schemaLocation="Common_5_0_0.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element name="ReferenceListProduct"
+        substitutionGroup="ota2-0500:ReferenceList" type="prod-0501:ReferenceList_Product"/>
+    
+    <xsd:complexType name="ReferenceList_Product">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">ReferenceList</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2-0500:ReferenceList">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" ref="prod-0500:ProductSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A product item.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Choice"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+</xsd:schema>

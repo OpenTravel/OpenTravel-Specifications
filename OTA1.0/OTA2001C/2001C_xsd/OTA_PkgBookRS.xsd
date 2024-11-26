@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="PkgReservation.xsd"/>
+	<xs:element name="OTA_PkgBookRS">
+		<xs:annotation>
+			<xs:documentation>Confirmation of a package booking.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:sequence>
+						<xs:element ref="Success"/>
+						<xs:element ref="Warnings" minOccurs="0"/>
+						<xs:element name="PackageReservation" type="PkgReservation"/>
+						<xs:element name="InformationItems" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A collection of items of informationy.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="InformationItem" type="InformationItem" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:sequence>
+						<xs:element ref="Errors"/>
+					</xs:sequence>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- ======================================================================================================================= -->
+	<xs:complexType name="InformationItem">
+		<xs:annotation>
+			<xs:documentation>Details of a travel component e.g. a set of travel legs making up a travel component or a single item defining a round-trip journey.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Information" type="PkgInformation" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="InventorySequence" type="xs:integer" use="optional">
+			<xs:annotation>
+				<xs:documentation>Used to relate this item of information to the inventory item.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Type" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Identifies the type of information e.g. Resort, Flight, Accommodation etc..</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

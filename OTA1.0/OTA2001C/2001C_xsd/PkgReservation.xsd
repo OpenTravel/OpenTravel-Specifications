@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="PkgPassengerListItem.xsd"/>
+	<xs:include schemaLocation="PkgTravelSegment.xsd"/>
+	<xs:include schemaLocation="PkgRoomProfile.xsd"/>
+	<xs:include schemaLocation="PkgInvoiceDetail.xsd"/>
+	<xs:include schemaLocation="Address.xsd"/>
+	<xs:include schemaLocation="Email.xsd"/>
+	<xs:include schemaLocation="Telephone.xsd"/>
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:include schemaLocation="UniqueId.xsd"/>
+	<xs:include schemaLocation="OTA_POS.xsd"/>
+	<xs:complexType name="PkgReservation">
+		<xs:annotation>
+			<xs:documentation>Details of a Package Holiday reservation object.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="POS" minOccurs="0"/>
+			<xs:element ref="UniqueId"/>
+			<xs:element name="InventoryItems">
+				<xs:annotation>
+					<xs:documentation>A collection of elements to allow any item of inventory to be requested for a booking.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="InventoryItem" type="InventoryItem" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ContactDetail" type="ContactDetailType"/>
+			<xs:element name="PassengerListItems">
+				<xs:annotation>
+					<xs:documentation>Details of all passengers in a reservation or reservation segment.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PassengerListItem" type="PkgPassengerListItem" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PersonalInsuranceItems" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for all personal insurance entries</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PersonalInsuranceItem" type="PersonalInsuranceItem" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OwnInsuranceChoices" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A collection of insurance policy details supplied by the customers.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="OwnInsuranceChoice" type="OwnInsuranceChoice" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="InvoiceDetail" type="PkgInvoiceDetail"/>
+			<xs:element name="Transactions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Details of each transaction receved against a reservation.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Transaction" type="Transaction" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ======================================================================================================================= -->
+	<xs:complexType name="AccommodationSegment">
+		<xs:annotation>
+			<xs:documentation>Describes the booked accommodation</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="HotelReference"/>
+			<xs:element name="DateRange" type="PkgDateRange"/>
+			<xs:element name="RoomProfiles" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A collection of Room Profiles.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="RoomProfile" type="PkgRoomProfile" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="MealPlans" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="MealPlan" type="PkgMealPlanType" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="RPH" type="RPH_Type" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ContactDetailType">
+		<xs:annotation>
+			<xs:documentation>Details of the person to whom correspondance regarding a booking will be directed.  At least PersonName and AddressInfo will normally be required for a direct booking, only 'PersonName' needed to identify the Lead Passenger for a Travel Agent booking.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="PersonName"/>
+			<xs:element name="Address" type="Address" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Telephone" type="Telephone" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Email" type="Email" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="DefaultInd">
+			<xs:simpleType>
+				<xs:annotation>
+					<xs:documentation>Indicates that the receiving system should assume the default value if the user specifies no overriding value
+						 or action. </xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Yes"/>
+					<xs:enumeration value="No"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<!--		<xs:attributeGroup ref="Privacy"/> -->
+	</xs:complexType>
+	<xs:complexType name="InventoryItem">
+		<xs:annotation>
+			<xs:documentation>Any valid item of inventory.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="Accommodation" type="AccommodationSegment"/>
+				<xs:element name="Travel" type="PkgTravelSegment"/>
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="ItinerarySequence" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>The position of this item in the package itinerary.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ChronologicalSequence" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>The position of this item in the package in time sequence.  Note: it is possible for more than one inventory item to have the same ChronologicalSequence value e.g. Car Hire and Hotel Stay.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="OwnInsuranceChoice">
+		<xs:annotation>
+			<xs:documentation>Details of the customer's own insurance policy</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CustomerCounts" type="CustomerCounts"/>
+		</xs:sequence>
+		<xs:attribute name="InsuranceCompany" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The name of the customer's chosen insurance company.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PolicyNmbr" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>A reference by which an issued policy is recognised. (UNICORN U346)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="PersonalInsuranceItem">
+		<xs:annotation>
+			<xs:documentation>Indicates the number of customers taking specific type of personal insurance.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CustomerCounts" type="CustomerCounts"/>
+		</xs:sequence>
+		<xs:attribute name="Code" type="PkgPersonalInsuranceCode" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="Transaction">
+		<xs:annotation>
+			<xs:documentation>A monetary transaction (credit or debit) against a reservation</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Amount" type="AmountType"/>
+		</xs:sequence>
+		<xs:attribute name="Type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Receipt"/>
+					<xs:enumeration value="Refund"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="CreditDebitInd" default="Credit">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Credit"/>
+					<xs:enumeration value="Debit"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="PostingDateTime" type="xs:dateTime" use="required"/>
+		<xs:attribute name="BatchNmbr" type="xs:string"/>
+		<xs:attribute name="Comment" type="xs:string"/>
+	</xs:complexType>
+</xs:schema>

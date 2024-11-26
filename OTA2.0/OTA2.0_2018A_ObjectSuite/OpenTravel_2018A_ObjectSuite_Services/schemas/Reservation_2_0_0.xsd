@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/reservation/v2"
+    version="2.0.0"
+    xmlns:fin-0300="http://www.opentravel.org/OTM/finance/v3"
+    xmlns:order-0300="http://www.opentravel.org/OTM/order/v3"
+    xmlns:org-0300="http://www.opentravel.org/OTM/organization/v3"
+    xmlns:orghs-0300="http://www.opentravel.org/OTM/organization/hospitality/v3"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0300="http://www.opentravel.org/OTM/Common/v3"
+    xmlns:ota2-0400="http://www.opentravel.org/OTM/Common/v4"
+    xmlns:ota2msg="http://opentravel.org/common/message/v02"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:pgt-0200="http://www.opentravel.org/OTM/product/Ground/v2"
+    xmlns:ph="http://www.opentravel.org/OTM/product/hospitality/v1"
+    xmlns:prod-0400="http://www.opentravel.org/OTM/product/v4"
+    xmlns:res-0200="http://www.opentravel.org/OTM/reservation/v2" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:ProjectName>HospitalityProject_030918.otp</otm:ProjectName>
+                <otm:LibraryName>Reservation</otm:LibraryName>
+                <otm:LibraryVersion>2.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                <otm:SourceFile>/Reservation_2_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2018-04-05T08:57:47.712-04:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://opentravel.org/common/message/v02" schemaLocation="built-ins/OTA2_Message_v2.0.0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v3" schemaLocation="CodeList_3_0_0.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/Ground/v2" schemaLocation="Ground_2_0_0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/product/v4" schemaLocation="Product_4_0_0.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/v3" schemaLocation="Organization_3_0_0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/order/v3" schemaLocation="Order_3_0_0.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/hospitality/v3" schemaLocation="OrganizationHospitality_3_0_0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v4" schemaLocation="Common_4_0_0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/finance/v3" schemaLocation="Finance_3_0_0.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/hospitality/v1" schemaLocation="Hospitality_1_0_0.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element abstract="true" name="ReservationSubGrp" type="res-0200:Reservation_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A container associating travelers and orders pertaining to a particular trip or event.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Reservation</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="ReservationID"
+        substitutionGroup="res-0200:ReservationSubGrp" type="res-0200:Reservation_ID"/>
+    <xsd:element name="ReservationIdentifier" type="res-0200:Reservation_ID"/>
+    <xsd:element name="Reservation"
+        substitutionGroup="res-0200:ReservationSubGrp" type="res-0200:Reservation"/>
+    <xsd:element name="ReservationSummary" type="res-0200:Reservation"/>
+    <xsd:element name="ReservationCancellation"
+        substitutionGroup="res-0200:ReservationSubGrp" type="res-0200:Reservation_Cancellation"/>
+    <xsd:element name="ReservationQueryByTraveler" type="res-0200:Reservation_Query_ByTraveler"/>
+    
+    <xsd:complexType name="Reservation_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A container associating travelers and orders pertaining to a particular trip or event.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Reservation</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0400:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="ReservationRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Reservation">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A container associating travelers and orders pertaining to a particular trip or event.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Reservation</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="res-0200:Reservation_ID">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="99" minOccurs="1" ref="order-0300:OrderConfirmation">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A collection of confirmed offers.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="99" minOccurs="1" ref="res-0200:ReceiptSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Receipt for the reservation.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="TimeSpan" type="ota2-0400:TimeSpan">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies the start date and end date that covers the whole reservation.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="99" minOccurs="0" ref="ota2-0400:TravelerSummary">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">For travelers uniquely identified in the order this should just be the traveler ID.  For travelers not identified in the orders, this may be more detailed information about the traveler.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0400:ContactPerson">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Information pertaining to the contact for the reservation.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="30" minOccurs="0" ref="ota2-0400:Comment">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Comments pertaining to the reservation.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="99" minOccurs="0" ref="org-0300:FacilitySubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">One or more facilities associated with this reservation.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Reservation_Cancellation">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A container associating travelers and orders pertaining to a particular trip or event.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Reservation</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="res-0200:Reservation">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="CancellationID" type="ota2-0400:Identifier">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Confirmation of the cancellation.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Reservation_Query_ByTraveler">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A container associating travelers and orders pertaining to a particular trip or event.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Reservation</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="res-0200:TravelerCriteria">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Traveler information on which the query is being preformed.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="res-0200:Verification">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Verification Information for the travler.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="TimeSpan" type="ota2-0400:TimeSpan">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The time span for which the query is to be performed.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="ReceiptSubGrp" type="res-0200:Receipt_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An identifier provided by the vendor or supplier confirming the reservation.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Receipt</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="ReceiptID"
+        substitutionGroup="res-0200:ReceiptSubGrp" type="res-0200:Receipt_ID"/>
+    <xsd:element name="ReceiptIdentifier" type="res-0200:Receipt_ID"/>
+    <xsd:element name="Receipt"
+        substitutionGroup="res-0200:ReceiptSubGrp" type="res-0200:Receipt"/>
+    <xsd:element name="ReceiptSummary" type="res-0200:Receipt"/>
+    
+    <xsd:complexType name="Receipt_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An identifier provided by the vendor or supplier confirming the reservation.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Receipt</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0400:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="ReceiptRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Receipt">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An identifier provided by the vendor or supplier confirming the reservation.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Receipt</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="res-0200:Receipt_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" ref="order-0300:PaymentSummary">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Payment details for the reservation.  Intended to be used when the reservation holder processes a single payment for all of the orders in the reservation.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="1" ref="order-0300:OrderIdentifier">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">An identifier to the order for which this receipt applies.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="res-0200:ReservationIdentifier">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Identifies the reservation for which this receipt applies.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="Verification" type="res-0200:Verification"/>
+    
+    <xsd:complexType name="Verification">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Fields that can be used to control access to reservations.</xsd:documentation>
+            <xsd:documentation source="Description">Fields that can be used to control access to reservations.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">Verification</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2-0400:PersonNameSummary">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Person name information.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="Email_Simple" type="ota2-0400:Email_Simple">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Email associated with the reservation.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="Telephone_Simple" type="ota2-0400:Telephone_Simple">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The telephone number associated with the reservation.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="PaymentCard_Masked" type="ota2-0400:EncryptionTokenTypeMask">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Masked payment card number that can be used to control access to reservations.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="TravelerCriteria" type="res-0200:TravelerCriteria"/>
+    
+    <xsd:complexType name="TravelerCriteria">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Criteria used to retreive a reservation for a specific traveler.</xsd:documentation>
+            <xsd:documentation source="Description">Criteria used to retreive a reservation for a specific traveler.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">TravelerCriteria</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2-0400:PersonIdentifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The person identifier with which the search should be performed.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0400:PersonNameSummary">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Person name information.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="Email_Simple" type="ota2-0400:Email_Simple">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Email associated with the reservation.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="Telephone_Simple" type="ota2-0400:Telephone_Simple">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The telephone number associated with the reservation.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="CreateRQ"
+        substitutionGroup="ota2msg:OTA2_Request_Payload" type="res-0200:Create_RQ"/>
+    
+    <xsd:complexType name="Create_RQ">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Reservation_Create</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Request_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0400:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0400:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of Sale (POS) identifies the party or connection channel making the request.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="100" minOccurs="0" ref="order-0300:OrderSummary">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The details of the order being reserved.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="CreateRS"
+        substitutionGroup="ota2msg:OTA2_Response_Payload" type="res-0200:Create_RS"/>
+    
+    <xsd:complexType name="Create_RS">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Reservation_Create</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Response_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0400:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0400:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="res-0200:ReservationSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The reservation identifier (confirmation number) and optionally the details of the reservation.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="CreateNotif"
+        substitutionGroup="ota2msg:OTA2_Notif_Payload" type="res-0200:Create_Notif"/>
+    
+    <xsd:complexType name="Create_Notif">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Reservation_Create</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Notif_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0400:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0400:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of Sale (POS) identifies the party or connection channel making the request.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0400:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="res-0200:ReservationSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The reservation identifier (confirmation number) and optionally the details of the reservation.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="ReadRQ"
+        substitutionGroup="ota2msg:OTA2_Request_Payload" type="res-0200:Read_RQ"/>
+    
+    <xsd:complexType name="Read_RQ">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Reservation_Read</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Request_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0400:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0400:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of Sale (POS) identifies the party or connection channel making the request.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="res-0200:ReservationIdentifier">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The reservation identifier of the reservation to be retrieved.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="res-0200:Verification">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Information that may be used to verify the correct reservation is being returned.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="ReadRS"
+        substitutionGroup="ota2msg:OTA2_Response_Payload" type="res-0200:Read_RS"/>
+    
+    <xsd:complexType name="Read_RS">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Reservation_Read</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Response_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0400:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0400:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="res-0200:ReservationSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The reservation requested.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="SearchRQ"
+        substitutionGroup="ota2msg:OTA2_Request_Payload" type="res-0200:Search_RQ"/>
+    
+    <xsd:complexType name="Search_RQ">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Reservation_Search</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Request_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0400:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0400:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of Sale (POS) identifies the party or connection channel making the request.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="res-0200:ReservationQueryByTraveler">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Information on which the query should be performed.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="SearchRS"
+        substitutionGroup="ota2msg:OTA2_Response_Payload" type="res-0200:Search_RS"/>
+    
+    <xsd:complexType name="Search_RS">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Reservation_Search</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Response_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0400:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0400:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="100" minOccurs="0" ref="res-0200:ReservationSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Reservations, if any, that meet the search criteria.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="CancelRQ"
+        substitutionGroup="ota2msg:OTA2_Request_Payload" type="res-0200:Cancel_RQ"/>
+    
+    <xsd:complexType name="Cancel_RQ">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Reservation_Cancel</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Request_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0400:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0400:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of Sale (POS) identifies the party or connection channel making the request.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="res-0200:ReservationIdentifier">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The reservation identifier of the reservation to be retrieved.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="res-0200:Verification">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Information that may be used to verify the correct reservation is being returned.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="CancelRS"
+        substitutionGroup="ota2msg:OTA2_Response_Payload" type="res-0200:Cancel_RS"/>
+    
+    <xsd:complexType name="Cancel_RS">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Reservation_Cancel</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Response_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0400:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0400:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="res-0200:ReservationCancellation">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Cancellation details for the reservation.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="CancelNotif"
+        substitutionGroup="ota2msg:OTA2_Notif_Payload" type="res-0200:Cancel_Notif"/>
+    
+    <xsd:complexType name="Cancel_Notif">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Reservation_Cancel</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Notif_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0400:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0400:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of Sale (POS) identifies the party or connection channel making the request.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0400:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="res-0200:ReservationCancellation">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Cancellation details for the reservation.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+</xsd:schema>

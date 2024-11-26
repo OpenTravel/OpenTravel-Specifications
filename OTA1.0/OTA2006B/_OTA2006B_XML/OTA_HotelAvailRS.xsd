@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA/2003/05" targetNamespace="http://www.opentravel.org/OTA/2003/05" elementFormDefault="qualified" version="4.000" id="OTA2006B">
+	<xs:include schemaLocation="OTA_HotelCommonTypes.xsd"/>
+	<xs:include schemaLocation="OTA_HotelReservation.xsd"/>
+	<xs:include schemaLocation="OTA_CommonTypes.xsd"/>
+	<xs:include schemaLocation="OTA_AirCommonTypes.xsd"/>
+	<xs:include schemaLocation="OTA_SimpleTypes.xsd"/>
+	<xs:include schemaLocation="OTA_CommonPrefs.xsd"/>
+	<xs:include schemaLocation="OTA_HotelPreferences.xsd"/>
+	<xs:include schemaLocation="OTA_Profile.xsd"/>
+	<xs:include schemaLocation="OTA_VehicleCommonTypes.xsd"/>
+	<xs:include schemaLocation="OTA_AirPreferences.xsd"/>
+	<xs:annotation>
+		<xs:documentation xml:lang="en">All Schema files in the OTA specification are made available according to the terms defined by the OTA License Agreement at http://www.opentravel.org/ota_downloads_form.cfm</xs:documentation>
+	</xs:annotation>
+	<xs:element name="OTA_HotelAvailRS">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Returns information about hotel properties that meet the requested criteria, indicating whether the requested service, rate, room stay, etc. is available within the date(s) specified. The response message may include Warnings from business processing rules, or Errors if the request did not succeed.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="POS" type="POS_Type" minOccurs="0"/>
+				<xs:choice>
+					<xs:sequence>
+						<xs:element name="Success" type="SuccessType"/>
+						<xs:element name="Warnings" type="WarningsType" minOccurs="0"/>
+						<xs:element name="Profiles" type="ProfilesType" minOccurs="0"/>
+						<xs:element name="RoomStays" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="RoomStay" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation xml:lang="en">Details on the Room Stay including Guest Counts, Time Span of this Room Stay, and financial information related to the Room Stay, including Guarantee, Deposit and Payment and Cancellation Penalties.</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="RoomStayType">
+													<xs:sequence>
+														<xs:element name="Reference" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">Information by which this availability quote can be later cross-referenced.</xs:documentation>
+															</xs:annotation>
+															<xs:complexType>
+																<xs:complexContent>
+																	<xs:extension base="UniqueID_Type">
+																		<xs:attribute name="DateTime" type="xs:dateTime" use="optional">
+																			<xs:annotation>
+																				<xs:documentation xml:lang="en">The date and time at which this availability quote was made available.</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																	</xs:extension>
+																</xs:complexContent>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="ServiceRPHs" type="ServiceRPHsType" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">A container for the unique references to the services for the room stay.</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+													<xs:attribute name="IsAlternate" type="xs:boolean" use="optional" default="false">
+														<xs:annotation>
+															<xs:documentation xml:lang="en">Indicates the RoomStay is an alternate offer. Default=false.</xs:documentation>
+														</xs:annotation>
+													</xs:attribute>
+													<xs:attribute name="AvailabilityStatus" type="RateIndicatorType" use="optional">
+														<xs:annotation>
+															<xs:documentation xml:lang="en">Used to specify an availability status at the room stay level for a property.</xs:documentation>
+														</xs:annotation>
+													</xs:attribute>
+													<xs:attributeGroup ref="ResponseTypeGroup"/>
+													<xs:attribute name="RoomStayCandidateRPH" type="RPH_Type" use="optional">
+														<xs:annotation>
+															<xs:documentation xml:lang="en">A reference to a requested room stay candidate from the SearchCriteria.</xs:documentation>
+														</xs:annotation>
+													</xs:attribute>
+													<xs:attribute name="MoreDataEchoToken" type="StringLength1to128" use="optional">
+														<xs:annotation>
+															<xs:documentation xml:lang="en">The availability response returns the attribute if there is additional data that could not fit within the availability response.  The text value should be echoed in the availability request to indicate where to begin the next block of availability data.		</xs:documentation>
+														</xs:annotation>
+													</xs:attribute>
+													<xs:attribute name="InfoSource" type="InfoSourceType" use="optional">
+														<xs:annotation>
+															<xs:documentation xml:lang="en">Used to specify the source of the data being exchanged as determined by trading partners. </xs:documentation>
+														</xs:annotation>
+													</xs:attribute>
+												</xs:extension>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+								<xs:attribute name="MoreIndicator" type="StringLength1to128" use="optional">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">A text field used to indicate that there are additional rates that cannot fit in the availability response.  The text returned should be meaningful in identifying where to begin the next block of data and sent in the availability request.</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Services" type="ServicesType" minOccurs="0"/>
+						<xs:element name="Areas" type="AreasType" minOccurs="0"/>
+						<xs:element name="Criteria" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Criterion" type="HotelSearchCriterionType" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="TPA_Extensions" minOccurs="0"/>
+					</xs:sequence>
+					<xs:element name="Errors" type="ErrorsType"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			<xs:attribute name="SearchCacheLevel" use="optional">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Live"/>
+						<xs:enumeration value="VeryRecent"/>
+						<xs:enumeration value="LessRecent"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+			 xmlns="http://www.opentravel.org/OTA"
+			 targetNamespace="http://www.opentravel.org/OTA"
+           elementFormDefault="qualified">
+
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+OTA v2001C Specification - Generic OTA_DeleteRS message definition
+Copyright (C) 2001 Open Travel Alliance. All rights reserved.
+		</xs:documentation>
+	</xs:annotation>
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	
+	<xs:element name="OTA_DeleteRS">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+Response to a generic OTA_DeleteRQ message, available as an action 
+on several OTA services which requests a server to delete the business 
+object identified by the UniqueId element.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element ref="Success" />
+					<xs:element ref="Warnings" minOccurs="0" />
+					<xs:element ref="UniqueId" />
+				</xs:sequence>
+				<xs:element ref="Errors" />
+			</xs:choice>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

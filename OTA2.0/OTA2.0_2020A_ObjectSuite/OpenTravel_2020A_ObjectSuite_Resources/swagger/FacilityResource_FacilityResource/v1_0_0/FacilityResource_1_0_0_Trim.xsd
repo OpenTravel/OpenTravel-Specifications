@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/resources/GlobalResources/v1"
+    version="1.0.0"
+    xmlns:fac1="http://www.opentravel.org/OTM/resources/GlobalResources/v1"
+    xmlns:org-0400="http://www.opentravel.org/OTM/organization/v4"
+    xmlns:orggf-0300="http://www.opentravel.org/OTM/organization/golf/v3"
+    xmlns:orghs-0400="http://www.opentravel.org/OTM/organization/hospitality/v4"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0400="http://www.opentravel.org/OTM/Common/v4"
+    xmlns:ota2-0500="http://www.opentravel.org/OTM/Common/v5"
+    xmlns:ota2-0501="http://www.opentravel.org/OTM/Common/v5_1"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:ph-0200="http://www.opentravel.org/OTM/product/hospitality/v2"
+    xmlns:prod-0500="http://www.opentravel.org/OTM/product/v5" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:LibraryName>FacilityResource</otm:LibraryName>
+                <otm:LibraryVersion>1.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>DRAFT</otm:LibraryStatus>
+                <otm:SourceFile>/FacilityResource_1_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2020-05-15T11:16:18.651-05:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/golf/v3" schemaLocation="OrganizationGolf_3_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v5_1" schemaLocation="Common_5_1_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/hospitality/v4" schemaLocation="OrganizationHospitality_4_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v4" schemaLocation="CodeList_4_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/hospitality/v2" schemaLocation="Hospitality_2_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/v4" schemaLocation="Organization_4_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/product/v5" schemaLocation="Product_5_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v5" schemaLocation="Common_5_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element name="FacilityList" type="fac1:FacilityList"/>
+    
+    <xsd:complexType name="FacilityList">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ActionFacet">FacilityResource_FacilityList</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="1000" minOccurs="0"
+                ref="FacilitySubGrp" xmlns="http://www.opentravel.org/OTM/organization/v4_1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+</xsd:schema>

@@ -1,0 +1,2263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/organization/hospitality/v4"
+    version="4.0.0"
+    xmlns:order-0400="http://www.opentravel.org/OTM/order/v4"
+    xmlns:org-0400="http://www.opentravel.org/OTM/organization/v4"
+    xmlns:orghs-0400="http://www.opentravel.org/OTM/organization/hospitality/v4"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0400="http://www.opentravel.org/OTM/Common/v4"
+    xmlns:ota2-0500="http://www.opentravel.org/OTM/Common/v5"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:pgt-0300="http://www.opentravel.org/OTM/product/Ground/v3"
+    xmlns:ph-0200="http://www.opentravel.org/OTM/product/hospitality/v2" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:LibraryName>OrganizationHospitality</otm:LibraryName>
+                <otm:LibraryVersion>4.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>DRAFT</otm:LibraryStatus>
+                <otm:SourceFile>/OrganizationHospitality_4_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2019-10-30T13:33:14.870-04:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/order/v4" schemaLocation="Order_4_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/hospitality/v2" schemaLocation="Hospitality_2_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/Ground/v3" schemaLocation="Ground_3_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v4" schemaLocation="CodeList_4_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/v4" schemaLocation="Organization_4_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v5" schemaLocation="Common_5_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element name="Recreation" type="orghs-0400:Recreation"/>
+    
+    <xsd:simpleType name="Recreation_Simple">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">Recreation</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2-0500:StringShort"/>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="Recreation_Simple_List">
+        <xsd:list itemType="orghs-0400:Recreation_Simple"/>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="Recreation">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Name of the recreation.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">Recreation</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Proximity" type="ota2-0400:Proximity_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Denotes whether a recreation is onsite, offsite or information is not available.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="ID" type="ota2-0500:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier for this recreation facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="RecreationService" type="ota2-0400:RecreationService_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Used to identify a specific recreation activity. Refer to OpenTravel Code list Recreation Srvc Type (RST).</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}OTA_CodeType</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="10" minOccurs="0" ref="ota2-0500:ContactInformation">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Contact information for the recreation facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="ota2-0500:OperationSchedule">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Collection of days, times, and fees of operation for the recreation facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="ota2-0500:ReferencePointSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies where the recreation facility is located.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:MultimediaCollection">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Multimedia information about the recreation facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="orghs-0400:RecreationFeature">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Provides furher desciption regarding the recreation.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:Description">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Descriptive infomation regarding the recreation facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="ota2-0500:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The name of the recreation facility
+.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="sort" type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Used to define the display order.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="yearReplaced" type="xsd:date" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The year when recreation associated equipment was last replaced.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="language" type="xsd:language" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Identifies the language in which the attraction information is sent.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="includedInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, this recreation is included with basic room rates.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="featuredInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">If true, this is a featured recreation for the property.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="HotelDescriptiveContentSubGrp" type="orghs-0400:HotelDescriptiveContent_ID">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">HotelDescriptiveContent</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="HotelDescriptiveContentID"
+        substitutionGroup="orghs-0400:HotelDescriptiveContentSubGrp" type="orghs-0400:HotelDescriptiveContent_ID"/>
+    <xsd:element name="HotelDescriptiveContentIdentifier" type="orghs-0400:HotelDescriptiveContent_ID"/>
+    <xsd:element name="HotelDescriptiveContent"
+        substitutionGroup="orghs-0400:HotelDescriptiveContentSubGrp" type="orghs-0400:HotelDescriptiveContent"/>
+    <xsd:element name="HotelDescriptiveContentSummary" type="orghs-0400:HotelDescriptiveContent"/>
+    <xsd:element name="HotelDescriptiveContentQueryHotels" type="orghs-0400:HotelDescriptiveContent_Query_Hotels"/>
+    
+    <xsd:complexType name="HotelDescriptiveContent_ID">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">HotelDescriptiveContent</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="DescriptiveContentRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the obj ID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0500:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="HotelDescriptiveContent">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">HotelDescriptiveContent</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="orghs-0400:HotelDescriptiveContent_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="CurrencyCode" type="ota2-0500:CurrencyCode">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies the currency used at the property.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0"
+                        name="DistanceUnitOfMeasure" type="ota2-0400:UnitOfMeasure_Enum">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Provides the unit of measure in which distance is provided in this message.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="AreaUnitOfMeasure" type="ota2-0400:UnitOfMeasure_Enum">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Provides the unit of measure in which area is provided in this message.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0"
+                        name="WeightUnitOfMeasure" type="ota2-0400:UnitOfMeasure_Enum">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Provides the unit of measure in which weight is provided in this message.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="TimeZone" type="ota2-0500:StringShort">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Describes the local time zone in which the hotel is located. This could include additional information regarding time zones (e.g., Daylight Saving Time observed), a proprietary code, the difference between the local time and GMT.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0500:DateTimeSpanWindowsSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The start and end date for which this information applies.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="100" minOccurs="0"
+                        name="DestinationSystemCode" type="ota2-0500:StringTiny">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The destination system code defines a system to which information is to be provided.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="100" minOccurs="0" ref="ota2-0500:WeatherInfo">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Provides information regarding the weather.  May be defined by period (e.g. season, month).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ph-0200:BasicPropertyInfoSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Provides identifying information for a hotel such as hotel, chain, and brand codes as well as hotel name and city code.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="orghs-0400:HotelPropertyInfo">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Contains descriptive information about a hotel.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="orghs-0400:FacilityInfo">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Information pertaining to the hotel facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="orghs-0400:HotelPolicies">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Information pertaining to the policy information as it applies to the hotel.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="1" minOccurs="0" ref="org-0400:AreaInformation">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Defines well-known locations and attractions of local interest in the geographical area of the hotel facility as well as other area hotels.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="org-0400:AffiliationInfo">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Provides information regarding affiliations, loyalty programs and award ratings.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0500:MultimediaCollection">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Multimedia information about a collection of multimedia objects.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="100" minOccurs="0" ref="ota2-0500:ContactInformation">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Provides contact information.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="orghs-0400:GDS_Information">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">This allows for information for GDS&amp;apos;s to be specified.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="100" minOccurs="0" ref="orghs-0400:EffectivePeriod">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The periods for which content is visible. This may be either specific times of year that repeat annually or actual dates.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="orghs-0400:RoomBlockInformation">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Describes room block information accepted by the hotel.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0500:EnvironmentalImpact">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Property environmental impact and green program/ initiative information.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+                <xsd:attribute name="language"
+                    type="ota2-0500:LanguageCode" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Identification of the requested language to be used for the descriptive information. ISO standard for human-readable languages.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="HotelDescriptiveContent_Query_Hotels">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">HotelDescriptiveContent</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" ref="ph-0200:BasicPropertyInfoSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the property(s) whose descriptive content is to be returned.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="maxRepsonses"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The max number of responses to be returned.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="CategoryCodes" type="orghs-0400:CategoryCodes"/>
+    
+    <xsd:complexType name="CategoryCodes">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Collection of descriptive details about a hotel.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">CategoryCodes</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="LocationCategory" type="ota2-0400:LocationCategory_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Defines the general location of the hotel such as airport, suburban, downtown.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="SegmentCategory" type="ota2-0400:SegmentCategory_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Defines the type of hotel such as luxury, extended stay, economy.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="5" minOccurs="0"
+                name="HotelCategory" type="ota2-0400:PropertyClassType_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the class or type of hotel.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="5" minOccurs="0"
+                name="ArchitecturalStyle" type="ota2-0400:ArchitecturalStyle_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the architectural style of the building or room.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="99" minOccurs="0" ref="orghs-0400:GuestRoomInfo">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The types and quantities of guest rooms at a hotel.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="GuestRoomInfo" type="orghs-0400:GuestRoomInfo"/>
+    
+    <xsd:complexType name="GuestRoomInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The types and quantities of guest rooms at a hotel.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GuestRoomInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="GuestRoomInfo_Enum" type="ota2-0400:GuestRoomInfo_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A type of guest room in the hotel.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="Quantity" type="xsd:positiveInteger">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The quanity of rooms that the hotel has of this type.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:RateRangeInfo">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Rate range and the dates for which they apply.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:MultimediaCollection">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Multimedia information regarding a guest room, this may include items such as images, videos and textual descriptions.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:TextParagraph">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Descriptive text that describes the guest room.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="Service" type="orghs-0400:Service">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A hotel service or amenity available to the guest such as a business center, concierge, valet parking, massage, newspapers, etc.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Service</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="ServiceBusiness"
+        substitutionGroup="orghs-0400:Service" type="orghs-0400:Service_Business"/>
+    <xsd:element name="ServiceHotelAmenity"
+        substitutionGroup="orghs-0400:Service" type="orghs-0400:Service_HotelAmenity"/>
+    <xsd:element name="ServiceMealPlan"
+        substitutionGroup="orghs-0400:Service" type="orghs-0400:Service_MealPlan"/>
+    <xsd:element name="ServiceMeetingRoom"
+        substitutionGroup="orghs-0400:Service" type="orghs-0400:Service_MeetingRoom"/>
+    
+    <xsd:complexType abstract="true" name="Service">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Service</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Proximity" type="ota2-0400:Proximity_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Denotes whether a service is onsite, offsite or information is not available</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:ContactInformation">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Contact information pertaining to a service.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:RelativePosition">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Directions to the service provider.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="99" minOccurs="0" ref="ota2-0500:OperationSchedule">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Collection of days, times, and fees.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:MultimediaCollection">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Multimedia information about the service.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:Description">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Descriptive text that describes the service.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Shared"/>
+        </xsd:sequence>
+        <xsd:attribute name="inventoryCode" type="ota2-0500:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Identification code of the business service for inventory and booking purposes if the service is an inventoriable item.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="quantity"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Specifies the total number of service items being described.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="sort" type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Used to define the display order.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="codeDetail" type="ota2-0500:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">May be used to give further detail on the code.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="includedInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, this service is included in the room rate.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="availableToAnyGuestInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When tre the service is available to all guests at the facility.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="featuredInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, this is a featured service for the property.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Service_Business">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Service</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="orghs-0400:Service">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="100" minOccurs="0"
+                        name="BusinessService" type="ota2-0400:BusinessService_Enum">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies a business service that is offered by the property.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Service_HotelAmenity">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Service</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="orghs-0400:Service">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="500" minOccurs="0"
+                        name="HotelAmenity" type="ota2-0500:Code">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies a hotel amenity offered by the property.  Refer to OpenTravel Code List Hotel Amenity Code (HAC).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Service_MealPlan">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Service</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="orghs-0400:Service">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="30" minOccurs="0"
+                        name="MealPlan" type="ota2-0400:MealPlan_Enum">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">This describes available meal plans for a property.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Service_MeetingRoom">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Service</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="orghs-0400:Service">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="MeetingRoomCode_Enum" type="ota2-0400:MeetingRoomCode_Enum">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies supplies, facilities, materials, equipment available specifically for meetings and events.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="DescriptiveContentFeatureSecurity"
+        substitutionGroup="org-0400:DescriptiveContentFeature" type="orghs-0400:DescriptiveContentFeature_Security"/>
+    
+    <xsd:complexType name="DescriptiveContentFeature_Security">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">DescriptiveContentFeature</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="org-0400:DescriptiveContentFeature">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="SecurityFeature_Enum" type="ota2-0400:SecurityFeature_Enum">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Identifies an offered security feature.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="DescriptiveContentFeatureAccessibility"
+        substitutionGroup="org-0400:DescriptiveContentFeature" type="orghs-0400:DescriptiveContentFeature_Accessibility"/>
+    
+    <xsd:complexType name="DescriptiveContentFeature_Accessibility">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">DescriptiveContentFeature</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="org-0400:DescriptiveContentFeature">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="AccessibilityCode" type="ota2-0400:DisabilityFeature_Enum">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies an offered feature specifically related to accessibility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="UnitOfMeasure_Enum" type="ota2-0400:UnitOfMeasure_Enum">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">May be used to identify the unit of measure and measurement described in the accessibility code.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="FacilityInfo" type="orghs-0400:FacilityInfo"/>
+    
+    <xsd:complexType name="FacilityInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Provides information pertaining to the hotel facitilty itself.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">FacilityInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="org-0400:MeetingRooms">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A collection of meeting rooms offered at a facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="orghs-0400:GuestRooms">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A collection of guest room types that are offered by a property.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="org-0400:Restaurants">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A collection of restaurants related to a facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="GuestRooms" type="orghs-0400:GuestRooms"/>
+    
+    <xsd:complexType name="GuestRooms">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A collection of guest room information for a property.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GuestRooms</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="1000" minOccurs="0" ref="orghs-0400:GuestRoom">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">An accommodation occupied by a guest.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="maxOccupancy"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Maximum number of guests the property can accommodate at one time.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="GuestRoom" type="orghs-0400:GuestRoom"/>
+    
+    <xsd:complexType name="GuestRoom">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An accommodation occupied by a guest.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GuestRoom</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Proximity" type="ota2-0400:Proximity_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Denotes the general location of the guest room.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="RoomTypeCode" type="ota2-0500:Code">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The hotel specific room type code that does not reference the OpenTravel Code Table as there are numerous hotel room types that are chain specific.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="5" minOccurs="0" ref="orghs-0400:TypeRoom">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Describes the guest room type; in composite types there can be multiple occurrences.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1000" minOccurs="0" ref="orghs-0400:DescriptiveContentAmenity">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Collection of room amenity items available to the guest.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1000" minOccurs="0" ref="orghs-0400:DescriptiveContentFeatureAccessibility">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Collection of features offered for this room type.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1000" minOccurs="0" ref="orghs-0400:DescriptiveContentFeatureSecurity">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Security features of a guest room.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:MultimediaCollection">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Multimedia information about the guest room.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:Description">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Descriptive text that describes the guest room.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="iD" type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">This may be used to uniquely identify a guest room.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="language" type="ota2-0500:LanguageCode" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Identifies the language in which the guest room information is being sent.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="sort" type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Used to define the display order.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="roomTypeName" type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The name of the room type.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="nonSmokingQuantity"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Designates the number of non-smoking rooms by room type.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="maxOccupancy"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Maximum number of guests allowed in a room type.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="minOccupancy"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Minimum number of guests allowed in a room type.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="maxAdultOccupancy"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Maximum number of adults allowed in a room type.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="maxChildOccupancy"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Maximum number of children allowed in a room type.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="compositeInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Indicates that the room type contains multiple rooms sold as a single unit.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="TypeRoom" type="orghs-0400:TypeRoom"/>
+    
+    <xsd:complexType name="TypeRoom">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes the guest room type.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">TypeRoom</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="RoomCategory" type="ota2-0400:SegmentCategory_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicates the category of the room. Typical values would be Moderate, Standard, or Deluxe.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="RoomLocationCode" type="ota2-0400:RoomLocation_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicates the location of the room within the hotel structure. Typical values would be &amp;quot;Near Exit&amp;quot;,&amp;quot;Close to elevator&amp;quot;, &amp;quot;Low Floor&amp;quot; or &amp;quot;High Floor&amp;quot;.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="RoomView" type="ota2-0400:RoomViewType_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicates the view of the room. Typical values would be &amp;quot;Ocean view&amp;quot;, &amp;quot;Pool view&amp;quot; or &amp;quot;Garden View&amp;quot;.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="5" minOccurs="0" name="BedType" type="ota2-0400:BedType_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicates the type of bed(s) found in the room. Typical values would be Double, Twin, Queen, or King.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="RoomClassification" type="ota2-0400:GuestRoomInfo_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the room classification (e.g., cabin, apartment).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="RoomArchitecture" type="ota2-0400:ArchitecturalStyle_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the architectural style of a room.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="standardBedQuantity"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Indicates the usual number of beds for this room type.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="standardOccupancy"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Indicates the usual number of guests that occupy this room.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="maxRollaways"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Maximum number of rollaway beds allowed in a room type.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="size" type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Number of square units (feet or meters) that defines the size of a room type.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="count" type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Number of rooms of this room type that makes up a larger unit (composite) such as a two bedroom suite could be comprised of two king rooms plus other room types.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="name" type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Text name of the type of room such as &amp;quot;Two Bedroom Villas&amp;quot;.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="roomTypeCode" type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">(Formerly, RoomInventoryCode) A code value that indicates the type of room for which this request is made, e.g.: double, king, etc. Values may use the Hotel Descriptive Content table or a codes specific to the property or hotel brand.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="gDSRoomTypeCode"
+            type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Specific system room type code, ex: A1K, A1Q etc.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="roomID" type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A string value representing the unique identification of a room if the request is looking for a specific room.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="floor" type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Floor on which the room is located.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="inventoryBlockCode"
+            type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A code or identification number that identifies the room stay as part of a group, package tour, or block of rooms designated in the inventory.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="configuration" type="ota2-0500:String" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Textual description of room configuration.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="sizeMeasurement" type="ota2-0500:String" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Textual description of room dimensions.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="quantity"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The quantity of this room type at the property.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="roomGender"
+            type="ota2-0400:RoomGender_Enum" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Used to request or specify a gender assignment for a room. Note: Typically used by Hosteliers.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="maxCribs"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Maximum number of cribs allowed in a room type.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="nonsmokingInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, this room type is non-smoking.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="compositeInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, the room (suite) is a composite of smaller units.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="shareRoomInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, the room requires or has sharing available. Note: Typically used by Hosteliers.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="DescriptiveContentAmenity" type="orghs-0400:DescriptiveContentAmenity"/>
+    
+    <xsd:complexType name="DescriptiveContentAmenity">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Tangible room item(s) (e.g., newspaper) available to the guest.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">DescriptiveContentAmenity</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="RoomAmenity" type="ota2-0500:Code">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refer to OpenTravel Code List Room Amenity Type (RMA).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="ota2-0500:OperationSchedule">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Collection of days, times, and fees.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="10" minOccurs="0" ref="ota2-0500:ContactInformation">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Used to include additional information regarding the amenity (e.g. the provider of the service).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:MultimediaCollection">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Multimedia information about the amenity.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:Description">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Descriptive text that describes the amenity.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="quantity"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The quantity of the amenity being described.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="amenityID" type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifying value assigned by the creating system.  The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="includedInRateInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, this indicates that the amenity or service is included in the room rate (i.e., this service or amenity has no additional charge).</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="HotelPolicies" type="orghs-0400:HotelPolicies"/>
+    
+    <xsd:complexType name="HotelPolicies">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A collection of policy information as it applies to the hotel.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">HotelPolicies</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="orghs-0400:HotelPolicy">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Describes the policies of the hotel, such as the type of payments, or whether children or pets are accepted.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="guaranteeRoomTypeViaGDSInd"
+            type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, indicates that room types can be guaranteed on reservations booked through GDS channels.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="guaranteeRoomTypeViaCRCInd"
+            type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, indicates that room types can be guaranteed on reservations booked by central reservation centers.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="guaranteeRoomTypeViaPropertyInd"
+            type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, indicates that room types can be guaranteed on reservations booked by the property.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="HotelPolicy" type="orghs-0400:HotelPolicy"/>
+    
+    <xsd:complexType name="HotelPolicy">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes the policies of the hotel, such as the type of payments, or whether children or pets are accepted.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">HotelPolicy</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2-0500:DateTimeSpanWindowsSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Used to indicate the effective dates of the policy.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="7" minOccurs="0" name="DaysOfWeek" type="ota2-0400:DayOfWeek_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Used to indicate the effective day(s) for the policy.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="orghs-0400:HotelCancelPolicy">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Defines the cancellation policy of the facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="order-0400:GuaranteesAccepted">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the type of guarantees and payments accepted at a property.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="order-0400:PaymentsAccepted">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Acceptable forms of payment for the property.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="orghs-0400:HotelPolicyInformation">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Basic property policy information.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="orghs-0400:TaxPolicies">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A collection of tax policies at a property.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="orghs-0400:PetPolicies">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A collection of policies pertaining to pets at a facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="orghs-0400:FeePolicies">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Fee policies for an organization.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="orghs-0400:RatePolicies">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies rate policies for a facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="orghs-0400:GroupPolicies">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A collection of group policy information.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="defaultValidBookingMinOffset"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Defines the default minimum number of days in advance that a booking must be made at this hotel.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="code" type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The code identifying this policy.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="HotelCancelPolicy" type="orghs-0400:HotelCancelPolicy"/>
+    
+    <xsd:complexType name="HotelCancelPolicy">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">HotelCancelPolicy</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="ota2-0500:CancelPenaltySubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Defines the cancellation penalty of the hotel facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="cancelPolicyInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, indicates a cancel policy exits. When false, no cancel policy exists. Typically this indicator is used when details are not being sent.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="HotelPolicyInformation" type="orghs-0400:HotelPolicyInformation"/>
+    
+    <xsd:complexType name="HotelPolicyInformation">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Basic policy information for a property.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">HotelPolicyInformation</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="MaxChildAge" type="ota2-0500:NonNegativeInteger">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The maximum age for a child price.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:Description">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Provides additional information regarding policy information.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="checkInTime" type="xsd:time" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The usual check-in time for a facility.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="checkOutTime" type="xsd:time" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The usual check-out time for the facility.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="minGuestAge"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The minimum guest age allowed for a guest at the facility.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="usualStayFreeCutoffAge"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The usual age limit at which a child can stay free with an adult at the hotel facility.  If 	this value is not set, then there is no cutoff limit.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="usualStayFreeChildPerAdult"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The usual number of children meeting the UsualStayFreeCutoffAge allowed to stay free with an adult at the hotel. If this value is not set, then there is no cutoff limit.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="totalGuestCount"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The total guest count allowed in a room at the hotel.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="defaultTaxServiceIncludedInd"
+            type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, taxes and service charges are included, by default, with this facility&amp;apos;s rates.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="kidsStayFreeInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, there is no charge for children.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="adultsOnlyInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, this property only accepts adult guests, children not permitted.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="couplesOnlyInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, this property only accepts couples.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="TaxPolicies" type="orghs-0400:TaxPolicies"/>
+    
+    <xsd:complexType name="TaxPolicies">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Property tax policies.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">TaxPolicies</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="orghs-0400:TaxPolicy">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A tax policy at a property.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="TaxPolicy" type="orghs-0400:TaxPolicy"/>
+    
+    <xsd:complexType name="TaxPolicy">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A tax policy for a property.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">TaxPolicy</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2-0500:AmountSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The breakdown of the tax including either the amount or percent of the tax.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="EffectiveExpire" type="ota2-0500:DateEffectiveExpire">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Provides the effective and expiry dates for the tax.</xsd:documentation>
+                    <xsd:documentation source="Implementer">AttributeGroup: EffectiveExpireOptionalDateGroup</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="TaxType_Enum" type="ota2-0400:TaxType_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies the tax (eg. Sales Tax, State Tax)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:DateTimeSpanWindowsSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The date span for which the policy applies.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:Description">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Textual description of the taxes.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="sequenceNbr" type="ota2-0500:String" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A number assigned by the responding system to designate the order of this tax among multiple taxes.</xsd:documentation>
+                <xsd:documentation source="Implementer">Changed type from {http://www.w3.org/2001/XMLSchema}nonNegativeInteger.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="nightsForTaxExemptionQuantity"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Length of stay required for tax exemption.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="taxableNightsQuantity"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The maximum number of taxable nights.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="taxExcludedInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When present and true, this tax is excluded.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="PetPolicy" type="orghs-0400:PetPolicy"/>
+    
+    <xsd:complexType name="PetPolicy">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The pet policy for a hotel.  Includes if pets are allowed and if so, detials on the types and sizes of pets allowed.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">PetPolicy</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="20" minOccurs="0"
+                name="PetPolicy_Enum" type="ota2-0400:PetPolicy_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the types of pets allowed if any.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:UnitOfMeasure">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Used to designate the maximum pet weight and unit of weight measure (e.g., pounds or kilograms).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="NonRefundableFee" type="ota2-0500:CurrencyAmount">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the charge associated with a pet staying in the room.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="ChargeFrequency" type="ota2-0400:ChargeUnit_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies how often the charge is applied, (e.g per day, per week)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:Description">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A textual description of the pet policy.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="maxPetQuantity"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The maximum number of pets allowed in the accomodation.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="refundableDepositInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, the pet deposit is refundable.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="restrictionInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, there is a restriction associated with this pet policy.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="PetPolicies" type="orghs-0400:PetPolicies"/>
+    
+    <xsd:complexType name="PetPolicies">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A collection of policies pertaining to pets.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">PetPolicies</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="PetsAllowed_Enum" type="ota2-0400:PetsAllowed_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies at a high level if pets are allowed and if so the types allowed.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="orghs-0400:PetPolicy">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A policy pertaining to pet at a facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="FeePolicy" type="orghs-0400:FeePolicy"/>
+    
+    <xsd:complexType name="FeePolicy">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An organization&amp;apos;s policy for a specific fee.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">FeePolicy</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2-0500:PriceSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The breakdown of the price associated with the fee.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="FeeType" type="ota2-0400:FeeType_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies the fee (e.g.,agency fee, municipality fee).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:Description">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Description of the fee.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:FeeDetail">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Detailed information regarding the fee.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:DateTimeSpanWindowsSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The date range for this policy.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="type"
+            type="ota2-0400:AmountDetermination_Enum" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Used to indicate if the amount is inclusive or exclusive of other charges, such as taxes, or is cumulative (amounts have been added to each other).</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="taxExcludedInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, tax is excluded from the price.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="mandatoryInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, indicates the fee is mandatory. When false, the fee is not mandatory.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="taxableInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, this fee is subject to tax.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="FeePolicies" type="orghs-0400:FeePolicies"/>
+    
+    <xsd:complexType name="FeePolicies">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A collection of policies for fees at an organization.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">FeePolicies</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="orghs-0400:FeePolicy">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The details of a fee policy.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="RatePolicy" type="orghs-0400:RatePolicy"/>
+    
+    <xsd:complexType name="RatePolicy">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Defines the policy for a specific rate type (e.g. government rates, preferred rates, etc.).</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RatePolicy</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="RatePlanType" type="ota2-0400:RatePlanType_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The type of the rate policy e.g. government and preferred.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="GuestType" type="ota2-0400:GuestType_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The guest type(s) for the policy.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="RateOfferType" type="ota2-0400:RatePlanType_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Used to indicate the alternate rate plan type to be offered.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:Description">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Details about the rate policy.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0"
+                name="IdRequiredInd" type="xsd:boolean">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">When true, ID is required at check-in.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="minRoomNightCommittment"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Identifies the minimum number of nights a guest has to stay in a room in order to be eligible for the rate.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="subjectToChangeInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, this rate type is subject to change without notice.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="corporateIdInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, a corporate ID is required to book a corporate rate.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="RatePolicies" type="orghs-0400:RatePolicies"/>
+    
+    <xsd:complexType name="RatePolicies">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Defines the policies for various rate types (e.g. government rates, preferred rates, etc.)</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RatePolicies</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="orghs-0400:RatePolicy">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies a rate policy.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="GroupPolicies" type="orghs-0400:GroupPolicies"/>
+    
+    <xsd:complexType name="GroupPolicies">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A collection of group policy information.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GroupPolicies</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="LocalDMCRole" type="orghs-0400:Role_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Local Destination Management Company Role (e.g. suggested or required).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="orghs-0400:GroupPolicy">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A policy for groups at this facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="maxNumberOfRooms"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The maximum number of sleepings rooms the hotel will accept as a group.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="Role_Enum">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">Role_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Required"/>
+            <xsd:enumeration value="Suggested"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:element name="GroupPolicy" type="orghs-0400:GroupPolicy"/>
+    
+    <xsd:complexType name="GroupPolicy">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Information pertaining to a facilities group poliy.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GroupPolicy</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="contractLanguage" type="xsd:language" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The language that the contract is available in.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="contractCurrency"
+            type="ota2-0500:CurrencyCode_ISO4217" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Currency the contract is is provided in.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="RecreationFeature" type="orghs-0400:RecreationFeature"/>
+    
+    <xsd:complexType name="RecreationFeature">
+        <xsd:annotation>
+            <xsd:documentation source="Description">RecreationDetail is used to give furher desciption regarding the recreation. These codes are passed in the code attribute and include details such as if a golf course has a driving range and what the total yardage for the course is.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RecreationFeature</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="RecreationFeature" type="ota2-0400:RecreationFeatures_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies details of a recreation facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="FeatureValue" type="ota2-0500:StringShort">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Value associated with the RecreationFeature enumeration.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:Description">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Further description regarding the recreation service.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="OtherHotel" type="orghs-0400:OtherHotel"/>
+    
+    <xsd:complexType name="OtherHotel">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Provides information on other area hotels.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">OtherHotel</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="SegmentCategory" type="ota2-0400:SegmentCategory_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies the segment (e.g., luxury, upscale, extended stay) of the other hotel.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ph-0200:BasicPropertyInfoSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The hotel reference identifies a specific hotel by using the Chain Code, the Brand Code, and the Hotel Code. The codes used are agreed upon by trading partners.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="ota2-0500:ContactInformation">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Provides contact information such as address and phone information for the other hotel.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="ota2-0500:ReferencePointSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Provides information on the location of the other hotel.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="competitorInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, indicates this hotel is a competitor.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="DistributionSystem" type="orghs-0400:DistributionSystem"/>
+    
+    <xsd:complexType name="DistributionSystem">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the affiliate distribution systems for the property.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">DistributionSystem</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ph-0200:BasicPropertyInfoSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the affiliation information for the distribution system.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="CompanyName" type="ota2-0500:CompanyName">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the company name for the affiliated distribution system.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="Brand" type="orghs-0400:Brand"/>
+    
+    <xsd:complexType name="Brand">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Brands affiliated with the property.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">Brand</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="URL" type="ota2-0500:URL">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The universal resource locator (URL) for the marketing brand as found on the Internet.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ph-0200:BasicPropertyInfoSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Affiliated brand information.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="Marketing" type="ota2-0500:String">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Name of brand, marketing chain, representation company or other affiliation(s).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="PartnerInfo" type="orghs-0400:PartnerInfo"/>
+    
+    <xsd:complexType name="PartnerInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Provides information on marketing and service partnerships (e.g., a theme park that offers discounts if you book this hotel). This is not a loyalty partnership.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">PartnerInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="10" minOccurs="0" ref="ota2-0500:ContactInformation">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Provides general information for the partner.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0500:Description">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Describes the partnership program.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="GDS_Information" type="orghs-0400:GDS_Information"/>
+    
+    <xsd:complexType name="GDS_Information">
+        <xsd:annotation>
+            <xsd:documentation source="Description">This allows for information for GDS&amp;apos;s to be specified.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GDS_Information</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="orghs-0400:GDS_CodesSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The element acts as a container for GDS_Code. It is used to send item for each GDS.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="orghs-0400:GDS_Status">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Hotel status per GDS.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="masterChainCode"
+            type="ota2-0500:StringLength2" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">This is the 2 character master chain code that identifes a specific chain that is recognized by all GDS&amp;apos;s.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="GDS_CodesSubGrp" type="orghs-0400:GDS_Codes">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A collection of GDS_Code items.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GDS_Codes</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="GDS_Codes"
+        substitutionGroup="orghs-0400:GDS_CodesSubGrp" type="orghs-0400:GDS_Codes"/>
+    <xsd:element name="GDS_CodesSummary" type="orghs-0400:GDS_Codes"/>
+    <xsd:element name="GDS_CodesDetail"
+        substitutionGroup="orghs-0400:GDS_CodesSubGrp" type="orghs-0400:GDS_Codes_Detail"/>
+    
+    <xsd:complexType name="GDS_Codes">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GDS_Codes</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="orghs-0400:GDS_CodeSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Provides detailed information regarding the specified GDS.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="GDS_Codes_Detail">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GDS_Codes</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="orghs-0400:GDS_Codes">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="loadGDSInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, this indicates rates will be loaded to specified GDSs. This attribute is also under GDS_Code to associate the rate load for an individual GDS. (This may also be used to idicate the willingness to upload rates to GDSs even if not specified in the request message.)</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="GDS_CodeSubGrp" type="orghs-0400:GDS_Code">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Provides detailed information regarding the specified GDS.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GDS_Code</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="GDS_Code"
+        substitutionGroup="orghs-0400:GDS_CodeSubGrp" type="orghs-0400:GDS_Code"/>
+    <xsd:element name="GDS_CodeSummary" type="orghs-0400:GDS_Code"/>
+    <xsd:element name="GDS_CodeDetail"
+        substitutionGroup="orghs-0400:GDS_CodeSubGrp" type="orghs-0400:GDS_Code_Detail"/>
+    
+    <xsd:complexType name="GDS_Code">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GDS_Code</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="gDS_PropertyCode"
+            type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">This is the GDS Property Code used to identify a specific hotel.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="gDS_Name" type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Type of GDS for hotel such as Apollo, Amadeus, Sabre, Worldspan etc.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="chainCode" type="ota2-0500:StringLength2" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">This is the 2 character GDS Chain Code used to identify a specific chain.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="GDS_Code_Detail">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GDS_Code</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="orghs-0400:GDS_Code">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="100" minOccurs="0" ref="orghs-0400:GDS_CodeInfo">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">This holds detailed information pertaining to the agencies authorized to book this rate.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="gDS_RoomTypeCode"
+                    type="ota2-0500:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A GDS channel room code.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="gDS_PropertyShortName"
+                    type="ota2-0500:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A property short name per channel.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="gDS_PropertyLongName"
+                    type="ota2-0500:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A property long name per channel.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="loadGDSInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">This attribute is used in conjunction with the GDS_Name. When true, this indicates rates will be loaded to the GDS specified by the GDS_Name.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="GDS_CodeInfo" type="orghs-0400:GDS_CodeInfo"/>
+    
+    <xsd:complexType name="GDS_CodeInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">This holds detailed information pertaining to the agencies authorized to book this rate.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GDS_CodeInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="pseudoCityCode" type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">This is used to pass the pseudo city code (i.e., the code that identifies a specific agency location) of the agency that has authority to book the negotiated rate(s)).</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="agencyName" type="ota2-0500:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">This is the agency with authority to book the negotiated rate(s).</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="GDS_Status" type="orghs-0400:GDS_Status"/>
+    
+    <xsd:complexType name="GDS_Status">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Hotel status per GDS.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GDS_Status</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="HotelStatus" type="ota2-0400:HotelStatus_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Property Status.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="code" type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Hotel status per GDS.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="name" type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">GDS name.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="EffectivePeriod" type="orghs-0400:EffectivePeriod"/>
+    
+    <xsd:complexType name="EffectivePeriod">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The period for which content is visible. This may be either specific times of year that repeat annually or actual dates.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">EffectivePeriod</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="DateEffectiveExpire" type="ota2-0500:DateEffectiveExpire">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The period for which content is visible. This may be either specific times of year that repeat annually or actual dates.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="RoomBlockInformation" type="orghs-0400:RoomBlockInformation"/>
+    
+    <xsd:complexType name="RoomBlockInformation">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes room block information accepted by the hotel.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RoomBlockInformation</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="org-0400:BlackoutDates">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Date(s) the room block is not available.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="totalRoomQuantity"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The total quantity of rooms that are available for room blocks.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="cancelPeriodDays"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The number of days advance notice to cancel a room block.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="availableInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, room blocks are accepted.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="HotelPropertyInfo" type="orghs-0400:HotelPropertyInfo"/>
+    
+    <xsd:complexType name="HotelPropertyInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Property information specific to a hotel.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">HotelPropertyInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="orghs-0400:CategoryCodes">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A collection of descriptive details about the hotel property.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="orghs-0400:ServiceBusiness">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies business services offered at a hotel.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1000" minOccurs="0" ref="orghs-0400:ServiceHotelAmenity">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies amenities offered at a hotel.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="orghs-0400:ServiceMealPlan">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies meal plans offered at a hotel.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="orghs-0400:ServiceMeetingRoom">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies meeting room services and items offered at a hotel.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="pMSSystem" type="ota2-0500:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Identifies the Property Management System being used by this hotel.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="HotelDescriptiveRequestInfo" type="orghs-0400:HotelDescriptiveRequestInfo"/>
+    
+    <xsd:complexType name="HotelDescriptiveRequestInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Provides for the ability to query for specific hotel data if no specific data is specified return full hotel content.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">HotelDescriptiveRequestInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" ref="ph-0200:BasicPropertyInfoSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies who&amp;apos;s informatation should be returned.  This may be a single property or mutliple properties based on the selections.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="orghs-0400:HotelRequestInfo">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Is used to indicate whether hotel information is being requested.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="FacilityRequestInfo" type="orghs-0400:FacilityRequestInfo">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Used to indicate the specific facility information being requested.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="PolicyRequestInfo" type="orghs-0400:PolicyInfo">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Used to indicate if policy information is being requested.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="AreaRequestInfo" type="orghs-0400:AreaInfo">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">When true, area information is being requested.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="AffiliationRequestInfo" type="orghs-0400:AffiliationInfoRequest">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Used to indicate if specific affilitation information is being requested.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="languageRequested" type="xsd:language" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The language in which the hotel property information should be returned.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="HotelRequestInfo" type="orghs-0400:HotelRequestInfo"/>
+    
+    <xsd:complexType name="HotelRequestInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Used to indicate whether hotel information is being requested.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">HotelRequestInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="HotelStatusCode" type="ota2-0400:PropertyStatus_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">This indicates the operating status (e.g. Open, Closed, Deflagged, Pre-opening) of the hotels to be returned in the response. Refer to OpenTravel Code List HotelStatusCode.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="hotelStatus" type="ota2-0500:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">This is a description of the operating status of the Hotel. This information may support the code in HotelStatusCode.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="sendDataInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, send hotel property info data.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="PolicyInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Used to indicate if policy information is being requested.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">PolicyInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="sendPoliciesInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, policy information is being requested.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FacilityRequestInfo">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">FacilityRequestInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="sendMeetingRoomsInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, send meeting room information.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="sendGuestRoomsInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, send guest room information.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="sendRestaurantsInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, send restaurant information.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="AreaInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Used to specifiy if area information is being requested.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">AreaInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="sendRefPointsInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, reference point information is being requested.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="sendAttractionsInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, attraction information is being requested.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="sendRecreationsInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, recreation information is being requested.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="AffiliationInfoRequest">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Used to indicated if affiliation information is being requested.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">AffiliationInfoRequest</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="sendDistribSystemsInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, distribution system information is being requested.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="sendBrandInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true Brand information is being rquested.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="sendLoyalProgramsInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, loyalty program information is being requested.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="sendAwardsInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, award information is being requested.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+</xsd:schema>

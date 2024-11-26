@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Hotel Availability Request for Negotiated Rate Plans.-->
+<OTA_HotelAvailRQ xmlns="http://www.opentravel.org/OTA" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opentravel.org/OTA OTA_HotelAvailRQ.xsd" EchoToken="00006#1P#42251#AB345" Target="Production">
+	<POS>
+		<Source AgentSine="GS" PseudoCityCode="XYZ" ISOCountry="US">
+			<UniqueId Type="BSA" Id="I234567"/>
+		</Source>
+		<Source>		
+			<UniqueId Type="BSM" Id="I965432"/>
+		</Source>
+	</POS>
+	<BookingSegments>
+		<BookingSegment MoreIndicator="N">
+			<HotelReference ChainCode="RD" HotelCode="RD103" HotelCityCode="ORD" BrandCode="AV"/>
+			<StayDateRange EndDate="2002-01-18T10:13:36.000-05:00" StartDate="2002-01-16T10:13:36.000-05:00"/>
+			<RateRange CurrencyCode="USD" MaxRate="100.00"/>
+			<RatePlanCandidates>
+				<RatePlanCandidate RatePlanType="Corporate"/>
+				<RatePlanCandidate RatePlanType="Negotiated" RatePlanCode="AAA#987654321"/>
+				<RatePlanCandidate RatePlanType="Negotiated" RatePlanCode="IBM#1112223334"/>
+				<RatePlanCandidate RatePlanType="Negotiated" RatePlanCode="XYZ#999999999"/>
+			</RatePlanCandidates>
+			<Profiles>
+				<Profile ProfileType="Customer">
+					<Customer>
+					<PersonName>
+						<Surname></Surname>
+					</PersonName>
+						<CustLoyalty ProgramCode="FRT" MembershipId="1234567890123"/>
+						<CustLoyalty ProgramCode="FRG" MembershipId="12345678901234567"/>
+						<CustLoyalty ProgramCode="CID" MembershipId="1234567"/>
+					</Customer>
+				</Profile>
+			</Profiles>
+			<RoomStayCandidates>
+				<RoomStayCandidate Quantity="1" RoomType="1Q#1K" InvBlockCode="IT7865432109" RoomCategoryCode="PS">
+					<GuestCount Count="1"/>
+				</RoomStayCandidate>
+			</RoomStayCandidates>
+		</BookingSegment>
+	</BookingSegments>
+</OTA_HotelAvailRQ>

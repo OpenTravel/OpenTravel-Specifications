@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA/2003/05" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA/2003/05" elementFormDefault="qualified" version="1.001" id="OTA2003B">
+
+
+
+
+	<!--  OTA_VehLocSearchRQ.xsd  -->
+	<xs:element name="OTA_VehLocSearchRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Vehicle Location Search request will allow car rental customers to request car rental provider(s) to return location(s) available.  The search will be based on longitude/latitude of the location.  Requests can be based on providing one or many of the following: longitude/latitude, address, telephone number, reference point, the actual code of the location, hotel, and/or radius.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="POS" type="POS_Type">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Point of Sale Identification.  Identification number of the vendor that has made the location search request and agency number assigned by IATA, ARC, ERSP or TID.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="VehLocSearchCriterion" type="ItemSearchCriterionType" maxOccurs="5">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">A collection of search parameters to be used in the search.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Vendor" type="CompanyNameType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Information on the vendor to be used as part of the search.  If this information is provided then only locations belonging to this vendor should be made available in the response.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="TPA_Extensions" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			<xs:attributeGroup ref="MaxResponsesGroup"/>
+			<xs:attributeGroup ref="ReqRespVersion"/>
+			<xs:attribute name="JustAddressPhone" type="xs:boolean" use="optional" default="false">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This attribute can be used to indicate how much information should be returned about a location matching the search criteria.  If set to true, only the location address and phone numbers will be provided.  If set to false, or omitted, all information about the location of the facility will be provided.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="VehicleLocSearchRQAdditionalInfoType">
+		<xs:sequence>
+			<xs:element ref="TPA_Extensions" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VehicleLocSearchRQCoreType">
+		<xs:sequence/>
+	</xs:complexType>
+	<!--  OTA_CommonTypes.xsd  -->
+	<xs:element name="TPA_Extensions" type="TPA_Extensions_Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A place holder in the schema to allow for additional elements and attributes to be included if required, per Trading Partner Agreement (TPA).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="AddressType">
+		<xs:sequence>
+			<xs:element name="StreetNmbr" type="StreetNmbrType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Street Name and Number within the address</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BldgRoom" type="StringLength0to64" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Building name, room, apartment, or suite number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AddressLine" type="StringLength1to64" minOccurs="0" maxOccurs="5"/>
+			<xs:element name="CityName" type="StringLength1to64" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">City name eg. Dublin</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PostalCode" type="StringLength1to16" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Post Office Code number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="County" type="StringLength1to32" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">County Name eg. Fairfax</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StateProv" type="StateProvType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">State name eg. Texas</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountryName" type="CountryNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Country name eg. Ireland</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="FormattedInd"/>
+		<xs:attributeGroup ref="PrivacyGroup"/>
+		<xs:attribute name="Type" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Defines the type of address (e.g. home, business, other). Refer to OTA Code List Communication Location Type (CLT).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="BookingChannelType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Specifies the booking channel types and whether it is the primary means of connectivity of the source.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Type" type="OTA_CodeType" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The type of booking channel (e.g. Global Distribution System (GDS), Alternative Distribution System (ADS), Sales and Catering System (SCS), Property Management System (PMS), Central Reservation System (CRS), Tour Operator System (TOS), Internet and ALL). Refer to OTA Code List Booking Channel Type (BCT).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Primary" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates whether the enumerated booking channel is the primary means of connectivity used by the source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="CompanyNameType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a company by name.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to64">
+				<xs:attributeGroup ref="CompanyID_AttributesGroup"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="CountryNameType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The name or code of a country (e.g. as used in an address or to specify citizenship of a traveller).</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to64">
+				<xs:attribute name="Code" type="ISO3166" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">ISO 3166 code for a country.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="DistanceAttributesType">
+		<xs:attributeGroup ref="DistanceAttributesGroup"/>
+	</xs:complexType>
+	<xs:complexType name="ItemSearchCriterionType">
+		<xs:sequence>
+			<xs:element name="Position" type="PositionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The Position element contains three attributes, Latitude, Longitude, and Altitude, used to indicate the geographic location(s) requested by the search, expressed in notation specified by ISO standard 6709.  It is likely that only the first two attributes, Latitude and Longitude, would be needed to define a geographic area.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Address" type="AddressType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Uses any part of address information, such as street name, postal code, or country code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Telephone" type="TelephoneType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Telephone number(s) used in the search.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RefPoint" type="StringLength1to64" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The Reference Point element allows for a search by proximity to a designated reference point by name. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodeRef" type="LocationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates the location of points of interest.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="HotelRef" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates the detail of hotel reference information.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attributeGroup ref="HotelReferenceGroup"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Radius" type="DistanceAttributesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The Radius element contains two attributes, Distance and DistanceMeasure, that indicate the distance from the center of the radius, combined with the unit of measure used to express the Distance. The center of the radius is specified by which ever location element is also present in this item search criterion type (e.g. position, address, hotel reference, etc.).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ExactMatch" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">values of "true" or "false", indicating whether the string of the search value must be an exact match.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ImportanceType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">an enumerated list, indicating the level of importance of the search criterion. Acceptable values are "Mandatory", "High", "Medium" or "Low".</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="StringLength1to16">
+					<xs:enumeration value="Mandatory"/>
+					<xs:enumeration value="High"/>
+					<xs:enumeration value="Medium"/>
+					<xs:enumeration value="Low"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="LocationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Code and optional string to describe a location point.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="LocationCode" type="StringLength1to8" use="required"/>
+				<xs:attribute name="CodeContext" type="StringLength1to32" default="IATA">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the context of the identifying code, such as IATA, ARC, or internal code, etc.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="POS_Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Point of Sale (POS) is the details identifying the party or connection channel making the request.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Source" type="SourceType" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This holds details regarding the requestor. It may be repeated to also accommodate the delivery systems.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PositionType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used to identify geospatial postion of the requesting entity.</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="PositionGroup"/>
+	</xs:complexType>
+	<xs:complexType name="SourceType">
+		<xs:sequence>
+			<xs:element name="RequestorID" type="UniqueID_Type">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An identifier of the entity making the request  (e.g. ATA/IATA/ID number, Electronic Reservation Service Provider (ERSP), Association of British Travel Agents (ABTA)). </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Position" type="PositionType" minOccurs="0"/>
+			<xs:element name="BookingChannel" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Specifies the booking channel type and whether it is the primary means of connectivity of the source.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="BookingChannelType">
+							<xs:sequence>
+								<xs:element name="CompanyName" type="CompanyNameType" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Identifies the company that is associated with the booking channel.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="AgentSine" type="StringLength1to16" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies the party within the requesting entity.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PseudoCityCode" type="StringLength1to16" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">An identification code assigned to an office/agency by a reservation system.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ISOCountry" type="ISO3166" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The country code of the requesting party.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ISOCurrency" type="AlphaLength3" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The currency code in which the reservation will be ticketed.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="AgentDutyCode" type="StringLength1to16" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">An authority code assigned to a requestor.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="AirlineVendorID" type="UpperCaseAlphaNumericLength2to3" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The IATA assigned airline code.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="AirportCode" type="UpperCaseAlphaNumericLength3to5" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The IATA assigned airport code.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="FirstDepartPoint" type="StringLength3" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The point of first departure in a trip.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ERSP_UserID" type="StringLength1to16" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Electronic Reservation Service Provider (ERSP) assigned identifier used to identify the individual using the ERSP system.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="StateProvType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">State, province, or region name or code needed to identify location.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to64">
+				<xs:attribute name="StateCode">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The postal service standard code or abbreviation for the state, province, or region.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="StringLength1to8">
+							<xs:minLength value="2"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="StreetNmbrType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Street name; number on street.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to64">
+				<xs:attribute name="PO_Box" type="StringLength1to16">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Defines a Post Office Box number.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="TPA_Extensions_Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Allows extensions to an OTA Schema to accommodate bilateral agreements between trading partners.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Extensions
+allowed to OTA specification per bilateral agreement between trading
+partners.</xs:documentation>
+			</xs:annotation>
+			<xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TelephoneType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Construct for holding a telephone number.</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="PrivacyGroup"/>
+		<xs:attributeGroup ref="TelephoneAttributesGroup"/>
+		<xs:attributeGroup ref="FormattedInd"/>
+	</xs:complexType>
+	<xs:complexType name="UniqueID_Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">An identifier used to uniquely reference an object in a system (e.g. an airline reservation reference, customer profile reference, booking confirmation number, or a reference to a previous availability quote). </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CompanyName" type="CompanyNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identifies the company that is associated with the UniqueID.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="UniqueID_Group"/>
+	</xs:complexType>
+	<xs:attributeGroup name="AltLangID_Group">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies the alternate language for a customer or message. The human language is identified by ISO 639 codes.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="AltLangID" type="xs:language" use="optional"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="AreaID_Group">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used in place of a property code to retrieve availability across multiple properties in a hotel reservation system defined area.  This attribute does not map to a code list, it maps to a hotel reservation system defined value.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="AreaID" type="NumericStringLength1to8" use="optional"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="CompanyID_AttributesGroup">
+		<xs:attribute name="CompanyShortName" type="StringLength1to32" use="optional"/>
+		<xs:attribute name="TravelSector" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">
+		Refer to OTA Code List Travel Sector (TVS).
+		</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Code" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies a company by the company code.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CodeContext" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies the context of the identifying code, such as DUNS, IATA or internal code, etc.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="DistanceAttributesGroup">
+		<xs:attribute name="Distance" type="NumericStringLength1to16">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">An optional attribute indicating the distance to/from a reference point.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DistanceMeasure" type="StringLength1to16">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">When the Distance attribute contains a value, (presumably a numerical value), the unit of measure is a string value that indicate what units are used for the value.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Direction" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">An optional string value used to indicate the compass point(s) direction, e.g.: S, SE (South, Southeast), FROM the Reference Point TO the hotel location if the search is not a full circumference from the reference point.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="FormattedInd">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies if the associated data is formatted into its individual pieces, or exists as a single entity.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="FormattedInd" type="xs:boolean" use="optional" default="false">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Specifies if the associated data is formatted or not. If true, then it is formatted, if false, then not formatted.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="HotelReferenceGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">HotelReference: The hotel reference identifies a specific hotel by using the Chain Code, the Brand Code, and the Hotel Code.  The codes used are agreed upon by trading partners.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ChainCode" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The code that identifies a hotel chain or management group. The hotel chain code is decided between vendors.  This attribute is optional if the hotel is an independent property that can be identified by the HotelCode attribute.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="BrandCode" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A code that identifies the brand or flag of a hotel, often used for independently-owned or franchised properties who are known by a specific brand.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HotelCode" type="StringLength1to16" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The code that uniquely identifies a single hotel property. The hotel code is decided between vendors.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HotelCityCode" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The IATA city code; for example DCA, ORD.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HotelName" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en"> A text field used to communicate the proper name of the hotel.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HotelCodeContext" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A text field used to communicate the context (or source of - ex Sabre, Galileo, Worldspan, Amadeus) the HotelReferenceGroup codes.
+</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ChainName" type="StringLength1to64" use="optional"/>
+		<xs:attribute name="BrandName" type="StringLength1to64" use="optional"/>
+		<xs:attributeGroup ref="AreaID_Group"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="ID_Group">
+		<xs:attribute name="ID" type="StringLength1to32" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A unique identifying value assigned by the creating system.  The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="MaxResponsesGroup">
+		<xs:attribute name="MaxResponses" type="xs:positiveInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A positive integer value that indicates the maximum number of responses desired in the return.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="OTA_PayloadStdAttributes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_PayloadStdAttributes defines the standard attributes that appear on the root element for all OTA payloads.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="EchoToken" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A sequence number for additional message identification, assigned by the requesting host system. When a request message includes an echo token the corresponding response message MUST include an echo token with an identical value.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TimeStamp" type="xs:dateTime" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates the creation date and time of the message in UTC using the following format specified by ISO 8601; YYYY-MM-DDThh:mm:ssZ with time values using the 24 hour clock (e.g. 20 November 2003, 1:59:38 pm UTC becomes 2003-11-20T13:59:38Z).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Target" use="optional" default="Production">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to indicate whether the request is for the Test or Production system.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Test"/>
+					<xs:enumeration value="Production"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Version" type="xs:decimal" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">For all OTA versioned messages, the version of the message is indicated by a decimal value.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TransactionIdentifier" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A unique identifier to relate all messages within a transaction (e.g. this would be sent in all request and response messages that are part of an on-going transaction).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SequenceNmbr" type="xs:nonNegativeInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to identify the sequence number of the transaction as assigned by the sending system; allows for an application to process messages in a certain order or to request a resynchronization of messages in the event that a system has been off-line and needs to retrieve messages that were missed. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TransactionStatusCode" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">This indicates where this message falls within a sequence of messages. </xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Start">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This is the first message within a transaction.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="End">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This is the last message within a transaction.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Rollback">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This indicates that all messages within the current transaction must be ignored.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="InSeries">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This is any message that is not the first or last message within a transaction.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attributeGroup ref="PrimaryLangID_Group"/>
+		<xs:attributeGroup ref="AltLangID_Group"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="PositionGroup">
+		<xs:attribute name="Latitude" type="StringLength1to16" use="optional"/>
+		<xs:attribute name="Longitude" type="StringLength1to16" use="optional"/>
+		<xs:attribute name="Altitude" type="StringLength1to16" use="optional"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="PrimaryLangID_Group">
+		<xs:attribute name="PrimaryLangID" type="xs:language" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifes the primary language preference for the form of travel represented in a collection.
+				 The human language is identified by ISO 639 codes.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="PrivacyGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The two Privacy attributes allow for control of the sharing of data between parties.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ShareSynchInd" use="optional">
+			<xs:simpleType>
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Inherit" Permission for sharing data for synchronization of information held by other travel service providers.							</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Yes"/>
+					<xs:enumeration value="No"/>
+					<xs:enumeration value="Inherit"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="ShareMarketInd" use="optional">
+			<xs:simpleType>
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Inherit" Permission for sharing data for marketing purposes.</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Yes"/>
+					<xs:enumeration value="No"/>
+					<xs:enumeration value="Inherit"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="ReqRespVersion">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The ReqRespVersion attribute is used to request the version of the payload message desired for the response.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ReqRespVersion" type="StringLength1to64"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="TelephoneAttributesGroup">
+		<xs:attribute name="PhoneLocationType" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Refer to OTA Code List Phone Location Type (PLT).
+		</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PhoneTechType" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates type of technology associated with this telephone number, such as Voice, Data, Fax, Pager, Mobile, TTY, etc. Refer to OTA Code List Phone Technology Type (PTT).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CountryAccessCode" type="NumericStringLength1to3" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Code assigned by telecommunications authorities for international country access identifier.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="AreaCityCode" type="NumericStringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Code assigned for telephones in a specific region, city, or area.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PhoneNumber" type="StringLength1to32" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Telephone number assigned to a single location.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Extension" type="NumericStringLength1to5" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Extension to reach a specific party at the phone number.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PIN" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Additional codes used for pager or telephone access rights.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="UniqueID_Group">
+		<xs:attribute name="URL" type="xs:anyURI">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">URL that identifies the location associated with the record identified by the UniqueID.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Type" type="OTA_CodeType" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A reference to the type of object defined by the UniqueID element. Refer to OTA Code List Unique ID Type (UIT).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Instance" type="StringLength1to32">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The identification of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="ID_Group"/>
+		<xs:attribute name="ID_Context" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to identify the source of the identifier (e.g. IATA, ABTA, etc.).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!--  OTA_SimpleTypes.xsd  -->
+	<xs:simpleType name="AlphaLength3">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Alphabetic Strings, length exactly 3</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z]{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ISO3166">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">2 character country code as defined in ISO3166.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumericStringLength1to16">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Numeric Strings, length 1 to 16.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{1,16}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumericStringLength1to3">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Numeric Strings, minimum length 1, maximum length 3.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{1,3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumericStringLength1to5">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Numeric Strings, length 1 to 5</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{1,5}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumericStringLength1to8">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Numeric Strings, length 1 to 8.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{1,8}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OTA_CodeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for codes in the OTA code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9A-Z]{1,3}(\.[A-Z]{3}(\.X){0,1}){0,1}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringLength0to64">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 0 to 64</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"/>
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringLength1to16">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 16</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringLength1to32">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 32</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringLength1to64">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 64</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringLength1to8">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 8</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringLength3">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Strings, length exactly 3</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="3"/>
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UpperCaseAlphaNumericLength2to3">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for an Upper Alpha String and Numeric, length 2 to 3.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z0-9]{2,3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UpperCaseAlphaNumericLength3to5">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for an Upper Alpha String and Numeric, length 3 to 5.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z0-9]{3,5}"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

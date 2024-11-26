@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.1 (http://www.xmlspy.com) by Marcel Jemio (OTA) -->
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:element name="UniqueId">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Unique identifier assigned to an individual customer profile.</xs:documentation>
+			</xs:annotation>
+			<xs:attribute name="URL" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">URL that identifies the location associated with the record identified by the UniqueId. The URL references should be public ORL used for an OTA discovery message between trading partners.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Type" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A reference to the type of object defined by the UniqueId element. By convention, the Type attribute value is the same as the element tag name for the reference object, for example, "Profile."</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Id" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A unique identifying value assigned by the creating system, using the XML data type ID.  The Id attribute may be used to reference a primary-key value within a database or in a particular implementation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Instance" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A snapshot of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

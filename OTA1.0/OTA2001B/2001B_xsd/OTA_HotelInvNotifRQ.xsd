@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:include schemaLocation="SellableProducts.xsd"/>
+	<xs:element name="OTA_HotelInvNotifRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_HotelInvNotifRQ is the message that sends the notification of a new inventory item, such as a room type or service type created for the hotel that did not previously exist.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelReference"/>
+				<xs:element ref="SellableProducts"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This element defines standard attributes that appear on the root element for all OTA payloads.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+			<xs:attribute name="InvNotifType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type that indicates whether this is a new inventory item or an update of an existing inventory item.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: New, Delta modification, Full overlay modification.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="New"/>
+						<xs:enumeration value="Delta"/>
+						<xs:enumeration value="Overlay"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="InvStatusType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type that indicates the status of the inventory item, ie: whether this notification is an initial announcement of a new inventory item, an update of an active (bookable) inventory item, or a notification of an inventory item that is no longer in effect.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: Initial, Active, Deactivated.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Initial"/>
+						<xs:enumeration value="Active"/>
+						<xs:enumeration value="Deactivated"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="InvCodeType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type that indicates whether this is an inventory item or an inventory grouping. </xs:documentation>
+					<xs:documentation xml:lang="en">Values: Does Not Apply, Inv Code, Inv Grouping Code.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="DoesNotApply"/>
+						<xs:enumeration value="InvCode"/>
+						<xs:enumeration value="InvGroupingCode"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="InvCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification of the inventory. Whether to use the sending/querying or the receiving/responding system's identification depends on which system is doing the translating.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InvGroupingCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The identification of the inventory grouping.  Whether to use the sending/querying or the receiving/responding system's identification depends on which system is doing the translating.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InvName" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The overall descriptive name of the inventoriable item.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="BeddingCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The identification of the type of bed(s) provided in the room inventory item, e.g.: single, double queens, king, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsRoom" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates if the inventoriable product is a room or other services. </xs:documentation>
+					<xs:documentation xml:lang="en">Values: (false) Non-room product,  (true) Room inventory.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Smoking" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates if the room inventory product is a smoking or non-smoking room type. </xs:documentation>
+					<xs:documentation xml:lang="en">Values: (false) Non-smoking,  (true) Smoking.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

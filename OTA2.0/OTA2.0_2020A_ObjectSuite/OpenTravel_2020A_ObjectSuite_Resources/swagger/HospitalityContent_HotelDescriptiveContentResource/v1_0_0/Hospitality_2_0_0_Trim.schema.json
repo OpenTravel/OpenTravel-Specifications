@@ -1,0 +1,426 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Hospitality",
+  "x-otm-library": {
+    "LibraryName": "Hospitality",
+    "LibraryVersion": "2.0.0",
+    "LibraryStatus": "DRAFT",
+    "SourceFile": "/Hospitality_2_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2019-10-30T13:33:15.006-0400"
+  },
+  "definitions": {
+    "RoomOccupancy": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "RoomOccupancy"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "minOccupancy": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "1"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "maxOccupancy": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "4"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "standardOccupancy": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "AgeQualifying": {
+          "type": "array",
+          "items": {
+            "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/AgeQualifyingCode_Enum"
+          },
+          "maxItems": 20
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "BasicPropertyInfo": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BasicPropertyInfo"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "WASJW"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "name": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "JW Marriott Washington DC"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "chainCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "MC"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "brandCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "FS"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "cityCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "WAS"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Site": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BasicPropertyInfo"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "WASJW"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "name": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "JW Marriott Washington DC"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "chainCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "MC"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "brandCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "FS"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "cityCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "WAS"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "BasicPropertyInfoDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BasicPropertyInfo"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BasicPropertyInfo"
+        },
+        {
+          "properties": {
+            "nameShort": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "chainName": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "Marriott"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 128
+            },
+            "brandName": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "Full Service"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 128
+            },
+            "areaID": {
+              "description": "Assigned Type: ota2-0500:String",
+              "type": "string",
+              "maxLength": 512
+            },
+            "hotelCode_TTI": {
+              "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0,
+              "exclusiveMinimum": false
+            },
+            "hotelCodeContext": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "SiteDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BasicPropertyInfo"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Site"
+        },
+        {
+          "properties": {
+            "nameShort": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "chainName": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "Marriott"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 128
+            },
+            "brandName": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "Full Service"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 128
+            },
+            "areaID": {
+              "description": "Assigned Type: ota2-0500:String",
+              "type": "string",
+              "maxLength": 512
+            },
+            "hotelCode_TTI": {
+              "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0,
+              "exclusiveMinimum": false
+            },
+            "hotelCodeContext": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "RoomOccupancy": {
+          "$ref": "#/definitions/RoomOccupancy"
+        }
+      },
+      "required": [
+        "RoomOccupancy"
+      ]
+    },
+    {
+      "properties": {
+        "BasicPropertyInfoSummary": {
+          "$ref": "#/definitions/BasicPropertyInfo"
+        }
+      },
+      "required": [
+        "BasicPropertyInfoSummary"
+      ]
+    },
+    {
+      "properties": {
+        "SiteSummary": {
+          "$ref": "#/definitions/BasicPropertyInfo"
+        }
+      },
+      "required": [
+        "SiteSummary"
+      ]
+    },
+    {
+      "properties": {
+        "BasicPropertyInfoDetail": {
+          "$ref": "#/definitions/BasicPropertyInfoDetail"
+        }
+      },
+      "required": [
+        "BasicPropertyInfoDetail"
+      ]
+    },
+    {
+      "properties": {
+        "SiteDetail": {
+          "$ref": "#/definitions/BasicPropertyInfoDetail"
+        }
+      },
+      "required": [
+        "SiteDetail"
+      ]
+    }
+  ]
+}

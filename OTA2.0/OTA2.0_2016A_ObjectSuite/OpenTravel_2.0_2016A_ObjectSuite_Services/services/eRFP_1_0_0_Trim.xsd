@@ -1,0 +1,1545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/product/eRFP/v1"
+    version="1.0.0" xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-dep="http://opentravel.org/common/v02"
+    xmlns:ota21="http://www.opentravel.org/OTM/Common/v1"
+    xmlns:ota2msg="http://opentravel.org/common/message/v02"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:prod-0100="http://www.opentravel.org/OTM/product/v1"
+    xmlns:rfp-0100="http://www.opentravel.org/OTM/product/eRFP/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:ProjectName>OpenTravel_eRFP_Publication_SKA.otp</otm:ProjectName>
+                <otm:LibraryName>eRFP</otm:LibraryName>
+                <otm:LibraryVersion>1.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                <otm:SourceFile>/eRFP_1_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>3.2</otm:CompilerVersion>
+                <otm:CompileDate>2016-02-28T08:24:52.674-05:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://opentravel.org/common/message/v02" schemaLocation="built-ins/OTA2_Message_v2.0.0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTA_SimpleTypes.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v1" schemaLocation="ota2-0100_imports.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/product/v1" schemaLocation="Product_1_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v1" schemaLocation="ota2-0100_imports.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element name="ContactSubGrp" type="rfp-0100:Contact_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Contact for the event.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Contact</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="ContactID"
+        substitutionGroup="rfp-0100:ContactSubGrp" type="rfp-0100:Contact_ID"/>
+    <xsd:element name="ContactIdentifier"
+        substitutionGroup="rfp-0100:ContactSubGrp" type="rfp-0100:Contact_ID"/>
+    <xsd:element name="Contact" substitutionGroup="rfp-0100:ContactID" type="rfp-0100:Contact"/>
+    <xsd:element name="ContactSummary"
+        substitutionGroup="rfp-0100:ContactSubGrp" type="rfp-0100:Contact"/>
+    <xsd:element name="ContactCompany"
+        substitutionGroup="rfp-0100:Contact" type="rfp-0100:Contact_Company"/>
+    <xsd:element name="ContactPerson"
+        substitutionGroup="rfp-0100:Contact" type="rfp-0100:Contact_Person"/>
+    
+    <xsd:complexType name="Contact_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Contact for the event.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Contact</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota21:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifier provides the ability to create a globally unique identifier. For the identifier to be globally unique it must have a system provided identifier and the system must be identified using a global naming authority. System identification uses the domain naming system (DNS) to assure they are globally unique and should be an URL. The system provided ID will typically be a primary or surrogate key in a database.
+
+The URL, system and company attributes can be omitted only when the system context can be implied by a parent or ancestor element.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Contact">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Contact for the event.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Contact</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="rfp-0100:Contact_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint_Summary"/>
+                </xsd:sequence>
+                <xsd:attribute name="comments" type="ota2:String_Long" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Comments related to the contact.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="primaryInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Indicates that his is the primary contact.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Contact_Company">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Contact for the event.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Contact</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="rfp-0100:Contact">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota21:CompanySubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Detailed information about a company.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Contact_Person">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Contact for the event.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Contact</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="rfp-0100:Contact">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota21:PersonSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Detailed information about a contact person.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="Contacts" type="rfp-0100:Contacts"/>
+    
+    <xsd:simpleType name="Contacts_Simple">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An empty string used when the simple content of an element or attribute is to be omitted.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">Contacts</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2:Empty"/>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="Contacts_Simple_List">
+        <xsd:list itemType="rfp-0100:Contacts_Simple"/>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="Contacts">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A collection of contact information for each contact.</xsd:documentation>
+            <xsd:documentation source="Description">A collection of contact information for each contact.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">Contacts</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="100" minOccurs="1" ref="rfp-0100:ContactSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Information related to a single contact.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="EventBlockSubGrp" type="rfp-0100:EventBlock_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Information pertaining to the event requirements.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">EventBlock</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="EventBlockID"
+        substitutionGroup="rfp-0100:EventBlockSubGrp" type="rfp-0100:EventBlock_ID"/>
+    <xsd:element name="EventBlockIdentifier"
+        substitutionGroup="rfp-0100:EventBlockSubGrp" type="rfp-0100:EventBlock_ID"/>
+    <xsd:element name="EventBlock"
+        substitutionGroup="rfp-0100:EventBlockID" type="rfp-0100:EventBlock"/>
+    <xsd:element name="EventBlockSummary"
+        substitutionGroup="rfp-0100:EventBlockSubGrp" type="rfp-0100:EventBlock"/>
+    
+    <xsd:complexType name="EventBlock_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Information pertaining to the event requirements.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">EventBlock</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota21:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifier provides the ability to create a globally unique identifier. For the identifier to be globally unique it must have a system provided identifier and the system must be identified using a global naming authority. System identification uses the domain naming system (DNS) to assure they are globally unique and should be an URL. The system provided ID will typically be a primary or surrogate key in a database.
+
+The URL, system and company attributes can be omitted only when the system context can be implied by a parent or ancestor element.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="EventBlock">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Information pertaining to the event requirements.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">EventBlock</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="rfp-0100:EventBlock_ID">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="100" minOccurs="1" ref="rfp-0100:EventDay">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies event information for a single day.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0"
+                        name="FoodAndBeveragesBudget" type="ota21:Currency_Amount">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies budget for food and beverage only.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+                </xsd:sequence>
+                <xsd:attribute name="peakMeetingRoom" type="xsd:integer" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Number of meeting rooms needed on the peak day of the event.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Example value: rfp1 = 3</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="rfp">3</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="EventDay" type="rfp-0100:EventDay"/>
+    
+    <xsd:simpleType name="EventDay_Simple">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An empty string used when the simple content of an element or attribute is to be omitted.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">EventDay</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2:Empty"/>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="EventDay_Simple_List">
+        <xsd:list itemType="rfp-0100:EventDay_Simple"/>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="EventDay">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Function details for a specific day of the event.</xsd:documentation>
+            <xsd:documentation source="Description">Function details for a specific day of the event.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">EventDay</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="rfp-0100:EventFunctionSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the details of the function.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="1" name="EventStatus" type="ota21:EventStatus_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The status for events for this day.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="dayNumber" type="xsd:positiveInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The number which indicates the day of the room requirements (e.g. 1, 2, 3, etc).</xsd:documentation>
+                <xsd:documentation source="Implementer">Example value: rfp1 = 1</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="rfp">1</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="EventFunctionSubGrp" type="rfp-0100:EventFunction">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of the function.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">EventFunction</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="EventFunction"
+        substitutionGroup="rfp-0100:EventFunctionSubGrp" type="rfp-0100:EventFunction"/>
+    <xsd:element name="EventFunctionSummary"
+        substitutionGroup="rfp-0100:EventFunctionSubGrp" type="rfp-0100:EventFunction"/>
+    <xsd:element name="EventFunctionDetail"
+        substitutionGroup="rfp-0100:EventFunction" type="rfp-0100:EventFunction_Detail"/>
+    
+    <xsd:simpleType name="EventFunction_Simple">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An empty string used when the simple content of an element or attribute is to be omitted.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">EventFunction</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2:Empty"/>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="EventFunction_Simple_List">
+        <xsd:list itemType="rfp-0100:EventFunction_Simple"/>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="EventFunction">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of the function.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">EventFunction</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="EventFunctionType" type="ota21:EventFunction_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicates the type of event being requested (e.g. breakfast meeting or reception).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="MeetingSpaceSize" type="rfp-0100:SpaceSize">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">This identifies the space requirement.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="eventId" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier for this event.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="startTime" type="xsd:time" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The time the event is scheduled to begin.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="endTime" type="xsd:time" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The time the event is scheduled to finish.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="attendeeQuantity"
+            type="xsd:positiveInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The number of people attending this event.</xsd:documentation>
+                <xsd:documentation source="Implementer">Example value: rfp1 = 50</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="rfp">50</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="functionName" type="ota2:String_Short" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The name of the event.</xsd:documentation>
+                <xsd:documentation source="Implementer">Example value: rfp1 = Break-out session</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="rfp">Break-out session</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="meetingSpaceId" type="ota2:String_Tiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Identifies a specific meeting room.</xsd:documentation>
+                <xsd:documentation source="Implementer">Example value: rfp1 = 246542</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="rfp">246542</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="meetingSpaceName" type="ota2:String_Short" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The name identifying the meeting room or space.</xsd:documentation>
+                <xsd:documentation source="Implementer">Example value: rfp1 = Grand Ballroom</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="rfp">Grand Ballroom</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="twentyFourHourHoldInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, indicates a room is held on a 24-hour basis (i.e., ensures a room set-up is not disturbed).</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="EventFunction_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of the function.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">EventFunction</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="rfp-0100:EventFunction">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="100" minOccurs="0"
+                        name="AVNeeds" type="ota21:AudioVisual_Enum">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">AV requirements for this function.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="RoomSetup" type="ota21:MeetingRoomFormat_Enum">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Indicates the arrangement of the meeting space (e.g. conference or banquet style). Refer to OpenTravel Code List Meeting Room Format Code (MRF).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="100" minOccurs="0" ref="rfp-0100:EventSubFunctionSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies the details of a subfunction taking place within a function.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="comments" type="ota2:String_Text" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Comments regarding the event function.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Example value: rfp1 = Comments about this function.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="rfp">Comments about this function.</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="EventSubFunctionSubGrp" type="rfp-0100:EventSubFunction">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of the sub function.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">EventSubFunction</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="EventSubFunction"
+        substitutionGroup="rfp-0100:EventSubFunctionSubGrp" type="rfp-0100:EventSubFunction"/>
+    <xsd:element name="EventSubFunctionSummary"
+        substitutionGroup="rfp-0100:EventSubFunctionSubGrp" type="rfp-0100:EventSubFunction"/>
+    <xsd:element name="EventSubFunctionDetail"
+        substitutionGroup="rfp-0100:EventSubFunction" type="rfp-0100:EventSubFunction_Detail"/>
+    
+    <xsd:simpleType name="EventSubFunction_Simple">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An empty string used when the simple content of an element or attribute is to be omitted.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">EventSubFunction</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2:Empty"/>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="EventSubFunction_Simple_List">
+        <xsd:list itemType="rfp-0100:EventSubFunction_Simple"/>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="EventSubFunction">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of the sub function.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">EventSubFunction</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Id" type="ota21:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique ID for this event subfunction.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="SubFunctionType" type="ota21:EventFunction_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicates the type of event being requested (e.g. breakfast meeting, reception).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="ota2:String_Short" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Used to identify the event.</xsd:documentation>
+                <xsd:documentation source="Implementer">Example value: rfp1 = Roll-in lunch</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="rfp">Roll-in lunch</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="startTime" type="xsd:time" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The time the event is scheduled to begin.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="endTime" type="xsd:time" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The time the event is scheduled to finish.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="attendeeQuantity"
+            type="xsd:positiveInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The number of people attending this event.</xsd:documentation>
+                <xsd:documentation source="Implementer">Example value: rfp1 = 50</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="rfp">50</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="EventSubFunction_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of the sub function.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">EventSubFunction</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="rfp-0100:EventSubFunction">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="100" minOccurs="0"
+                        name="AVNeeds" type="ota21:AudioVisual_Enum">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">AV requirments for this sub-function.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="RequestInfo" type="rfp-0100:RequestInfo"/>
+    
+    <xsd:simpleType name="RequestInfo_Simple">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An empty string used when the simple content of an element or attribute is to be omitted.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RequestInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2:Empty"/>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="RequestInfo_Simple_List">
+        <xsd:list itemType="rfp-0100:RequestInfo_Simple"/>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="RequestInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifics about the Event.</xsd:documentation>
+            <xsd:documentation source="Description">Specifics about the Event.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RequestInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="EventType" type="ota21:EventType_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The type of event.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Example value: rfp1 = Conference</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="BusinessType" type="ota21:BusinessType_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The business category for this event.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Example value: rfp1 = Group</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="MarketSegment" type="ota21:InventoryBlockType_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Used to identify the market segment for the meeting.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Example value: rfp1 = Corporate Group</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="TotalEventBudget" type="ota21:Currency_Amount">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A general indication of the planner's budget for the event.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="LargestMeetingSpace" type="rfp-0100:SpaceSize">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The largest meeting room required for the event.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Example value: rfp1 = 1000 sq ft</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="TotalMeetingSpace" type="rfp-0100:SpaceSize">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The total amount of meeting space needed for the event.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Example value: rfp1 = 7000 sq ft</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="ExpectedCommissionRate" type="ota21:AmountPercent">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The commission rate expected for this event.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="PreferredContactMethod" type="ota21:DistributionType_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The prefered method of contact.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Example value: rfp1 = Email</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Unique identifier supplied by the requesting system.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="rFPName" type="ota2:String_Short" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A name identifiying the RFP.</xsd:documentation>
+                <xsd:documentation source="Implementer">Example value: rfp1 = Booking for ABC Convention</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="rfp">ABC Convention</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="responseDue"
+            type="ota2:DateTime_WithTimeZone" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The date the requestor requires a response/proposal.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="decisionDue"
+            type="ota2:DateTime_WithTimeZone" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The date in which the client intends to make a decision.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="totalAttendees" type="xsd:positiveInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">An estimate of the total number of attendees for the event.</xsd:documentation>
+                <xsd:documentation source="Implementer">Example value: rfp1 = 200</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="rfp">500</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="peakRoomQuantity"
+            type="xsd:positiveInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The number of rooms needed for the peak night of the event.</xsd:documentation>
+                <xsd:documentation source="Implementer">Example value: rfp1 = 100</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="rfp">100</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="rFPDescription" type="ota2:String_Text" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A comment field used to convey free form information about the RFP</xsd:documentation>
+                <xsd:documentation source="Implementer">Example value: rfp1 = Text about the event.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="rfp">Text about the event.</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="eventName" type="ota2:String_Short" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A name identifiying the event.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="roomBlockInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, indicates a room block is requested. When false, indicates no room block is requested and RoomBlock will not be passed.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="eventBlockInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, indicates function space is required. When false, indicates no function space is required and EventBlock will not be passed.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="commisionInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, commission will be paid on this event.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="E_RFPSubGrp" type="rfp-0100:E_RFP_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Infomation pertaining to a request for proposal (meeting room and/or sleeping room information for a group).</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">E_RFP</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="E_RFPID" substitutionGroup="rfp-0100:E_RFPSubGrp" type="rfp-0100:E_RFP_ID"/>
+    <xsd:element name="E_RFPIdentifier"
+        substitutionGroup="rfp-0100:E_RFPSubGrp" type="rfp-0100:E_RFP_ID"/>
+    <xsd:element name="E_RFP" substitutionGroup="rfp-0100:E_RFPID" type="rfp-0100:E_RFP"/>
+    <xsd:element name="E_RFPSummary"
+        substitutionGroup="rfp-0100:E_RFPSubGrp" type="rfp-0100:E_RFP"/>
+    <xsd:element name="E_RFPDetail" substitutionGroup="rfp-0100:E_RFP" type="rfp-0100:E_RFP_Detail"/>
+    
+    <xsd:complexType name="E_RFP_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Infomation pertaining to a request for proposal (meeting room and/or sleeping room information for a group).</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">E_RFP</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota21:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifier provides the ability to create a globally unique identifier. For the identifier to be globally unique it must have a system provided identifier and the system must be identified using a global naming authority. System identification uses the domain naming system (DNS) to assure they are globally unique and should be an URL. The system provided ID will typically be a primary or surrogate key in a database.
+
+The URL, system and company attributes can be omitted only when the system context can be implied by a parent or ancestor element.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="E_RFP">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Infomation pertaining to a request for proposal (meeting room and/or sleeping room information for a group).</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">E_RFP</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="rfp-0100:E_RFP_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" ref="rfp-0100:RequestInfo">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifics about the Event.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="rfp-0100:Contacts">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Profile information for the submitter of the request.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="1" minOccurs="0" ref="rfp-0100:Dates">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A collection of dates which allows you to request preferred and/or alternate dates.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="rfp-0100:Sites">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A collection of sites for which the request is being submitted (e.g. a hotel, national sales office, convention center).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="rfp-0100:RoomBlock">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">This is information pertaining to room requirements for this request.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="rfp-0100:EventBlockSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">This is information pertaining to the event requirements for this request.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint_Summary"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="E_RFP_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Infomation pertaining to a request for proposal (meeting room and/or sleeping room information for a group).</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">E_RFP</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="rfp-0100:E_RFP">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="AdditionalInfo" type="rfp-0100:AdditionalInfo">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A collection of additional information requests.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="comments" type="ota2:String_Text" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Comments related to the request.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="RoomBlock" type="rfp-0100:RoomBlock"/>
+    
+    <xsd:simpleType name="RoomBlock_Simple">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An empty string used when the simple content of an element or attribute is to be omitted.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RoomBlock</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2:Empty"/>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="RoomBlock_Simple_List">
+        <xsd:list itemType="rfp-0100:RoomBlock_Simple"/>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="RoomBlock">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details for a room block.</xsd:documentation>
+            <xsd:documentation source="Description">Specifies the details for a room block.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RoomBlock</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="BudgetedRoomRate" type="ota21:Currency_Amount">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A general indication of the planner's budget for individual room nights and/or delegate rates.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="100" minOccurs="1" ref="rfp-0100:StayDay">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Room requirements for a particular day of the room block.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="ReservationMethod" type="ota21:ReservationMethod_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Rooming List, Individual, Housing Agency</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="organizerCheckInDaysBefore"
+            type="xsd:integer" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Specifies the number of days the organizers will be checking in before the event.</xsd:documentation>
+                <xsd:documentation source="Implementer">Example value: rfp1 = 2</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="rfp">2</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="organizerCheckOutDaysAfter"
+            type="xsd:integer" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Specifies the number of days the organizers will be staying after the event.</xsd:documentation>
+                <xsd:documentation source="Implementer">Example value: rfp1 = 1</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="rfp">1</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="sleepingRoomInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, sleeping rooms are required.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="SpaceSize">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The numeric value associated with the measurement.</xsd:documentation>
+            <xsd:documentation source="Implementer">Example value: rfp1 = 1200</xsd:documentation>
+            <xsd:documentation source="Implementer">Example value: rfp1 = 1200</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">SpaceSize</otm:OTA2Entity>
+                <otm:Example context="rfp">1200</otm:Example>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:decimal">
+                <xsd:attribute name="unitOfMeasure"
+                    type="ota2:String_Tiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">This is the standard unit of measure name (e.g., it could be generic such as metric or imperial or specific such as inches, feet, yards, miles, millimeters, centimeters, meters, kilometers- according to usage).</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="rfp">Sq. Ft.</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:element name="Sites" type="rfp-0100:Sites"/>
+    
+    <xsd:simpleType name="Sites_Simple">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An empty string used when the simple content of an element or attribute is to be omitted.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">Sites</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2:Empty"/>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="Sites_Simple_List">
+        <xsd:list itemType="rfp-0100:Sites_Simple"/>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="Sites">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A collection of site information.</xsd:documentation>
+            <xsd:documentation source="Description">A collection of site information.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">Sites</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="prod-0100:SiteSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The site information for the RFP.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="StayDay" type="rfp-0100:StayDay"/>
+    
+    <xsd:simpleType name="StayDay_Simple">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An empty string used when the simple content of an element or attribute is to be omitted.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">StayDay</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2:Empty"/>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="StayDay_Simple_List">
+        <xsd:list itemType="rfp-0100:StayDay_Simple"/>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="StayDay">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Sleeping room details for a specific day of the event.</xsd:documentation>
+            <xsd:documentation source="Description">Sleeping room details for a specific day of the event.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">StayDay</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="100" minOccurs="1" ref="rfp-0100:StayDayRoomSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies the room requirements.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="dayNumber" type="xsd:positiveInteger" use="required">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The number which indicates the day of the room requirements (e.g. 1, 2, 3, etc).</xsd:documentation>
+                <xsd:documentation source="Implementer">Example value: rfp1 = 1</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="rfp">1</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="StayDayRoomSubGrp" type="rfp-0100:StayDayRoom">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the room requirements for this day of the room block.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">StayDayRoom</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="StayDayRoom"
+        substitutionGroup="rfp-0100:StayDayRoomSubGrp" type="rfp-0100:StayDayRoom"/>
+    <xsd:element name="StayDayRoomSummary"
+        substitutionGroup="rfp-0100:StayDayRoomSubGrp" type="rfp-0100:StayDayRoom"/>
+    <xsd:element name="StayDayRoomDetail"
+        substitutionGroup="rfp-0100:StayDayRoom" type="rfp-0100:StayDayRoom_Detail"/>
+    
+    <xsd:simpleType name="StayDayRoom_Simple">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An empty string used when the simple content of an element or attribute is to be omitted.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">StayDayRoom</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2:Empty"/>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="StayDayRoom_Simple_List">
+        <xsd:list itemType="rfp-0100:StayDayRoom_Simple"/>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="StayDayRoom">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the room requirements for this day of the room block.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">StayDayRoom</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="prod-0100:RoomTypeSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">This is where a requester specifies the room type they wish to procure (e.g. king, double, double double, accessible). This is NOT an OpenTravel Codelist due to the infinite number of possible room types.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="numberOfUnits" type="xsd:integer" use="required">
+            <xsd:annotation>
+                <xsd:documentation source="Description">This is the required number of rooms for a particular day for a particular room type.</xsd:documentation>
+                <xsd:documentation source="Implementer">Example value: rfp1 = 75</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="rfp">75</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="occupancyType" type="ota2:String_Short" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Single, Double, Triple, Quad. Not ENUM.</xsd:documentation>
+                <xsd:documentation source="Implementer">Example value: rfp1 = Single</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="rfp">Single</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="StayDayRoom_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the room requirements for this day of the room block.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">StayDayRoom</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="rfp-0100:StayDayRoom">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="comments" type="ota2:String_Text" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Comment related to the StayDayRoom.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Example value: rfp1 = Comments about this stay day.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="rfp">Comments about this stay day.</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="Dates" type="rfp-0100:Dates"/>
+    
+    <xsd:simpleType name="Dates_Simple">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An empty string used when the simple content of an element or attribute is to be omitted.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">Dates</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2:Empty"/>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="Dates_Simple_List">
+        <xsd:list itemType="rfp-0100:Dates_Simple"/>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="Dates">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the date(s) or date window(s) for the RFP.</xsd:documentation>
+            <xsd:documentation source="Description">Specifies the date(s) or date window(s) for the RFP.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">Dates</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="ota21:DateTimeSpanWindowsSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the date range or date windows for the event.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="comments" type="ota2:String_Text" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Comments regarding the set of date ranges as a whole.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="flexibleInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, indicates that the event dates are flexible.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="AdditionalInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Group of indicators specifiying what additional information is provided.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">AdditionalInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="attachDocumentInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, there is a document attachment.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="aVNeedsInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, indicates that there are audio visual requirements for this event.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="decisionFactorsInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, indicates that there are specific decision factors for this event.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="contractualRequirementsInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, indicates that there are contractual requirements for this event.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="billingInfoInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, indicates that billing information is provided for this event.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="otherSuppliersInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, indicates that other suppliers are required for this event.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="thirdPartyPlannerInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, indicates that there is third party planner information included in the RFP.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:element name="CreateRQ"
+        substitutionGroup="ota2msg:OTA2_Request_Payload" type="rfp-0100:Create_RQ"/>
+    
+    <xsd:complexType name="Create_RQ">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">ERFP_Create</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Request_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="rfp-0100:E_RFPSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Infomation pertaining to a request for proposal (meeting room and/or sleeping room information for a group).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota21:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota21:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of sale details.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="CreateRS"
+        substitutionGroup="ota2msg:OTA2_Response_Payload" type="rfp-0100:Create_RS"/>
+    
+    <xsd:complexType name="Create_RS">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">ERFP_Create</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Response_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="rfp-0100:E_RFPSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Infomation pertaining to a request for proposal (meeting room and/or sleeping room information for a group).  The response may include full eRFP object or just and identifer for the E_RFP.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota21:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota21:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="CreateNotif"
+        substitutionGroup="ota2msg:OTA2_Notif_Payload" type="rfp-0100:Create_Notif"/>
+    
+    <xsd:complexType name="Create_Notif">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">ERFP_Create</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Notif_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="rfp-0100:E_RFPSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Infomation pertaining to a request for proposal (meeting room and/or sleeping room information for a group).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota21:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="DeleteRQ"
+        substitutionGroup="ota2msg:OTA2_Request_Payload" type="rfp-0100:Delete_RQ"/>
+    
+    <xsd:complexType name="Delete_RQ">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">ERFP_Delete</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Request_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="rfp-0100:E_RFPIdentifier">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The identifier for the RFP to be deleted.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota21:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota21:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of sale details.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="DeleteRS"
+        substitutionGroup="ota2msg:OTA2_Response_Payload" type="rfp-0100:Delete_RS"/>
+    
+    <xsd:complexType name="Delete_RS">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">ERFP_Delete</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Response_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="rfp-0100:E_RFPSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A request for proposal (meeting room and/or sleeping room information for a group).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota21:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota21:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="DeleteNotif"
+        substitutionGroup="ota2msg:OTA2_Notif_Payload" type="rfp-0100:Delete_Notif"/>
+    
+    <xsd:complexType name="Delete_Notif">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">ERFP_Delete</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Notif_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="rfp-0100:E_RFPSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A request for proposal (meeting room and/or sleeping room information for a group).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota21:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="ReadRQ"
+        substitutionGroup="ota2msg:OTA2_Request_Payload" type="rfp-0100:Read_RQ"/>
+    
+    <xsd:complexType name="Read_RQ">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">ERFP_Read</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Request_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="rfp-0100:E_RFPIdentifier">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">An ID for the request for proposal (meeting room and/or sleeping room information for a group) to be returned.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota21:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota21:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of sale details.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="ReadRS"
+        substitutionGroup="ota2msg:OTA2_Response_Payload" type="rfp-0100:Read_RS"/>
+    
+    <xsd:complexType name="Read_RS">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">ERFP_Read</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Response_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="rfp-0100:E_RFPSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">THe request for proposal (meeting room and/or sleeping room information for a group).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota21:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota21:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="ReadNotif"
+        substitutionGroup="ota2msg:OTA2_Notif_Payload" type="rfp-0100:Read_Notif"/>
+    
+    <xsd:complexType name="Read_Notif">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">ERFP_Read</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Notif_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="rfp-0100:E_RFPSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A request for proposal (meeting room and/or sleeping room information for a group).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota21:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="UpdateRQ"
+        substitutionGroup="ota2msg:OTA2_Request_Payload" type="rfp-0100:Update_RQ"/>
+    
+    <xsd:complexType name="Update_RQ">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">ERFP_Update</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Request_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="rfp-0100:E_RFPSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A request for proposal (meeting room and/or sleeping room information for a group).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota21:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota21:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of sale details.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="UpdateRS"
+        substitutionGroup="ota2msg:OTA2_Response_Payload" type="rfp-0100:Update_RS"/>
+    
+    <xsd:complexType name="Update_RS">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">ERFP_Update</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Response_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="rfp-0100:E_RFPSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A request for proposal (meeting room and/or sleeping room information for a group).  The response may include the full E_RFP object or simply and identifer for the E_RFP.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota21:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota21:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="UpdateNotif"
+        substitutionGroup="ota2msg:OTA2_Notif_Payload" type="rfp-0100:Update_Notif"/>
+    
+    <xsd:complexType name="Update_Notif">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">ERFP_Update</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Notif_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="rfp-0100:E_RFPSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A request for proposal (meeting room and/or sleeping room information for a group).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota21:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2msg:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+</xsd:schema>

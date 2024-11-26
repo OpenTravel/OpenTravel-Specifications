@@ -1,0 +1,1347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/product/hospitality/v1"
+    version="1.0.0"
+    xmlns:fin-0300="http://www.opentravel.org/OTM/finance/v3"
+    xmlns:order-0300="http://www.opentravel.org/OTM/order/v3"
+    xmlns:org-0300="http://www.opentravel.org/OTM/organization/v3"
+    xmlns:orghs-0300="http://www.opentravel.org/OTM/organization/hospitality/v3"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0300="http://www.opentravel.org/OTM/Common/v3"
+    xmlns:ota2-0400="http://www.opentravel.org/OTM/Common/v4"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:pgt-0200="http://www.opentravel.org/OTM/product/Ground/v2"
+    xmlns:ph="http://www.opentravel.org/OTM/product/hospitality/v1"
+    xmlns:prod-0400="http://www.opentravel.org/OTM/product/v4" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:LibraryName>Hospitality</otm:LibraryName>
+                <otm:LibraryVersion>1.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                <otm:SourceFile>/Hospitality_1_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2018-04-05T08:59:59.630-04:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v3" schemaLocation="CodeList_3_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/Ground/v2" schemaLocation="Ground_2_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/product/v4" schemaLocation="Product_4_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/v3" schemaLocation="Organization_3_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/order/v3" schemaLocation="Order_3_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/hospitality/v3" schemaLocation="OrganizationHospitality_3_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v4" schemaLocation="Common_4_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/finance/v3" schemaLocation="Finance_3_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element abstract="true" name="RoomStaySubGrp" type="ph:RoomStay_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Details on the Room Stay including Guest Counts, Time Span of this Room Stay, pointers to Res Guests, guest Memberships, Comments and Special Requests pertaining to this particular Room Stay and finally finacial information related to the Room Stay, including Guarantee, Deposit and Payment and Cancellation Penalties.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomStay</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="RoomStayID" substitutionGroup="ph:RoomStaySubGrp" type="ph:RoomStay_ID"/>
+    <xsd:element name="RoomStayIdentifier" type="ph:RoomStay_ID"/>
+    <xsd:element name="RoomStay" substitutionGroup="ph:RoomStaySubGrp" type="ph:RoomStay"/>
+    <xsd:element name="RoomStaySummary" type="ph:RoomStay"/>
+    <xsd:element name="RoomStayDetail"
+        substitutionGroup="ph:RoomStaySubGrp" type="ph:RoomStay_Detail"/>
+    <xsd:element name="RoomStayQueryCandidate" type="ph:RoomStay_Query_Candidate"/>
+    
+    <xsd:complexType name="RoomStay_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Details on the Room Stay including Guest Counts, Time Span of this Room Stay, pointers to Res Guests, guest Memberships, Comments and Special Requests pertaining to this particular Room Stay and finally finacial information related to the Room Stay, including Guarantee, Deposit and Payment and Cancellation Penalties.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomStay</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0400:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="RoomStayRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the obj ID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RoomStay">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Details on the Room Stay including Guest Counts, Time Span of this Room Stay, pointers to Res Guests, guest Memberships, Comments and Special Requests pertaining to this particular Room Stay and finally finacial information related to the Room Stay, including Guarantee, Deposit and Payment and Cancellation Penalties.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomStay</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ph:RoomStay_ID">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" ref="ph:RoomTypeSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The RoomType element is used to contain all the room type information.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}RoomTypes</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="1" minOccurs="1" ref="ph:RatePlanSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The rate plan element is used to contain all the rate plan information for a single Rate Plan Code (ex RACK).  The rate plan contains everything included with the room stay outside of the room.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}RatePlans</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="1" minOccurs="1" ref="ota2-0400:DateTimeSpanWindowsSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The Time Span encompassing the start and end date for which this room stay product exists.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}DateTimeSpanType</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="50" minOccurs="0"
+                        name="SpecialRequest" type="ph:SpecialRequest">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The SpecialRequest object indicates special requests for the whole Reservation, or a particular Room Stay or Service.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}SpecialRequestType</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="FacilityRef" type="xsd:IDREF">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The hotel facility object for the room stay.  May include the hotel facility object or a reference to the hotel facility object.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}BasicPropertyInfo</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+                </xsd:sequence>
+                <xsd:attribute name="invBlockCode"
+                    type="ota2-0400:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Code that identifies an inventory block.  Used for group blocks and single room blocks.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">xyzzy</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RoomStay_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Details on the Room Stay including Guest Counts, Time Span of this Room Stay, pointers to Res Guests, guest Memberships, Comments and Special Requests pertaining to this particular Room Stay and finally finacial information related to the Room Stay, including Guarantee, Deposit and Payment and Cancellation Penalties.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomStay</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ph:RoomStay">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="10" minOccurs="0" ref="ota2-0400:Comment">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A collection of Comment objects. Comments which apply to the whole Reservation or a particular Room Stay or Service.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}CommentType</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="language" type="xsd:language" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Language of the response for the RoomStay (property). Note that the requested language may not be available for all properties and so the language of the response for each property may vary.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}language</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">en</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RoomStay_Query_Candidate">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Details on the Room Stay including Guest Counts, Time Span of this Room Stay, pointers to Res Guests, guest Memberships, Comments and Special Requests pertaining to this particular Room Stay and finally finacial information related to the Room Stay, including Guarantee, Deposit and Payment and Cancellation Penalties.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomStay</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="ArrivalDepartureDates" type="ota2-0400:DateEffectiveExpire">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies the start and/or end dates.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ph:BasicPropertyInfoSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies a specific hotel or city for which the availability search applies.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ph:RoomTypeSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies a type of room.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="GuestCount" type="prod-0400:GuestCount">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The rate range for the query.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ph:RoomRateQueryRange">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the details of a room rate.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="RoomTypeSubGrp" type="ph:RoomType_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Provides details regarding rooms, usually guest rooms.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomType</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="RoomTypeID" substitutionGroup="ph:RoomTypeSubGrp" type="ph:RoomType_ID"/>
+    <xsd:element name="RoomTypeIdentifier" type="ph:RoomType_ID"/>
+    <xsd:element name="RoomType" substitutionGroup="ph:RoomTypeSubGrp" type="ph:RoomType"/>
+    <xsd:element name="RoomTypeSummary" type="ph:RoomType"/>
+    
+    <xsd:complexType name="RoomType_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Provides details regarding rooms, usually guest rooms.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomType</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RoomType">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Provides details regarding rooms, usually guest rooms.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomType</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ph:RoomType_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ph:RoomCharacteristicsSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Provides details of the room type.</xsd:documentation>
+                            <xsd:documentation source="Implementer">AttributeGroup: RoomGroup</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="1" minOccurs="0" ref="ota2-0400:Description">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Textual information regarding the room.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}ParagraphType</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="1000" minOccurs="0" ref="ota2-0400:Amenity">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A collection of amenity information.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}Amenities</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="10" minOccurs="0" ref="ph:RoomOccupancy">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Provides parameters of occupancy limits.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}Occupancy</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="Code" type="ota2-0400:Code">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">(Formerly, RoomInventoryCode) A code value that indicates the type of room for which this request is made, e.g.: double, king, etc. Values may use the Hotel Descriptive Content table or a codes specific to the property or hotel.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="Tier" type="ota2-0400:OTA_Code">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">TODO:  Create enumerated list.  Indicates the category of the room. Typical values would be Moderate, Standard, or Deluxe. Refer to OpenTravel Code List Segment Category Code (SEG).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="RatePlanSubGrp" type="ph:RatePlan">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Information significant to defining a rate plan.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RatePlan</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="RatePlan" substitutionGroup="ph:RatePlanSubGrp" type="ph:RatePlan"/>
+    <xsd:element name="RatePlanSummary" type="ph:RatePlan"/>
+    <xsd:element name="RatePlanDetail"
+        substitutionGroup="ph:RatePlanSubGrp" type="ph:RatePlan_Detail"/>
+    
+    <xsd:complexType name="RatePlan">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Information significant to defining a rate plan.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RatePlan</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" ref="ota2-0400:Description">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Describes the rate plan.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}ParagraphType</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="ph"/>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="50" minOccurs="0" ref="ph:RatePlanInclusions">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Items that are included with the rate plan.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="RatePlanCode" type="ph:RatePlanCode">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The RatePlanCode assigned by the receiving system for the inventory item in response to a new rate plan notification. (Implementation Notes: This would only be returned when the notification is of type New and the sender is translating RatePlanCode values. On subsequent transactions for this rate plan, the sender would populate the RatePlanCode attribute with this value returned by the receiver.)</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to16</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="ph">RatePlanCode</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="RatePlanType" type="ota2-0300:RatePlanType_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">An enumerated type that allows the query to specify a rate category type, and provides major categories for comparison across brands. Refer to OpenTravel Code List Rate Plan Type (RPT).</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}OTA_CodeType</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="ph">RatePlanType</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="ratePlanID" type="ota2-0400:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A text field used to provide a special  ID code that is associated with the rate and is required in the reservation request in order to obtain the rate. Examples are a corporate ID number, a promotion code or a membership number.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to64</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="ph">RatePlanID</otm:Equivalent>
+                    <otm:Example context="ph">AAAB</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ratePlanName" type="ota2-0400:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Provides the name of the rate plan or group. Typically used with RatePlanType to further describe the rate plan.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to64</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="ph">RatePlanName</otm:Equivalent>
+                    <otm:Example context="ph">AAA with Breakfast</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RatePlan_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Information significant to defining a rate plan.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RatePlan</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ph:RatePlan">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0" ref="ph:Commission">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Commission associated with the RatePlan. This can be a percentage or a flat amount.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}CommissionType</xsd:documentation>
+                            <xsd:appinfo>
+                                <otm:Equivalent context="ph">Commission</otm:Equivalent>
+                            </xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="RoomOccupancy" type="ph:RoomOccupancy"/>
+    
+    <xsd:complexType name="RoomOccupancy">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Occupany for the room.</xsd:documentation>
+            <xsd:documentation source="Description">Occupany for the room.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RoomOccupancy</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="20" minOccurs="0"
+                name="AgeQualifying" type="ota2-0300:AgeQualifyingCode_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the age parameters for the occupancy of this guest room type.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="minOccupancy"
+            type="ota2-0400:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Minimum number of persons allowed in a unit of accommodation or place.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="ph">1</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="maxOccupancy"
+            type="ota2-0400:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Maximum number of persons allowed in a unit of accommodation or place.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="ph">4</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="SpecialRequest">
+        <xsd:annotation>
+            <xsd:documentation source="Description">This identifies a special request for this reservation and is typically hotel-specific.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">SpecialRequest</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="numberOfUnits" type="xsd:integer" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Allows you to pass the number of units that the special request is for (e.g., if 4 rooms are booked you may want 3 with double/double beds and 1 with a king).</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}integer</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="ph">NumberOfUnits</otm:Equivalent>
+                            <otm:Example context="ph">1</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:element name="RatePlanInclusions" type="ph:RatePlanInclusions"/>
+    
+    <xsd:complexType name="RatePlanInclusions">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Defines charges that are included in this rate plan.</xsd:documentation>
+            <xsd:documentation source="Description">Defines charges that are included in this rate plan.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RatePlanInclusions</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" ref="ota2-0400:Description">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Description of what is included in the rate plan.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}ParagraphType</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="ph">RatePlanInclusionDesciption</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="taxInclusiveInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Indicates that tax is included in the rate.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="serviceFeeInclusiveInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Indicates that service fees are included in the rate.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RatePlanCode">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A string value may be used to request a particular code or an ID if the guest qualifies for a specific rate, such as AARP, AAA, a corporate rate, etc., or to specify a negotiated code as a result of a negotiated rate.</xsd:documentation>
+            <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to64</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">RatePlanCode</otm:OTA2Entity>
+                <otm:Equivalent context="ph">RatePlanGroup</otm:Equivalent>
+                <otm:Example context="ph">AAAB</otm:Example>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0400:StringShort">
+                <xsd:attribute name="ratePlanType"
+                    type="ota2-0300:RatePlanType_Enum_Base" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">An enumerated type that allows the query to specify a rate category type, and provides major categories for comparison across brands.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}OTA_CodeType</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="ph">RatePlanType</otm:Equivalent>
+                            <otm:Example context="ph">11.RPT</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="ratePlanTypeExtension" type="ota2:String_EnumExtension"/>
+                <xsd:attribute name="ratePlanID"
+                    type="ota2-0400:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A text field used to indicate a unique ID that is associated with the rate plan and is essential in the reservation request in order to obtain the rate.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to64</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="ph">RatePlanID</otm:Equivalent>
+                            <otm:Example context="ph">12345678</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="ratePlanCategory"
+                    type="ota2-0400:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Hotel systems often group multiple rate plans into a single category. This refers to that category that is specific to the hotel CRS/ PMS and should not be confused with a GDS rate category.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to64</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="ph">RatePlanCategory</otm:Equivalent>
+                            <otm:Example context="ph">POD</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="promotionCode"
+                    type="ota2-0400:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Used to provide a promotion code of the loyalty redemption.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">L9Z</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="promotionVendorCode"
+                    type="ota2-0400:ListOfTinyStrings" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">List of the vendor codes associated with a promotion.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">WT1</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="ratePlanQualifierInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The Rate Plan Qualifier is used to control the sort order of RatePlans. Those Rate Plans that are not qualified will appear first, those that are qualified will appear last.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:element name="Commission" type="ph:Commission"/>
+    
+    <xsd:complexType name="Commission">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Contains details pertaining to commissions.</xsd:documentation>
+            <xsd:documentation source="Description">Contains details pertaining to commissions.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">Commission</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="CurrencyCode" type="ota2-0400:CurrencyCode_ISO4217">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicates the currency to be applied to the amounts located in the child elements.</xsd:documentation>
+                    <xsd:documentation source="Implementer">AttributeGroup: CurrencyCodeGroup</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="Frequency" type="ota2-0300:ChargeUnit_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">This is the frequency at which the commission is applied (e.g. per stay, daily). Refer to OpenTravel Code List Charge Type (CHG).</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}OTA_CodeType</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="ph">Frequency</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" ref="ota2-0400:PersonIdentifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies the recipient of the commission.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}UniqueID_Type</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="ph">UniqueID</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" ref="ph:CommissionableAmount">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The amount on which commission is calculated.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}CommissionableAmount</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="ph">CommissionableAmount</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0"
+                name="PrepaidAmount" type="ota2-0400:CurrencyAmount">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The amount of commission paid to the agency prior to the service being rendered.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}PrepaidAmount</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="ph">PrepaidAmount</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0"
+                name="FlatCommission" type="ota2-0400:CurrencyAmount">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A fixed commission amount.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}FlatCommission</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="ph">FlatCommission</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0"
+                name="PayableAmount" type="ota2-0400:CurrencyAmount">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The amount of commission to be paid.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}CommissionPayableAmount</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="ph">CommissionPayableAmount</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" ref="ota2-0400:Comment">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Text related to the commission.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}ParagraphType</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="ph">Comment</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="StatusType" type="ota2-0300:Status_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicates the status of the commission payment itself (e.g. no-show indicates that a different commission may be applied if the reservation is not fulfilled).</xsd:documentation>
+                    <xsd:documentation source="Implementer">LocalAnonymousType: CommissionType_StatusType</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="ph">StatusType</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="BillToID" type="ota2-0400:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies a person or company who should be billed for the commission amount.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to8</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="ph">BillToID</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="percent" type="ota2-0400:Percent" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The percent applied to the commissionable amount to determine the commission payable amount.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}Percentage</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="ph">Percent</otm:Equivalent>
+                    <otm:Example context="ph">10</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="reasonCode" type="ota2-0400:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Identifies the reason why a commission is not paid or not paid in full.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to8</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="ph">ReasonCode</otm:Equivalent>
+                    <otm:Example context="ph">No Show</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="maxCommissionUnitApplies"
+            type="xsd:positiveInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Maximum number of units for which the commission will be applied. This may be used in conjunction with the frequency attribute.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}positiveInteger</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="ph">MaxCommissionUnitApplies</otm:Equivalent>
+                    <otm:Example context="ph">5</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="capAmount" type="ota2-0400:Money" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The highest monetary value that may be paid for the commission.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}Money</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="ph">CapAmount</otm:Equivalent>
+                    <otm:Example context="ph">100.00</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="CommissionableAmount" type="ph:CommissionableAmount"/>
+    
+    <xsd:complexType name="CommissionableAmount">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">CommissionableAmount</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="CurrencyAmount" type="ota2-0400:CurrencyAmount">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Provides the currency amount on which the commission is applied.</xsd:documentation>
+                    <xsd:documentation source="Implementer">AttributeGroup: CurrencyAmountGroup</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="ttaxInclusiveInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, indicates that the commission is calculated using the rate including tax. When false, indicates that the commission is calculated using the net rate.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="RoomCharacteristicsSubGrp" type="ph:RoomCharacteristics">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Used to define a room (eg. its location, configuration, view).  These are items that are part of the room and cannot easily be removed.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RoomCharacteristics</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="RoomCharacteristics"
+        substitutionGroup="ph:RoomCharacteristicsSubGrp" type="ph:RoomCharacteristics"/>
+    <xsd:element name="RoomCharacteristicsSummary" type="ph:RoomCharacteristics"/>
+    <xsd:element name="RoomCharacteristicsDetail"
+        substitutionGroup="ph:RoomCharacteristicsSubGrp" type="ph:RoomCharacteristics_Detail"/>
+    
+    <xsd:complexType name="RoomCharacteristics">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Used to define a room (eg. its location, configuration, view).  These are items that are part of the room and cannot easily be removed.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RoomCharacteristics</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="LocationCode" type="ota2-0300:RoomLocation_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicates the location of the room within the hotel structure. Typical values would be &amp;quot;Near Exit&amp;quot;,&amp;quot;Close to elevator&amp;quot;, &amp;quot;Low Floor&amp;quot; or &amp;quot;High Floor&amp;quot;. Refer to OpenTravel Code List Room Location Type (RLT).</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}OTA_CodeType</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="ph:AccessibilityFeature">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Accessibility features of the room.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="100" minOccurs="0" ref="ph:SecurityFeature">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Security features of the room.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="BedTypeCode" type="ota2-0300:BedType_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicates the type of bed(s) found in the room. Typical values would be Double, Twin, Queen, or King. Refer to OpenTravel Code List Bed Type Code (BED).</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}ListOfOTA_CodeType</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="Category" type="ota2-0300:SegmentCategory_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicates the category of the room. Typical values would be Moderate, Standard, or Deluxe. Refer to OpenTravel Code List Segment Category Code (SEG).</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}OTA_CodeType</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="ClassificationCode" type="ota2-0300:GuestRoomInfo">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the room classification (e.g., cabin, apartment). Refer to OpenTravel Code List Guest Room Info (GRI).</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}OTA_CodeType</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="ViewCode" type="ota2-0300:RoomViewType_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicates the view of the room. Typical values would be &amp;quot;Ocean view&amp;quot;, &amp;quot;Pool view&amp;quot; or &amp;quot;Garden View&amp;quot;. Refer to OpenTravel Code List Room View Type (RVT).</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}OTA_CodeType</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="nonSmokingInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Non-smoking indicator.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}boolean</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="compositeInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Indicates that the room (suite) is a composite of smaller units.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}boolean</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RoomCharacteristics_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Used to define a room (eg. its location, configuration, view).  These are items that are part of the room and cannot easily be removed.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RoomCharacteristics</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ph:RoomCharacteristics">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="gender"
+                    type="ota2-0300:Gender_Enum" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Used to request or specify a gender assignment for a room. Note: Typically used by Hosteliers.</xsd:documentation>
+                        <xsd:documentation source="Implementer">LocalAnonymousType: RoomGroup_RoomGender</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="invBlockCode"
+                    type="ota2-0400:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A code or identification number that identifies the room  stay as part of a group, package tour, or block of rooms designated in the inventory.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to32</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="architectureCode"
+                    type="ota2-0400:OTA_Code" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the architectural style of a room. Refer to OpenTravel Code List Architectural Style Code (ARC).</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}OTA_CodeType</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="floor" type="xsd:positiveInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Floor on which the room is located.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}Numeric1to999</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="typeCode"
+                    type="ota2-0400:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specific system room type code, ex: A1K, A1Q etc.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to16</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="sizeMeasurement" type="xsd:string" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Textual description of room dimensions.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="sharedRoomInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">If TRUE, the room requires or has sharing available. Note: Typically used by Hosteliers.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}boolean</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="AccessibilityFeature" type="ph:AccessibilityFeature"/>
+    
+    <xsd:complexType name="AccessibilityFeature">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Accessibility features.</xsd:documentation>
+            <xsd:documentation source="Description">Accessibility features.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">AccessibilityFeature</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="DisabilityFeature_Enum" type="ota2-0300:DisabilityFeature_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">An accessibility feature of the item being described.  May be a guest room, a facility or other item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="quantity" type="xsd:integer" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The quantity of this feature in the room.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="ph">2</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="description" type="ota2-0400:StringLong" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The description of the accessibility feature.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="ph">Door locks at wheelchair height.</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="SecurityFeature" type="ph:SecurityFeature"/>
+    
+    <xsd:complexType name="SecurityFeature">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Security features.</xsd:documentation>
+            <xsd:documentation source="Description">Security features.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">SecurityFeature</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="SecurityFeature" type="ota2-0300:SecurityFeature_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">An accessibility feature of the room.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="quantity" type="xsd:integer" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The quantity of this feature in the room.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="ph">1</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="description" type="ota2-0400:StringLong" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The description of the security feature.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="ph">Smoke alarm in room.</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="ProductHospitality"
+        substitutionGroup="prod-0400:ProductSubGrp" type="ph:Product_Hospitality"/>
+    
+    <xsd:complexType name="Product_Hospitality">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Product</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0400:Product">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" ref="ph:RoomStaySubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A hospitality guest room product.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="99" minOccurs="0"
+                        name="GuestCount" type="prod-0400:GuestCount">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The ages or age types of the guests occupying the room.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0400:DateTimeSpanWindowsSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The Time Span encompassing arrival and departure for the Room Stay.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="ActivityHotel"
+        substitutionGroup="prod-0400:Activity" type="ph:Activity_Hotel"/>
+    
+    <xsd:complexType name="Activity_Hotel">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A golf activity.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Activity</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0400:Activity">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="TODO" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">TODO Place holder for a hospitality activity object.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="ProductQueriesHospitality"
+        substitutionGroup="prod-0400:ProductQueries" type="ph:ProductQueries_Hospitality"/>
+    
+    <xsd:complexType name="ProductQueries_Hospitality">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">ProductQueries</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="prod-0400:ProductQueries">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="prod-0400:RoomStayQueryProduct">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Hospitality query for a room stay.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="HospitalityOffersSubGrp" type="ph:HospitalityOffers_ID">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">HospitalityOffers</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="HospitalityOffersID"
+        substitutionGroup="ph:HospitalityOffersSubGrp" type="ph:HospitalityOffers_ID"/>
+    <xsd:element name="HospitalityOffersIdentifier" type="ph:HospitalityOffers_ID"/>
+    <xsd:element name="HospitalityOffers"
+        substitutionGroup="ph:HospitalityOffersSubGrp" type="ph:HospitalityOffers"/>
+    <xsd:element name="HospitalityOffersSummary" type="ph:HospitalityOffers"/>
+    
+    <xsd:complexType name="HospitalityOffers_ID">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">HospitalityOffers</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0400:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="HospitalityOffersRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the obj ID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="HospitalityOffers">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">HospitalityOffers</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ph:HospitalityOffers_ID">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" ref="org-0300:FacilityIdentifier">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">An identififer for the property to which the offers apply.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" ref="order-0300:OfferSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Offers that meet the criteria in the offer request.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0400:ReferenceListProduct">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Allows products to be defined once and associated with different offers by reference.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="RoomRateSubGrp" type="ph:RoomRate_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of a room rate.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomRate</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="RoomRateID" substitutionGroup="ph:RoomRateSubGrp" type="ph:RoomRate_ID"/>
+    <xsd:element name="RoomRateIdentifier" type="ph:RoomRate_ID"/>
+    <xsd:element name="RoomRate" substitutionGroup="ph:RoomRateSubGrp" type="ph:RoomRate"/>
+    <xsd:element name="RoomRateSummary" type="ph:RoomRate"/>
+    <xsd:element name="RoomRateDetail"
+        substitutionGroup="ph:RoomRateSubGrp" type="ph:RoomRate_Detail"/>
+    <xsd:element name="RoomRateQueryRange" type="ph:RoomRate_Query_Range"/>
+    
+    <xsd:complexType name="RoomRate_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of a room rate.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomRate</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0400:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="RoomRateRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RoomRate">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of a room rate.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomRate</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ph:RoomRate_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="Rate" type="ota2-0400:RoomPrice">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies the rate for the room.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+                </xsd:sequence>
+                <xsd:attribute name="effectiveDate" type="xsd:date" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the starting date for this room rate.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">2017-08-22</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="expireDate" type="xsd:date" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the end date for this room rate.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">2018-08-22</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="bookingCode"
+                    type="ota2-0400:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">This is used to indicate the item booked and is primarily used to exchange information with GDSs.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">A1KRACKB</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="expireDateExclusiveInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, the ExpireDate is the first day after the applicable period (e.g. when expire date is Oct 15  the last date of the period is Oct 14).</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RoomRate_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of a room rate.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomRate</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ph:RoomRate">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2-0400:Taxes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Taxes associated to the room rate.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0400:Fees">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A fee associated to the room rate.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="source"
+                    type="ota2-0400:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the source of the rate (e.g. room block, negotiated rate, promotion).</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">Promotion</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RoomRate_Query_Range">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of a room rate.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">RoomRate</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="StartRate" type="ota2-0400:RoomPrice">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Starting price for the rate range query.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="EndRate" type="ota2-0400:RoomPrice">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Ending price for the rate range query.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="BasicPropertyInfoSubGrp" type="ph:BasicPropertyInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Identifies a property.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">BasicPropertyInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="BasicPropertyInfo"
+        substitutionGroup="ph:BasicPropertyInfoSubGrp" type="ph:BasicPropertyInfo"/>
+    <xsd:element name="BasicPropertyInfoSummary" type="ph:BasicPropertyInfo"/>
+    <xsd:element name="BasicPropertyInfoDetail"
+        substitutionGroup="ph:BasicPropertyInfoSubGrp" type="ph:BasicPropertyInfo_Detail"/>
+    
+    <xsd:complexType name="BasicPropertyInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Identifies a property.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">BasicPropertyInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="code" type="ota2-0400:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Uniquely identifies a single property for a reservation.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="ph">WASJW</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="BasicPropertyInfo_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Identifies a property.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">BasicPropertyInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ph:BasicPropertyInfo">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="ota2-0400:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the proper name of the property.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">JW Marriott Washington DC</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="cityCode"
+                    type="ota2-0400:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the three character IATA city code.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">WAS</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="chainCode"
+                    type="ota2-0400:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Identifies the chain.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">MC</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="chainName"
+                    type="ota2-0400:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the proper name of the chain.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">Marriott</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="brandCode"
+                    type="ota2-0400:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Identifies a brand with in a chain (e.g. Courtyard, Hampton Inn).  This code is optional if the hotel is an independent property that can be identified by a propert code alone.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">FS</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="brandName"
+                    type="ota2-0400:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Identifies the proper name of the brand.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">Full Service</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+</xsd:schema>

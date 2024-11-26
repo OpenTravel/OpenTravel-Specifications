@@ -1,0 +1,1507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/Common/v2"
+    version="2.0.0" xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0200="http://www.opentravel.org/OTM/Common/v2"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:ProjectName>Groundv3.otp</otm:ProjectName>
+                <otm:LibraryName>CodeList</otm:LibraryName>
+                <otm:LibraryVersion>2.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                <otm:SourceFile>/CodeList_2_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2017-05-24T10:17:03.376-04:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:complexType name="DistributionType_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Defines the preferred method of communication or the method of distribution for the material.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">DistributionType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:DistributionType_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="DistributionType_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Defines the preferred method of communication or the method of distribution for the material.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">DistributionType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Fax"/>
+            <xsd:enumeration value="Email"/>
+            <xsd:enumeration value="Mail"/>
+            <xsd:enumeration value="Courier"/>
+            <xsd:enumeration value="Airport collection"/>
+            <xsd:enumeration value="City office"/>
+            <xsd:enumeration value="Hotel desk"/>
+            <xsd:enumeration value="Will call"/>
+            <xsd:enumeration value="Express mail"/>
+            <xsd:enumeration value="Telephone"/>
+            <xsd:enumeration value="XML"/>
+            <xsd:enumeration value="FTP"/>
+            <xsd:enumeration value="Website"/>
+            <xsd:enumeration value="HTTP"/>
+            <xsd:enumeration value="Non-XML"/>
+            <xsd:enumeration value="Any"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="DocumentType_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Defines the specific type of identification or certification document.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">DocumentType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:DocumentType_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="DocumentType_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Defines the specific type of identification or certification document.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">DocumentType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="NaturalizationCertificate"/>
+            <xsd:enumeration value="PassportCard"/>
+            <xsd:enumeration value="CrewMemberCertificate"/>
+            <xsd:enumeration value="AirNexusCard"/>
+            <xsd:enumeration value="MerchantMariner"/>
+            <xsd:enumeration value="Non-standard"/>
+            <xsd:enumeration value="KnownTravelerNumber"/>
+            <xsd:enumeration value="RedressNumber"/>
+            <xsd:enumeration value="PermanentResidentCard"/>
+            <xsd:enumeration value="PilotsLicense"/>
+            <xsd:enumeration value="RefugeeTravelDocument"/>
+            <xsd:enumeration value="BorderCrossingCard"/>
+            <xsd:enumeration value="VerhicleRegistrationNumber"/>
+            <xsd:enumeration value="TaxexEmptionNumber"/>
+            <xsd:enumeration value="InsurancePolicyNumber"/>
+            <xsd:enumeration value="AlienRegistrationNumber"/>
+            <xsd:enumeration value="VaccinationCertificate"/>
+            <xsd:enumeration value="NationalIdentityDocument"/>
+            <xsd:enumeration value="DriversLicense"/>
+            <xsd:enumeration value="MilitaryIdentification"/>
+            <xsd:enumeration value="Passport"/>
+            <xsd:enumeration value="Visa"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="DurationUnit_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Defines the 'Units' that can be applied to Stay restrictions.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">DurationUnit_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:DurationUnit_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="DurationUnit_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Defines the 'Units' that can be applied to Stay restrictions.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">DurationUnit_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="SUN">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Sunday</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="SAT">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Saturday</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="FRI">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Friday</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="THU">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Thursday</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="WED">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Wednesday</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="TUES">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Tuesday</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="MON">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Monday</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Months">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Duration in months.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Days">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Duration in days.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Hours">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Duration in hours.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Minutes">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Duration in minutes.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="DisabilityFeature_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies information about a facility, amenity or service that is relevant to people with a disability.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">DisabilityFeature_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:DisabilityFeature_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="DisabilityFeature_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies information about a facility, amenity or service that is relevant to people with a disability.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">DisabilityFeature_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Accessibility to goods and services"/>
+            <xsd:enumeration value="Accessible baths"/>
+            <xsd:enumeration value="Accessible entrance"/>
+            <xsd:enumeration value="Accessible parking"/>
+            <xsd:enumeration value="Accessible platform lifts available"/>
+            <xsd:enumeration value="Accessible rooms"/>
+            <xsd:enumeration value="Accessible self parking available"/>
+            <xsd:enumeration value="Accessible van parking"/>
+            <xsd:enumeration value="Accommodations have bath in bedroom"/>
+            <xsd:enumeration value="Adapted room doors"/>
+            <xsd:enumeration value="Adjustable height hand-held shower wand"/>
+            <xsd:enumeration value="Americans with Disabilities Act (ADA) compliance"/>
+            <xsd:enumeration value="Assistive listening devices for meetings upon request"/>
+            <xsd:enumeration value="Audible emergency alarm for sight impaired guest"/>
+            <xsd:enumeration value="Bathroom doors in inches"/>
+            <xsd:enumeration value="Bathroom doors open outwards"/>
+            <xsd:enumeration value="Bathroom vanity in guest rooms for wheelchair user's height"/>
+            <xsd:enumeration value="Bathtub grab bars"/>
+            <xsd:enumeration value="Bathtub seat"/>
+            <xsd:enumeration value="Bed types of wheelchair accessible rooms"/>
+            <xsd:enumeration value="Bedroom wheelchair access"/>
+            <xsd:enumeration value="Benches in locker rooms."/>
+            <xsd:enumeration value="Braille signage provided"/>
+            <xsd:enumeration value="Braille/large print literature"/>
+            <xsd:enumeration value="Business center  is wheelchair accessible"/>
+            <xsd:enumeration value="Closed caption TV"/>
+            <xsd:enumeration value="Closet rods in guest rooms for disabled person height"/>
+            <xsd:enumeration value="Complementary accessible transportation with advanced notice"/>
+            <xsd:enumeration value="Complies with Local/State/Federal laws for disabled"/>
+            <xsd:enumeration value="Concierge desk is wheelchair accessible"/>
+            <xsd:enumeration value="Describe in detail how your kitchen is accessible.">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Include special appliances, lowered cabinets, where dishes are kept, are upper cabinets usable.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Does hotel have accessible parking?"/>
+            <xsd:enumeration value="Door width in inches"/>
+            <xsd:enumeration value="Drinking fountains accessible"/>
+            <xsd:enumeration value="Elevator access to all levels"/>
+            <xsd:enumeration value="Elevator near accessible rooms"/>
+            <xsd:enumeration value="Elevators equipped for accessibility"/>
+            <xsd:enumeration value="Elevators have Braille Instructions"/>
+            <xsd:enumeration value="Emergency cord/button system in bathroom"/>
+            <xsd:enumeration value="Emergency cord/button system in bedroom"/>
+            <xsd:enumeration value="Emergency exit signs in Braille"/>
+            <xsd:enumeration value="Emergency info in Braille"/>
+            <xsd:enumeration value="Emergency instructions in pictorial form"/>
+            <xsd:enumeration value="Emergeny procedures for people with disabilites"/>
+            <xsd:enumeration value="Exercise facility is wheelchair accessible"/>
+            <xsd:enumeration value="Facilities for people with hearing impairment only"/>
+            <xsd:enumeration value="Facilities for people with vision impairment only"/>
+            <xsd:enumeration value="Feather free bedding/pillows available"/>
+            <xsd:enumeration value="Flashing door knocker available"/>
+            <xsd:enumeration value="Flat terrain between parking and entrance"/>
+            <xsd:enumeration value="Food service lines accessible"/>
+            <xsd:enumeration value="Grab bars in bathroom"/>
+            <xsd:enumeration value="Guest rooms and access routes are accessible"/>
+            <xsd:enumeration value="Hearing impaired services"/>
+            <xsd:enumeration value="Hearing induction loop system installed"/>
+            <xsd:enumeration value="Height from ground of deadbolt in guest room"/>
+            <xsd:enumeration value="Height from ground of elevator external buttons"/>
+            <xsd:enumeration value="Height from ground of elevator internal buttons"/>
+            <xsd:enumeration value="Height from ground of elevator internal handrails"/>
+            <xsd:enumeration value="Height from ground of guest bed including mattress"/>
+            <xsd:enumeration value="Height from ground of thermostat in guest room"/>
+            <xsd:enumeration value="Height from ground to light switches in bathroom"/>
+            <xsd:enumeration value="Height from ground to light switches in guest room"/>
+            <xsd:enumeration value="Height from ground to peephole in guest room door"/>
+            <xsd:enumeration value="Height of bathroom basin"/>
+            <xsd:enumeration value="Height of bathroom toilet seat"/>
+            <xsd:enumeration value="Height of controls at highest operable part for bath"/>
+            <xsd:enumeration value="Height of controls at highest operable part for roll-in shower"/>
+            <xsd:enumeration value="Height of deadbolt in guest room (in feet)"/>
+            <xsd:enumeration value="Height of deadbolt in guest room (in Inches)"/>
+            <xsd:enumeration value="Height of light switches in guest rooms (feet)"/>
+            <xsd:enumeration value="Height of light switches in guest rooms (inches)"/>
+            <xsd:enumeration value="Height of non-slip handrails adjacent to bath"/>
+            <xsd:enumeration value="Height of non-slip handrails adjacent to bathroom toilet"/>
+            <xsd:enumeration value="Height of non-slip handrails in shower area"/>
+            <xsd:enumeration value="Height of peephole in guest room (in feet)"/>
+            <xsd:enumeration value="Height of peephole in guest room (in inches)"/>
+            <xsd:enumeration value="Height of thermostat in guest room (in feet)"/>
+            <xsd:enumeration value="Height of thermostat in guest room (in inches)"/>
+            <xsd:enumeration value="Hotel entrance is accessible"/>
+            <xsd:enumeration value="Hotel restaurant is wheelchair accessible"/>
+            <xsd:enumeration value="Impairment aids available"/>
+            <xsd:enumeration value="Length/depth of clear floor space in front of bath"/>
+            <xsd:enumeration value="Length/depth of clear floor space in front of guest bathroom toilet"/>
+            <xsd:enumeration value="Lever handles on guest room doors"/>
+            <xsd:enumeration value="Light switches in guest rooms for wheelchair user's height"/>
+            <xsd:enumeration value="List available room types for disabled persons- 8 fields"/>
+            <xsd:enumeration value="Locker rooms accessible"/>
+            <xsd:enumeration value="Lower level seating required"/>
+            <xsd:enumeration value="Lowered electrical outlets"/>
+            <xsd:enumeration value="Lowered night guards on guest room doors"/>
+            <xsd:enumeration value="Number of accessible meeting rooms"/>
+            <xsd:enumeration value="Number of accessible rooms with standard tub"/>
+            <xsd:enumeration value="Number of each room type equipped for disabled persons- 8 fields"/>
+            <xsd:enumeration value="Number of roll-in showers available"/>
+            <xsd:enumeration value="Number of rooms with Braille"/>
+            <xsd:enumeration value="Number of rooms with wheelchair accessible showers"/>
+            <xsd:enumeration value="Number of wheelchair accessible rooms"/>
+            <xsd:enumeration value="Other services for persons with disabilities"/>
+            <xsd:enumeration value="Passenger has meet and assist requirement"/>
+            <xsd:enumeration value="Passenger has oxygen equipment"/>
+            <xsd:enumeration value="Pool is wheelchair accessible"/>
+            <xsd:enumeration value="Portable bathtub seats"/>
+            <xsd:enumeration value="Public areas wheelchair accessible"/>
+            <xsd:enumeration value="Public telephones accessible"/>
+            <xsd:enumeration value="Raised toilet seat with grab bars"/>
+            <xsd:enumeration value="Ramp access"/>
+            <xsd:enumeration value="Registration desk is wheelchair accessible"/>
+            <xsd:enumeration value="Restaurant/bar menus available in 14pt print"/>
+            <xsd:enumeration value="Restaurant/bar menus available in Braille"/>
+            <xsd:enumeration value="Restroom facilities accessible"/>
+            <xsd:enumeration value="Roll-in shower area with bathroom seat"/>
+            <xsd:enumeration value="Roll-in shower available"/>
+            <xsd:enumeration value="Route from accessible public entrance to business center is accessible"/>
+            <xsd:enumeration value="Route from accessible public entrance to exercise facility is accessible"/>
+            <xsd:enumeration value="Route from accessible public entrance to meeting rooms is accessible"/>
+            <xsd:enumeration value="Route from accessible public entrance to pool is accessible"/>
+            <xsd:enumeration value="Route from accessible public entrance to registration area is accessible"/>
+            <xsd:enumeration value="Route from accessible public entrance to restaurant is accessible"/>
+            <xsd:enumeration value="Route from accessible public entrance to spa is accessible"/>
+            <xsd:enumeration value="Safety bars in shower"/>
+            <xsd:enumeration value="Sales and service counters accessible"/>
+            <xsd:enumeration value="Service animals allowed on property for people with disabilities"/>
+            <xsd:enumeration value="Service dogs allowed"/>
+            <xsd:enumeration value="Special needs menus"/>
+            <xsd:enumeration value="Staff proficient in sign language"/>
+            <xsd:enumeration value="Staff trained in service to disabled guests"/>
+            <xsd:enumeration value="Steps/staircases have color markings"/>
+            <xsd:enumeration value="Steps/staircases have handrails"/>
+            <xsd:enumeration value="Subtitles/closed captions available on TV"/>
+            <xsd:enumeration value="Tactile/14pt print signage throughout hotel"/>
+            <xsd:enumeration value="Telephone for hearing impaired"/>
+            <xsd:enumeration value="Television amplifier"/>
+            <xsd:enumeration value="Toilet seat in guest rooms for disabled person"/>
+            <xsd:enumeration value="TTY/TTD compatible"/>
+            <xsd:enumeration value="Van accessible parking in self parking"/>
+            <xsd:enumeration value="Viabrating alarm available"/>
+            <xsd:enumeration value="Vibrating pillows available"/>
+            <xsd:enumeration value="Visual emergency alarm for hearing impaired guest"/>
+            <xsd:enumeration value="Walk-in shower"/>
+            <xsd:enumeration value="What room types have wheel-in showers? (free form stringbox)"/>
+            <xsd:enumeration value="Wheelchair accessible elevators"/>
+            <xsd:enumeration value="Wheelchair lift required"/>
+            <xsd:enumeration value="Wheelchair, passenger has own chair, buses"/>
+            <xsd:enumeration value="Wheelchair, passenger has own chair, trains"/>
+            <xsd:enumeration value="Wheelchair, passenger requires station wheelchair"/>
+            <xsd:enumeration value="Wheelchairs available"/>
+            <xsd:enumeration value="Which floors have accessible rooms"/>
+            <xsd:enumeration value="Wide corridors"/>
+            <xsd:enumeration value="Wide entrance"/>
+            <xsd:enumeration value="Wide restaurant entrance"/>
+            <xsd:enumeration value="Width/diameter of clear floor space at main hotel entrance"/>
+            <xsd:enumeration value="Width/diameter of clear floor space at main restaurant entrance"/>
+            <xsd:enumeration value="Width/diameter of clear floor space in front of bath"/>
+            <xsd:enumeration value="Width/diameter of clear floor space in front of guest bathroom toilet"/>
+            <xsd:enumeration value="Width/diameter of clear opening space at bathroom door"/>
+            <xsd:enumeration value="Width/diameter of clear opening space at bedroom door"/>
+            <xsd:enumeration value="Width/diameter of elevator clear door opening space"/>
+            <xsd:enumeration value="Width/diameter of main corridors"/>
+            <xsd:enumeration value="Width/diameter of wheelchair turning space in bathroom"/>
+            <xsd:enumeration value="Width/diameter of wheelchair turning space in bedroom"/>
+            <xsd:enumeration value="Width/diameter of wheelchair turning space in lobby/reception area"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="SecurityFeature_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Identifies security features of the services, meeting rooms, guest rooms, and restaurants of a property.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">SecurityFeature_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:SecurityFeature_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="SecurityFeature_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Identifies security features of the services, meeting rooms, guest rooms, and restaurants of a property.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">SecurityFeature_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="2nd lock on guest doors"/>
+            <xsd:enumeration value="Audible alarm smoke detectors in guest rooms"/>
+            <xsd:enumeration value="Audible alarms in hallways"/>
+            <xsd:enumeration value="Audible alarms in public areas"/>
+            <xsd:enumeration value="Auto link to fire station"/>
+            <xsd:enumeration value="Automated External Defibrillator (AED) on-site"/>
+            <xsd:enumeration value="Building meets all current local, state and country building codes"/>
+            <xsd:enumeration value="Carbon monoxide detector"/>
+            <xsd:enumeration value="Complies with Local/State/Federal fire laws"/>
+            <xsd:enumeration value="Connecting doors have deadbolts"/>
+            <xsd:enumeration value="Dead bolts on guest room doors"/>
+            <xsd:enumeration value="Electronic room key"/>
+            <xsd:enumeration value="Elevator auto recall"/>
+            <xsd:enumeration value="Emergency back-up generators"/>
+            <xsd:enumeration value="Emergency evacuation plan"/>
+            <xsd:enumeration value="Emergency exits on each floor"/>
+            <xsd:enumeration value="Emergency info in room"/>
+            <xsd:enumeration value="Emergency lighting"/>
+            <xsd:enumeration value="Evacuation drills"/>
+            <xsd:enumeration value="Exterior doors (except lobby entrance) require key access at night"/>
+            <xsd:enumeration value="FEMA approved"/>
+            <xsd:enumeration value="Fire extinguishers"/>
+            <xsd:enumeration value="Fire extinguishers in hallways"/>
+            <xsd:enumeration value="Fire extinguishers in public areas"/>
+            <xsd:enumeration value="First aid available"/>
+            <xsd:enumeration value="Guest room doors self-closing"/>
+            <xsd:enumeration value="Hard wired smoke detectors"/>
+            <xsd:enumeration value="Health club facilities (pool/gym) require key access for entrance"/>
+            <xsd:enumeration value="Hours security"/>
+            <xsd:enumeration value="If no 24 hour security, what are the hours?"/>
+            <xsd:enumeration value="Lighted parking area"/>
+            <xsd:enumeration value="Multiple exits on each floor"/>
+            <xsd:enumeration value="Patrolled parking area"/>
+            <xsd:enumeration value="Private security available"/>
+            <xsd:enumeration value="Property has elevators"/>
+            <xsd:enumeration value="Public address system"/>
+            <xsd:enumeration value="Room access through exterior corridor"/>
+            <xsd:enumeration value="Room access through interior corridor"/>
+            <xsd:enumeration value="Room accessible through balcony sliding glass doors"/>
+            <xsd:enumeration value="Room windows open"/>
+            <xsd:enumeration value="Safety chains on guest doors"/>
+            <xsd:enumeration value="Secondary locks on room windows"/>
+            <xsd:enumeration value="Secondary locks on sliding glass doors"/>
+            <xsd:enumeration value="Secured floors"/>
+            <xsd:enumeration value="Security"/>
+            <xsd:enumeration value="Security 24 hours/day"/>
+            <xsd:enumeration value="Security escorts available on request"/>
+            <xsd:enumeration value="Smoke detector in guest rooms"/>
+            <xsd:enumeration value="Smoke detector in hallways"/>
+            <xsd:enumeration value="Smoke detector in public areas"/>
+            <xsd:enumeration value="Sprinklers in guest rooms"/>
+            <xsd:enumeration value="Sprinklers in hallways"/>
+            <xsd:enumeration value="Sprinklers in public areas"/>
+            <xsd:enumeration value="Staff Red Cross certified in CPR"/>
+            <xsd:enumeration value="Staff trained in Automated External Defibrillator (AED) usage"/>
+            <xsd:enumeration value="Staff trained in CPR"/>
+            <xsd:enumeration value="Staff trained in duplicate key issue"/>
+            <xsd:enumeration value="Staff trained in first aid"/>
+            <xsd:enumeration value="Swingbolt lock"/>
+            <xsd:enumeration value="Ventilated stair wells"/>
+            <xsd:enumeration value="Video cameras at entrance"/>
+            <xsd:enumeration value="Video cameras in public areas"/>
+            <xsd:enumeration value="Video surveillance monitored 24 hrs a day"/>
+            <xsd:enumeration value="Video surveillance of parking"/>
+            <xsd:enumeration value="Video surveillance recorded 24 hrs a day"/>
+            <xsd:enumeration value="Viewports in guest room doors"/>
+            <xsd:enumeration value="VIP Security"/>
+            <xsd:enumeration value="Visual alarm in guest rooms"/>
+            <xsd:enumeration value="Visual alarms in hallways"/>
+            <xsd:enumeration value="Visual alarms in public areas"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="Gender_Enum">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">Gender_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Male"/>
+            <xsd:enumeration value="Female"/>
+            <xsd:enumeration value="Unknown"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="MaritalStatus_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The marital status of a person.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">MaritalStatus_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Annulled"/>
+            <xsd:enumeration value="Co-habiting"/>
+            <xsd:enumeration value="Divorced"/>
+            <xsd:enumeration value="Engaged"/>
+            <xsd:enumeration value="Married"/>
+            <xsd:enumeration value="Separated"/>
+            <xsd:enumeration value="Single"/>
+            <xsd:enumeration value="Widowed"/>
+            <xsd:enumeration value="Unknown"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="Status_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The status condition.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">Status_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:Status_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="Status_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The status condition.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">Status_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Complete"/>
+            <xsd:enumeration value="Incomplete"/>
+            <xsd:enumeration value="Not processed"/>
+            <xsd:enumeration value="Unknown"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="ErrorWarningType_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Tthe category of error or warning.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">ErrorWarningType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:ErrorWarningType_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="ErrorWarningType_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Tthe category of error or warning.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">ErrorWarningType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Advisory"/>
+            <xsd:enumeration value="Application error"/>
+            <xsd:enumeration value="Authentication"/>
+            <xsd:enumeration value="Authentication timeout"/>
+            <xsd:enumeration value="Authorization"/>
+            <xsd:enumeration value="Business rule"/>
+            <xsd:enumeration value="No implementation"/>
+            <xsd:enumeration value="Processing exception"/>
+            <xsd:enumeration value="Protocol violation"/>
+            <xsd:enumeration value="Required field missing"/>
+            <xsd:enumeration value="Unknown"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="PhoneLocation_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Where the phone is located.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">PhoneLocation_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:PhoneLocation_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="PhoneLocation_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Where the phone is located.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">PhoneLocation_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Brand reservations office"/>
+            <xsd:enumeration value="Central reservations office"/>
+            <xsd:enumeration value="Home"/>
+            <xsd:enumeration value="Managing company"/>
+            <xsd:enumeration value="Mobile"/>
+            <xsd:enumeration value="Office"/>
+            <xsd:enumeration value="Property direct"/>
+            <xsd:enumeration value="Property reservation Office"/>
+            <xsd:enumeration value="Sales office"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="PhoneUseType_Enum">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">PhoneUseType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:PhoneUseType_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="PhoneUseType_Enum_Base">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">PhoneUseType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Contact"/>
+            <xsd:enumeration value="Daytime contact"/>
+            <xsd:enumeration value="Emergency contact"/>
+            <xsd:enumeration value="Evening contact"/>
+            <xsd:enumeration value="Guest use"/>
+            <xsd:enumeration value="Mobile"/>
+            <xsd:enumeration value="Pickup contact"/>
+            <xsd:enumeration value="Toll free number"/>
+            <xsd:enumeration value="Travel arranger"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="PhoneTechType_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Defines the technology associated with this phone number.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">PhoneTechType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:PhoneTechType_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="PhoneTechType_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Defines the technology associated with this phone number.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">PhoneTechType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Voice"/>
+            <xsd:enumeration value="Fax"/>
+            <xsd:enumeration value="Pager"/>
+            <xsd:enumeration value="TTY"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="TimeUnit_Enum">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">TimeUnit_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Day"/>
+            <xsd:enumeration value="Full duration"/>
+            <xsd:enumeration value="Hour"/>
+            <xsd:enumeration value="Minute"/>
+            <xsd:enumeration value="Month"/>
+            <xsd:enumeration value="Second"/>
+            <xsd:enumeration value="Week"/>
+            <xsd:enumeration value="Year"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="FeeType_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes the type of fee or tax.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">FeeType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:FeeType_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="FeeType_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes the type of fee or tax.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">FeeType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Adult rollaway fee"/>
+            <xsd:enumeration value="Application Fee"/>
+            <xsd:enumeration value="Banquet service fee"/>
+            <xsd:enumeration value="Beverage with alcohol"/>
+            <xsd:enumeration value="Beverage without alcohol"/>
+            <xsd:enumeration value="Child rollaway charge"/>
+            <xsd:enumeration value="City hotel fee"/>
+            <xsd:enumeration value="Crib fee"/>
+            <xsd:enumeration value="Destination amenity fee"/>
+            <xsd:enumeration value="Early checkout fee"/>
+            <xsd:enumeration value="Exempt"/>
+            <xsd:enumeration value="Express Handling Fee"/>
+            <xsd:enumeration value="Extra child charge"/>
+            <xsd:enumeration value="Extra person charge"/>
+            <xsd:enumeration value="Food"/>
+            <xsd:enumeration value="Local fee"/>
+            <xsd:enumeration value="Maintenance fee"/>
+            <xsd:enumeration value="Miscellaneous"/>
+            <xsd:enumeration value="Package fee"/>
+            <xsd:enumeration value="Pet sanitation fee"/>
+            <xsd:enumeration value="Resort fee"/>
+            <xsd:enumeration value="Rollaway fee"/>
+            <xsd:enumeration value="Room service fee"/>
+            <xsd:enumeration value="Service charge"/>
+            <xsd:enumeration value="Standard"/>
+            <xsd:enumeration value="Standard food and beverage gratuity"/>
+            <xsd:enumeration value="State cost recovery fee"/>
+            <xsd:enumeration value="Surcharge"/>
+            <xsd:enumeration value="Tobacco"/>
+            <xsd:enumeration value="Total surcharges"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="TravelSector_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the travel sector.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">TravelSector_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:TravelSector_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="TravelSector_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the travel sector.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">TravelSector_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Air"/>
+            <xsd:enumeration value="Car"/>
+            <xsd:enumeration value="Cruise"/>
+            <xsd:enumeration value="Excursion"/>
+            <xsd:enumeration value="Ferry"/>
+            <xsd:enumeration value="Golf"/>
+            <xsd:enumeration value="Hotel"/>
+            <xsd:enumeration value="Insurance"/>
+            <xsd:enumeration value="Package option"/>
+            <xsd:enumeration value="Rail"/>
+            <xsd:enumeration value="Tour"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="PaymentType_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies a type of payment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">PaymentType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:PaymentType_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="PaymentType_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies a type of payment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">PaymentType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Air travel card"/>
+            <xsd:enumeration value="Airline payment card"/>
+            <xsd:enumeration value="Barter"/>
+            <xsd:enumeration value="Business account"/>
+            <xsd:enumeration value="Business check"/>
+            <xsd:enumeration value="Cash"/>
+            <xsd:enumeration value="Certified check"/>
+            <xsd:enumeration value="Check"/>
+            <xsd:enumeration value="Company name/address"/>
+            <xsd:enumeration value="Corporate ID/CD number"/>
+            <xsd:enumeration value="Coupon"/>
+            <xsd:enumeration value="Credit card"/>
+            <xsd:enumeration value="Debit card"/>
+            <xsd:enumeration value="Deposit"/>
+            <xsd:enumeration value="Direct bill"/>
+            <xsd:enumeration value="Frequent guest number"/>
+            <xsd:enumeration value="Frequent traveler number"/>
+            <xsd:enumeration value="Guarantee to property"/>
+            <xsd:enumeration value="Guest name/address"/>
+            <xsd:enumeration value="Miscellaneous"/>
+            <xsd:enumeration value="Miscellaneous charge order"/>
+            <xsd:enumeration value="Mobile payment"/>
+            <xsd:enumeration value="Money order"/>
+            <xsd:enumeration value="None"/>
+            <xsd:enumeration value="Override guarantee information"/>
+            <xsd:enumeration value="Payment manager"/>
+            <xsd:enumeration value="Payment service"/>
+            <xsd:enumeration value="Personal check"/>
+            <xsd:enumeration value="Pre-pay"/>
+            <xsd:enumeration value="Redemption"/>
+            <xsd:enumeration value="Special industry program"/>
+            <xsd:enumeration value="Ticket"/>
+            <xsd:enumeration value="Tour order"/>
+            <xsd:enumeration value="Travel agency IATA number"/>
+            <xsd:enumeration value="Travel agency name/address"/>
+            <xsd:enumeration value="Traveler's check"/>
+            <xsd:enumeration value="Virtual card "/>
+            <xsd:enumeration value="Voucher"/>
+            <xsd:enumeration value="Wire payment"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="CommunicationLocation_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies a location for communication.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">CommunicationLocation_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:CommunicationLocation_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="CommunicationLocation_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies a location for communication.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">CommunicationLocation_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Business"/>
+            <xsd:enumeration value="Destination"/>
+            <xsd:enumeration value="Home"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="AddressUse_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes how an address is to be used.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">AddressUse_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:AddressUse_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="AddressUse_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes how an address is to be used.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">AddressUse_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Billing"/>
+            <xsd:enumeration value="Chain"/>
+            <xsd:enumeration value="Contact"/>
+            <xsd:enumeration value="Credit card"/>
+            <xsd:enumeration value="Delivery"/>
+            <xsd:enumeration value="Deposit"/>
+            <xsd:enumeration value="Mailing"/>
+            <xsd:enumeration value="Physical"/>
+            <xsd:enumeration value="Pre-opening office"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="BookingChannel_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies a type of booking channel.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">BookingChannel_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:BookingChannel_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="BookingChannel_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies a type of booking channel.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">BookingChannel_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Agent"/>
+            <xsd:enumeration value="Alternative distribution system (ADS)"/>
+            <xsd:enumeration value="Central reservation system (CRS)"/>
+            <xsd:enumeration value="Global distribution system (GDS)"/>
+            <xsd:enumeration value="Internet"/>
+            <xsd:enumeration value="Kiosk"/>
+            <xsd:enumeration value="Property management system (PMS)"/>
+            <xsd:enumeration value="Sales and catering system (SCS)"/>
+            <xsd:enumeration value="Tour operator system (TOS)"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="UnitOfMeasure_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The unit of measure in a code format. Refer to OpenTravel Code List Unit of Measure Code (UOM).</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">UnitOfMeasure_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Miles">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (statute mile) (mile) (SMI)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Kilometers">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (kilometre) (km) (KMT)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Meters">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (metre) (m) (MTR)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Millimeters">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (millimetre) (mm) (MMT)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Centimeters">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (centimetre) (cm) (CMT)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Yards">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (yard) (yd) (YRD)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Feet">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (foot) (ft) (FOT)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Inches">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (inch) (in) (INH)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Pixels">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (pixel: picture element) (E37)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Block"/>
+            <xsd:enumeration value="Megabytes">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (megabyte) (MB) (4L)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Gigabytes">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (gigabyte) (GB) (E34)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Square feet">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (square foot) (ft2) (FTK)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Square meters">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (square metre) (m2) (MTK)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Pounds">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (pound) (lb) (LBR)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Kilograms">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (kilogram (kg) (KGM)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Square inch">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (square inch) (in2) (INK)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Square yard">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (square yard) (yd2) (YDK)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Acre">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (acre) (acre) (ACR)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Square millimeter">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Sames as UN/ECE 20 (square millimetre) (mm2)(MMK)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Square centimeter">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (square centimetre (cm2) (CMK)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Hectare">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (hectare) (ha) (HAR)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Ounce">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (ounce) (oz) (ONZ)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Gram">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Same as UN/ECE 20 (gram) (g) (GRM)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Gallons"/>
+            <xsd:enumeration value="Liters"/>
+            <xsd:enumeration value="Kilowatts"/>
+            <xsd:enumeration value="Cubic meters"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="EmailAddressType_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies a type of email address.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">EmailAddressType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:EmailAddressType_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="EmailAddressType_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies a type of email address.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">EmailAddressType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Business"/>
+            <xsd:enumeration value="Listserve"/>
+            <xsd:enumeration value="Managing company"/>
+            <xsd:enumeration value="Personal"/>
+            <xsd:enumeration value="Property"/>
+            <xsd:enumeration value="Reservation office"/>
+            <xsd:enumeration value="Sales office"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="PositionAccuracy_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the level of accuracy for the positon.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">PositionAccuracy_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Zip9Code"/>
+            <xsd:enumeration value="Zip7Code"/>
+            <xsd:enumeration value="Zip5Code"/>
+            <xsd:enumeration value="Street"/>
+            <xsd:enumeration value="State"/>
+            <xsd:enumeration value="Property"/>
+            <xsd:enumeration value="Intersection"/>
+            <xsd:enumeration value="Exact"/>
+            <xsd:enumeration value="County"/>
+            <xsd:enumeration value="Country"/>
+            <xsd:enumeration value="City"/>
+            <xsd:enumeration value="Block"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="DayOfWeek_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Day of the Week types.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">DayOfWeek_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Monday"/>
+            <xsd:enumeration value="Tuesday"/>
+            <xsd:enumeration value="Wednesday"/>
+            <xsd:enumeration value="Thursday"/>
+            <xsd:enumeration value="Friday"/>
+            <xsd:enumeration value="Saturday"/>
+            <xsd:enumeration value="Sunday"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="BankAccountType_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Source: OpenTravel</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">BankAccountType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:BankAccountType_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="BankAccountType_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Source: OpenTravel</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">BankAccountType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Savings"/>
+            <xsd:enumeration value="Investment"/>
+            <xsd:enumeration value="Checking"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="PaymentCardIssuer_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Source: OpenTravel</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">PaymentCardIssuer_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:PaymentCardIssuer_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="PaymentCardIssuer_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Source: OpenTravel</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">PaymentCardIssuer_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="VISA"/>
+            <xsd:enumeration value="USAirways"/>
+            <xsd:enumeration value="UnitedAirlines"/>
+            <xsd:enumeration value="StarwoodHotels"/>
+            <xsd:enumeration value="SouthwestAirlines"/>
+            <xsd:enumeration value="RitzCarlton"/>
+            <xsd:enumeration value="Mastercard"/>
+            <xsd:enumeration value="Mariott"/>
+            <xsd:enumeration value="Hyatt"/>
+            <xsd:enumeration value="Hilton"/>
+            <xsd:enumeration value="Eurocard"/>
+            <xsd:enumeration value="Disney"/>
+            <xsd:enumeration value="DiscoverCard"/>
+            <xsd:enumeration value="DeltaAirlines"/>
+            <xsd:enumeration value="ContinentalAirlines"/>
+            <xsd:enumeration value="Citibank"/>
+            <xsd:enumeration value="Chase"/>
+            <xsd:enumeration value="CapitalOne"/>
+            <xsd:enumeration value="BritishAirways"/>
+            <xsd:enumeration value="BankOfAmerica"/>
+            <xsd:enumeration value="AmericanExpress"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="AgeQualifyingCode_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A code representing a business rule that determines the charges for a guest based upon age range (e.g. Adult, Child, Senior, Child With Adult, Child Without Adult). This attribute allows for an increase in rate by occupant class.
+Person age categories.
+Note: Age categories  are typically used to qualify pricing and/or eligibility.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">AgeQualifyingCode_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:AgeQualifyingCode_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="AgeQualifyingCode_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A code representing a business rule that determines the charges for a guest based upon age range (e.g. Adult, Child, Senior, Child With Adult, Child Without Adult). This attribute allows for an increase in rate by occupant class.
+Person age categories.
+Note: Age categories  are typically used to qualify pricing and/or eligibility.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">AgeQualifyingCode_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Junior"/>
+            <xsd:enumeration value="Under 10"/>
+            <xsd:enumeration value="Younger driver"/>
+            <xsd:enumeration value="Young driver"/>
+            <xsd:enumeration value="Free adult"/>
+            <xsd:enumeration value="Free child"/>
+            <xsd:enumeration value="Additional occupant without adult"/>
+            <xsd:enumeration value="Additional occupant with adult"/>
+            <xsd:enumeration value="Senior"/>
+            <xsd:enumeration value="Adult"/>
+            <xsd:enumeration value="Teenager"/>
+            <xsd:enumeration value="Child"/>
+            <xsd:enumeration value="Infant"/>
+            <xsd:enumeration value="Under 21"/>
+            <xsd:enumeration value="Under 17"/>
+            <xsd:enumeration value="Under 12"/>
+            <xsd:enumeration value="Under 2"/>
+            <xsd:enumeration value="Over 65"/>
+            <xsd:enumeration value="Over 21"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="Transportation_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Type of tranportation: Air, Rail, Bus, Boat, Private Auto, Other.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">Transportation_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:Transportation_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="Transportation_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Type of tranportation: Air, Rail, Bus, Boat, Private Auto, Other.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">Transportation_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Bicycle"/>
+            <xsd:enumeration value="Boat"/>
+            <xsd:enumeration value="Bus"/>
+            <xsd:enumeration value="Cable car"/>
+            <xsd:enumeration value="Car"/>
+            <xsd:enumeration value="Carriage"/>
+            <xsd:enumeration value="Courtesy car"/>
+            <xsd:enumeration value="Helicopter"/>
+            <xsd:enumeration value="Limousine"/>
+            <xsd:enumeration value="Metro"/>
+            <xsd:enumeration value="Monorail"/>
+            <xsd:enumeration value="Motorbike"/>
+            <xsd:enumeration value="Pack animal"/>
+            <xsd:enumeration value="Plane"/>
+            <xsd:enumeration value="Rental car"/>
+            <xsd:enumeration value="Rickshaw"/>
+            <xsd:enumeration value="Shuttle"/>
+            <xsd:enumeration value="Subway"/>
+            <xsd:enumeration value="Sedan chair"/>
+            <xsd:enumeration value="Taxi"/>
+            <xsd:enumeration value="Train"/>
+            <xsd:enumeration value="Trolley"/>
+            <xsd:enumeration value="Tube"/>
+            <xsd:enumeration value="Walk"/>
+            <xsd:enumeration value="Water taxi"/>
+            <xsd:enumeration value="Express train"/>
+            <xsd:enumeration value="Public"/>
+            <xsd:enumeration value="Ferry"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="RatePeriod_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The RatePeriodSimpleType simple type defines a set of valid values for the type of rate that may be applied.  Typically rates differ based upon the duration, and the actual rate is then expressed in terms of the period of the rental.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">RatePeriod_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Hourly"/>
+            <xsd:enumeration value="Daily"/>
+            <xsd:enumeration value="Weekly"/>
+            <xsd:enumeration value="Monthly"/>
+            <xsd:enumeration value="WeekendDay"/>
+            <xsd:enumeration value="Other"/>
+            <xsd:enumeration value="Package">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The rate period is based on the package.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Bundle">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The rate is the same regardless of the number of days the vehicle is rented.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Total">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The rate is the total, no specific rate period.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="ToFrom_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Used to indicate whether the context is to a facility or from a facility.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">ToFrom_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ToFacility">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicates the direction is to the facility based on use (e.g., hotel, car rental location, airport).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="FromFacility">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicates the direction is from the facility based on use (e.g., hotel, car rental location, airport).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="TaxType_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes the type of fee or tax.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">TaxType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:TaxType_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="TaxType_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes the type of fee or tax.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">TaxType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Assessment/license tax"/>
+            <xsd:enumeration value="Bed tax"/>
+            <xsd:enumeration value="City tax"/>
+            <xsd:enumeration value="Convention tax"/>
+            <xsd:enumeration value="Country tax"/>
+            <xsd:enumeration value="County tax"/>
+            <xsd:enumeration value="Energy tax"/>
+            <xsd:enumeration value="Federal tax"/>
+            <xsd:enumeration value="Food &amp; beverage tax"/>
+            <xsd:enumeration value="Goods and services tax (GST)"/>
+            <xsd:enumeration value="Insurance Premium Tax"/>
+            <xsd:enumeration value="Lodging tax"/>
+            <xsd:enumeration value="National government tax"/>
+            <xsd:enumeration value="Occupancy tax"/>
+            <xsd:enumeration value="Room Tax"/>
+            <xsd:enumeration value="Sales tax"/>
+            <xsd:enumeration value="State tax"/>
+            <xsd:enumeration value="Surplus Lines Tax"/>
+            <xsd:enumeration value="Total tax"/>
+            <xsd:enumeration value="Tourism tax"/>
+            <xsd:enumeration value="Value Added Tax (VAT)"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="ChargeUnit_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Source: Charge Type (CHG) OpenTravel codelist.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">ChargeUnit_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:ChargeUnit_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="ChargeUnit_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Source: Charge Type (CHG) OpenTravel codelist.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">ChargeUnit_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Per unit"/>
+            <xsd:enumeration value="Per order"/>
+            <xsd:enumeration value="Per tray"/>
+            <xsd:enumeration value="Per dozen"/>
+            <xsd:enumeration value="Per gallon"/>
+            <xsd:enumeration value="Round trip"/>
+            <xsd:enumeration value="Per room"/>
+            <xsd:enumeration value="Per item"/>
+            <xsd:enumeration value="Per rental"/>
+            <xsd:enumeration value="Per person per night"/>
+            <xsd:enumeration value="Per person per stay"/>
+            <xsd:enumeration value="Per room per night"/>
+            <xsd:enumeration value="Per room per stay"/>
+            <xsd:enumeration value="Weekly"/>
+            <xsd:enumeration value="Per occurance"/>
+            <xsd:enumeration value="Half day"/>
+            <xsd:enumeration value="Hourly"/>
+            <xsd:enumeration value="Daily"/>
+            <xsd:enumeration value="Per function"/>
+            <xsd:enumeration value="Per minute"/>
+            <xsd:enumeration value="First use"/>
+            <xsd:enumeration value="Per person"/>
+            <xsd:enumeration value="Unit"/>
+            <xsd:enumeration value="Tray"/>
+            <xsd:enumeration value="Stay"/>
+            <xsd:enumeration value="Room"/>
+            <xsd:enumeration value="Reservation/Booking"/>
+            <xsd:enumeration value="Rental"/>
+            <xsd:enumeration value="OverMinuteCharge"/>
+            <xsd:enumeration value="Order"/>
+            <xsd:enumeration value="OneWay"/>
+            <xsd:enumeration value="OneTimeUse"/>
+            <xsd:enumeration value="MinimumCharge"/>
+            <xsd:enumeration value="MaximumCharge"/>
+            <xsd:enumeration value="Item"/>
+            <xsd:enumeration value="Gallon"/>
+            <xsd:enumeration value="Complimentary"/>
+            <xsd:enumeration value="AdditionsPerStay"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+</xsd:schema>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="DateTimeSpan.xsd"/>
+	<xs:include schemaLocation="DOWPattern.xsd"/>
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:element name="HotelSummaryMessage">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The HotelSummaryMessage is the message that is used to provide a notification of the general status of availability of the hotel, and its minimum and maximum rates.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DateTimeSpan"/>
+				<xs:element ref="DOWPattern"/>
+				<xs:element ref="RateMin"/>
+				<xs:element ref="RateMax"/>
+			</xs:sequence>
+			<xs:attribute name="StatusType" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Closed"/>
+						<xs:enumeration value="Open"/>
+						<xs:enumeration value="OnRequest"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelSummaryMessages">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelSummaryMessage" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OTA_HotelSummaryNotifRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_HotelSummaryNotifRQ is the message that sends the notification of the general availability of a hotel for booking.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelReference"/>
+				<xs:element ref="HotelSummaryMessages"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This element defines standard attributes that appear on the root element for all OTA payloads.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RateMax">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The maximum rate at which the hotel will sell an available room.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:float">
+					<xs:attribute name="CurrencyCode" type="xs:string" use="required"/>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RateMin">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The minimum rate at which the hotel will sell an available room.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:float">
+					<xs:attribute name="CurrencyCode" type="xs:string" use="required"/>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

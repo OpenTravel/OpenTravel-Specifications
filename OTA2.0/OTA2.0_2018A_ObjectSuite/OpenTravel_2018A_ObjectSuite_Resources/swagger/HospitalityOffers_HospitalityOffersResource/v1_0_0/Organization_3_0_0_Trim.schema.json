@@ -1,0 +1,648 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Organization",
+  "x-otm-library": {
+    "LibraryName": "Organization",
+    "LibraryVersion": "3.0.0",
+    "LibraryStatus": "FINAL",
+    "SourceFile": "/Organization_3_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2018-04-05T08:59:59.715-0400"
+  },
+  "definitions": {
+    "FacilityID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "description": "Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "FacilityRef": {
+          "description": "Refers to the obj ID on an object defined elsewhere in the current document.",
+          "type": "string"
+        },
+        "FacilityKey": {
+          "description": "Assigned Type: org-0300:FacilityKey",
+          "$ref": "#/definitions/FacilityKey"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Facility": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "description": "Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FacilityID"
+        },
+        {
+          "properties": {
+            "name": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "Location": {
+              "description": "Assigned Type: ota2-0400:Location",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Location"
+            },
+            "OperationSchedule": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_4_0_0_Trim.schema.json#/definitions/OperationSchedule"
+              },
+              "maxItems": 30
+            },
+            "MultimediaCollection": {
+              "description": "Assigned Type: ota2-0400:MultimediaCollection",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/MultimediaCollection"
+            },
+            "Rating": {
+              "description": "Assigned Type: ota2-0400:Rating",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Rating"
+            },
+            "Telephone": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Telephone"
+              },
+              "maxItems": 5
+            },
+            "Email": {
+              "description": "Assigned Type: ota2-0400:Email",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Email"
+            },
+            "Description": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Text"
+              },
+              "maxItems": 10
+            },
+            "Property": {
+              "description": "Assigned Type: org-0300:Property",
+              "$ref": "#/definitions/PropertyID"
+            },
+            "SiteURL": {
+              "description": "Assigned Type: ota2-0400:URL",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/URL"
+            },
+            "RelativePosition": {
+              "description": "Assigned Type: ota2-0400:RelativePosition",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/RelativePosition"
+            },
+            "AccessibilityFeatures": {
+              "description": "Assigned Type: ota2-0400:AccessibilityFeatures",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/AccessibilityFeatures"
+            },
+            "ExtensionPoint_Summary": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+            }
+          }
+        }
+      ]
+    },
+    "FacilityMeeting": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "description": "Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Facility"
+        },
+        {
+          "properties": {
+            "MeetingCenter": {
+              "description": "Assigned Type: org-0300:MeetingCenter",
+              "$ref": "#/definitions/MeetingCenter"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    },
+    "PropertyID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Property"
+      },
+      "description": "A property may contain one or more facilities of the same or differing types.  Example:  The property Disney Orlando has many hotels and golf courses on it.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0400:Identifier",
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Identifier"
+        },
+        "PropertyRef": {
+          "description": "Refers to the obj ID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "ResortID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Property"
+      },
+      "description": "A property may contain one or more facilities of the same or differing types.  Example:  The property Disney Orlando has many hotels and golf courses on it.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0400:Identifier",
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Identifier"
+        },
+        "PropertyRef": {
+          "description": "Refers to the obj ID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Property": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Property"
+      },
+      "description": "A property may contain one or more facilities of the same or differing types.  Example:  The property Disney Orlando has many hotels and golf courses on it.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PropertyID"
+        },
+        {
+          "properties": {
+            "name": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "companyName": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "Address": {
+              "description": "Assigned Type: ota2-0400:Address",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Address"
+            },
+            "URL": {
+              "description": "The URL for the property.",
+              "type": "string"
+            },
+            "Telephone": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Telephone"
+              },
+              "maxItems": 5
+            },
+            "Email": {
+              "description": "Assigned Type: ota2-0400:Email",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Email"
+            },
+            "MultimediaCollection": {
+              "description": "Assigned Type: ota2-0400:MultimediaCollection",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/MultimediaCollection"
+            },
+            "Rating": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Rating"
+              },
+              "maxItems": 5
+            },
+            "ExtensionPoint_Summary": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      ]
+    },
+    "Resort": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Property"
+      },
+      "description": "A property may contain one or more facilities of the same or differing types.  Example:  The property Disney Orlando has many hotels and golf courses on it.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PropertyID"
+        },
+        {
+          "properties": {
+            "name": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "companyName": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "Address": {
+              "description": "Assigned Type: ota2-0400:Address",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Address"
+            },
+            "URL": {
+              "description": "The URL for the property.",
+              "type": "string"
+            },
+            "Telephone": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Telephone"
+              },
+              "maxItems": 5
+            },
+            "Email": {
+              "description": "Assigned Type: ota2-0400:Email",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Email"
+            },
+            "MultimediaCollection": {
+              "description": "Assigned Type: ota2-0400:MultimediaCollection",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/MultimediaCollection"
+            },
+            "Rating": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Rating"
+              },
+              "maxItems": 5
+            },
+            "ExtensionPoint_Summary": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      ]
+    },
+    "PropertyDetail": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Property"
+      },
+      "description": "A property may contain one or more facilities of the same or differing types.  Example:  The property Disney Orlando has many hotels and golf courses on it.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Property"
+        },
+        {
+          "properties": {
+            "Facility": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FacilityID"
+              },
+              "maxItems": 1000,
+              "minItems": 1
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          },
+          "required": [
+            "Facility"
+          ]
+        }
+      ]
+    },
+    "ResortDetail": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Property"
+      },
+      "description": "A property may contain one or more facilities of the same or differing types.  Example:  The property Disney Orlando has many hotels and golf courses on it.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Property"
+        },
+        {
+          "properties": {
+            "Facility": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FacilityID"
+              },
+              "maxItems": 1000,
+              "minItems": 1
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          },
+          "required": [
+            "Facility"
+          ]
+        }
+      ]
+    },
+    "MeetingCenter": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "MeetingCenter"
+      },
+      "description": "Meeting center details for a facility.",
+      "properties": {
+        "meetingRoomCount": {
+          "description": "Assigned Type: ota2-0400:NonNegativeInteger",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Changed type from {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}nonNegativeInteger.",
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "org",
+                "value": "15"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "largestSeatingCapacity": {
+          "description": "The largest seating capacity available in the largest meeting room - generally this is for theatre-style room setup.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Changed type from {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}nonNegativeInteger.",
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "org",
+                "value": "200"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "largestRoomSpace": {
+          "description": "The amount of room space for the largest unique meeting room at the facility.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Changed type from {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}nonNegativeInteger.",
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "org",
+                "value": "2000 sq ft"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "unitOfMeasureCode": {
+          "description": "Assigned Type: ota2-0400:OTA_Code",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}OTA_CodeType"
+              ]
+            }
+          },
+          "type": "string",
+          "pattern": "[0-9A-Z]{1,4}(\\.[A-Z]{3}(\\.X){0,1}){0,1}"
+        },
+        "meetingRoomCode": {
+          "description": "Assigned Type: ota2-0400:OTA_Code",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}OTA_CodeType"
+              ]
+            }
+          },
+          "type": "string",
+          "pattern": "[0-9A-Z]{1,4}(\\.[A-Z]{3}(\\.X){0,1}){0,1}"
+        }
+      }
+    },
+    "BusinessService": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "BusinessService"
+      },
+      "description": "Name of the business service.",
+      "properties": {
+        "businessServiceCode": {
+          "description": "Assigned Type: ota2-0400:OTA_Code",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}OTA_CodeType"
+              ]
+            }
+          },
+          "type": "string",
+          "pattern": "[0-9A-Z]{1,4}(\\.[A-Z]{3}(\\.X){0,1}){0,1}"
+        }
+      }
+    },
+    "FacilityKey": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "FacilityKey"
+      },
+      "description": "Allows for a facility to be identified by and Identifier element or other elements\\/attributes that are appropriate for the specific type of facility.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "ExtensionPoint_Shared": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Shared"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "FacilityKeyIdentifier": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "FacilityKey"
+      },
+      "description": "Allows for a facility to be identified by and Identifier element or other elements\\/attributes that are appropriate for the specific type of facility.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FacilityKey"
+        },
+        {
+          "properties": {
+            "Identifier": {
+              "description": "Assigned Type: ota2-0400:Identifier",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Identifier"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "FacilityIdentifier": {
+          "$ref": "#/definitions/FacilityID"
+        }
+      },
+      "required": [
+        "FacilityIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "FacilitySummary": {
+          "$ref": "#/definitions/Facility"
+        }
+      },
+      "required": [
+        "FacilitySummary"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityMeeting": {
+          "$ref": "#/definitions/FacilityMeeting"
+        }
+      },
+      "required": [
+        "FacilityMeeting"
+      ]
+    },
+    {
+      "properties": {
+        "PropertyIdentifier": {
+          "$ref": "#/definitions/PropertyID"
+        }
+      },
+      "required": [
+        "PropertyIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "ResortIdentifier": {
+          "$ref": "#/definitions/PropertyID"
+        }
+      },
+      "required": [
+        "ResortIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "PropertySummary": {
+          "$ref": "#/definitions/Property"
+        }
+      },
+      "required": [
+        "PropertySummary"
+      ]
+    },
+    {
+      "properties": {
+        "ResortSummary": {
+          "$ref": "#/definitions/Property"
+        }
+      },
+      "required": [
+        "ResortSummary"
+      ]
+    },
+    {
+      "properties": {
+        "PropertyDetail": {
+          "$ref": "#/definitions/PropertyDetail"
+        }
+      },
+      "required": [
+        "PropertyDetail"
+      ]
+    },
+    {
+      "properties": {
+        "ResortDetail": {
+          "$ref": "#/definitions/PropertyDetail"
+        }
+      },
+      "required": [
+        "ResortDetail"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityKeyShared": {
+          "$ref": "#/definitions/FacilityKey"
+        }
+      },
+      "required": [
+        "FacilityKeyShared"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityKeyIdentifier": {
+          "$ref": "#/definitions/FacilityKeyIdentifier"
+        }
+      },
+      "required": [
+        "FacilityKeyIdentifier"
+      ]
+    }
+  ]
+}

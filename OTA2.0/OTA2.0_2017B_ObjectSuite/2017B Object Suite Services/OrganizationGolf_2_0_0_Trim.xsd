@@ -1,0 +1,1221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/organization/golf/v2"
+    version="2.0.0"
+    xmlns:org-0200="http://www.opentravel.org/OTM/organization/v2"
+    xmlns:orggf-0200="http://www.opentravel.org/OTM/organization/golf/v2"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0200="http://www.opentravel.org/OTM/Common/v2"
+    xmlns:ota2-0300="http://www.opentravel.org/OTM/Common/v3"
+    xmlns:ota2msg="http://opentravel.org/common/message/v02"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:ProjectName>Groundv3.otp</otm:ProjectName>
+                <otm:LibraryName>OrganizationGolf</otm:LibraryName>
+                <otm:LibraryVersion>2.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                <otm:SourceFile>/OrganizationGolf_2_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2017-05-24T10:17:02.811-04:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://opentravel.org/common/message/v02" schemaLocation="built-ins/OTA2_Message_v2.0.0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v2" schemaLocation="CodeList_2_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/v2" schemaLocation="Organization_2_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v3" schemaLocation="Common_3_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element abstract="true" name="CourseSubGrp" type="orggf-0200:Course_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Details of a golf course.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Course</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="CourseID"
+        substitutionGroup="orggf-0200:CourseSubGrp" type="orggf-0200:Course_ID"/>
+    <xsd:element name="CourseIdentifier" type="orggf-0200:Course_ID"/>
+    <xsd:element name="Course"
+        substitutionGroup="orggf-0200:CourseSubGrp" type="orggf-0200:Course"/>
+    <xsd:element name="CourseSummary" type="orggf-0200:Course"/>
+    <xsd:element name="CourseDetail"
+        substitutionGroup="orggf-0200:CourseSubGrp" type="orggf-0200:Course_Detail"/>
+    
+    <xsd:complexType name="Course_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Details of a golf course.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Course</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0300:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="CourseRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the obj ID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Course">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Details of a golf course.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Course</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="orggf-0200:Course_ID">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="20" minOccurs="0" ref="orggf-0200:CourseConditions">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Information about course conditions with an optional source name or URL.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="20" minOccurs="0" ref="orggf-0200:CourseRestrictionsSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A date and time period when restrictions apply to golf facility tee times.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="50" minOccurs="0" ref="orggf-0200:ScoreCard">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Scorecard information for the golf facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="30" minOccurs="0" ref="ota2-0300:OperationSchedule">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Hours of operation for the golf course.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="FeeStructure" type="ota2-0300:RateRange">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">General green fee amounts.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="CourseArchitect" type="orggf-0200:CourseArchitect">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Name of the designer of the golf course.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+                </xsd:sequence>
+                <xsd:attribute name="numberOfHoles"
+                    type="ota2-0300:NonNegativeInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The number of holes offered at the golf course.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="par"
+                    type="ota2-0300:NonNegativeInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Par for the golf course.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="totalYardage"
+                    type="ota2-0300:NonNegativeInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Total yardage for the golf course.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="yearBuilt" type="xsd:date" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The year the course was built.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="name" type="ota2-0300:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The name of the golf course.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="golfCarRequiredInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, a golf car is required on this golf course.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Course_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Details of a golf course.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Course</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="orggf-0200:Course">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="10" minOccurs="0"
+                        name="NineHoleName" type="ota2-0300:StringShort">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The name of a specific nine holes that make up part of the course.  This applies when a course has 18 or more holes where a user could request the back nine, or the name of the nine holes if the facility names them</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="CourseConditions" type="orggf-0200:CourseConditions"/>
+    
+    <xsd:complexType name="CourseConditions">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Information about course conditions with an optional source name or URL.</xsd:documentation>
+            <xsd:documentation source="Description">Information about course conditions with an optional source name or URL.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">CourseConditions</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="source" type="ota2-0300:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The source  that provided the course conditions.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="anyURI" type="xsd:anyURI" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The URL that provided the course conditions.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="CourseRestrictionsSubGrp" type="orggf-0200:CourseRestrictions">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Restrictions that apply to this golf course.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">CourseRestrictions</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="CourseRestrictions"
+        substitutionGroup="orggf-0200:CourseRestrictionsSubGrp" type="orggf-0200:CourseRestrictions"/>
+    <xsd:element name="CourseRestrictionsSummary" type="orggf-0200:CourseRestrictions"/>
+    <xsd:element name="CourseRestrictionsDetail"
+        substitutionGroup="orggf-0200:CourseRestrictionsSubGrp" type="orggf-0200:CourseRestrictions_Detail"/>
+    
+    <xsd:complexType name="CourseRestrictions">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Restrictions that apply to this golf course.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">CourseRestrictions</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="TimeSpan" type="ota2-0300:TimeSpan">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Start and end dates.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="type" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The type of facility and/or tee time restriction.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="description" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A description of the facility and/or tee time restriction.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="CourseRestrictions_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Restrictions that apply to this golf course.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">CourseRestrictions</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="orggf-0200:CourseRestrictions">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="StartWindow" type="ota2-0300:TimeSpan">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The earliest and latest dates acceptable for the start date.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="EndWindow" type="ota2-0300:TimeSpan">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The earliest and latest dates acceptable for the end date.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="100" minOccurs="0"
+                        name="Duration" type="xsd:duration">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The duration data type represents a combination of year, month, day and time values representing a single duration of time, encoded as a single string.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="DurationUnit" type="ota2-0200:DurationUnit_Enum">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The unit of elapsed time or the day of the week applied to the value.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="DrivingRange" type="orggf-0200:DrivingRange"/>
+    
+    <xsd:complexType name="DrivingRange">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Driving range details for the golf facility.</xsd:documentation>
+            <xsd:documentation source="Description">Driving range details for the golf facility.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">DrivingRange</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="turfType" type="ota2-0300:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The type of turf on the driving range.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="orggf">Grass</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="distance" type="ota2-0300:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Driving range distance.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="orggf">500 ft</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="numberOfStations"
+            type="xsd:positiveInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The number of stations at the driving range.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="orggf">10</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="drivingRangeType"
+            type="orggf-0200:DrivingRangeType_Enum" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Describes the type of driving range (e.g. Covered, Indoor, Outdoor).</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="orggf">Outdoor</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="nightLightingInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, night lighting is provided.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="GolfFacilityFeatures" type="orggf-0200:GolfFacilityFeatures"/>
+    
+    <xsd:complexType name="GolfFacilityFeatures">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GolfFacilityFeatures</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="10" minOccurs="0"
+                name="FacilityHighlights" type="orggf-0200:FacilityHighlights_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Highlighted features of the golf facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="description" type="ota2-0300:String" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A description of the highlights of the facility.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="PracticeFacilities" type="orggf-0200:PracticeFacilities"/>
+    
+    <xsd:complexType name="PracticeFacilities">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Details on a the practice facilities of a golf facility.</xsd:documentation>
+            <xsd:documentation source="Description">Details on a the practice facilities of a golf facility.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">PracticeFacilities</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="30" minOccurs="0" ref="ota2-0300:OperationSchedule">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Operation schedules for the practice facilities.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="10" minOccurs="0" ref="orggf-0200:DrivingRange">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Details of the driving range.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="FeeStructure" type="ota2-0300:RateRange">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Fees associated with the practice facilities.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="20" minOccurs="0"
+                name="PracticeFacilityFeatures" type="orggf-0200:PracticeFacilityFeatures_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Features of the practice facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="ProShopSubGrp" type="orggf-0200:ProShop_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Details of a golf facility pro shop.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">ProShop</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="ProShopID"
+        substitutionGroup="orggf-0200:ProShopSubGrp" type="orggf-0200:ProShop_ID"/>
+    <xsd:element name="ProShopIdentifier" type="orggf-0200:ProShop_ID"/>
+    <xsd:element name="ProShop"
+        substitutionGroup="orggf-0200:ProShopSubGrp" type="orggf-0200:ProShop"/>
+    <xsd:element name="ProShopSummary" type="orggf-0200:ProShop"/>
+    
+    <xsd:complexType name="ProShop_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Details of a golf facility pro shop.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">ProShop</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0300:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="ProShopRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the obj ID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="ProShop">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Details of a golf facility pro shop.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">ProShop</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="orggf-0200:ProShop_ID">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="30" minOccurs="0" ref="orggf-0200:RentalEquipment">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Club rental details.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="30" minOccurs="0"
+                        name="Services" type="orggf-0200:GolfServices_Enum">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Services offered by the facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="GolfFacilitySearchCriteria" type="orggf-0200:GolfFacilitySearchCriteria"/>
+    
+    <xsd:complexType name="GolfFacilitySearchCriteria">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Golf facility and tee time search criteria.</xsd:documentation>
+            <xsd:documentation source="Description">Golf facility and tee time search criteria.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GolfFacilitySearchCriteria</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="99" minOccurs="0"
+                name="SpecifiedAmenity" type="ota2-0300:ListOfTinyStrings">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Amentities and services available with a product(either included in the price of the tee time or available for an extra fee), such as power carts. Note, includes pricing.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}GolfAmenitySummaryType</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="1" ref="orggf-0200:GolfFacilitySubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Facility course description and features information.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="RateRange" type="ota2-0300:RateRange">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A min or max rate for green fees for this search.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0300:Location">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Defines the location of the search.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="Radius" type="ota2-0300:Radius">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The radial distance for which a the search should be performed.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="golfFacilityName"
+            type="ota2-0300:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The name of the golf facility for which the search is being performed.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="orggf">Brookside Golf</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="ClubHouse" type="orggf-0200:ClubHouse"/>
+    
+    <xsd:complexType name="ClubHouse">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Details of a golf facility club house.</xsd:documentation>
+            <xsd:documentation source="Description">Details of a golf facility club house.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">ClubHouse</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="20" minOccurs="0"
+                name="ClubHouseFeatures" type="orggf-0200:ClubHouseFeatures_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Features of the Club House.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="CourseType_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The course type at the facility.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">CourseType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="DailyFee"/>
+            <xsd:enumeration value="Municipal/Government/Military"/>
+            <xsd:enumeration value="Private"/>
+            <xsd:enumeration value="Private Limited Access"/>
+            <xsd:enumeration value="Resort"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="DrivingRangeType_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes the type of driving range.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">DrivingRangeType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Covered"/>
+            <xsd:enumeration value="Indoor"/>
+            <xsd:enumeration value="Outdoor"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:element abstract="true" name="GolfFacilitySubGrp" type="orggf-0200:GolfFacility">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Information about a golf facility, which may be a golf course proper and/or a facility such as a hotel that has an association with a nearby golf course or has one on premise.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GolfFacility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="GolfFacility"
+        substitutionGroup="orggf-0200:GolfFacilitySubGrp" type="orggf-0200:GolfFacility"/>
+    <xsd:element name="GolfFacilitySummary" type="orggf-0200:GolfFacility"/>
+    <xsd:element name="GolfFacilityDetail"
+        substitutionGroup="orggf-0200:GolfFacilitySubGrp" type="orggf-0200:GolfFacility_Detail"/>
+    
+    <xsd:complexType name="GolfFacility">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Information about a golf facility, which may be a golf course proper and/or a facility such as a hotel that has an association with a nearby golf course or has one on premise.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GolfFacility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="1" ref="orggf-0200:GolfFacilityFeatures">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Facility features information.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="orggf-0200:ClubHouse">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Club house details.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="10" minOccurs="0" ref="orggf-0200:CourseSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Golf course details.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="orggf-0200:ProShopSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Pro shop details.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="orggf-0200:PracticeFacilities">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Details of the practice facilities.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="99" minOccurs="0" ref="ota2-0300:Amenity">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Amenities available at the golf facility. Note, these amenities typically apply to all tee times at the facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="99" minOccurs="0" ref="ota2-0300:Ancillary">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Ancillary available at the golf facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="courseType"
+            type="orggf-0200:CourseType_Enum" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The course type at the facility.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="dressPolicy" type="ota2-0300:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The dress code for the golf facility.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="featuredInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">If true, this facility has been marked as a featured course by the supplier.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="GolfFacility_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Information about a golf facility, which may be a golf course proper and/or a facility such as a hotel that has an association with a nearby golf course or has one on premise.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GolfFacility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="orggf-0200:GolfFacility">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="MeetingCenter" type="org-0200:MeetingCenter">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Describes the meeting room facilities.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="RateRange" type="ota2-0300:RateRange">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A rate range for tee times at this course.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="RentalEquipment" type="orggf-0200:RentalEquipment"/>
+    
+    <xsd:complexType name="RentalEquipment">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Equipment available for rental at this facility.</xsd:documentation>
+            <xsd:documentation source="Description">Equipment available for rental at this facility.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RentalEquipment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Type" type="orggf-0200:GolfRentalEquipment_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Type of rental equipment offered.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="10" minOccurs="0"
+                name="PersonCategory" type="orggf-0200:PersonCategory_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the type of person for whom the rental equipment is offered.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="accessibleInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, this equipment offered is accessible.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="GolfRentalEquipment_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Rental equipment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">GolfRentalEquipment_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="orggf-0200:GolfRentalEquipment_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="GolfRentalEquipment_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Rental equipment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">GolfRentalEquipment_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="RightHandedClubs"/>
+            <xsd:enumeration value="LeftHandedClubs"/>
+            <xsd:enumeration value="GolfCars"/>
+            <xsd:enumeration value="StandupTransportation"/>
+            <xsd:enumeration value="Shoes"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="PersonCategory_Enum">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">PersonCategory_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="orggf-0200:PersonCategory_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="PersonCategory_Enum_Base">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">PersonCategory_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Juniors"/>
+            <xsd:enumeration value="Womens"/>
+            <xsd:enumeration value="Mens"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="FacilityHighlights_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Items offered at a facility.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">FacilityHighlights_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="orggf-0200:FacilityHighlights_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="FacilityHighlights_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Items offered at a facility.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">FacilityHighlights_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Accessible"/>
+            <xsd:enumeration value="ClubRental"/>
+            <xsd:enumeration value="DayLockers"/>
+            <xsd:enumeration value="Dining"/>
+            <xsd:enumeration value="DrivingRange"/>
+            <xsd:enumeration value="GolfLessons"/>
+            <xsd:enumeration value="GolfSchool"/>
+            <xsd:enumeration value="MetalSpilesAllowed"/>
+            <xsd:enumeration value="PracticeFacilities"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="GolfServices_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Services offered at a golf facility.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">GolfServices_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="orggf-0200:GolfServices_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="GolfServices_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Services offered at a golf facility.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">GolfServices_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ClubRegripping"/>
+            <xsd:enumeration value="ClubFitting"/>
+            <xsd:enumeration value="Lessons"/>
+            <xsd:enumeration value="RetailStore"/>
+            <xsd:enumeration value="CaddyForHire"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="TeePosition">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The tee position for the hole.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">TeePosition</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="teePositionName"
+                    type="ota2-0300:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The name of this tee position.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="orggf">Champion</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="yardage" type="xsd:positiveInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The yardage for this hole from this tee position.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="orggf">120</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:element name="ScoreCard" type="orggf-0200:ScoreCard"/>
+    
+    <xsd:complexType name="ScoreCard">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Scorecard information for the golf facility.</xsd:documentation>
+            <xsd:documentation source="Description">Scorecard information for the golf facility.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">ScoreCard</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="TeePosition" type="orggf-0200:TeePosition">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Yardage information by tee position.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="courseSlope" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The slope rating of the golf course.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="orggf">60</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="number" type="xsd:positiveInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The hole number.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}positiveInteger</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="orggf">2</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="par" type="xsd:positiveInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The par for the hole.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}positiveInteger</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="orggf">3</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="CourseArchitect">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Information regarding the architect of the course.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">CourseArchitect</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="name" type="ota2-0300:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The name of the course architect or designer.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="year" type="ota2-0300:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The year the course was built or renovated.  When the originalInd attribute is true this is the year the course was originally built.  When false this is the year of the renovation.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="description"
+                    type="ota2-0300:StringLong" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A description relating to the architect and the design of the course.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="originalInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, this is the orginal course architect, when false this is the course architect for a renovation.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="ClubHouseFeatures_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Features related to the club house.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">ClubHouseFeatures_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="orggf-0200:ClubHouseFeatures_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="ClubHouseFeatures_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Features related to the club house.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">ClubHouseFeatures_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="FitnessCenter"/>
+            <xsd:enumeration value="LockerRoom"/>
+            <xsd:enumeration value="Lounge"/>
+            <xsd:enumeration value="MeetingFacilities"/>
+            <xsd:enumeration value="Restaurant"/>
+            <xsd:enumeration value="SnackShop"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="PracticeFacilityFeatures_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Features of the practice facility.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">PracticeFacilityFeatures_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="orggf-0200:PracticeFacilityFeatures_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="PracticeFacilityFeatures_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Features of the practice facility.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">PracticeFacilityFeatures_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="PuttingGreen"/>
+            <xsd:enumeration value="PracticeHoles"/>
+            <xsd:enumeration value="ShortGamePracticeArea"/>
+            <xsd:enumeration value="GolfSchool"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:element name="SearchFacilityRQ"
+        substitutionGroup="ota2msg:OTA2_Request_Payload" type="orggf-0200:SearchFacility_RQ"/>
+    
+    <xsd:complexType name="SearchFacility_RQ">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Golf_SearchFacility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Request_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0300:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0300:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of Sale (POS) identifies the party or connection channel making the request.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="ProcessingInfo" type="ota2-0300:ProcessingInfo">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Transaction processing directives, including display currency overrides. If no display currency information is provided, the display and pricing currency will default to the value in POS/Source/@ISOCurrency.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="orggf-0200:GolfFacilitySearchCriteria">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Golf facility and tee time search criteria.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="SearchFacilityRS"
+        substitutionGroup="ota2msg:OTA2_Response_Payload" type="orggf-0200:SearchFacility_RS"/>
+    
+    <xsd:complexType name="SearchFacility_RS">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Golf_SearchFacility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Response_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0300:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="ProcessingInfo" type="ota2-0300:ProcessingInfo">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Transaction processing directives, including display currency overrides. If no display currency information is provided, the display and pricing currency will default to the value in POS/Source/@ISOCurrency.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0300:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="1000" minOccurs="0" ref="orggf-0200:GolfFacilitySubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Information about a golf facility, which may be a golf course proper and/or a facility such as a hotel that has an association with a nearby golf course or has one on premise.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="SearchFacilityNotif"
+        substitutionGroup="ota2msg:OTA2_Notif_Payload" type="orggf-0200:SearchFacility_Notif"/>
+    
+    <xsd:complexType name="SearchFacility_Notif">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Golf_SearchFacility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Notif_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0300:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0300:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of Sale (POS) identifies the party or connection channel sending the Notification.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="1000" minOccurs="0" ref="orggf-0200:GolfFacilitySubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Information about a golf facility, which may be a golf course proper and/or a facility such as a hotel that has an association with a nearby golf course or has one on premise.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="ReadFacilityRQ"
+        substitutionGroup="ota2msg:OTA2_Request_Payload" type="orggf-0200:ReadFacility_RQ"/>
+    
+    <xsd:complexType name="ReadFacility_RQ">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Golf_ReadFacility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Request_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0300:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0300:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of Sale (POS) identifies the party or connection channel making the request.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="orggf-0200:GolfFacilitySubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The ID of the facility or course.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="ReadFacilityRS"
+        substitutionGroup="ota2msg:OTA2_Response_Payload" type="orggf-0200:ReadFacility_RS"/>
+    
+    <xsd:complexType name="ReadFacility_RS">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Golf_ReadFacility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Response_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0300:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0300:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="orggf-0200:GolfFacilitySubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Information about a golf facility, which may be a golf course proper and/or a facility such as a hotel that has an association with a nearby golf course or has one on premise.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="ReadFacilityNotif"
+        substitutionGroup="ota2msg:OTA2_Notif_Payload" type="orggf-0200:ReadFacility_Notif"/>
+    
+    <xsd:complexType name="ReadFacility_Notif">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">Golf_ReadFacility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Notif_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="PayloadStdAttributes" type="ota2-0300:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0300:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of Sale (POS) identifies the party or connection channel sending the Notification.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0300:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="orggf-0200:GolfFacilitySubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Information about a golf facility, which may be a golf course proper and/or a facility such as a hotel that has an association with a nearby golf course or has one on premise.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+</xsd:schema>

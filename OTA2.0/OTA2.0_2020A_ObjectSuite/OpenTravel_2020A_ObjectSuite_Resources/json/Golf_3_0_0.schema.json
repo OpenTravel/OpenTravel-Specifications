@@ -1,0 +1,659 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Golf",
+  "x-otm-library": {
+    "ProjectName": "HotelDescriptiveContent 103019.otp",
+    "LibraryName": "Golf",
+    "LibraryVersion": "3.0.0",
+    "LibraryStatus": "DRAFT",
+    "SourceFile": "/Golf_3_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2019-10-30T13:33:14.687-0400"
+  },
+  "definitions": {
+    "GolfActivity": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GolfActivity"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "numberOfHoles": {
+          "description": "The number of holes that the golfers wish to play within one round. If this differs by day, separate messages must be sent.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}positiveInteger"
+              ]
+            },
+            "examples": [
+              {
+                "context": "pg",
+                "value": "18"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "replayRoundQty": {
+          "description": "(Example) If a foursome wants to play two separate rounds within one day, the number of tee times would be 2.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}positiveInteger"
+              ]
+            }
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxGolferCount": {
+          "description": "The maximum number of golfers represented in this tee time round.",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pg",
+                "value": "4"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type",
+        "maxGolferCount"
+      ],
+      "discriminator": "@type"
+    },
+    "GolfActivityDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GolfActivity"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GolfActivity"
+        },
+        {
+          "properties": {
+            "startingHole": {
+              "description": "The tee on which the round will start. This could be a hole number, or a course designation where there are multiple courses.",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}StringLength1to8"
+                  ]
+                },
+                "examples": [
+                  {
+                    "context": "pg",
+                    "value": "1"
+                  }
+                ]
+              },
+              "type": "integer",
+              "format": "int32"
+            },
+            "Course": {
+              "description": "Assigned Type: orggf-0300:Course",
+              "$ref": "OrganizationGolf_3_0_0.schema.json#/definitions/CourseID"
+            },
+            "GolfFacility": {
+              "description": "Assigned Type: orggf-0300:GolfFacility",
+              "$ref": "OrganizationGolf_3_0_0.schema.json#/definitions/GolfFacility"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          },
+          "required": [
+            "GolfFacility"
+          ]
+        }
+      ]
+    },
+    "TeeTime": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "TeeTime"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "roundID": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}positiveInteger"
+              ]
+            },
+            "examples": [
+              {
+                "context": "pg",
+                "value": "12181631"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "packageID": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}StringLength1to8"
+              ]
+            }
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "numberOfHoles": {
+          "description": "The number of holes that the golfers wish to play within one round. If this differs by day, separate messages must be sent.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}positiveInteger"
+              ]
+            },
+            "examples": [
+              {
+                "context": "pg",
+                "value": "18"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "carQty": {
+          "description": "The number of carts\\/buggies requested.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}positiveInteger"
+              ]
+            },
+            "examples": [
+              {
+                "context": "pg",
+                "value": "1"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "replayRoundQty": {
+          "description": "(Example) If a foursome wants to play two separate rounds within one day, the number of tee times would be 2.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}positiveInteger"
+              ]
+            },
+            "examples": [
+              {
+                "context": "pg",
+                "value": "2"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "DateTimeSpanWindows": {
+          "description": "Assigned Type: ota2-0500:DateTimeSpanWindows",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "AttributeGroup: DateTimeSpanGroup"
+              ]
+            }
+          },
+          "$ref": "Common_5_0_0.schema.json#/definitions/DateTimeSpanWindows"
+        },
+        "Discount": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_5_0_0.schema.json#/definitions/RateQualifier"
+          },
+          "maxItems": 99
+        },
+        "LoyaltyProgram": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_5_0_0.schema.json#/definitions/LoyaltyProgram"
+          },
+          "maxItems": 99
+        },
+        "GolferCount": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GolferCount"
+          },
+          "maxItems": 5,
+          "minItems": 1
+        },
+        "CourseIdentifier": {
+          "description": "Assigned Type: orggf-0300:Course_ID",
+          "$ref": "OrganizationGolf_3_0_0.schema.json#/definitions/CourseID"
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type",
+        "numberOfHoles",
+        "DateTimeSpanWindows",
+        "GolferCount",
+        "CourseIdentifier"
+      ],
+      "discriminator": "@type"
+    },
+    "TeeTimeDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "TeeTime"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TeeTime"
+        },
+        {
+          "properties": {
+            "NineHoleName": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 128
+              },
+              "maxItems": 10
+            },
+            "SpecifiedAmenity": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_5_0_0.schema.json#/definitions/SpecifiedAmenity"
+              },
+              "maxItems": 99
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "TeeTimeAvailability": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "TeeTimeAvailability"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "FacilityGolf": {
+          "description": "Assigned Type: orggf-0300:Facility_Golf",
+          "$ref": "OrganizationGolf_3_0_0.schema.json#/definitions/FacilityGolf"
+        },
+        "TeeTime": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TeeTime"
+          },
+          "maxItems": 99,
+          "minItems": 1
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type",
+        "FacilityGolf",
+        "TeeTime"
+      ],
+      "discriminator": "@type"
+    },
+    "GolferCount": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "GolferCount"
+      },
+      "description": "The number of golfers in this age group.",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ageQualifyingCode": {
+          "$ref": "CodeList_4_0_0.schema.json#/definitions/AgeQualifyingCode_Enum_Base"
+        },
+        "ageQualifyingCodeExtension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "golferType": {
+          "description": "Summary golfer type qualifying information.",
+          "$ref": "#/definitions/GolferType_Enum"
+        },
+        "handicap": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pg",
+                "value": "18"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "accessibleInd": {
+          "description": "When true, tee time rounds that accommodate accessibility needs are requested.",
+          "type": "boolean"
+        }
+      }
+    },
+    "GolferType_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "GolferType_Enum"
+      },
+      "description": "Golfer types with an \\\"Other\\\" value to support open enumeration list.",
+      "type": "string",
+      "enum": [
+        "ClubMember",
+        "GuestOfMember",
+        "GuestOfResort",
+        "LocalResident",
+        "LoyaltyProgramMember"
+      ]
+    },
+    "ActivityGolf": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Activity"
+      },
+      "allOf": [
+        {
+          "$ref": "Product_5_0_0.schema.json#/definitions/Activity"
+        },
+        {
+          "properties": {
+            "GolfActivity": {
+              "description": "Assigned Type: pg-0300:GolfActivity",
+              "$ref": "#/definitions/GolfActivity"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "ProductQueriesGolf": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "ProductQueries"
+      },
+      "allOf": [
+        {
+          "$ref": "Product_5_0_0.schema.json#/definitions/ProductQueries"
+        },
+        {
+          "properties": {
+            "TeeTimeAvailability": {
+              "description": "Assigned Type: pg-0300:TeeTimeAvailability_Summary",
+              "$ref": "#/definitions/TeeTimeAvailability"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "GetOffersRQ": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Golf_GetOffers"
+      },
+      "x-otm-annotations": {
+        "documentation": {
+          "deprecations": [
+            "All operations on Golf are deprecated and will be removed in the next version.  Please use the operations on GolfOffers."
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Request_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0500:PayloadStdAttributes",
+              "$ref": "Common_5_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "POS": {
+              "description": "Assigned Type: ota2-0500:POS_Summary",
+              "$ref": "Common_5_0_0.schema.json#/definitions/POS"
+            },
+            "ProcessingInfo": {
+              "description": "Assigned Type: ota2-0500:ProcessingInfo",
+              "$ref": "Common_5_0_0.schema.json#/definitions/ProcessingInfo"
+            },
+            "ProductQueries": {
+              "description": "Assigned Type: prod-0500:ProductQueries",
+              "$ref": "Product_5_0_0.schema.json#/definitions/ProductQueries"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "GetOffersRS": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Golf_GetOffers"
+      },
+      "x-otm-annotations": {
+        "documentation": {
+          "deprecations": [
+            "All operations on Golf are deprecated and will be removed in the next version.  Please use the operations on GolfOffers."
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Response_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0500:PayloadStdAttributes",
+              "$ref": "Common_5_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "Result": {
+              "description": "Assigned Type: ota2-0500:Result_Summary",
+              "$ref": "Common_5_0_0.schema.json#/definitions/Result"
+            },
+            "OfferSummary": {
+              "type": "array",
+              "items": {
+                "$ref": "Order_4_0_0.schema.json#/definitions/Offer"
+              },
+              "maxItems": 100
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "GetOffersNotif": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Golf_GetOffers"
+      },
+      "x-otm-annotations": {
+        "documentation": {
+          "deprecations": [
+            "All operations on Golf are deprecated and will be removed in the next version.  Please use the operations on GolfOffers."
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Notif_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0500:PayloadStdAttributes",
+              "$ref": "Common_5_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "POS": {
+              "description": "Assigned Type: ota2-0500:POS_Summary",
+              "$ref": "Common_5_0_0.schema.json#/definitions/POS"
+            },
+            "Result": {
+              "description": "Assigned Type: ota2-0500:Result_Summary",
+              "$ref": "Common_5_0_0.schema.json#/definitions/Result"
+            },
+            "OfferSummary": {
+              "description": "Assigned Type: order-0400:Offer_Summary",
+              "$ref": "Order_4_0_0.schema.json#/definitions/Offer"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "GolfActivitySummary": {
+          "$ref": "#/definitions/GolfActivity"
+        }
+      },
+      "required": [
+        "GolfActivitySummary"
+      ]
+    },
+    {
+      "properties": {
+        "GolfActivityDetail": {
+          "$ref": "#/definitions/GolfActivityDetail"
+        }
+      },
+      "required": [
+        "GolfActivityDetail"
+      ]
+    },
+    {
+      "properties": {
+        "TeeTimeSummary": {
+          "$ref": "#/definitions/TeeTime"
+        }
+      },
+      "required": [
+        "TeeTimeSummary"
+      ]
+    },
+    {
+      "properties": {
+        "TeeTimeDetail": {
+          "$ref": "#/definitions/TeeTimeDetail"
+        }
+      },
+      "required": [
+        "TeeTimeDetail"
+      ]
+    },
+    {
+      "properties": {
+        "TeeTimeAvailability": {
+          "$ref": "#/definitions/TeeTimeAvailability"
+        }
+      },
+      "required": [
+        "TeeTimeAvailability"
+      ]
+    },
+    {
+      "properties": {
+        "ActivityGolf": {
+          "$ref": "#/definitions/ActivityGolf"
+        }
+      },
+      "required": [
+        "ActivityGolf"
+      ]
+    },
+    {
+      "properties": {
+        "ProductQueriesGolf": {
+          "$ref": "#/definitions/ProductQueriesGolf"
+        }
+      },
+      "required": [
+        "ProductQueriesGolf"
+      ]
+    },
+    {
+      "properties": {
+        "GetOffersRQ": {
+          "$ref": "#/definitions/GetOffersRQ"
+        }
+      },
+      "required": [
+        "GetOffersRQ"
+      ]
+    },
+    {
+      "properties": {
+        "GetOffersRS": {
+          "$ref": "#/definitions/GetOffersRS"
+        }
+      },
+      "required": [
+        "GetOffersRS"
+      ]
+    },
+    {
+      "properties": {
+        "GetOffersNotif": {
+          "$ref": "#/definitions/GetOffersNotif"
+        }
+      },
+      "required": [
+        "GetOffersNotif"
+      ]
+    }
+  ]
+}

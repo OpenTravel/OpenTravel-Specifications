@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.1 (http://www.xmlspy.com) by Marcel M Jemio (OTA) -->
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="Preferences.xsd"/>
+	<xs:simpleType name="CabinType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en"> A cabin is either First, Business or Economy </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="First"/>
+			<xs:enumeration value="Business"/>
+			<xs:enumeration value="Economy"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OnTimeRateType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Dept. Of Transport On Time Rate - value between 1 and 90 which is a percent of the time that it is on time.(Note:  0 doesn't really make sense.)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:positiveInteger">
+			<xs:maxInclusive value="90"/>
+			<xs:minInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ThreeLetterCodeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Three letter string between a-z and A-Z. Used for representing airport codes.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z]{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResBookDesigCodeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Single letter string between a-Z for representing a booking class.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z]{1}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TicketType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Paper or e-ticket</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="eTicket"/>
+			<xs:enumeration value="Paper"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MealServiceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en"> Single letter representing the meal for this cabin type. If not available it defaults to '-'.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z]{1}|[-]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AirlineVendorIDType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Two/Three character alpha-numberic code for airline vendors name.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="LocationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Three letter code and optional string to describe a location point.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="LocationCode" type="xs:string" use="required"/>
+				<xs:attribute name="CodeContext" default="IATA">
+					<xs:simpleType>
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Identifies the context of the identifying code, such as IATA, ARC, or internal code, etc.</xs:documentation>
+						</xs:annotation>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="IATA"/>
+							<xs:enumeration value="Internal"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="EquipmentType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Three letter equipment code and description.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="AirEquipType" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:element name="BookingClassPref">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Booking class code and preference level for specifying booking classes preferred/not preferred in a request.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="BookingClassCode" type="ResBookDesigCodeType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+				The booking class code.
+				</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional" default="Preferred">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+				The preference level for the booking class.
+				</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="BookingClassAvailabilityType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Holds booking class and available seats quantity.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ResBookDesigCode" type="ResBookDesigCodeType" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Booking class code</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Availability" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">seat availability quantity if available, or vendor specific availability coded.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="Cabin">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Construct for holding cabin class information, such as seat availability or meal codes. Can be up to three of these per flight segment or air leg - First, Business and Economy.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="BookingClassAvail" type="BookingClassAvailabilityType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="CabinType" type="CabinType" use="required"/>
+			<xs:attribute name="MealCode" type="MealServiceType" default="-"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ConnectionType">
+		<xs:sequence>
+			<xs:element name="ConnectionLocation" type="LocationType"/>
+		</xs:sequence>
+		<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional" default="Preferred">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">
+				The preference level for the connection point - only , unacceptable, preferred.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="SmokingIndType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates preference of smoking or no-smoking.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Yes"/>
+			<xs:enumeration value="No"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

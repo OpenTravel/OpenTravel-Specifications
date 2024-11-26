@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.0 (http://www.xmlspy.com) by Derek Williams (Travel Technology Initiative Ltd) -->
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="PkgCommonElements.xsd"/>
+	<xs:include schemaLocation="PkgInvoiceDetail.xsd"/>
+	<xs:include schemaLocation="PkgPackageSegment.xsd"/>
+	<xs:include schemaLocation="PkgTravelJourney.xsd"/>
+	<xs:element name="OTA_PkgAvailRS">
+		<xs:annotation>
+			<xs:documentation>The message details the availability of a requested package</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:sequence>
+						<xs:element ref="Success" minOccurs="0"/>
+						<xs:element ref="Warnings" minOccurs="0"/>
+						<xs:element name="Package">
+							<xs:annotation>
+								<xs:documentation>Defines a  holiday package</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="DateRange" type="PkgDateRange"/>
+									<xs:element name="PackageSegments">
+										<xs:complexType>
+											<xs:annotation>
+												<xs:documentation>A collection of pagkage itinerary items.</xs:documentation>
+											</xs:annotation>
+											<xs:sequence>
+												<xs:element name="PackageSegment" type="PkgPackageSegment" maxOccurs="unbounded"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element ref="Prices" minOccurs="0"/>
+									<xs:element ref="Extras" minOccurs="0"/>
+								</xs:sequence>
+								<xs:attribute name="SKU" type="xs:string"/>
+								<xs:attribute name="URL" type="xs:string"/>
+								<xs:attribute name="ProductType" type="PkgProductType"/>
+								<xs:attribute name="AvailableQty" type="xs:integer"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="AcceptedPaymtForms" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element ref="AcceptedPaymtForm" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="TravelChoices" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A collection of TravelItem elements.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="TravelItem" type="TravelItem" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="AccommodationChoices" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A collection of available properties.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="AvailableProperty" type="AccommodationDetail" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="FacilityChoices" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Provides the available facilities for the enquiror's chosen property and stay.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element ref="AvailableRooms"/>
+									<xs:element ref="RoomPrices" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element ref="AvailableMealPlans" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:sequence>
+						<xs:annotation>
+							<xs:documentation>May have either errors or warnings or both, but must have one if there is no success</xs:documentation>
+						</xs:annotation>
+						<xs:element ref="Errors"/>
+					</xs:sequence>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			<xs:attribute name="SupplierCode" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- ======================================================================================================================= -->
+	<xs:element name="AcceptedPaymtForm">
+		<xs:annotation>
+			<xs:documentation>The AcceptedPaymtForms class defines the policy regarding acceptable forms of payment. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PaymtCardCodes" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="PaymtMethodType" use="required">
+				<xs:annotation>
+					<xs:documentation>An enumerated type that defines a method of payment. </xs:documentation>
+					<xs:documentation>Values: 1 = Cash, 2 = Credit Card, 3= Debit Card, 4 = Voucher, 5 = Check, 6 = Other.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Cash"/>
+						<xs:enumeration value="CreditCard"/>
+						<xs:enumeration value="DebitCard"/>
+						<xs:enumeration value="Voucher"/>
+						<xs:enumeration value="Check"/>
+						<xs:enumeration value="Cheque"/>
+						<xs:enumeration value="Other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PaymtFormUseType" use="required">
+				<xs:annotation>
+					<xs:documentation>An enumerated type that defines a form of payment. </xs:documentation>
+					<xs:documentation>Values: 1 = Guarantee, 2 = Deposit, 3 = Paymt.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Guarantee"/>
+						<xs:enumeration value="Deposit"/>
+						<xs:enumeration value="Paymt"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AccommodationClass">
+		<xs:annotation>
+			<xs:documentation>Rating of an accommodation property.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Code" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Providers rating eg '4'.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Providers qualifier name eg 'Crowns'.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NationalCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Official rating e.g. '4'.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OfficialName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Official qualifier name eg 'STAR'.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="AccommodationDetail">
+		<xs:annotation>
+			<xs:documentation>Provides accommodation location, dates and classifications</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="Property"/>
+			<xs:element ref="Resort" minOccurs="0"/>
+			<xs:element ref="AvailableRooms" minOccurs="0"/>
+			<xs:element ref="AccommodationClass" minOccurs="0"/>
+			<xs:element ref="RoomPrices" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="AvailableMealPlans"/>
+			<xs:element ref="SourceIdentification" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="SKU" type="xs:string"/>
+		<xs:attribute name="URL" type="xs:string"/>
+		<xs:attributeGroup ref="DateTimePeriod"/>
+		<xs:attribute name="MaxChildAge" type="xs:integer"/>
+		<xs:attribute name="TravelOKFlag" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>Used to indicate whether or not the travel associated with the package is available with this accommodation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="AvailableMealPlans">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="MealPlan" type="PkgMealPlanType" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AvailableRooms">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Room" type="PkgRoomInventoryType" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Describes a type of room/cabin/apartment etc</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CarHireItem">
+		<xs:annotation>
+			<xs:documentation>An optional package component.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:any/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CarHireItems">
+		<xs:annotation>
+			<xs:documentation>A collection of CarHireItem elements.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CarHireItem" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:attributeGroup name="DateTimePeriod">
+		<xs:annotation>
+			<xs:documentation>Date and time of an arrangement, e.g. a property stay.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="CheckInDateTime" type="xs:date">
+			<xs:annotation>
+				<xs:documentation>Date and (optionally) time of checkin (also known as Arrival Date/Time).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Duration" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The length of the accommodation stay.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CheckOutDateTime" type="xs:date">
+			<xs:annotation>
+				<xs:documentation>Normal Date and (optionally) time of checkout (also known as Departure Date/Time).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="LastCheckOutDateTime" type="xs:date">
+			<xs:annotation>
+				<xs:documentation>Latest Date and (optionally) time of checkout.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:element name="Excursion">
+		<xs:annotation>
+			<xs:documentation>An optional package component.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:any/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Excursions">
+		<xs:annotation>
+			<xs:documentation>A collection of Excursion items.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Excursion" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Extras">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Excursions" minOccurs="0"/>
+				<xs:element ref="CarHireItems" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MealPlanTypes">
+		<xs:annotation>
+			<xs:documentation>A collection of MealPlan elements</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="MealPlanType" type="PkgMealPlanType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PaymtCardCode">
+		<xs:complexType>
+			<xs:attribute name="Type" type="PkgPaymentType" use="required"/>
+			<xs:attribute name="Rule" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Description of any restriction or rule associated with a type of payment.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PaymtCardCodes">
+		<xs:annotation>
+			<xs:documentation>A collection of credit card code strings identifying the credit cards accepted for payment.  This attribute is used if the PaymtMethodType is Credit Card, Debit Card, or Voucher. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PaymtCardCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PriceRule">
+		<xs:annotation>
+			<xs:documentation>A rule governing the application of a price.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="Type" type="xs:string" use="required"/>
+					<xs:attribute name="Value" type="xs:string" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Prices">
+		<xs:annotation>
+			<xs:documentation>A collection of price details.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PriceRule" minOccurs="0" maxOccurs="unbounded"/>
+    				<xs:element name="Price" type="Price" maxOccurs="unbounded"/>
+    			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Property">
+		<xs:annotation>
+			<xs:documentation>Full name or description plus codes for a property.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="ChainCode" type="xs:string"/>
+					<xs:attribute name="BrandCode" type="xs:string"/>
+					<xs:attribute name="Code" type="xs:string" use="required"/>
+					<xs:attribute name="Type" type="PkgAccommodationType" use="required"/>
+					<xs:attribute name="ContentURL" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Resort">
+		<xs:annotation>
+			<xs:documentation>A locality encompassing one or more places of touristic/travel interest </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="Code" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>This would be a Resort Code.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="RoomPrice">
+		<xs:complexContent>
+			<xs:extension base="PkgRoomProfile">
+				<xs:sequence>
+					<xs:element name="ItemPrice" type="CostingItemType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="ProfilePrice" type="AmountType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="RoomPrices">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="RoomPrice" type="RoomPrice" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="BoardTerms" type="PkgBoardCode"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SourceIdentification">
+		<xs:annotation>
+			<xs:documentation>Where details of the package can be found</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="Code" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>E.g. brochure code.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Issue" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>e.g. brochure edition/issue reference.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Page" type="xs:integer">
+						<xs:annotation>
+							<xs:documentation>e.g. page number in the brochure.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Supplements">
+		<xs:annotation>
+			<xs:documentation>A collection of Supplement elements.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Supplement" type="Supplement" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TravelDetail">
+		<xs:annotation>
+			<xs:documentation>Provides details of travel arrangements</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="OutwardTravel" type="PkgTravelSegment" maxOccurs="unbounded"/>
+				<xs:element name="ReturnTravel" type="PkgTravelSegment" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="TravelItem">
+		<xs:annotation>
+			<xs:documentation>Details of a travel component e.g. a set of travel legs making up a travel component or a single item defining a round-trip journey.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="TravelDetail" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="TravelJourney" type="PkgTravelJourney" minOccurs="0"/>
+			</xs:choice>
+			<xs:sequence>
+				<xs:element ref="Supplements" minOccurs="0"/>
+				<xs:element name="Information" type="PkgInformation" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:sequence>
+		<xs:attribute name="AccomOKFlag" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>Used to indicate whether or not the accommodation associated with the package is available with this travel journey.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

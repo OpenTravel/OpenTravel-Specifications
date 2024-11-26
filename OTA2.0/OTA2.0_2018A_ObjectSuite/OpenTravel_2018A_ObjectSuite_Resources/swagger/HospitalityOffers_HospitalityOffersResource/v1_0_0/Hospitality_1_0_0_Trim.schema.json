@@ -1,0 +1,2240 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Hospitality",
+  "x-otm-library": {
+    "LibraryName": "Hospitality",
+    "LibraryVersion": "1.0.0",
+    "LibraryStatus": "FINAL",
+    "SourceFile": "/Hospitality_1_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2018-04-05T08:59:59.768-0400"
+  },
+  "definitions": {
+    "RoomStayID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "RoomStay"
+      },
+      "description": "Details on the Room Stay including Guest Counts, Time Span of this Room Stay, pointers to Res Guests, guest Memberships, Comments and Special Requests pertaining to this particular Room Stay and finally finacial information related to the Room Stay, including Guarantee, Deposit and Payment and Cancellation Penalties.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0400:Identifier",
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Identifier"
+        },
+        "RoomStayRef": {
+          "description": "Refers to the obj ID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "RoomStay": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "RoomStay"
+      },
+      "description": "Details on the Room Stay including Guest Counts, Time Span of this Room Stay, pointers to Res Guests, guest Memberships, Comments and Special Requests pertaining to this particular Room Stay and finally finacial information related to the Room Stay, including Guarantee, Deposit and Payment and Cancellation Penalties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoomStayID"
+        },
+        {
+          "properties": {
+            "invBlockCode": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "xyzzy"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "RoomType": {
+              "description": "Assigned Type: ph:RoomType",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}RoomTypes"
+                  ]
+                }
+              },
+              "$ref": "#/definitions/RoomTypeID"
+            },
+            "RatePlan": {
+              "description": "Assigned Type: ph:RatePlan",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}RatePlans"
+                  ]
+                }
+              },
+              "$ref": "#/definitions/RatePlan"
+            },
+            "DateTimeSpanWindows": {
+              "description": "Assigned Type: ota2-0400:DateTimeSpanWindows",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}DateTimeSpanType"
+                  ]
+                }
+              },
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/DateTimeSpanWindows"
+            },
+            "SpecialRequest": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SpecialRequest"
+              },
+              "maxItems": 50
+            },
+            "FacilityRef": {
+              "description": "The hotel facility object for the room stay.  May include the hotel facility object or a reference to the hotel facility object.",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}BasicPropertyInfo"
+                  ]
+                }
+              },
+              "type": "string"
+            },
+            "ExtensionPoint_Summary": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+            }
+          },
+          "required": [
+            "RoomType",
+            "RatePlan",
+            "DateTimeSpanWindows"
+          ]
+        }
+      ]
+    },
+    "RoomStayDetail": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "RoomStay"
+      },
+      "description": "Details on the Room Stay including Guest Counts, Time Span of this Room Stay, pointers to Res Guests, guest Memberships, Comments and Special Requests pertaining to this particular Room Stay and finally finacial information related to the Room Stay, including Guarantee, Deposit and Payment and Cancellation Penalties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoomStay"
+        },
+        {
+          "properties": {
+            "language": {
+              "description": "Language of the response for the RoomStay (property). Note that the requested language may not be available for all properties and so the language of the response for each property may vary.",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}language"
+                  ]
+                },
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "en"
+                  }
+                ]
+              },
+              "type": "string"
+            },
+            "Comment": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Comment"
+              },
+              "maxItems": 10
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "RoomStayQueryCandidate": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "RoomStay"
+      },
+      "description": "Details on the Room Stay including Guest Counts, Time Span of this Room Stay, pointers to Res Guests, guest Memberships, Comments and Special Requests pertaining to this particular Room Stay and finally finacial information related to the Room Stay, including Guarantee, Deposit and Payment and Cancellation Penalties.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "ArrivalDepartureDates": {
+          "description": "Assigned Type: ota2-0400:DateEffectiveExpire",
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/DateEffectiveExpire"
+        },
+        "BasicPropertyInfo": {
+          "description": "Assigned Type: ph:BasicPropertyInfo",
+          "$ref": "#/definitions/BasicPropertyInfo"
+        },
+        "RoomType": {
+          "description": "Assigned Type: ph:RoomType",
+          "$ref": "#/definitions/RoomTypeID"
+        },
+        "GuestCount": {
+          "description": "Assigned Type: prod-0400:GuestCount",
+          "$ref": "Product_4_0_0_Trim.schema.json#/definitions/GuestCount"
+        },
+        "RoomRateQueryRange": {
+          "description": "Assigned Type: ph:RoomRate_Query_Range",
+          "$ref": "#/definitions/RoomRateQueryRange"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "RoomTypeID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "RoomType"
+      },
+      "description": "Provides details regarding rooms, usually guest rooms.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "RoomType": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "RoomType"
+      },
+      "description": "Provides details regarding rooms, usually guest rooms.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoomTypeID"
+        },
+        {
+          "properties": {
+            "RoomCharacteristics": {
+              "description": "Assigned Type: ph:RoomCharacteristics",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "AttributeGroup: RoomGroup"
+                  ]
+                }
+              },
+              "$ref": "#/definitions/RoomCharacteristics"
+            },
+            "Description": {
+              "description": "Assigned Type: ota2-0400:Description",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}ParagraphType"
+                  ]
+                }
+              },
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Description"
+            },
+            "Amenity": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Amenity"
+              },
+              "maxItems": 1000
+            },
+            "RoomOccupancy": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RoomOccupancy"
+              },
+              "maxItems": 10
+            },
+            "Code": {
+              "description": "Assigned Type: ota2-0400:Code",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Code"
+            },
+            "Tier": {
+              "description": "TODO:  Create enumerated list.  Indicates the category of the room. Typical values would be Moderate, Standard, or Deluxe. Refer to OpenTravel Code List Segment Category Code (SEG).",
+              "type": "string",
+              "pattern": "[0-9A-Z]{1,4}(\\.[A-Z]{3}(\\.X){0,1}){0,1}"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "RatePlan": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "RatePlan"
+      },
+      "description": "Information significant to defining a rate plan.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "ratePlanID": {
+          "description": "Assigned Type: ota2-0400:StringShort",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}StringLength1to64"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "RatePlanID"
+              }
+            ],
+            "examples": [
+              {
+                "context": "ph",
+                "value": "AAAB"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "ratePlanName": {
+          "description": "Assigned Type: ota2-0400:StringShort",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}StringLength1to64"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "RatePlanName"
+              }
+            ],
+            "examples": [
+              {
+                "context": "ph",
+                "value": "AAA with Breakfast"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "Description": {
+          "description": "Assigned Type: ota2-0400:Description",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}ParagraphType"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": ""
+              }
+            ],
+            "examples": [
+              {
+                "context": "ph",
+                "value": ""
+              }
+            ]
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Description"
+        },
+        "RatePlanInclusions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RatePlanInclusions"
+          },
+          "maxItems": 50
+        },
+        "RatePlanCode": {
+          "description": "Assigned Type: ph:RatePlanCode",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}StringLength1to16"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "RatePlanCode"
+              }
+            ]
+          },
+          "$ref": "#/definitions/RatePlanCode"
+        },
+        "RatePlanType": {
+          "description": "Assigned Type: ota2-0300:RatePlanType_Enum",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}OTA_CodeType"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "RatePlanType"
+              }
+            ]
+          },
+          "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/RatePlanType_Enum"
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "RatePlanDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "RatePlan"
+      },
+      "description": "Information significant to defining a rate plan.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RatePlan"
+        },
+        {
+          "properties": {
+            "Commission": {
+              "description": "Assigned Type: ph:Commission",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}CommissionType"
+                  ]
+                },
+                "equivalents": [
+                  {
+                    "context": "ph",
+                    "value": "Commission"
+                  }
+                ]
+              },
+              "$ref": "#/definitions/Commission"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "RoomOccupancy": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "RoomOccupancy"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "minOccupancy": {
+          "description": "Assigned Type: ota2-0400:NonNegativeInteger",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "1"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "maxOccupancy": {
+          "description": "Assigned Type: ota2-0400:NonNegativeInteger",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "4"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "AgeQualifying": {
+          "type": "array",
+          "items": {
+            "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/AgeQualifyingCode_Enum"
+          },
+          "maxItems": 20
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "SpecialRequest": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "SpecialRequest"
+      },
+      "description": "This identifies a special request for this reservation and is typically hotel-specific.",
+      "properties": {
+        "numberOfUnits": {
+          "description": "Allows you to pass the number of units that the special request is for (e.g., if 4 rooms are booked you may want 3 with double\\/double beds and 1 with a king).",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}integer"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "NumberOfUnits"
+              }
+            ],
+            "examples": [
+              {
+                "context": "ph",
+                "value": "1"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "RatePlanInclusions": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "RatePlanInclusions"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "Description": {
+          "description": "Assigned Type: ota2-0400:Description",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}ParagraphType"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "RatePlanInclusionDesciption"
+              }
+            ]
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Description"
+        },
+        "taxInclusiveInd": {
+          "description": "Indicates that tax is included in the rate.",
+          "type": "boolean"
+        },
+        "serviceFeeInclusiveInd": {
+          "description": "Indicates that service fees are included in the rate.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "RatePlanCode": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "RatePlanCode"
+      },
+      "description": "A string value may be used to request a particular code or an ID if the guest qualifies for a specific rate, such as AARP, AAA, a corporate rate, etc., or to specify a negotiated code as a result of a negotiated rate.",
+      "x-otm-annotations": {
+        "documentation": {
+          "implementers": [
+            "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}StringLength1to64"
+          ]
+        }
+      },
+      "properties": {
+        "value": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "ratePlanType": {
+          "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/RatePlanType_Enum_Base"
+        },
+        "ratePlanTypeExtension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "ratePlanID": {
+          "description": "Assigned Type: ota2-0400:StringShort",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}StringLength1to64"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "RatePlanID"
+              }
+            ],
+            "examples": [
+              {
+                "context": "ph",
+                "value": "12345678"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "ratePlanCategory": {
+          "description": "Assigned Type: ota2-0400:StringShort",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}StringLength1to64"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "RatePlanCategory"
+              }
+            ],
+            "examples": [
+              {
+                "context": "ph",
+                "value": "POD"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "promotionCode": {
+          "description": "Assigned Type: ota2-0400:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "L9Z"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "promotionVendorCode": {
+          "description": "Assigned Type: ota2-0400:ListOfTinyStrings",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "WT1"
+              }
+            ]
+          },
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 32
+          }
+        },
+        "ratePlanQualifierInd": {
+          "description": "The Rate Plan Qualifier is used to control the sort order of RatePlans. Those Rate Plans that are not qualified will appear first, those that are qualified will appear last.",
+          "type": "boolean"
+        }
+      }
+    },
+    "Commission": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "Commission"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "percent": {
+          "description": "Assigned Type: ota2-0400:Percent",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}Percentage"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "Percent"
+              }
+            ],
+            "examples": [
+              {
+                "context": "ph",
+                "value": "10"
+              }
+            ]
+          },
+          "type": "number",
+          "format": "float",
+          "maximum": 100.0,
+          "exclusiveMaximum": false,
+          "minimum": 0.0,
+          "exclusiveMinimum": false
+        },
+        "reasonCode": {
+          "description": "Assigned Type: ota2-0400:StringTiny",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}StringLength1to8"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "ReasonCode"
+              }
+            ],
+            "examples": [
+              {
+                "context": "ph",
+                "value": "No Show"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "maxCommissionUnitApplies": {
+          "description": "Maximum number of units for which the commission will be applied. This may be used in conjunction with the frequency attribute.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}positiveInteger"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "MaxCommissionUnitApplies"
+              }
+            ],
+            "examples": [
+              {
+                "context": "ph",
+                "value": "5"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "capAmount": {
+          "description": "Assigned Type: ota2-0400:Money",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}Money"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "CapAmount"
+              }
+            ],
+            "examples": [
+              {
+                "context": "ph",
+                "value": "100.00"
+              }
+            ]
+          },
+          "type": "number",
+          "format": "float"
+        },
+        "CurrencyCode": {
+          "description": "Indicates the currency to be applied to the amounts located in the child elements.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "AttributeGroup: CurrencyCodeGroup"
+              ]
+            },
+            "examples": [
+              {
+                "context": "ph",
+                "value": "USD"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[a-zA-Z]{3}"
+        },
+        "Frequency": {
+          "description": "Assigned Type: ota2-0300:ChargeUnit_Enum",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}OTA_CodeType"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "Frequency"
+              }
+            ],
+            "examples": [
+              {
+                "context": "ph",
+                "value": ""
+              }
+            ]
+          },
+          "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/ChargeUnit_Enum"
+        },
+        "PersonIdentifier": {
+          "description": "Assigned Type: ota2-0400:Person_ID",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}UniqueID_Type"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "UniqueID"
+              }
+            ]
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/PersonID"
+        },
+        "CommissionableAmount": {
+          "description": "Assigned Type: ph:CommissionableAmount",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}CommissionableAmount"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "CommissionableAmount"
+              }
+            ]
+          },
+          "$ref": "#/definitions/CommissionableAmount"
+        },
+        "PrepaidAmount": {
+          "description": "Assigned Type: ota2-0400:CurrencyAmount",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}PrepaidAmount"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "PrepaidAmount"
+              }
+            ]
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/CurrencyAmount"
+        },
+        "FlatCommission": {
+          "description": "Assigned Type: ota2-0400:CurrencyAmount",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}FlatCommission"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "FlatCommission"
+              }
+            ]
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/CurrencyAmount"
+        },
+        "PayableAmount": {
+          "description": "Assigned Type: ota2-0400:CurrencyAmount",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}CommissionPayableAmount"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "CommissionPayableAmount"
+              }
+            ]
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/CurrencyAmount"
+        },
+        "Comment": {
+          "description": "Assigned Type: ota2-0400:Comment",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}ParagraphType"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "Comment"
+              }
+            ]
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Comment"
+        },
+        "StatusType": {
+          "description": "Assigned Type: ota2-0300:Status_Enum",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: CommissionType_StatusType"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "StatusType"
+              }
+            ]
+          },
+          "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/Status_Enum"
+        },
+        "BillToID": {
+          "description": "Assigned Type: ota2-0400:Identifier",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}StringLength1to8"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "BillToID"
+              }
+            ]
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Identifier"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "CommissionableAmount": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "CommissionableAmount"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "CurrencyAmount": {
+          "description": "Assigned Type: ota2-0400:CurrencyAmount",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "AttributeGroup: CurrencyAmountGroup"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/CurrencyAmount"
+        },
+        "ttaxInclusiveInd": {
+          "description": "When true, indicates that the commission is calculated using the rate including tax. When false, indicates that the commission is calculated using the net rate.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "RoomCharacteristics": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "RoomCharacteristics"
+      },
+      "description": "Used to define a room (eg. its location, configuration, view).  These are items that are part of the room and cannot easily be removed.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "LocationCode": {
+          "description": "Assigned Type: ota2-0300:RoomLocation_Enum",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}OTA_CodeType"
+              ]
+            }
+          },
+          "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/RoomLocation_Enum"
+        },
+        "AccessibilityFeature": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessibilityFeature"
+          },
+          "maxItems": 100
+        },
+        "SecurityFeature": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityFeature"
+          },
+          "maxItems": 100
+        },
+        "BedTypeCode": {
+          "description": "Assigned Type: ota2-0300:BedType_Enum",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}ListOfOTA_CodeType"
+              ]
+            }
+          },
+          "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/BedType_Enum"
+        },
+        "Category": {
+          "description": "Assigned Type: ota2-0300:SegmentCategory_Enum",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}OTA_CodeType"
+              ]
+            }
+          },
+          "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/SegmentCategory_Enum"
+        },
+        "ClassificationCode": {
+          "description": "Assigned Type: ota2-0300:GuestRoomInfo",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}OTA_CodeType"
+              ]
+            }
+          },
+          "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/GuestRoomInfo"
+        },
+        "ViewCode": {
+          "description": "Assigned Type: ota2-0300:RoomViewType_Enum",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}OTA_CodeType"
+              ]
+            }
+          },
+          "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/RoomViewType_Enum"
+        },
+        "nonSmokingInd": {
+          "description": "Non-smoking indicator.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}boolean"
+              ]
+            }
+          },
+          "type": "boolean"
+        },
+        "compositeInd": {
+          "description": "Indicates that the room (suite) is a composite of smaller units.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}boolean"
+              ]
+            }
+          },
+          "type": "boolean"
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "RoomCharacteristicsDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "RoomCharacteristics"
+      },
+      "description": "Used to define a room (eg. its location, configuration, view).  These are items that are part of the room and cannot easily be removed.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoomCharacteristics"
+        },
+        {
+          "properties": {
+            "gender": {
+              "description": "Used to request or specify a gender assignment for a room. Note: Typically used by Hosteliers.",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "LocalAnonymousType: RoomGroup_RoomGender"
+                  ]
+                }
+              },
+              "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/Gender_Enum"
+            },
+            "invBlockCode": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}StringLength1to32"
+                  ]
+                }
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "architectureCode": {
+              "description": "Assigned Type: ota2-0400:OTA_Code",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}OTA_CodeType"
+                  ]
+                }
+              },
+              "type": "string",
+              "pattern": "[0-9A-Z]{1,4}(\\.[A-Z]{3}(\\.X){0,1}){0,1}"
+            },
+            "floor": {
+              "description": "Floor on which the room is located.",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}Numeric1to999"
+                  ]
+                }
+              },
+              "type": "integer",
+              "format": "int32"
+            },
+            "typeCode": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}StringLength1to16"
+                  ]
+                }
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "sizeMeasurement": {
+              "description": "Textual description of room dimensions.",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+                  ]
+                }
+              },
+              "type": "string"
+            },
+            "sharedRoomInd": {
+              "description": "If TRUE, the room requires or has sharing available. Note: Typically used by Hosteliers.",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}boolean"
+                  ]
+                }
+              },
+              "type": "boolean"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "AccessibilityFeature": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "AccessibilityFeature"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "quantity": {
+          "description": "The quantity of this feature in the room.",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "2"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "description": {
+          "description": "Assigned Type: ota2-0400:StringLong",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "Door locks at wheelchair height."
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 4096
+        },
+        "DisabilityFeature_Enum": {
+          "description": "Assigned Type: ota2-0300:DisabilityFeature_Enum",
+          "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/DisabilityFeature_Enum"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "SecurityFeature": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "SecurityFeature"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "quantity": {
+          "description": "The quantity of this feature in the room.",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "1"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "description": {
+          "description": "Assigned Type: ota2-0400:StringLong",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "Smoke alarm in room."
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 4096
+        },
+        "SecurityFeature": {
+          "description": "Assigned Type: ota2-0300:SecurityFeature_Enum",
+          "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/SecurityFeature_Enum"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "ProductHospitality": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "allOf": [
+        {
+          "$ref": "Product_4_0_0_Trim.schema.json#/definitions/Product"
+        },
+        {
+          "properties": {
+            "RoomStay": {
+              "description": "Assigned Type: ph:RoomStay",
+              "$ref": "#/definitions/RoomStayID"
+            },
+            "GuestCount": {
+              "type": "array",
+              "items": {
+                "$ref": "Product_4_0_0_Trim.schema.json#/definitions/GuestCount"
+              },
+              "maxItems": 99
+            },
+            "DateTimeSpanWindows": {
+              "description": "Assigned Type: ota2-0400:DateTimeSpanWindows",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/DateTimeSpanWindows"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          },
+          "required": [
+            "RoomStay"
+          ]
+        }
+      ]
+    },
+    "AssociatedProductHospitality": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "allOf": [
+        {
+          "$ref": "Product_4_0_0_Trim.schema.json#/definitions/Product"
+        },
+        {
+          "properties": {
+            "RoomStay": {
+              "description": "Assigned Type: ph:RoomStay",
+              "$ref": "#/definitions/RoomStayID"
+            },
+            "GuestCount": {
+              "type": "array",
+              "items": {
+                "$ref": "Product_4_0_0_Trim.schema.json#/definitions/GuestCount"
+              },
+              "maxItems": 99
+            },
+            "DateTimeSpanWindows": {
+              "description": "Assigned Type: ota2-0400:DateTimeSpanWindows",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/DateTimeSpanWindows"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          },
+          "required": [
+            "RoomStay"
+          ]
+        }
+      ]
+    },
+    "ActivityHotel": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Activity"
+      },
+      "description": "A golf activity.",
+      "allOf": [
+        {
+          "$ref": "Product_4_0_0_Trim.schema.json#/definitions/Activity"
+        },
+        {
+          "properties": {
+            "TODO": {
+              "description": "TODO Place holder for a hospitality activity object.",
+              "type": "string"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "ProductQueriesHospitality": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "ProductQueries"
+      },
+      "allOf": [
+        {
+          "$ref": "Product_4_0_0_Trim.schema.json#/definitions/ProductQueries"
+        },
+        {
+          "properties": {
+            "RoomStayQueryProduct": {
+              "description": "Assigned Type: prod-0400:RoomStay_Query_Product",
+              "$ref": "Product_4_0_0_Trim.schema.json#/definitions/RoomStayQueryProduct"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "HospitalityOffersID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "HospitalityOffers"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0400:Identifier",
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Identifier"
+        },
+        "HospitalityOffersRef": {
+          "description": "Refers to the obj ID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "HospitalityOffers": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "HospitalityOffers"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/HospitalityOffersID"
+        },
+        {
+          "properties": {
+            "FacilityIdentifier": {
+              "description": "Assigned Type: org-0300:Facility_ID",
+              "$ref": "Organization_3_0_0_Trim.schema.json#/definitions/FacilityID"
+            },
+            "Offer": {
+              "type": "array",
+              "items": {
+                "$ref": "Order_3_0_0_Trim.schema.json#/definitions/OfferID"
+              }
+            },
+            "ReferenceListProduct": {
+              "description": "Assigned Type: ota2-0400:ReferenceList_Product",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/ReferenceListProduct"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          },
+          "required": [
+            "FacilityIdentifier"
+          ]
+        }
+      ]
+    },
+    "RoomRateID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "RoomRate"
+      },
+      "description": "Specifies the details of a room rate.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0400:Identifier",
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Identifier"
+        },
+        "RoomRateRef": {
+          "description": "Refers to the objID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "RoomRate": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "RoomRate"
+      },
+      "description": "Specifies the details of a room rate.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoomRateID"
+        },
+        {
+          "properties": {
+            "effectiveDate": {
+              "description": "Specifies the starting date for this room rate.",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "2017-08-22"
+                  }
+                ]
+              },
+              "type": "string",
+              "format": "date"
+            },
+            "expireDate": {
+              "description": "Specifies the end date for this room rate.",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "2018-08-22"
+                  }
+                ]
+              },
+              "type": "string",
+              "format": "date"
+            },
+            "bookingCode": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "A1KRACKB"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "Rate": {
+              "description": "Assigned Type: ota2-0400:RoomPrice",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/RoomPrice"
+            },
+            "expireDateExclusiveInd": {
+              "description": "When true, the ExpireDate is the first day after the applicable period (e.g. when expire date is Oct 15  the last date of the period is Oct 14).",
+              "type": "boolean"
+            },
+            "ExtensionPoint_Summary": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+            }
+          },
+          "required": [
+            "effectiveDate"
+          ]
+        }
+      ]
+    },
+    "RoomRateDetail": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "RoomRate"
+      },
+      "description": "Specifies the details of a room rate.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoomRate"
+        },
+        {
+          "properties": {
+            "source": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "Promotion"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 128
+            },
+            "Taxes": {
+              "description": "Assigned Type: ota2-0400:Taxes",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Taxes"
+            },
+            "Fees": {
+              "description": "Assigned Type: ota2-0400:Fees",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Fees"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "RoomRateQueryRange": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "RoomRate"
+      },
+      "description": "Specifies the details of a room rate.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "StartRate": {
+          "description": "Assigned Type: ota2-0400:RoomPrice",
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/RoomPrice"
+        },
+        "EndRate": {
+          "description": "Assigned Type: ota2-0400:RoomPrice",
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/RoomPrice"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "BasicPropertyInfo": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BasicPropertyInfo"
+      },
+      "description": "Identifies a property.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0400:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "WASJW"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Site": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BasicPropertyInfo"
+      },
+      "description": "Identifies a property.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0400:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "WASJW"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "BasicPropertyInfoDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BasicPropertyInfo"
+      },
+      "description": "Identifies a property.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BasicPropertyInfo"
+        },
+        {
+          "properties": {
+            "name": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "JW Marriott Washington DC"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 128
+            },
+            "cityCode": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "WAS"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "chainCode": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "MC"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "chainName": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "Marriott"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 128
+            },
+            "brandCode": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "FS"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "brandName": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "Full Service"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 128
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "SiteDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BasicPropertyInfo"
+      },
+      "description": "Identifies a property.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BasicPropertyInfo"
+        },
+        {
+          "properties": {
+            "name": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "JW Marriott Washington DC"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 128
+            },
+            "cityCode": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "WAS"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "chainCode": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "MC"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "chainName": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "Marriott"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 128
+            },
+            "brandCode": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "FS"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "brandName": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "Full Service"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 128
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "RoomStayIdentifier": {
+          "$ref": "#/definitions/RoomStayID"
+        }
+      },
+      "required": [
+        "RoomStayIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "RoomStaySummary": {
+          "$ref": "#/definitions/RoomStay"
+        }
+      },
+      "required": [
+        "RoomStaySummary"
+      ]
+    },
+    {
+      "properties": {
+        "RoomStayDetail": {
+          "$ref": "#/definitions/RoomStayDetail"
+        }
+      },
+      "required": [
+        "RoomStayDetail"
+      ]
+    },
+    {
+      "properties": {
+        "RoomStayQueryCandidate": {
+          "$ref": "#/definitions/RoomStayQueryCandidate"
+        }
+      },
+      "required": [
+        "RoomStayQueryCandidate"
+      ]
+    },
+    {
+      "properties": {
+        "RoomTypeIdentifier": {
+          "$ref": "#/definitions/RoomTypeID"
+        }
+      },
+      "required": [
+        "RoomTypeIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "RoomTypeSummary": {
+          "$ref": "#/definitions/RoomType"
+        }
+      },
+      "required": [
+        "RoomTypeSummary"
+      ]
+    },
+    {
+      "properties": {
+        "RatePlanSummary": {
+          "$ref": "#/definitions/RatePlan"
+        }
+      },
+      "required": [
+        "RatePlanSummary"
+      ]
+    },
+    {
+      "properties": {
+        "RatePlanDetail": {
+          "$ref": "#/definitions/RatePlanDetail"
+        }
+      },
+      "required": [
+        "RatePlanDetail"
+      ]
+    },
+    {
+      "properties": {
+        "RoomOccupancy": {
+          "$ref": "#/definitions/RoomOccupancy"
+        }
+      },
+      "required": [
+        "RoomOccupancy"
+      ]
+    },
+    {
+      "properties": {
+        "RatePlanInclusions": {
+          "$ref": "#/definitions/RatePlanInclusions"
+        }
+      },
+      "required": [
+        "RatePlanInclusions"
+      ]
+    },
+    {
+      "properties": {
+        "Commission": {
+          "$ref": "#/definitions/Commission"
+        }
+      },
+      "required": [
+        "Commission"
+      ]
+    },
+    {
+      "properties": {
+        "CommissionableAmount": {
+          "$ref": "#/definitions/CommissionableAmount"
+        }
+      },
+      "required": [
+        "CommissionableAmount"
+      ]
+    },
+    {
+      "properties": {
+        "RoomCharacteristicsSummary": {
+          "$ref": "#/definitions/RoomCharacteristics"
+        }
+      },
+      "required": [
+        "RoomCharacteristicsSummary"
+      ]
+    },
+    {
+      "properties": {
+        "RoomCharacteristicsDetail": {
+          "$ref": "#/definitions/RoomCharacteristicsDetail"
+        }
+      },
+      "required": [
+        "RoomCharacteristicsDetail"
+      ]
+    },
+    {
+      "properties": {
+        "AccessibilityFeature": {
+          "$ref": "#/definitions/AccessibilityFeature"
+        }
+      },
+      "required": [
+        "AccessibilityFeature"
+      ]
+    },
+    {
+      "properties": {
+        "SecurityFeature": {
+          "$ref": "#/definitions/SecurityFeature"
+        }
+      },
+      "required": [
+        "SecurityFeature"
+      ]
+    },
+    {
+      "properties": {
+        "ProductHospitality": {
+          "$ref": "#/definitions/ProductHospitality"
+        }
+      },
+      "required": [
+        "ProductHospitality"
+      ]
+    },
+    {
+      "properties": {
+        "AssociatedProductHospitality": {
+          "$ref": "#/definitions/ProductHospitality"
+        }
+      },
+      "required": [
+        "AssociatedProductHospitality"
+      ]
+    },
+    {
+      "properties": {
+        "ActivityHotel": {
+          "$ref": "#/definitions/ActivityHotel"
+        }
+      },
+      "required": [
+        "ActivityHotel"
+      ]
+    },
+    {
+      "properties": {
+        "ProductQueriesHospitality": {
+          "$ref": "#/definitions/ProductQueriesHospitality"
+        }
+      },
+      "required": [
+        "ProductQueriesHospitality"
+      ]
+    },
+    {
+      "properties": {
+        "HospitalityOffersIdentifier": {
+          "$ref": "#/definitions/HospitalityOffersID"
+        }
+      },
+      "required": [
+        "HospitalityOffersIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "HospitalityOffersSummary": {
+          "$ref": "#/definitions/HospitalityOffers"
+        }
+      },
+      "required": [
+        "HospitalityOffersSummary"
+      ]
+    },
+    {
+      "properties": {
+        "RoomRateIdentifier": {
+          "$ref": "#/definitions/RoomRateID"
+        }
+      },
+      "required": [
+        "RoomRateIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "RoomRateSummary": {
+          "$ref": "#/definitions/RoomRate"
+        }
+      },
+      "required": [
+        "RoomRateSummary"
+      ]
+    },
+    {
+      "properties": {
+        "RoomRateDetail": {
+          "$ref": "#/definitions/RoomRateDetail"
+        }
+      },
+      "required": [
+        "RoomRateDetail"
+      ]
+    },
+    {
+      "properties": {
+        "RoomRateQueryRange": {
+          "$ref": "#/definitions/RoomRateQueryRange"
+        }
+      },
+      "required": [
+        "RoomRateQueryRange"
+      ]
+    },
+    {
+      "properties": {
+        "BasicPropertyInfoSummary": {
+          "$ref": "#/definitions/BasicPropertyInfo"
+        }
+      },
+      "required": [
+        "BasicPropertyInfoSummary"
+      ]
+    },
+    {
+      "properties": {
+        "SiteSummary": {
+          "$ref": "#/definitions/BasicPropertyInfo"
+        }
+      },
+      "required": [
+        "SiteSummary"
+      ]
+    },
+    {
+      "properties": {
+        "BasicPropertyInfoDetail": {
+          "$ref": "#/definitions/BasicPropertyInfoDetail"
+        }
+      },
+      "required": [
+        "BasicPropertyInfoDetail"
+      ]
+    },
+    {
+      "properties": {
+        "SiteDetail": {
+          "$ref": "#/definitions/BasicPropertyInfoDetail"
+        }
+      },
+      "required": [
+        "SiteDetail"
+      ]
+    }
+  ]
+}

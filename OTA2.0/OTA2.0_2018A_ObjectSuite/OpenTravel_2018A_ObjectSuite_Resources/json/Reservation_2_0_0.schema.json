@@ -1,0 +1,805 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Reservation",
+  "x-otm-library": {
+    "ProjectName": "HospitalityProject_030918.otp",
+    "LibraryName": "Reservation",
+    "LibraryVersion": "2.0.0",
+    "LibraryStatus": "FINAL",
+    "SourceFile": "/Reservation_2_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2018-04-05T08:59:18.799-0400"
+  },
+  "definitions": {
+    "ReservationID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Reservation"
+      },
+      "description": "A container associating travelers and orders pertaining to a particular trip or event.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0400:Identifier",
+          "$ref": "Common_4_0_0.schema.json#/definitions/Identifier"
+        },
+        "ReservationRef": {
+          "description": "Refers to the objID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Reservation": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Reservation"
+      },
+      "description": "A container associating travelers and orders pertaining to a particular trip or event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReservationID"
+        },
+        {
+          "properties": {
+            "OrderConfirmation": {
+              "type": "array",
+              "items": {
+                "$ref": "Order_3_0_0.schema.json#/definitions/OrderConfirmation"
+              },
+              "maxItems": 99,
+              "minItems": 1
+            },
+            "Receipt": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReceiptID"
+              },
+              "maxItems": 99,
+              "minItems": 1
+            },
+            "TimeSpan": {
+              "description": "Assigned Type: ota2-0400:TimeSpan",
+              "$ref": "Common_4_0_0.schema.json#/definitions/TimeSpan"
+            },
+            "TravelerSummary": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_4_0_0.schema.json#/definitions/Traveler"
+              },
+              "maxItems": 99
+            },
+            "ContactPerson": {
+              "description": "Assigned Type: ota2-0400:ContactPerson_Summary",
+              "$ref": "Common_4_0_0.schema.json#/definitions/ContactPerson"
+            },
+            "Comment": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_4_0_0.schema.json#/definitions/Comment"
+              },
+              "maxItems": 30
+            },
+            "Facility": {
+              "type": "array",
+              "items": {
+                "$ref": "Organization_3_0_0.schema.json#/definitions/FacilityID"
+              },
+              "maxItems": 99
+            },
+            "ExtensionPoint_Summary": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+            }
+          },
+          "required": [
+            "OrderConfirmation",
+            "Receipt"
+          ]
+        }
+      ]
+    },
+    "ReservationCancellation": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Reservation"
+      },
+      "description": "A container associating travelers and orders pertaining to a particular trip or event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Reservation"
+        },
+        {
+          "properties": {
+            "CancellationID": {
+              "description": "Assigned Type: ota2-0400:Identifier",
+              "$ref": "Common_4_0_0.schema.json#/definitions/Identifier"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    },
+    "ReservationQueryByTraveler": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Reservation"
+      },
+      "description": "A container associating travelers and orders pertaining to a particular trip or event.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "TravelerCriteria": {
+          "description": "Assigned Type: res-0200:TravelerCriteria",
+          "$ref": "#/definitions/TravelerCriteria"
+        },
+        "Verification": {
+          "description": "Assigned Type: res-0200:Verification",
+          "$ref": "#/definitions/Verification"
+        },
+        "TimeSpan": {
+          "description": "Assigned Type: ota2-0400:TimeSpan",
+          "$ref": "Common_4_0_0.schema.json#/definitions/TimeSpan"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "ReceiptID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Receipt"
+      },
+      "description": "An identifier provided by the vendor or supplier confirming the reservation.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0400:Identifier",
+          "$ref": "Common_4_0_0.schema.json#/definitions/Identifier"
+        },
+        "ReceiptRef": {
+          "description": "Refers to the objID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Receipt": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Receipt"
+      },
+      "description": "An identifier provided by the vendor or supplier confirming the reservation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReceiptID"
+        },
+        {
+          "properties": {
+            "PaymentSummary": {
+              "description": "Assigned Type: order-0300:Payment_Summary",
+              "$ref": "Order_3_0_0.schema.json#/definitions/Payment"
+            },
+            "OrderIdentifier": {
+              "description": "Assigned Type: order-0300:Order_ID",
+              "$ref": "Order_3_0_0.schema.json#/definitions/OrderID"
+            },
+            "ReservationIdentifier": {
+              "description": "Assigned Type: res-0200:Reservation_ID",
+              "$ref": "#/definitions/ReservationID"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          },
+          "required": [
+            "PaymentSummary",
+            "OrderIdentifier"
+          ]
+        }
+      ]
+    },
+    "Verification": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "Verification"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "PersonNameSummary": {
+          "description": "Assigned Type: ota2-0400:PersonName_Summary",
+          "$ref": "Common_4_0_0.schema.json#/definitions/PersonName"
+        },
+        "Email_Simple": {
+          "description": "Email associated with the reservation.",
+          "type": "string",
+          "maxLength": 512
+        },
+        "Telephone_Simple": {
+          "description": "The telephone number associated with the reservation.",
+          "type": "string",
+          "maxLength": 128
+        },
+        "PaymentCard_Masked": {
+          "description": "Masked payment card number that can be used to control access to reservations.",
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "TravelerCriteria": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "TravelerCriteria"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "PersonIdentifier": {
+          "description": "Assigned Type: ota2-0400:Person_ID",
+          "$ref": "Common_4_0_0.schema.json#/definitions/PersonID"
+        },
+        "PersonNameSummary": {
+          "description": "Assigned Type: ota2-0400:PersonName_Summary",
+          "$ref": "Common_4_0_0.schema.json#/definitions/PersonName"
+        },
+        "Email_Simple": {
+          "description": "Email associated with the reservation.",
+          "type": "string",
+          "maxLength": 512
+        },
+        "Telephone_Simple": {
+          "description": "The telephone number associated with the reservation.",
+          "type": "string",
+          "maxLength": 128
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "CreateRQ": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Reservation_Create"
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Request_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+              "$ref": "Common_4_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "POS": {
+              "description": "Assigned Type: ota2-0400:POS_Summary",
+              "$ref": "Common_4_0_0.schema.json#/definitions/POS"
+            },
+            "OrderSummary": {
+              "type": "array",
+              "items": {
+                "$ref": "Order_3_0_0.schema.json#/definitions/Order"
+              },
+              "maxItems": 100
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "CreateRS": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Reservation_Create"
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Response_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+              "$ref": "Common_4_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "Result": {
+              "description": "Assigned Type: ota2-0400:Result_Summary",
+              "$ref": "Common_4_0_0.schema.json#/definitions/Result"
+            },
+            "Reservation": {
+              "description": "Assigned Type: res-0200:Reservation",
+              "$ref": "#/definitions/ReservationID"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "CreateNotif": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Reservation_Create"
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Notif_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+              "$ref": "Common_4_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "POS": {
+              "description": "Assigned Type: ota2-0400:POS_Summary",
+              "$ref": "Common_4_0_0.schema.json#/definitions/POS"
+            },
+            "Result": {
+              "description": "Assigned Type: ota2-0400:Result_Summary",
+              "$ref": "Common_4_0_0.schema.json#/definitions/Result"
+            },
+            "Reservation": {
+              "description": "Assigned Type: res-0200:Reservation",
+              "$ref": "#/definitions/ReservationID"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "ReadRQ": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Reservation_Read"
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Request_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+              "$ref": "Common_4_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "POS": {
+              "description": "Assigned Type: ota2-0400:POS_Summary",
+              "$ref": "Common_4_0_0.schema.json#/definitions/POS"
+            },
+            "ReservationIdentifier": {
+              "description": "Assigned Type: res-0200:Reservation_ID",
+              "$ref": "#/definitions/ReservationID"
+            },
+            "Verification": {
+              "description": "Assigned Type: res-0200:Verification",
+              "$ref": "#/definitions/Verification"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "ReadRS": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Reservation_Read"
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Response_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+              "$ref": "Common_4_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "Result": {
+              "description": "Assigned Type: ota2-0400:Result_Summary",
+              "$ref": "Common_4_0_0.schema.json#/definitions/Result"
+            },
+            "Reservation": {
+              "description": "Assigned Type: res-0200:Reservation",
+              "$ref": "#/definitions/ReservationID"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "SearchRQ": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Reservation_Search"
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Request_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+              "$ref": "Common_4_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "POS": {
+              "description": "Assigned Type: ota2-0400:POS_Summary",
+              "$ref": "Common_4_0_0.schema.json#/definitions/POS"
+            },
+            "ReservationQueryByTraveler": {
+              "description": "Assigned Type: res-0200:Reservation_Query_ByTraveler",
+              "$ref": "#/definitions/ReservationQueryByTraveler"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "SearchRS": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Reservation_Search"
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Response_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+              "$ref": "Common_4_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "Result": {
+              "description": "Assigned Type: ota2-0400:Result_Summary",
+              "$ref": "Common_4_0_0.schema.json#/definitions/Result"
+            },
+            "Reservation": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReservationID"
+              },
+              "maxItems": 100
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "CancelRQ": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Reservation_Cancel"
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Request_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+              "$ref": "Common_4_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "POS": {
+              "description": "Assigned Type: ota2-0400:POS_Summary",
+              "$ref": "Common_4_0_0.schema.json#/definitions/POS"
+            },
+            "ReservationIdentifier": {
+              "description": "Assigned Type: res-0200:Reservation_ID",
+              "$ref": "#/definitions/ReservationID"
+            },
+            "Verification": {
+              "description": "Assigned Type: res-0200:Verification",
+              "$ref": "#/definitions/Verification"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "CancelRS": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Reservation_Cancel"
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Response_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+              "$ref": "Common_4_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "Result": {
+              "description": "Assigned Type: ota2-0400:Result_Summary",
+              "$ref": "Common_4_0_0.schema.json#/definitions/Result"
+            },
+            "ReservationCancellation": {
+              "description": "Assigned Type: res-0200:Reservation_Cancellation",
+              "$ref": "#/definitions/ReservationCancellation"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "CancelNotif": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Reservation_Cancel"
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Notif_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+              "$ref": "Common_4_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "POS": {
+              "description": "Assigned Type: ota2-0400:POS_Summary",
+              "$ref": "Common_4_0_0.schema.json#/definitions/POS"
+            },
+            "Result": {
+              "description": "Assigned Type: ota2-0400:Result_Summary",
+              "$ref": "Common_4_0_0.schema.json#/definitions/Result"
+            },
+            "ReservationCancellation": {
+              "description": "Assigned Type: res-0200:Reservation_Cancellation",
+              "$ref": "#/definitions/ReservationCancellation"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "ReservationIdentifier": {
+          "$ref": "#/definitions/ReservationID"
+        }
+      },
+      "required": [
+        "ReservationIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "ReservationSummary": {
+          "$ref": "#/definitions/Reservation"
+        }
+      },
+      "required": [
+        "ReservationSummary"
+      ]
+    },
+    {
+      "properties": {
+        "ReservationCancellation": {
+          "$ref": "#/definitions/ReservationCancellation"
+        }
+      },
+      "required": [
+        "ReservationCancellation"
+      ]
+    },
+    {
+      "properties": {
+        "ReservationQueryByTraveler": {
+          "$ref": "#/definitions/ReservationQueryByTraveler"
+        }
+      },
+      "required": [
+        "ReservationQueryByTraveler"
+      ]
+    },
+    {
+      "properties": {
+        "ReceiptIdentifier": {
+          "$ref": "#/definitions/ReceiptID"
+        }
+      },
+      "required": [
+        "ReceiptIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "ReceiptSummary": {
+          "$ref": "#/definitions/Receipt"
+        }
+      },
+      "required": [
+        "ReceiptSummary"
+      ]
+    },
+    {
+      "properties": {
+        "Verification": {
+          "$ref": "#/definitions/Verification"
+        }
+      },
+      "required": [
+        "Verification"
+      ]
+    },
+    {
+      "properties": {
+        "TravelerCriteria": {
+          "$ref": "#/definitions/TravelerCriteria"
+        }
+      },
+      "required": [
+        "TravelerCriteria"
+      ]
+    },
+    {
+      "properties": {
+        "CreateRQ": {
+          "$ref": "#/definitions/CreateRQ"
+        }
+      },
+      "required": [
+        "CreateRQ"
+      ]
+    },
+    {
+      "properties": {
+        "CreateRS": {
+          "$ref": "#/definitions/CreateRS"
+        }
+      },
+      "required": [
+        "CreateRS"
+      ]
+    },
+    {
+      "properties": {
+        "CreateNotif": {
+          "$ref": "#/definitions/CreateNotif"
+        }
+      },
+      "required": [
+        "CreateNotif"
+      ]
+    },
+    {
+      "properties": {
+        "ReadRQ": {
+          "$ref": "#/definitions/ReadRQ"
+        }
+      },
+      "required": [
+        "ReadRQ"
+      ]
+    },
+    {
+      "properties": {
+        "ReadRS": {
+          "$ref": "#/definitions/ReadRS"
+        }
+      },
+      "required": [
+        "ReadRS"
+      ]
+    },
+    {
+      "properties": {
+        "SearchRQ": {
+          "$ref": "#/definitions/SearchRQ"
+        }
+      },
+      "required": [
+        "SearchRQ"
+      ]
+    },
+    {
+      "properties": {
+        "SearchRS": {
+          "$ref": "#/definitions/SearchRS"
+        }
+      },
+      "required": [
+        "SearchRS"
+      ]
+    },
+    {
+      "properties": {
+        "CancelRQ": {
+          "$ref": "#/definitions/CancelRQ"
+        }
+      },
+      "required": [
+        "CancelRQ"
+      ]
+    },
+    {
+      "properties": {
+        "CancelRS": {
+          "$ref": "#/definitions/CancelRS"
+        }
+      },
+      "required": [
+        "CancelRS"
+      ]
+    },
+    {
+      "properties": {
+        "CancelNotif": {
+          "$ref": "#/definitions/CancelNotif"
+        }
+      },
+      "required": [
+        "CancelNotif"
+      ]
+    }
+  ]
+}

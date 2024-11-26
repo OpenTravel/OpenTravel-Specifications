@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OTA_AirAvailRQ xmlns="http://www.opentravel.org/OTA" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OTA_AirAvailRQ.xsd" DesiredOptionQuantity="10" DirectFlightsOnly="false">
+	<POS>
+		<Source AgentSine="BSIA1234PM/GS" PseudoCityCode="2U8" ISOCountry="us" ISOCurrency="USD" CarrierCode="AA" AirportCode="IAD" FirstDepartPoint="IAD" ERSPUserId="12345432">
+			<UniqueId URL=" http://provider1.org/OTAEngine/" Type=" OTA_AirAvailRQ" Id="ID0507G4325" Instance="2001-06-03T13:09:21"/>
+			<BookingChannel Type="GDS" Primary="1"/>
+		</Source>
+	</POS>
+	<OriginDestinationInformation>
+		<OriginLocation LocationCode="LON" CodeContext="IATA"/>
+		<DestinationLocation LocationCode="LAX" CodeContext="IATA"/>
+		<TravelDateTime TravelDate="2001-09-03T13:00:00" TravelTimeIndicator="DepartureTime" TimeWindowBefore="P3D" TimeWindowAfter="P3D"/>
+		<Connection PreferLevel="Preferred">
+			<ConnectionLocation LocationCode="NYC" CodeContext="IATA"/>
+		</Connection>
+	</OriginDestinationInformation>
+	<TravelPreferences SmokingInd="No" OnTimeRate="1" MaxStopsQuantity="1">
+		<VendorPref PreferLevel="Only">
+			<VendorName Code="BA" CodeContext="IATA"/>
+		</VendorPref>
+		<FlightTypePref PreferLevel="Preferred">direct</FlightTypePref>
+		<AirFareRestrictPref PreferLevel="Only" FareRestrictType="none"/>
+		<AirEquipPref PreferLevel="Preferred" AirEquipType="jet"/>
+		<AirCabinPref PreferLevel="Preferred" CabinType="Y"/>
+		<TicketDistribPref PreferLevel="Only" DistribType="Mail" TicketTime="P5D"/>
+	</TravelPreferences>
+	<TravelerInformation>
+		<PassengerTypeQuantity PassengerTypeCode="ADT" Quantity="2"/>
+		<PassengerTypeQuantity PassengerTypeCode="CNN" Quantity="1"/>
+	</TravelerInformation>
+</OTA_AirAvailRQ>

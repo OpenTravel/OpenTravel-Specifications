@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.1 (http://www.xmlspy.com) by Marcel M Jemio (OTA) -->
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:element name="DateTimeSpan">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA DateTimeSpan data type is based on the W3C base data types of timeInstant and timeDuration.</xs:documentation>
+			<xs:documentation xml:lang="en">[Definition:]  The timeDuration datatype represents a combination of year, month, day and time values representing a single duration of time, encoded as a single string. </xs:documentation>
+			<xs:documentation xml:lang="en">[Lexical Representation] The lexical representation for timeDuration is the [ISO 8601] extended format PnYn MnDTnH nMnS, where nY represents the number of years, nM the number of months, nD the number of days, 'T' is the date/time separator, nH the number of hours, nM the number of minutes and nS the number of seconds. The number of seconds can include decimal digits to arbitrary precision. As an example, 7 months, 2 days, 2hours and 30 minutes would be expressed as P0Y7M2DT2H30M0S. Truncated representations are allowed provided they conform to ISO 8601 format. </xs:documentation>
+			<xs:documentation xml:lang="en">Time periods, i.e. specific durations of time, can be represented by supplying two items of information: a start instant and a duration or a start instant and an end instant or an end instant and a duration. The OTA standards use the XML mapping that provides for two elements to represent the specific period of time; a startInstant and a duration.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="StartInstant" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The starting value of the time span. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Duration" type="xs:duration" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The lexical representation for timeDuration is the [ISO 8601] extended format PnYn MnDTnH nMnS, where nY represents the number of years, nM the number of months, nD the number of days, 'T' is the date/time separator, nH the number of hours, nM the number of minutes and nS the number of seconds. The number of seconds can include decimal digits to arbitrary precision. As an example, 7 months, 2 days, 2hours and 30 minutes would be expressed as P0Y7M2DT2H30M0S. Truncated representations are allowed provided they conform to ISO 8601 format.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EndInstant" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The ending value of the time span. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

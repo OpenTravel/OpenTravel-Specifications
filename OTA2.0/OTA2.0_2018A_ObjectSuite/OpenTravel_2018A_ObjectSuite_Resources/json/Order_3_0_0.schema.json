@@ -1,0 +1,2012 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Order",
+  "x-otm-library": {
+    "ProjectName": "HospitalityProject_030918.otp",
+    "LibraryName": "Order",
+    "LibraryVersion": "3.0.0",
+    "LibraryStatus": "FINAL",
+    "SourceFile": "/Order_3_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2018-04-05T08:59:18.710-0400"
+  },
+  "definitions": {
+    "OfferID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Offer"
+      },
+      "description": "A product or products available at the given price and terms.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0400:Identifier",
+          "$ref": "Common_4_0_0.schema.json#/definitions/Identifier"
+        },
+        "OfferRef": {
+          "description": "Refers to the objID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Offer": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Offer"
+      },
+      "description": "A product or products available at the given price and terms.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OfferID"
+        },
+        {
+          "properties": {
+            "vendor": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "Order",
+                    "value": "Vendor Name"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "TotalPrice": {
+              "description": "Assigned Type: order-0300:TotalPrice",
+              "$ref": "#/definitions/TotalPrice"
+            },
+            "TermsAndConditions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TermsAndConditionsID"
+              },
+              "maxItems": 25
+            },
+            "Product": {
+              "type": "array",
+              "items": {
+                "$ref": "Product_4_0_0.schema.json#/definitions/ProductID"
+              },
+              "maxItems": 30
+            },
+            "FacilityIdentifier": {
+              "description": "Assigned Type: org-0300:Facility_ID",
+              "$ref": "Organization_3_0_0.schema.json#/definitions/FacilityID"
+            },
+            "taxExcludedInd": {
+              "description": "By default, taxes are included.  When present and true, all taxes are excluded from the price.  Individual taxes may be excluded using the indicator on the tax object.",
+              "type": "boolean"
+            },
+            "ExtensionPoint_Summary": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+            }
+          },
+          "required": [
+            "TotalPrice"
+          ]
+        }
+      ]
+    },
+    "OfferConfirmed": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Offer"
+      },
+      "description": "A product or products available at the given price and terms.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Offer"
+        },
+        {
+          "properties": {
+            "description": {
+              "description": "Assigned Type: ota2-0400:StringLong",
+              "type": "string",
+              "maxLength": 4096
+            },
+            "ConfirmationId": {
+              "description": "Assigned Type: ota2-0400:Identifier",
+              "$ref": "Common_4_0_0.schema.json#/definitions/Identifier"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    },
+    "OfferQueryOffer": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Offer"
+      },
+      "description": "A product or products available at the given price and terms.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "ProductQueries": {
+          "type": "array",
+          "items": {
+            "$ref": "Product_4_0_0.schema.json#/definitions/ProductQueries"
+          },
+          "maxItems": 2,
+          "minItems": 1
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type",
+        "ProductQueries"
+      ],
+      "discriminator": "@type"
+    },
+    "OrderID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Order"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0400:Identifier",
+          "$ref": "Common_4_0_0.schema.json#/definitions/Identifier"
+        },
+        "OrderRef": {
+          "description": "Refers to the objID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Order": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Order"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OrderID"
+        },
+        {
+          "properties": {
+            "Offer": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OfferID"
+              },
+              "maxItems": 99,
+              "minItems": 1
+            },
+            "Traveler": {
+              "description": "Assigned Type: ota2-0400:Traveler",
+              "$ref": "Common_4_0_0.schema.json#/definitions/TravelerID"
+            },
+            "RelatedTraveler": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_4_0_0.schema.json#/definitions/RelatedTraveler"
+              },
+              "maxItems": 98
+            },
+            "Payment": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PaymentID"
+              },
+              "maxItems": 5
+            },
+            "TotalPrice": {
+              "description": "Assigned Type: order-0300:TotalPrice",
+              "$ref": "#/definitions/TotalPrice"
+            },
+            "GuaranteePolicy": {
+              "description": "Assigned Type: order-0300:GuaranteePolicy",
+              "$ref": "#/definitions/GuaranteePolicy"
+            },
+            "Commission": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Commission"
+              },
+              "maxItems": 9
+            },
+            "PersonProductRef": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PersonProductRef"
+              },
+              "maxItems": 99
+            },
+            "TripPurpose": {
+              "description": "Assigned Type: ota2-0400:Code",
+              "$ref": "Common_4_0_0.schema.json#/definitions/Code"
+            },
+            "ExtensionPoint_Summary": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+            }
+          },
+          "required": [
+            "Offer",
+            "Traveler"
+          ]
+        }
+      ]
+    },
+    "OrderConfirmation": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Order"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Order"
+        },
+        {
+          "properties": {
+            "description": {
+              "description": "Assigned Type: ota2-0400:StringLong",
+              "type": "string",
+              "maxLength": 4096
+            },
+            "ConfirmationId": {
+              "description": "Assigned Type: ota2-0400:Identifier",
+              "$ref": "Common_4_0_0.schema.json#/definitions/Identifier"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    },
+    "TermsAndConditionsID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "TermsAndConditions"
+      },
+      "description": "The terms and conditions related to an offer.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0400:Identifier",
+          "$ref": "Common_4_0_0.schema.json#/definitions/Identifier"
+        },
+        "TermsAndConditionsRef": {
+          "description": "Refers to the objID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "TermsAndConditions": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "TermsAndConditions"
+      },
+      "description": "The terms and conditions related to an offer.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TermsAndConditionsID"
+        },
+        {
+          "properties": {
+            "duration": {
+              "description": "Specifies the duration of the trip.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "Promotion": {
+              "description": "Assigned Type: ota2-0400:Promotion",
+              "$ref": "Common_4_0_0.schema.json#/definitions/Promotion"
+            },
+            "RebateProgram": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RebateProgram"
+              },
+              "maxItems": 25
+            },
+            "Description": {
+              "description": "Assigned Type: ota2-0400:Description",
+              "$ref": "Common_4_0_0.schema.json#/definitions/Description"
+            },
+            "CancelPenalty": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CancelPenalty"
+              },
+              "maxItems": 10
+            },
+            "GuaranteePolicy": {
+              "description": "Assigned Type: order-0300:GuaranteePolicy",
+              "$ref": "#/definitions/GuaranteePolicy"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "PaymentID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Payment"
+      },
+      "description": "Payment information which may be related to one or more offers.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0400:Identifier",
+          "$ref": "Common_4_0_0.schema.json#/definitions/Identifier"
+        },
+        "PaymentRef": {
+          "description": "Refers to the objID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Payment": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Payment"
+      },
+      "description": "Payment information which may be related to one or more offers.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PaymentID"
+        },
+        {
+          "properties": {
+            "FormOfPaymentSummary": {
+              "type": "array",
+              "items": {
+                "$ref": "Finance_3_0_0.schema.json#/definitions/FormOfPayment"
+              },
+              "maxItems": 5,
+              "minItems": 1
+            },
+            "Amount": {
+              "description": "Assigned Type: ota2-0400:CurrencyAmount",
+              "$ref": "Common_4_0_0.schema.json#/definitions/CurrencyAmount"
+            },
+            "Person": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_4_0_0.schema.json#/definitions/PersonID"
+              },
+              "maxItems": 99
+            },
+            "OfferRef": {
+              "description": "The offer that the payment is for.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          },
+          "required": [
+            "FormOfPaymentSummary",
+            "Amount"
+          ]
+        }
+      ]
+    },
+    "TotalPrice": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "TotalPrice"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "Total": {
+          "description": "Assigned Type: ota2-0400:CurrencyAmount",
+          "$ref": "Common_4_0_0.schema.json#/definitions/CurrencyAmount"
+        },
+        "ProductPrice": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductPrice"
+          },
+          "maxItems": 99
+        },
+        "PriceModifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PriceModifiers"
+          },
+          "maxItems": 99
+        },
+        "Fee": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_4_0_0.schema.json#/definitions/Fee"
+          },
+          "maxItems": 99
+        },
+        "Taxes": {
+          "description": "Assigned Type: ota2-0400:Taxes",
+          "$ref": "Common_4_0_0.schema.json#/definitions/Taxes"
+        },
+        "estimateInd": {
+          "description": "When true, indicates the total price is an estimate.",
+          "type": "boolean"
+        },
+        "taxExcludedInd": {
+          "description": "Taxes are included in the Total price unless this indicator is set.  Individual taxes may be excluded by indicating as such on the individual tax item.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type",
+        "Total"
+      ],
+      "discriminator": "@type"
+    },
+    "GuaranteePolicy": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GuaranteePolicy"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "retribution": {
+          "description": "An enumerated type defining the type of action taken when the deadline has been exceeded. Valid values: Res Automatically Cancelled, Res No Longer Guaranteed.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: GuaranteeType_RetributionType"
+              ]
+            }
+          },
+          "$ref": "#/definitions/Retribution_Enum"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0400:StringTiny",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}StringLength1to32"
+              ]
+            }
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "type": {
+          "description": "An enumerated type defining the guarantee to be applied to this reservation.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: GuaranteeType_GuaranteeType"
+              ]
+            }
+          },
+          "$ref": "#/definitions/GuaranteeType_Enum"
+        },
+        "guaranteePolicyType": {
+          "description": "GuaranteePolicyType: An enumerated type that defines the guarantee policy applied to the booking restrictions.",
+          "$ref": "#/definitions/GuaranteeType_Enum"
+        },
+        "Deadline": {
+          "description": "Assigned Type: order-0300:Deadline",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}Deadline"
+              ]
+            }
+          },
+          "$ref": "#/definitions/Deadline"
+        },
+        "Comment": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_4_0_0.schema.json#/definitions/Comment"
+          },
+          "maxItems": 20
+        },
+        "Description": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_4_0_0.schema.json#/definitions/Description"
+          },
+          "maxItems": 9
+        },
+        "CurrencyCode": {
+          "description": "Assigned Type: ota2-0400:CurrencyCode",
+          "$ref": "Common_4_0_0.schema.json#/definitions/CurrencyCode"
+        },
+        "GuaranteesAccepted": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GuaranteesAccepted"
+          },
+          "maxItems": 100
+        },
+        "DepositPolicy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DepositPolicy"
+          },
+          "maxItems": 10
+        },
+        "HoldTime": {
+          "description": "Assigned Type: ota2-0400:DateTimeStamp",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}time"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0.schema.json#/definitions/DateTimeStamp"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "PersonProductRef": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "PersonProductRef"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "JourneyQueryProduct": {
+          "description": "Assigned Type: prod-0400:Journey_Query_Product",
+          "$ref": "Product_4_0_0.schema.json#/definitions/JourneyQueryProduct"
+        },
+        "PersonIdentifier": {
+          "description": "Assigned Type: ota2-0400:Person_ID",
+          "$ref": "Common_4_0_0.schema.json#/definitions/PersonID"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "PersonDiscount": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "PersonDiscount"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "PersonIdentifier": {
+          "description": "Assigned Type: ota2-0400:Person_ID",
+          "$ref": "Common_4_0_0.schema.json#/definitions/PersonID"
+        },
+        "Discount": {
+          "description": "Assigned Type: ota2-0400:RateQualifier",
+          "$ref": "Common_4_0_0.schema.json#/definitions/RateQualifier"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Policy": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "Policy"
+      },
+      "description": "Policy information regarding the ancillary for example Power Cart rental policy.",
+      "properties": {
+        "type": {
+          "description": "Assigned Type: ota2-0400:StringShort",
+          "type": "string",
+          "maxLength": 128
+        }
+      }
+    },
+    "Applicability_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "Applicability_Enum"
+      },
+      "type": "string",
+      "enum": [
+        "FromPickupLocation",
+        "FromDropoffLocation",
+        "BeforePickup",
+        "AfterDropoff"
+      ]
+    },
+    "FeeType_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "FeeType_Enum"
+      },
+      "description": "A descriptor for the fee amount, such as low, high and average.",
+      "type": "string",
+      "enum": [
+        "Low",
+        "Mid",
+        "Average",
+        "High"
+      ]
+    },
+    "RateCategory_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "RateCategory_Enum"
+      },
+      "description": "The RateCategory attribute defines a set of valid values for the category of a rate. Typically rates are offered as either Leisure rates or Business (Corporate) rates, with a business rate usually including additional costs such as the cost of insurance, etc.  This set of values defines the rate categories. Refer to OpenTravel Code List Rate Category (RTC).",
+      "type": "string",
+      "enum": [
+        "Government",
+        "Business",
+        "Leisure",
+        "Employee",
+        "VIP",
+        "All",
+        "Association",
+        "Business standard",
+        "Corporate",
+        "Industry",
+        "Fully inclusive",
+        "Inclusive",
+        "Negotiated",
+        "Promotional",
+        "Credential",
+        "Standard",
+        "Consortiums",
+        "Conventions"
+      ]
+    },
+    "GuaranteesAccepted": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GuaranteesAccepted"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "array",
+          "items": {
+            "$ref": "CodeList_3_0_0.schema.json#/definitions/PaymentType_Enum"
+          },
+          "maxItems": 50
+        },
+        "PaymentCardCode": {
+          "type": "array",
+          "items": {
+            "$ref": "CodeList_3_0_0.schema.json#/definitions/PaymentCardCode_Enum"
+          },
+          "maxItems": 30
+        },
+        "noCardHolderInfoReqInd": {
+          "description": "If true, no credit card holder information is required. If false, it is not required.",
+          "type": "boolean"
+        },
+        "nameReqInd": {
+          "description": "If true, the credit card holder name is required. If false, it is not required.",
+          "type": "boolean"
+        },
+        "addressReqInd": {
+          "description": "If true, credit card holder address is required. If false, it is not required.",
+          "type": "boolean"
+        },
+        "phoneReqInd": {
+          "description": "If true, credit card holder phone number is required. If false, it is not required.",
+          "type": "boolean"
+        },
+        "interbankNbrReqInd": {
+          "description": "If true, the credit card interbank number is required. If false, it is not required.",
+          "type": "boolean"
+        },
+        "bookingSourceAllowedInd": {
+          "description": "When true, the booking source may be used to guarantee the booking.",
+          "type": "boolean"
+        },
+        "corpDiscountNbrAllowedInd": {
+          "description": "When true, the corporate discount number may be used to guarantee the booking.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "GuaranteeType_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "GuaranteeType_Enum"
+      },
+      "description": "An enumerated type defining the guarantee to be applied to this reservation.",
+      "type": "string",
+      "enum": [
+        "GuaranteeRequired",
+        "CC/DC/Voucher",
+        "Profile",
+        "NoGuaranteesAccepted",
+        "GuaranteesAccepted",
+        "DepositRequired",
+        "GuaranteesNotRequired",
+        "DepositNotRequired",
+        "PrepayRequired",
+        "PrepayNotRequired",
+        "NoDepositsAccepted"
+      ]
+    },
+    "Retribution_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "Retribution_Enum"
+      },
+      "description": "An enumerated type defining the type of action taken when the deadline has been exceeded.",
+      "type": "string",
+      "enum": [
+        "ResAutoCancelled",
+        "ResNotGuaranteed"
+      ]
+    },
+    "Commission": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "Commission"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "statusType": {
+          "description": "Indicates the status of the commission payment itself (e.g. no-show indicates that a different commission may be applied if the reservation is not fulfilled).",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: CommissionType_StatusType"
+              ]
+            }
+          },
+          "$ref": "#/definitions/Commission_Enum"
+        },
+        "percent": {
+          "description": "Assigned Type: ota2-0400:Percent",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}Percentage"
+              ]
+            },
+            "examples": [
+              {
+                "context": "Order",
+                "value": "10"
+              }
+            ]
+          },
+          "type": "number",
+          "format": "float",
+          "maximum": 100.0,
+          "exclusiveMaximum": false,
+          "minimum": 0.0,
+          "exclusiveMinimum": false
+        },
+        "reasonCode": {
+          "description": "Assigned Type: ota2-0400:StringTiny",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}StringLength1to8"
+              ]
+            }
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "billToID": {
+          "description": "Assigned Type: ota2-0400:StringTiny",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}StringLength1to8"
+              ]
+            }
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "maxCommissionUnitApplies": {
+          "description": "Maximum number of units for which the commission will be applied. This may be used in conjunction with the frequency attribute.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}positiveInteger"
+              ]
+            }
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "capAmount": {
+          "description": "Assigned Type: ota2-0400:Money",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}Money"
+              ]
+            }
+          },
+          "type": "number",
+          "format": "float"
+        },
+        "CurrencyCode": {
+          "description": "Assigned Type: ota2-0400:CurrencyCode",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "AttributeGroup: CurrencyCodeGroup"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0.schema.json#/definitions/CurrencyCode"
+        },
+        "Frequency": {
+          "description": "Assigned Type: ota2-0300:ChargeUnit_Enum",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}OTA_CodeType"
+              ]
+            }
+          },
+          "$ref": "CodeList_3_0_0.schema.json#/definitions/ChargeUnit_Enum"
+        },
+        "PersonIdentifier": {
+          "description": "Assigned Type: ota2-0400:Person_ID",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}UniqueID_Type"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0.schema.json#/definitions/PersonID"
+        },
+        "CommissionableAmount": {
+          "description": "Assigned Type: order-0300:CommissionableAmount",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}CommissionableAmount"
+              ]
+            }
+          },
+          "$ref": "#/definitions/CommissionableAmount"
+        },
+        "PrepaidAmount": {
+          "description": "Assigned Type: ota2-0400:CurrencyAmount",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}PrepaidAmount"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0.schema.json#/definitions/CurrencyAmount"
+        },
+        "FlatCommission": {
+          "description": "Assigned Type: ota2-0400:CurrencyAmount",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}FlatCommission"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0.schema.json#/definitions/CurrencyAmount"
+        },
+        "PayableAmount": {
+          "description": "Assigned Type: ota2-0400:CurrencyAmount",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}CommissionPayableAmount"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0.schema.json#/definitions/CurrencyAmount"
+        },
+        "Comment": {
+          "description": "Assigned Type: ota2-0400:Comment",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}ParagraphType"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0.schema.json#/definitions/Comment"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "CommissionableAmount": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "CommissionableAmount"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "CurrencyAmountGroup": {
+          "description": "Assigned Type: ota2-0400:CurrencyAmount",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "AttributeGroup: CurrencyAmountGroup"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0.schema.json#/definitions/CurrencyAmount"
+        },
+        "taxInclusiveInd": {
+          "description": "When true, indicates that the commission is calculated using the rate including tax. When false, indicates that the commission is calculated using the net rate.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Commission_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "Commission_Enum"
+      },
+      "type": "string",
+      "enum": [
+        "Full",
+        "Partial",
+        "Non-paying",
+        "No-show",
+        "Adjustment",
+        "Commissionable"
+      ]
+    },
+    "AmountDetermination_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "AmountDetermination_Enum"
+      },
+      "description": "Used to indicate if an amount is inclusive or exclusive of other charges, such as taxes, or is cumulative (amounts have been added to each other).",
+      "type": "string",
+      "enum": [
+        "Inclusive",
+        "Exclusive",
+        "Cumulative"
+      ]
+    },
+    "RebateProgram": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "RebateProgram"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "programName": {
+          "description": "Assigned Type: ota2-0400:String",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            }
+          },
+          "type": "string",
+          "maxLength": 512
+        },
+        "PaymentCardSummary": {
+          "type": "array",
+          "items": {
+            "$ref": "Finance_3_0_0.schema.json#/definitions/PaymentCard"
+          },
+          "maxItems": 9
+        },
+        "ProgramRestrictions": {
+          "description": "Assigned Type: ota2-0400:TextFree",
+          "$ref": "Common_4_0_0.schema.json#/definitions/TextFree"
+        },
+        "participationInd": {
+          "description": "When true, the supplier is participating in a rebate program, e.g. a VAT (value added tax) program.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Gratuity": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "Gratuity"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "AmountOrPercent": {
+          "description": "Assigned Type: ota2-0400:AmountOrPercent",
+          "$ref": "Common_4_0_0.schema.json#/definitions/AmountOrPercent"
+        },
+        "mandatoryInd": {
+          "description": "When true, a gratuity is mandatory.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Deadline": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Deadline"
+      },
+      "description": "Allows a choice between a time period range, an absolute date or a date range for the appication of a cancellation penalty.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "deadlineType": {
+          "description": "An enumerated list of deadline types e.g.Before Arrival.",
+          "$ref": "Ground_2_0_0.schema.json#/definitions/DeadlineDropTime_Enum"
+        },
+        "ExtensionPoint_Shared": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Shared"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "DeadlineTimePeriod": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Deadline"
+      },
+      "description": "Allows a choice between a time period range, an absolute date or a date range for the appication of a cancellation penalty.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Deadline"
+        },
+        {
+          "properties": {
+            "minPeriod": {
+              "description": "The minimum time period.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxPeriod": {
+              "description": "The maximum time period",
+              "type": "integer",
+              "format": "int32"
+            },
+            "timePeriod": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "DeadlineAbsoluteDate": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Deadline"
+      },
+      "description": "Allows a choice between a time period range, an absolute date or a date range for the appication of a cancellation penalty.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Deadline"
+        },
+        {
+          "properties": {
+            "absoluteDateTime": {
+              "description": "Assigned Type: ota2-0400:DateTime",
+              "type": "string",
+              "format": "date-time"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "CancelPenalty": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "CancelPenalty"
+      },
+      "description": "The CancelPenalty class defines the cancellation policy of the hotel facility.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "numberOfNights": {
+          "description": "Used in conjunction with the basis type when Nights is selected.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "BasisType": {
+          "description": "Assigned Type: ota2-0300:BasisType",
+          "$ref": "CodeList_3_0_0.schema.json#/definitions/BasisType"
+        },
+        "Deadline": {
+          "description": "Assigned Type: order-0300:Deadline",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}Deadline"
+              ]
+            }
+          },
+          "$ref": "#/definitions/Deadline"
+        },
+        "AmountPercent": {
+          "description": "Assigned Type: ota2-0400:AmountPercent",
+          "$ref": "Common_4_0_0.schema.json#/definitions/AmountPercent"
+        },
+        "Description": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_4_0_0.schema.json#/definitions/Description"
+          },
+          "maxItems": 9
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "CancelPenaltyDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "CancelPenalty"
+      },
+      "description": "The CancelPenalty class defines the cancellation policy of the hotel facility.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CancelPenalty"
+        },
+        {
+          "properties": {
+            "policyId": {
+              "description": "Assigned Type: ota2-0400:StringTiny",
+              "x-otm-annotations": {
+                "documentation": {
+                  "implementers": [
+                    "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}StringLength1to16"
+                  ]
+                }
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "nonRefundableInd": {
+              "description": "Indicates that any prepayment for the reservation is non refundable, therefore a 100% penalty on the prepayment is applied, irrespective of deadline.",
+              "type": "boolean"
+            },
+            "noCancelInd": {
+              "description": "Note: This will typically be set to false indicating that a reservation may be cancelled.",
+              "type": "boolean"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "PriceModifiers": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "PriceModifiers"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "Promotion": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_4_0_0.schema.json#/definitions/Promotion"
+          },
+          "maxItems": 99
+        },
+        "RateQualifier": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_4_0_0.schema.json#/definitions/RateQualifier"
+          },
+          "maxItems": 99
+        },
+        "PersonIdentifier": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_4_0_0.schema.json#/definitions/PersonID"
+          },
+          "maxItems": 99
+        },
+        "ProductRef": {
+          "description": "A reference to the product for which the rate modifier applies.",
+          "type": "string"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "ProductPrice": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "ProductPrice"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "Price": {
+          "description": "Assigned Type: ota2-0400:Price",
+          "$ref": "Common_4_0_0.schema.json#/definitions/Price"
+        },
+        "Taxes": {
+          "description": "Assigned Type: ota2-0400:Taxes",
+          "$ref": "Common_4_0_0.schema.json#/definitions/Taxes"
+        },
+        "Fee": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_4_0_0.schema.json#/definitions/Fee"
+          },
+          "maxItems": 99
+        },
+        "ProductRef": {
+          "description": "Refers to the objID on an object defined elsewhere in the current document.",
+          "type": "string"
+        },
+        "Gratuity": {
+          "description": "Assigned Type: order-0300:Gratuity",
+          "$ref": "#/definitions/Gratuity"
+        },
+        "taxExcludedInd": {
+          "description": "When present and true, tax is excluded from the price.",
+          "type": "boolean"
+        },
+        "feesIncludedInd": {
+          "description": "When present and true, fees are included.",
+          "type": "boolean"
+        },
+        "gratuityIncludedInd": {
+          "description": "When present and true, the gratuity is included in the price of this product.",
+          "type": "boolean"
+        },
+        "ExtensionPoint_Shared": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Shared"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "ProductPriceHospitality": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "ProductPrice"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProductPrice"
+        },
+        {
+          "properties": {
+            "RoomRate": {
+              "description": "Assigned Type: ph:RoomRate",
+              "$ref": "Hospitality_1_0_0.schema.json#/definitions/RoomRateID"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "DepositPolicy": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "DepositPolicy"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "numberOfNights": {
+          "description": "The number of nights used to calculate the deposit required.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "BasisType": {
+          "description": "Assigned Type: ota2-0300:BasisType",
+          "$ref": "CodeList_3_0_0.schema.json#/definitions/BasisType"
+        },
+        "AmountPercent": {
+          "description": "Assigned Type: ota2-0400:AmountPercent",
+          "$ref": "Common_4_0_0.schema.json#/definitions/AmountPercent"
+        },
+        "Deadline": {
+          "description": "Assigned Type: order-0300:Deadline",
+          "$ref": "#/definitions/Deadline"
+        },
+        "Description": {
+          "description": "Assigned Type: ota2-0400:Description",
+          "$ref": "Common_4_0_0.schema.json#/definitions/Description"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "CreateOrderRQ": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Order_CreateOrder"
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Request_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+              "$ref": "Common_4_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "POS": {
+              "description": "Assigned Type: ota2-0400:POS",
+              "$ref": "Common_4_0_0.schema.json#/definitions/POS"
+            },
+            "Order": {
+              "description": "Assigned Type: order-0300:Order",
+              "$ref": "#/definitions/OrderID"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "CreateOrderRS": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Order_CreateOrder"
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Response_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+              "$ref": "Common_4_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "Result": {
+              "description": "Assigned Type: ota2-0400:Result",
+              "$ref": "Common_4_0_0.schema.json#/definitions/Result"
+            },
+            "OrderConfirmation": {
+              "description": "Assigned Type: order-0300:Order_Confirmation",
+              "$ref": "#/definitions/OrderConfirmation"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "CreateOrderNotif": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Order_CreateOrder"
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Notif_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+              "$ref": "Common_4_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "POS": {
+              "description": "Assigned Type: ota2-0400:POS",
+              "$ref": "Common_4_0_0.schema.json#/definitions/POS"
+            },
+            "Result": {
+              "description": "Assigned Type: ota2-0400:Result",
+              "$ref": "Common_4_0_0.schema.json#/definitions/Result"
+            },
+            "Order": {
+              "description": "Assigned Type: order-0300:Order",
+              "$ref": "#/definitions/OrderID"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "DeleteOrderRQ": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Order_DeleteOrder"
+      },
+      "description": "The order id of the order that was deleted (canceled).",
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Request_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+              "$ref": "Common_4_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "POS": {
+              "description": "Assigned Type: ota2-0400:POS",
+              "$ref": "Common_4_0_0.schema.json#/definitions/POS"
+            },
+            "Order": {
+              "description": "Assigned Type: order-0300:Order",
+              "$ref": "#/definitions/OrderID"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "DeleteOrderRS": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Order_DeleteOrder"
+      },
+      "description": "The order id of the order that was deleted (canceled).",
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Response_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+              "$ref": "Common_4_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "Result": {
+              "description": "Assigned Type: ota2-0400:Result",
+              "$ref": "Common_4_0_0.schema.json#/definitions/Result"
+            },
+            "OrderIdentifier": {
+              "description": "Assigned Type: order-0300:Order_ID",
+              "$ref": "#/definitions/OrderID"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "DeleteOrderNotif": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "Order_DeleteOrder"
+      },
+      "description": "The order id of the order that was deleted (canceled).",
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Notif_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+              "$ref": "Common_4_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "POS": {
+              "description": "Assigned Type: ota2-0400:POS",
+              "$ref": "Common_4_0_0.schema.json#/definitions/POS"
+            },
+            "Result": {
+              "description": "Assigned Type: ota2-0400:Result",
+              "$ref": "Common_4_0_0.schema.json#/definitions/Result"
+            },
+            "OrderIdentifier": {
+              "description": "Assigned Type: order-0300:Order_ID",
+              "$ref": "#/definitions/OrderID"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "OfferIdentifier": {
+          "$ref": "#/definitions/OfferID"
+        }
+      },
+      "required": [
+        "OfferIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "OfferSummary": {
+          "$ref": "#/definitions/Offer"
+        }
+      },
+      "required": [
+        "OfferSummary"
+      ]
+    },
+    {
+      "properties": {
+        "OfferConfirmed": {
+          "$ref": "#/definitions/OfferConfirmed"
+        }
+      },
+      "required": [
+        "OfferConfirmed"
+      ]
+    },
+    {
+      "properties": {
+        "OfferQueryOffer": {
+          "$ref": "#/definitions/OfferQueryOffer"
+        }
+      },
+      "required": [
+        "OfferQueryOffer"
+      ]
+    },
+    {
+      "properties": {
+        "OrderIdentifier": {
+          "$ref": "#/definitions/OrderID"
+        }
+      },
+      "required": [
+        "OrderIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "OrderSummary": {
+          "$ref": "#/definitions/Order"
+        }
+      },
+      "required": [
+        "OrderSummary"
+      ]
+    },
+    {
+      "properties": {
+        "OrderConfirmation": {
+          "$ref": "#/definitions/OrderConfirmation"
+        }
+      },
+      "required": [
+        "OrderConfirmation"
+      ]
+    },
+    {
+      "properties": {
+        "TermsAndConditionsIdentifier": {
+          "$ref": "#/definitions/TermsAndConditionsID"
+        }
+      },
+      "required": [
+        "TermsAndConditionsIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "TermsAndConditionsSummary": {
+          "$ref": "#/definitions/TermsAndConditions"
+        }
+      },
+      "required": [
+        "TermsAndConditionsSummary"
+      ]
+    },
+    {
+      "properties": {
+        "PaymentIdentifier": {
+          "$ref": "#/definitions/PaymentID"
+        }
+      },
+      "required": [
+        "PaymentIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "PaymentSummary": {
+          "$ref": "#/definitions/Payment"
+        }
+      },
+      "required": [
+        "PaymentSummary"
+      ]
+    },
+    {
+      "properties": {
+        "TotalPrice": {
+          "$ref": "#/definitions/TotalPrice"
+        }
+      },
+      "required": [
+        "TotalPrice"
+      ]
+    },
+    {
+      "properties": {
+        "GuaranteePolicy": {
+          "$ref": "#/definitions/GuaranteePolicy"
+        }
+      },
+      "required": [
+        "GuaranteePolicy"
+      ]
+    },
+    {
+      "properties": {
+        "PersonProductRef": {
+          "$ref": "#/definitions/PersonProductRef"
+        }
+      },
+      "required": [
+        "PersonProductRef"
+      ]
+    },
+    {
+      "properties": {
+        "PersonDiscount": {
+          "$ref": "#/definitions/PersonDiscount"
+        }
+      },
+      "required": [
+        "PersonDiscount"
+      ]
+    },
+    {
+      "properties": {
+        "GuaranteesAccepted": {
+          "$ref": "#/definitions/GuaranteesAccepted"
+        }
+      },
+      "required": [
+        "GuaranteesAccepted"
+      ]
+    },
+    {
+      "properties": {
+        "Commission": {
+          "$ref": "#/definitions/Commission"
+        }
+      },
+      "required": [
+        "Commission"
+      ]
+    },
+    {
+      "properties": {
+        "CommissionableAmount": {
+          "$ref": "#/definitions/CommissionableAmount"
+        }
+      },
+      "required": [
+        "CommissionableAmount"
+      ]
+    },
+    {
+      "properties": {
+        "RebateProgram": {
+          "$ref": "#/definitions/RebateProgram"
+        }
+      },
+      "required": [
+        "RebateProgram"
+      ]
+    },
+    {
+      "properties": {
+        "Gratuity": {
+          "$ref": "#/definitions/Gratuity"
+        }
+      },
+      "required": [
+        "Gratuity"
+      ]
+    },
+    {
+      "properties": {
+        "DeadlineShared": {
+          "$ref": "#/definitions/Deadline"
+        }
+      },
+      "required": [
+        "DeadlineShared"
+      ]
+    },
+    {
+      "properties": {
+        "DeadlineTimePeriod": {
+          "$ref": "#/definitions/DeadlineTimePeriod"
+        }
+      },
+      "required": [
+        "DeadlineTimePeriod"
+      ]
+    },
+    {
+      "properties": {
+        "DeadlineAbsoluteDate": {
+          "$ref": "#/definitions/DeadlineAbsoluteDate"
+        }
+      },
+      "required": [
+        "DeadlineAbsoluteDate"
+      ]
+    },
+    {
+      "properties": {
+        "CancelPenaltySummary": {
+          "$ref": "#/definitions/CancelPenalty"
+        }
+      },
+      "required": [
+        "CancelPenaltySummary"
+      ]
+    },
+    {
+      "properties": {
+        "CancelPenaltyDetail": {
+          "$ref": "#/definitions/CancelPenaltyDetail"
+        }
+      },
+      "required": [
+        "CancelPenaltyDetail"
+      ]
+    },
+    {
+      "properties": {
+        "PriceModifiers": {
+          "$ref": "#/definitions/PriceModifiers"
+        }
+      },
+      "required": [
+        "PriceModifiers"
+      ]
+    },
+    {
+      "properties": {
+        "ProductPriceShared": {
+          "$ref": "#/definitions/ProductPrice"
+        }
+      },
+      "required": [
+        "ProductPriceShared"
+      ]
+    },
+    {
+      "properties": {
+        "ProductPriceHospitality": {
+          "$ref": "#/definitions/ProductPriceHospitality"
+        }
+      },
+      "required": [
+        "ProductPriceHospitality"
+      ]
+    },
+    {
+      "properties": {
+        "DepositPolicy": {
+          "$ref": "#/definitions/DepositPolicy"
+        }
+      },
+      "required": [
+        "DepositPolicy"
+      ]
+    },
+    {
+      "properties": {
+        "CreateOrderRQ": {
+          "$ref": "#/definitions/CreateOrderRQ"
+        }
+      },
+      "required": [
+        "CreateOrderRQ"
+      ]
+    },
+    {
+      "properties": {
+        "CreateOrderRS": {
+          "$ref": "#/definitions/CreateOrderRS"
+        }
+      },
+      "required": [
+        "CreateOrderRS"
+      ]
+    },
+    {
+      "properties": {
+        "CreateOrderNotif": {
+          "$ref": "#/definitions/CreateOrderNotif"
+        }
+      },
+      "required": [
+        "CreateOrderNotif"
+      ]
+    },
+    {
+      "properties": {
+        "DeleteOrderRQ": {
+          "$ref": "#/definitions/DeleteOrderRQ"
+        }
+      },
+      "required": [
+        "DeleteOrderRQ"
+      ]
+    },
+    {
+      "properties": {
+        "DeleteOrderRS": {
+          "$ref": "#/definitions/DeleteOrderRS"
+        }
+      },
+      "required": [
+        "DeleteOrderRS"
+      ]
+    },
+    {
+      "properties": {
+        "DeleteOrderNotif": {
+          "$ref": "#/definitions/DeleteOrderNotif"
+        }
+      },
+      "required": [
+        "DeleteOrderNotif"
+      ]
+    }
+  ]
+}

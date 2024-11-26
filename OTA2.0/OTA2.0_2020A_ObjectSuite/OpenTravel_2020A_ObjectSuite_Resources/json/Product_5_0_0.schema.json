@@ -1,0 +1,1944 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Product",
+  "x-otm-library": {
+    "ProjectName": "HotelDescriptiveContent 103019.otp",
+    "LibraryName": "Product",
+    "LibraryVersion": "5.0.0",
+    "LibraryStatus": "DRAFT",
+    "SourceFile": "/Product_5_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2019-10-30T13:33:14.644-0400"
+  },
+  "definitions": {
+    "RoomStayQueryProduct": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "RoomStay"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "BasicPropertyInfo": {
+          "description": "Assigned Type: ph-0200:BasicPropertyInfo",
+          "$ref": "Hospitality_2_0_0.schema.json#/definitions/BasicPropertyInfo"
+        },
+        "BaseHospitalityFacilityQuery": {
+          "description": "Assigned Type: orghs-0400:BaseHospitalityFacilityQuery_Summary",
+          "$ref": "OrganizationHospitality_4_0_0.schema.json#/definitions/BaseHospitalityFacilityQuery"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "JourneyID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Journey"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0500:Identifier",
+          "$ref": "Common_5_0_0.schema.json#/definitions/Identifier"
+        },
+        "JourneyRef": {
+          "description": "Refers to the objID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Journey": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Journey"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JourneyID"
+        },
+        {
+          "properties": {
+            "duration": {
+              "type": "string"
+            },
+            "Segment": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SegmentID"
+              },
+              "maxItems": 6,
+              "minItems": 1
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          },
+          "required": [
+            "duration",
+            "Segment"
+          ]
+        }
+      ]
+    },
+    "JourneyQueryProduct": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Journey"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "departureDateTime": {
+          "description": "Date and time of the departure.",
+          "type": "string"
+        },
+        "ArrivalPoint": {
+          "description": "Assigned Type: prod-0500:ArrivalPoint",
+          "$ref": "#/definitions/ArrivalPoint"
+        },
+        "DeparturePoint": {
+          "description": "Assigned Type: prod-0500:DeparturePoint",
+          "$ref": "#/definitions/DeparturePoint"
+        },
+        "TransportNumber": {
+          "description": "Assigned Type: prod-0500:TransportNumber",
+          "$ref": "#/definitions/TransportNumber"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type",
+        "departureDateTime",
+        "ArrivalPoint",
+        "DeparturePoint"
+      ],
+      "discriminator": "@type"
+    },
+    "Meal": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "Meal"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "mealCode": {
+          "description": "Meal(s) served",
+          "$ref": "#/definitions/Meal_Enum"
+        },
+        "ClassOfService": {
+          "description": "Assigned Type: prod-0500:ClassOfService",
+          "$ref": "#/definitions/ClassOfService"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type",
+        "ClassOfService"
+      ],
+      "discriminator": "@type"
+    },
+    "ProductID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0500:Identifier",
+          "$ref": "Common_5_0_0.schema.json#/definitions/Identifier"
+        },
+        "ProductRef": {
+          "description": "Refers to the objID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "AssociatedProductID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0500:Identifier",
+          "$ref": "Common_5_0_0.schema.json#/definitions/Identifier"
+        },
+        "ProductRef": {
+          "description": "Refers to the objID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Product": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProductID"
+        },
+        {
+          "properties": {
+            "AssociatedProductIdentifier": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AssociatedProductID"
+              },
+              "maxItems": 100
+            },
+            "ExtensionPoint_Summary": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+            }
+          }
+        }
+      ]
+    },
+    "AssociatedProduct": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssociatedProductID"
+        },
+        {
+          "properties": {
+            "AssociatedProductIdentifier": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AssociatedProductID"
+              },
+              "maxItems": 100
+            },
+            "ExtensionPoint_Summary": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+            }
+          }
+        }
+      ]
+    },
+    "ProductAncillary": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Product"
+        },
+        {
+          "properties": {
+            "Ancillary": {
+              "description": "Assigned Type: ota2-0500:Ancillary_Summary",
+              "$ref": "Common_5_0_0.schema.json#/definitions/Ancillary"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          },
+          "required": [
+            "Ancillary"
+          ]
+        }
+      ]
+    },
+    "AssociatedProductAncillary": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssociatedProductID"
+        },
+        {
+          "properties": {
+            "Ancillary": {
+              "description": "Assigned Type: ota2-0500:Ancillary_Summary",
+              "$ref": "Common_5_0_0.schema.json#/definitions/Ancillary"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          },
+          "required": [
+            "Ancillary"
+          ]
+        }
+      ]
+    },
+    "ProductActivity": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Product"
+        },
+        {
+          "properties": {
+            "Activity": {
+              "description": "Assigned Type: prod-0500:Activity",
+              "$ref": "#/definitions/Activity"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    },
+    "AssociatedProductActivity": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssociatedProductID"
+        },
+        {
+          "properties": {
+            "Activity": {
+              "description": "Assigned Type: prod-0500:Activity",
+              "$ref": "#/definitions/Activity"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    },
+    "ProductTransportation": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Product"
+        },
+        {
+          "properties": {
+            "Journey": {
+              "description": "Assigned Type: prod-0500:Journey",
+              "$ref": "#/definitions/JourneyID"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    },
+    "AssociatedProductTransportation": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssociatedProductID"
+        },
+        {
+          "properties": {
+            "Journey": {
+              "description": "Assigned Type: prod-0500:Journey",
+              "$ref": "#/definitions/JourneyID"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    },
+    "ProductGolf": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Product"
+        },
+        {
+          "properties": {
+            "TeeTime": {
+              "description": "Assigned Type: pg-0300:TeeTime",
+              "$ref": "Golf_3_0_0.schema.json#/definitions/TeeTime"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    },
+    "AssociatedProductGolf": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssociatedProductID"
+        },
+        {
+          "properties": {
+            "TeeTime": {
+              "description": "Assigned Type: pg-0300:TeeTime",
+              "$ref": "Golf_3_0_0.schema.json#/definitions/TeeTime"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    },
+    "ProductQueryAvailability": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "ProductQueries": {
+          "description": "Assigned Type: prod-0500:ProductQueries",
+          "$ref": "#/definitions/ProductQueries"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type",
+        "ProductQueries"
+      ],
+      "discriminator": "@type"
+    },
+    "AssociatedProductQueryAvailability": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "ProductQueries": {
+          "description": "Assigned Type: prod-0500:ProductQueries",
+          "$ref": "#/definitions/ProductQueries"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type",
+        "ProductQueries"
+      ],
+      "discriminator": "@type"
+    },
+    "Meal_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "Meal_Enum"
+      },
+      "type": "string",
+      "enum": [
+        "B",
+        "L",
+        "D"
+      ]
+    },
+    "Service_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "Service_Enum"
+      },
+      "type": "string",
+      "enum": [
+        "M",
+        "D",
+        "B",
+        "C"
+      ]
+    },
+    "OtherServiceInfo": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "OtherServiceInfo"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0500:OSI_Code",
+          "type": "string",
+          "pattern": "[A-Z]{4}"
+        },
+        "text": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "type": "string",
+          "maxLength": 128
+        },
+        "Operator": {
+          "description": "Assigned Type: ota2-0500:CompanyName",
+          "$ref": "Common_5_0_0.schema.json#/definitions/CompanyName"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Activity": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Activity"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "start": {
+          "description": "The start date and or time of the activity.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "ExtensionPoint_Shared": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Shared"
+        }
+      },
+      "required": [
+        "@type",
+        "start"
+      ],
+      "discriminator": "@type"
+    },
+    "ClassOfService": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "ClassOfService"
+      },
+      "properties": {
+        "count": {
+          "description": "Number available for sale or that have been sold",
+          "type": "integer",
+          "format": "int32"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "name": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "code",
+        "name"
+      ]
+    },
+    "LocationPoint": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "LocationPoint"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "kioskInd": {
+          "type": "boolean"
+        },
+        "curbSideBaggageCheckInd": {
+          "type": "boolean"
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type",
+        "code"
+      ],
+      "discriminator": "@type"
+    },
+    "ArrivalPoint": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "LocationPoint"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "kioskInd": {
+          "type": "boolean"
+        },
+        "curbSideBaggageCheckInd": {
+          "type": "boolean"
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type",
+        "code"
+      ],
+      "discriminator": "@type"
+    },
+    "DeparturePoint": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "LocationPoint"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "kioskInd": {
+          "type": "boolean"
+        },
+        "curbSideBaggageCheckInd": {
+          "type": "boolean"
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type",
+        "code"
+      ],
+      "discriminator": "@type"
+    },
+    "LocationPointDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "LocationPoint"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/LocationPoint"
+        },
+        {
+          "properties": {
+            "openingTime": {
+              "type": "string"
+            },
+            "closingTime": {
+              "type": "string"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          },
+          "required": [
+            "openingTime",
+            "closingTime"
+          ]
+        }
+      ]
+    },
+    "ArrivalPointDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "LocationPoint"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ArrivalPoint"
+        },
+        {
+          "properties": {
+            "openingTime": {
+              "type": "string"
+            },
+            "closingTime": {
+              "type": "string"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          },
+          "required": [
+            "openingTime",
+            "closingTime"
+          ]
+        }
+      ]
+    },
+    "DeparturePointDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "LocationPoint"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeparturePoint"
+        },
+        {
+          "properties": {
+            "openingTime": {
+              "type": "string"
+            },
+            "closingTime": {
+              "type": "string"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          },
+          "required": [
+            "openingTime",
+            "closingTime"
+          ]
+        }
+      ]
+    },
+    "TransportNumber": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "TransportNumber"
+      },
+      "properties": {
+        "value": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "carrier": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "operatingCarrier": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        }
+      },
+      "required": [
+        "carrier"
+      ]
+    },
+    "ProductQueries": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "ProductQueries"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "PriceModifiers": {
+          "description": "Assigned Type: order-0400:PriceModifiers",
+          "$ref": "Order_4_0_0.schema.json#/definitions/PriceModifiers"
+        },
+        "LoyaltyProgram": {
+          "description": "Assigned Type: ota2-0500:LoyaltyProgram_Summary",
+          "$ref": "Common_5_0_0.schema.json#/definitions/LoyaltyProgram"
+        },
+        "ExtensionPoint_Shared": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Shared"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "ProductQueriesTransportation": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "ProductQueries"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProductQueries"
+        },
+        {
+          "properties": {
+            "JourneyQueryProduct": {
+              "description": "Assigned Type: prod-0500:Journey_Query_Product",
+              "$ref": "#/definitions/JourneyQueryProduct"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "DepartureArrival": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "DepartureArrival"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "dateTime": {
+          "description": "Assigned Type: ota2-0500:DateTime",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "product",
+                "value": "2016-11-28T14:14:00"
+              }
+            ]
+          },
+          "type": "string",
+          "format": "date-time"
+        },
+        "LocationPointChoice": {
+          "description": "Assigned Type: prod-0500:LocationPointChoice",
+          "$ref": "#/definitions/LocationPointChoice"
+        },
+        "asDirectedInd": {
+          "description": "If true, this location will be notified by the customer.",
+          "type": "boolean"
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Departure": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "DepartureArrival"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "dateTime": {
+          "description": "Assigned Type: ota2-0500:DateTime",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "product",
+                "value": "2016-11-28T14:14:00"
+              }
+            ]
+          },
+          "type": "string",
+          "format": "date-time"
+        },
+        "LocationPointChoice": {
+          "description": "Assigned Type: prod-0500:LocationPointChoice",
+          "$ref": "#/definitions/LocationPointChoice"
+        },
+        "asDirectedInd": {
+          "description": "If true, this location will be notified by the customer.",
+          "type": "boolean"
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Arrival": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "DepartureArrival"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "dateTime": {
+          "description": "Assigned Type: ota2-0500:DateTime",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "product",
+                "value": "2016-11-28T14:14:00"
+              }
+            ]
+          },
+          "type": "string",
+          "format": "date-time"
+        },
+        "LocationPointChoice": {
+          "description": "Assigned Type: prod-0500:LocationPointChoice",
+          "$ref": "#/definitions/LocationPointChoice"
+        },
+        "asDirectedInd": {
+          "description": "If true, this location will be notified by the customer.",
+          "type": "boolean"
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "DepartureArrivalDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "DepartureArrival"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DepartureArrival"
+        },
+        {
+          "properties": {
+            "openingTime": {
+              "type": "string"
+            },
+            "closingTime": {
+              "type": "string"
+            },
+            "TimeSpan": {
+              "description": "Assigned Type: ota2-0500:TimeSpan",
+              "$ref": "Common_5_0_0.schema.json#/definitions/TimeSpan"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "DepartureDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "DepartureArrival"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Departure"
+        },
+        {
+          "properties": {
+            "openingTime": {
+              "type": "string"
+            },
+            "closingTime": {
+              "type": "string"
+            },
+            "TimeSpan": {
+              "description": "Assigned Type: ota2-0500:TimeSpan",
+              "$ref": "Common_5_0_0.schema.json#/definitions/TimeSpan"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "ArrivalDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "DepartureArrival"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Arrival"
+        },
+        {
+          "properties": {
+            "openingTime": {
+              "type": "string"
+            },
+            "closingTime": {
+              "type": "string"
+            },
+            "TimeSpan": {
+              "description": "Assigned Type: ota2-0500:TimeSpan",
+              "$ref": "Common_5_0_0.schema.json#/definitions/TimeSpan"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "LocationPointChoice": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "LocationPointChoice"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "name": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "type": "string",
+          "maxLength": 128
+        },
+        "Location": {
+          "description": "Assigned Type: ota2-0500:Location_Summary",
+          "$ref": "Common_5_0_0.schema.json#/definitions/Location"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0500:Identifier",
+          "$ref": "Common_5_0_0.schema.json#/definitions/Identifier"
+        },
+        "ExtensionPoint_Shared": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Shared"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "LocationPointChoiceAddress": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "LocationPointChoice"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/LocationPointChoice"
+        },
+        {
+          "properties": {
+            "Notes": {
+              "description": "Assigned Type: ota2-0500:Text",
+              "$ref": "Common_5_0_0.schema.json#/definitions/Text"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "LocationPointChoiceAirport": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "LocationPointChoice"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/LocationPointChoice"
+        },
+        {
+          "properties": {
+            "terminal": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "product",
+                    "value": "2"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "gate": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "product",
+                    "value": "38B"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "country": {
+              "description": "Assigned Type: ota2-0500:CountryCode_ISO3166",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "product",
+                    "value": "US"
+                  }
+                ]
+              },
+              "type": "string",
+              "pattern": "[a-zA-Z]{2}"
+            },
+            "code": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "product",
+                    "value": "LAX"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "FlightInfo": {
+              "description": "Assigned Type: pgt-0300:FlightInfo_Summary",
+              "$ref": "Ground_3_0_0.schema.json#/definitions/FlightInfo"
+            },
+            "kioskInd": {
+              "type": "boolean"
+            },
+            "curbSideBaggageCheckInd": {
+              "type": "boolean"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          },
+          "required": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "SegmentID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Segment"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0500:Identifier",
+          "$ref": "Common_5_0_0.schema.json#/definitions/Identifier"
+        },
+        "SegmentRef": {
+          "description": "Refers to the objID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Segment": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Segment"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SegmentID"
+        },
+        {
+          "properties": {
+            "numberOfStops": {
+              "description": "The number of intermediate stops.",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "product",
+                    "value": "1"
+                  }
+                ]
+              },
+              "type": "integer",
+              "format": "int32"
+            },
+            "duration": {
+              "type": "string"
+            },
+            "status": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "Departure": {
+              "description": "Assigned Type: prod-0500:Departure",
+              "$ref": "#/definitions/Departure"
+            },
+            "Arrival": {
+              "description": "Assigned Type: prod-0500:Arrival",
+              "$ref": "#/definitions/Arrival"
+            },
+            "Transport": {
+              "description": "Assigned Type: prod-0500:Transport",
+              "$ref": "#/definitions/Transport"
+            },
+            "Description": {
+              "description": "Assigned Type: ota2-0500:TextFree",
+              "$ref": "Common_5_0_0.schema.json#/definitions/TextFree"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          },
+          "required": [
+            "Departure",
+            "Arrival"
+          ]
+        }
+      ]
+    },
+    "Transport": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Transport"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "TransportNumber": {
+          "description": "Assigned Type: prod-0500:TransportNumber",
+          "$ref": "#/definitions/TransportNumber"
+        },
+        "ExtensionPoint_Shared": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Shared"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "PropertyInfo": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "PropertyInfo"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Site": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "PropertyInfo"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "PropertyInfoDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "PropertyInfo"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PropertyInfo"
+        },
+        {
+          "properties": {
+            "name": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "cityCode": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "chainCode": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "chainName": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "brandCode": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "brandName": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "SiteDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "PropertyInfo"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Site"
+        },
+        {
+          "properties": {
+            "name": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "cityCode": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "chainCode": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "chainName": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "brandCode": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "brandName": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "GuestCount": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "GuestCount"
+      },
+      "description": "Identifies the number of guests for the reservation.",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ageQualifyingCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "age": {
+          "description": "Specifies the specific age of the guest.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "MealsIncluded": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "MealsIncluded"
+      },
+      "description": "Specifies which meals are included with this rate plan.",
+      "properties": {
+        "mealPlanCodes": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "breakfastInd": {
+          "description": "When true, indicates that breakfast is included with this rate plan.",
+          "type": "boolean"
+        },
+        "lunchInd": {
+          "description": "When true, indicates that lunch is included with this rate plan.",
+          "type": "boolean"
+        },
+        "dinnerInd": {
+          "description": "When true, indicates dinner is included with this rate plan.",
+          "type": "boolean"
+        },
+        "eveningReceptionInd": {
+          "description": "When true, indicates an evening reception is included with this rate plan.",
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "RoomStayQueryProduct": {
+          "$ref": "#/definitions/RoomStayQueryProduct"
+        }
+      },
+      "required": [
+        "RoomStayQueryProduct"
+      ]
+    },
+    {
+      "properties": {
+        "JourneyIdentifier": {
+          "$ref": "#/definitions/JourneyID"
+        }
+      },
+      "required": [
+        "JourneyIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "JourneySummary": {
+          "$ref": "#/definitions/Journey"
+        }
+      },
+      "required": [
+        "JourneySummary"
+      ]
+    },
+    {
+      "properties": {
+        "JourneyQueryProduct": {
+          "$ref": "#/definitions/JourneyQueryProduct"
+        }
+      },
+      "required": [
+        "JourneyQueryProduct"
+      ]
+    },
+    {
+      "properties": {
+        "Meal": {
+          "$ref": "#/definitions/Meal"
+        }
+      },
+      "required": [
+        "Meal"
+      ]
+    },
+    {
+      "properties": {
+        "ProductIdentifier": {
+          "$ref": "#/definitions/ProductID"
+        }
+      },
+      "required": [
+        "ProductIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "AssociatedProductIdentifier": {
+          "$ref": "#/definitions/ProductID"
+        }
+      },
+      "required": [
+        "AssociatedProductIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "ProductSummary": {
+          "$ref": "#/definitions/Product"
+        }
+      },
+      "required": [
+        "ProductSummary"
+      ]
+    },
+    {
+      "properties": {
+        "AssociatedProductSummary": {
+          "$ref": "#/definitions/Product"
+        }
+      },
+      "required": [
+        "AssociatedProductSummary"
+      ]
+    },
+    {
+      "properties": {
+        "ProductAncillary": {
+          "$ref": "#/definitions/ProductAncillary"
+        }
+      },
+      "required": [
+        "ProductAncillary"
+      ]
+    },
+    {
+      "properties": {
+        "AssociatedProductAncillary": {
+          "$ref": "#/definitions/ProductAncillary"
+        }
+      },
+      "required": [
+        "AssociatedProductAncillary"
+      ]
+    },
+    {
+      "properties": {
+        "ProductActivity": {
+          "$ref": "#/definitions/ProductActivity"
+        }
+      },
+      "required": [
+        "ProductActivity"
+      ]
+    },
+    {
+      "properties": {
+        "AssociatedProductActivity": {
+          "$ref": "#/definitions/ProductActivity"
+        }
+      },
+      "required": [
+        "AssociatedProductActivity"
+      ]
+    },
+    {
+      "properties": {
+        "ProductTransportation": {
+          "$ref": "#/definitions/ProductTransportation"
+        }
+      },
+      "required": [
+        "ProductTransportation"
+      ]
+    },
+    {
+      "properties": {
+        "AssociatedProductTransportation": {
+          "$ref": "#/definitions/ProductTransportation"
+        }
+      },
+      "required": [
+        "AssociatedProductTransportation"
+      ]
+    },
+    {
+      "properties": {
+        "ProductGolf": {
+          "$ref": "#/definitions/ProductGolf"
+        }
+      },
+      "required": [
+        "ProductGolf"
+      ]
+    },
+    {
+      "properties": {
+        "AssociatedProductGolf": {
+          "$ref": "#/definitions/ProductGolf"
+        }
+      },
+      "required": [
+        "AssociatedProductGolf"
+      ]
+    },
+    {
+      "properties": {
+        "ProductQueryAvailability": {
+          "$ref": "#/definitions/ProductQueryAvailability"
+        }
+      },
+      "required": [
+        "ProductQueryAvailability"
+      ]
+    },
+    {
+      "properties": {
+        "AssociatedProductQueryAvailability": {
+          "$ref": "#/definitions/ProductQueryAvailability"
+        }
+      },
+      "required": [
+        "AssociatedProductQueryAvailability"
+      ]
+    },
+    {
+      "properties": {
+        "OtherServiceInfo": {
+          "$ref": "#/definitions/OtherServiceInfo"
+        }
+      },
+      "required": [
+        "OtherServiceInfo"
+      ]
+    },
+    {
+      "properties": {
+        "ActivityShared": {
+          "$ref": "#/definitions/Activity"
+        }
+      },
+      "required": [
+        "ActivityShared"
+      ]
+    },
+    {
+      "properties": {
+        "LocationPointSummary": {
+          "$ref": "#/definitions/LocationPoint"
+        }
+      },
+      "required": [
+        "LocationPointSummary"
+      ]
+    },
+    {
+      "properties": {
+        "ArrivalPointSummary": {
+          "$ref": "#/definitions/LocationPoint"
+        }
+      },
+      "required": [
+        "ArrivalPointSummary"
+      ]
+    },
+    {
+      "properties": {
+        "DeparturePointSummary": {
+          "$ref": "#/definitions/LocationPoint"
+        }
+      },
+      "required": [
+        "DeparturePointSummary"
+      ]
+    },
+    {
+      "properties": {
+        "LocationPointDetail": {
+          "$ref": "#/definitions/LocationPointDetail"
+        }
+      },
+      "required": [
+        "LocationPointDetail"
+      ]
+    },
+    {
+      "properties": {
+        "ArrivalPointDetail": {
+          "$ref": "#/definitions/LocationPointDetail"
+        }
+      },
+      "required": [
+        "ArrivalPointDetail"
+      ]
+    },
+    {
+      "properties": {
+        "DeparturePointDetail": {
+          "$ref": "#/definitions/LocationPointDetail"
+        }
+      },
+      "required": [
+        "DeparturePointDetail"
+      ]
+    },
+    {
+      "properties": {
+        "ProductQueriesShared": {
+          "$ref": "#/definitions/ProductQueries"
+        }
+      },
+      "required": [
+        "ProductQueriesShared"
+      ]
+    },
+    {
+      "properties": {
+        "ProductQueriesTransportation": {
+          "$ref": "#/definitions/ProductQueriesTransportation"
+        }
+      },
+      "required": [
+        "ProductQueriesTransportation"
+      ]
+    },
+    {
+      "properties": {
+        "DepartureArrivalSummary": {
+          "$ref": "#/definitions/DepartureArrival"
+        }
+      },
+      "required": [
+        "DepartureArrivalSummary"
+      ]
+    },
+    {
+      "properties": {
+        "DepartureSummary": {
+          "$ref": "#/definitions/DepartureArrival"
+        }
+      },
+      "required": [
+        "DepartureSummary"
+      ]
+    },
+    {
+      "properties": {
+        "ArrivalSummary": {
+          "$ref": "#/definitions/DepartureArrival"
+        }
+      },
+      "required": [
+        "ArrivalSummary"
+      ]
+    },
+    {
+      "properties": {
+        "DepartureArrivalDetail": {
+          "$ref": "#/definitions/DepartureArrivalDetail"
+        }
+      },
+      "required": [
+        "DepartureArrivalDetail"
+      ]
+    },
+    {
+      "properties": {
+        "DepartureDetail": {
+          "$ref": "#/definitions/DepartureArrivalDetail"
+        }
+      },
+      "required": [
+        "DepartureDetail"
+      ]
+    },
+    {
+      "properties": {
+        "ArrivalDetail": {
+          "$ref": "#/definitions/DepartureArrivalDetail"
+        }
+      },
+      "required": [
+        "ArrivalDetail"
+      ]
+    },
+    {
+      "properties": {
+        "LocationPointChoiceShared": {
+          "$ref": "#/definitions/LocationPointChoice"
+        }
+      },
+      "required": [
+        "LocationPointChoiceShared"
+      ]
+    },
+    {
+      "properties": {
+        "LocationPointChoiceAddress": {
+          "$ref": "#/definitions/LocationPointChoiceAddress"
+        }
+      },
+      "required": [
+        "LocationPointChoiceAddress"
+      ]
+    },
+    {
+      "properties": {
+        "LocationPointChoiceAirport": {
+          "$ref": "#/definitions/LocationPointChoiceAirport"
+        }
+      },
+      "required": [
+        "LocationPointChoiceAirport"
+      ]
+    },
+    {
+      "properties": {
+        "SegmentIdentifier": {
+          "$ref": "#/definitions/SegmentID"
+        }
+      },
+      "required": [
+        "SegmentIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "SegmentSummary": {
+          "$ref": "#/definitions/Segment"
+        }
+      },
+      "required": [
+        "SegmentSummary"
+      ]
+    },
+    {
+      "properties": {
+        "TransportShared": {
+          "$ref": "#/definitions/Transport"
+        }
+      },
+      "required": [
+        "TransportShared"
+      ]
+    },
+    {
+      "properties": {
+        "PropertyInfoSummary": {
+          "$ref": "#/definitions/PropertyInfo"
+        }
+      },
+      "required": [
+        "PropertyInfoSummary"
+      ]
+    },
+    {
+      "properties": {
+        "SiteSummary": {
+          "$ref": "#/definitions/PropertyInfo"
+        }
+      },
+      "required": [
+        "SiteSummary"
+      ]
+    },
+    {
+      "properties": {
+        "PropertyInfoDetail": {
+          "$ref": "#/definitions/PropertyInfoDetail"
+        }
+      },
+      "required": [
+        "PropertyInfoDetail"
+      ]
+    },
+    {
+      "properties": {
+        "SiteDetail": {
+          "$ref": "#/definitions/PropertyInfoDetail"
+        }
+      },
+      "required": [
+        "SiteDetail"
+      ]
+    }
+  ]
+}

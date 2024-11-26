@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.0 (http://www.xmlspy.com) by Tony Williams (Travel Technology Initiative Ltd) -->
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="PkgCommonElements.xsd"/>
+	<xs:complexType name="PkgTravelSegment">
+		<xs:annotation>
+			<xs:documentation>A full definition of a travel segment including supplemental price and facilities.</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="AirSegment" type="PkgAirSegmentType"/>
+			<xs:element name="FerrySegment" type="PkgFerrySegmentType"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="PkgAirSegmentType">
+		<xs:annotation>
+			<xs:documentation>Provides details of an air segment</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="DepartureAirport" type="PkgTravelLocationName" minOccurs="0"/>
+			<xs:element name="ArrivalAirport" type="PkgTravelLocationName" minOccurs="0"/>
+			<xs:element name="Supplement" type="AmountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A value representing a supplement for this journey (e.g. Aberdeen to Palma) over the cost of the journey on which package basic price is calculated (e.g. Gatwick to Palma).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AvailableSeats" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A collection of seat availability by class.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="SeatAvailability" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="RPH" type="RPH_Type" use="optional"/>
+		<xs:attribute name="Type">
+			<xs:annotation>
+				<xs:documentation>Indicates whether the flight is a scheduled or charter service.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Charter"/>
+					<xs:enumeration value="Scheduled"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attributeGroup ref="PkgTravelDateTimeAttributes"/>
+		<xs:attribute name="TravelCode" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>The code allocated to a travel component by the supplier.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Duration" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The length of time.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CarrierCode" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>A code representing the transport operator.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CarrierName" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>The name of the transport operator.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ServiceId" use="optional">
+			<xs:simpleType>
+				<xs:annotation>
+					<xs:documentation>Identification number for a transport movement eg a scheduled train or flight number (UNICORN U399)</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="7"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="SeatAvailability">
+		<xs:annotation>
+			<xs:documentation>A collection of seat availability by class.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Supplement" type="AmountType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>A value representing a supplement for this seat class over the cost of the seat class on which package basic price is calculated.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="SeatQty" type="xs:integer">
+				<xs:annotation>
+					<xs:documentation>The number of seats in a Service Class.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceClass" type="PkgTransportServiceClassCode" use="optional">
+				<xs:annotation>
+					<xs:documentation>Class of travel or services. (UNICORN U259)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="PkgFerrySegmentType">
+		<xs:annotation>
+			<xs:documentation>Provides details of a ferry segment</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:any/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

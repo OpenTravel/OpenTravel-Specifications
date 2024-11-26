@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:element name="OTA_HotelInvSyncRS">
+		<xs:complexType>
+		      <xs:sequence>
+	               <xs:element ref="UniqueId"/>
+				<xs:choice>
+		                <xs:sequence>
+	                            <xs:element ref="Success" />
+		                       <xs:element ref="Warnings" minOccurs="0" />
+		                </xs:sequence>
+	                     <xs:element ref="Errors"/>
+				</xs:choice>
+		      </xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

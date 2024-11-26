@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:element name="OTA_HotelRateAmountNotifRS">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_RateAmountNotifRS message returns an integer to indicate the status of processing the OTA_RateAmountNotifRQ message.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UniqueId"/>
+				<xs:choice>
+					<xs:sequence>
+						<xs:element ref="Success"/>
+						<xs:element ref="Warnings" minOccurs="0"/>
+					</xs:sequence>
+					<xs:element ref="Errors"/>
+				</xs:choice>
+				<!-- BW added UniqueId element reference -->
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This element defines standard attributes that appear on the root element for all OTA payloads.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

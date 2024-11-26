@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="PkgCodeList.xsd"/>
+	<xs:complexType name="PkgAirportType">
+		<xs:annotation>
+			<xs:documentation>Details of an airport</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="PkgCode" type="PkgAirportCode" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="AmountType">
+		<xs:annotation>
+			<xs:documentation>An amount of money required as payment in a given monetary unit (UNICORN U372) or Charge in minor currency units. (UNICORN U236)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:decimal">
+				<xs:attribute name="PkgCurrencyCode" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="PkgCarHireGroupType">
+		<xs:annotation>
+			<xs:documentation>A description of a car hire group</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="2-door Compact"/>
+			<xs:enumeration value="4-door Compact"/>
+			<xs:enumeration value="4-door Intermediate"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="PkgDateTimeType">
+		<xs:sequence>
+			<xs:element name="PkgDate" type="xs:date"/>
+			<xs:element name="PkgTime" type="xs:time"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PkgDescriptionType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="PkgLanguageCode" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="DOW_Type">
+		<xs:annotation>
+			<xs:documentation>Weekday abbreviation.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Mon"/>
+			<xs:enumeration value="Tue"/>
+			<xs:enumeration value="Wed"/>
+			<xs:enumeration value="Thu"/>
+			<xs:enumeration value="Fri"/>
+			<xs:enumeration value="Sat"/>
+			<xs:enumeration value="Sun"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgEquipmentHireType">
+		<xs:annotation>
+			<xs:documentation>An equipment hire service.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Snow Skis"/>
+			<xs:enumeration value="Water Skis"/>
+			<xs:enumeration value="Scuba Kit"/>
+			<xs:enumeration value="Cycle Helmet"/>
+			<xs:enumeration value="Roller Blades"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgEventType">
+		<xs:annotation>
+			<xs:documentation>An entertainment or sporting event.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Theatre"/>
+			<xs:enumeration value="Sports"/>
+			<xs:enumeration value="Opera"/>
+			<xs:enumeration value="Culture"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgLeisureActivityType">
+		<xs:annotation>
+			<xs:documentation>A leisure or sporting activity.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Water Sports"/>
+			<xs:enumeration value="Skiing"/>
+			<xs:enumeration value="Diving"/>
+			<xs:enumeration value="Paragliding"/>
+			<xs:enumeration value="Cycling"/>
+			<xs:enumeration value="Gambling"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgLifeStyleType">
+		<xs:annotation>
+			<xs:documentation>Preferred LifeStyle the destination should 'support'.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="adventurous"/>
+			<xs:enumeration value="children"/>
+			<xs:enumeration value="child"/>
+			<xs:enumeration value="classic music"/>
+			<xs:enumeration value="couple"/>
+			<xs:enumeration value="hiphop"/>
+			<xs:enumeration value="single"/>
+			<xs:enumeration value="sports"/>
+			<xs:enumeration value="theatre"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgPaymentType">
+		<xs:annotation>
+			<xs:documentation>A coded identification of a type of payment e.g. VISA.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="VISA"/>
+			<xs:enumeration value="MASTERCARD"/>
+			<xs:enumeration value="SWITCH"/>
+			<xs:enumeration value="DELTA"/>
+			<xs:enumeration value="AMEX"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgPer">
+		<xs:annotation>
+			<xs:documentation>Indicates the unit type for a price e.g. room, passenger etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Unit"/>
+			<xs:enumeration value="Pax"/>
+			<xs:enumeration value="Room"/>
+			<xs:enumeration value="Week"/>
+			<xs:enumeration value="Night"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgPersonalInsuranceType">
+		<xs:annotation>
+			<xs:documentation>A coded identification of a type of insurance (UNICORN U347 - Codes yet to be defined.) This element is equivalent to UN/EDIFACT 4497 Insurance cover type, coded)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Standard"/>
+			<xs:enumeration value="Senior"/>
+			<xs:enumeration value="Child"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Replaced by PreferLevel in OTA Preferences.xsd
+	<xs:simpleType name="PkgPreferLevelType">
+		<xs:annotation>
+			<xs:documentation>Indicates the level of preference for the bed type requested.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Only"/>
+			<xs:enumeration value="Unacceptable"/>
+			<xs:enumeration value="Immaterial"/>
+			<xs:enumeration value="Preferred"/>
+		</xs:restriction>
+	</xs:simpleType>
+	-->
+	<xs:simpleType name="PkgPropertyClassType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Luxury"/>
+			<xs:enumeration value="Moderate"/>
+			<xs:enumeration value="Economy"/>
+			<xs:enumeration value="1st Class"/>
+			<xs:enumeration value="Budget"/>
+			<xs:enumeration value="Tourist"/>
+			<xs:enumeration value="1star"/>
+			<xs:enumeration value="2star"/>
+			<xs:enumeration value="3star"/>
+			<xs:enumeration value="4star"/>
+			<xs:enumeration value="5star"/>
+			<xs:enumeration value="6star"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RPH_Type">
+		<xs:annotation>
+			<xs:documentation>(Reference Place Holder) - an index code to identify an instance in a collection of like items.. For example,  used to assign individual passengers or clients to particular itinerary items (UNICORN U351)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	<xs:simpleType name="PkgTourismServiceType">
+		<xs:annotation>
+			<xs:documentation>A service with tourist connotations.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Excursion"/>
+			<xs:enumeration value="Museum"/>
+			<xs:enumeration value="Exhibition"/>
+			<xs:enumeration value="Event"/>
+			<xs:enumeration value="Sports Facilities"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PkgSportsFacilityType">
+		<xs:annotation>
+			<xs:documentation>A facility for sports participation.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Football"/>
+			<xs:enumeration value="Badminton"/>
+			<xs:enumeration value="Motor racing"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:attributeGroup name="PkgTravelDateTimeAttributes">
+		<xs:annotation>
+			<xs:documentation>The standard date and time attributes for a travel segment.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="PkgDepartureDay" type="DOW_Type" use="optional">
+			<xs:annotation>
+				<xs:documentation>The day of the week on which the travel segment starts e.g. Monday.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PkgCheckIn" type="xs:dateTime" use="optional"/>
+		<xs:attribute name="PkgDeparture" type="xs:dateTime"/>
+		<xs:attribute name="PkgArrival" type="xs:dateTime" use="optional"/>
+	</xs:attributeGroup>
+</xs:schema>

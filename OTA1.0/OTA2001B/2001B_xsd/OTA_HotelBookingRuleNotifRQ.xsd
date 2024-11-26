@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:include schemaLocation="StatusApplicationControl.xsd"/>
+	<xs:include schemaLocation="CancelPenalties.xsd"/>
+	<xs:include schemaLocation="ProfileType.xsd"/>
+	<xs:include schemaLocation="Profile.xsd"/>
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:element name="OTA_HotelBookingRuleNotifRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_BookingRuleNotifRQ is the message that sends the notification of the rules and restrictions affecting the availability status of the hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UniqueId" minOccurs="0"/>
+				<xs:element ref="HotelReference" minOccurs="0"/>
+				<xs:element ref="RuleMessages" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This element defines standard attributes that appear on the root element for all OTA payloads.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RuleMessages">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RuleMessage" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RuleMessage">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StatusApplicationControl" minOccurs="0"/>
+				<xs:element ref="BookingRules" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="LocatorId" type="xs:positiveInteger" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Can be used to communicate back to the sender exactly which transaction may have had a problem; e.g. "Message 214 had an invalid date range".</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AcceptedCard" type="xs:string"/>
+	<xs:element name="AcceptedCards">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of strings identifying the credit cards, debit cards, etc. that are accepted for the guarantee. These strings may be the CreditCardCode attribute from the Profile.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AcceptedCard" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BookingRule">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The BookingRule element defines restrictions to rates and stays at the hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DropTimeOffset" minOccurs="0"/>
+				<xs:element ref="BookingRuleCodes" minOccurs="0"/>
+				<xs:element ref="EffectiveBookingDateRange" minOccurs="0"/>
+				<xs:element ref="GuaranteesAccepted" minOccurs="0"/>
+				<xs:element ref="AcceptedCards" minOccurs="0"/>
+				<xs:element ref="ProfileTypes" minOccurs="0"/>
+				<xs:element ref="Profiles" minOccurs="0"/>
+				<xs:element ref="CancelPenalties" minOccurs="0"/>
+				<xs:element ref="RequiredPaymts" minOccurs="0"/>
+				<xs:element ref="Description" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="MaxAdvancedBookingOffset" type="xs:duration" use="optional"/>
+			<xs:attribute name="MinAdvancedBookingOffset" type="xs:duration" use="optional"/>
+			<xs:attribute name="MinTotalOccupancy" type="xs:integer" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Defines the minimum number of total occupants required for a rate plan.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MaxTotalOccupancy" type="xs:int" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Defines the maximum number of total occupants allowed for a rate plan.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AbsoluteDropTime" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The fixed time that the booking restriction goes into effect to cancel the non-guaranteed reservation.  Either this attribute or the DropTimeOffset element may be used.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BookingRuleCode">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="IsCancellable"/>
+				<xs:enumeration value="IsModifiable"/>
+				<xs:enumeration value="IsRefundable"/>
+				<xs:enumeration value="ProfileTypesInclusive"/>
+				<xs:enumeration value="ProfilesInclusive"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="BookingRuleCodes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="BookingRuleCode" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BookingRules">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="BookingRule" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Description" type="xs:string"/>
+	<xs:element name="DropTimeOffset">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines the offset of time for a drop time to go into effect.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="DropTimeOffset" type="xs:duration" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The amount of time before a DropTime goes into effect.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DropTimeOffsetType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type indicating when the drop time goes into effect.  Values: Before Arrival, After Booking.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="BeforeArrival"/>
+						<xs:enumeration value="AfterBooking"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EffectiveBookingDateRange">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Absolute dates during which this restriction is to be applied.  This attribute and/or the three AdvanceBooking attributes may be used to set applied booking dates.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DateTimeSpan" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GuaranteesAccepted">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="GuaranteeAccepted" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GuaranteeAccepted">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of GuaranteeAccepted elements indicating the types of guarantees accepted for this booking restriction.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AcceptedPayments" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="GuaranteeType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">GuaranteeType: An enumerated type that indicates a type of guarantee accepted for this booking restriction. Guarantee Type is an attribute of GuaranteeInfo in the Hotel Reservation.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="GuaranteeRequired"/>
+						<xs:enumeration value="CC_DC_Voucher"/>
+						<xs:enumeration value="Profile"/>
+						<xs:enumeration value="Deposit"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="GuaranteePolicyType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">GuaranteePolicyType: An enumerated type that defines the guarantee policy applied to the booking restrictions.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="NoGuaranteesAccepted"/>
+						<xs:enumeration value="GuaranteesAccepted"/>
+						<xs:enumeration value="GuaranteesRequired"/>
+						<xs:enumeration value="DepositRequired"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AcceptedPayments">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of AcceptedPayment elements identifying payments that are accepted for the guarantee. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AcceptedPayment" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AcceptedPayment">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">AcceptedPayment identifies a payment accepted for guarantee.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PaymentType" use="optional">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="CreditCard"/>
+								<xs:enumeration value="DebitCard"/>
+								<xs:enumeration value="BusinessAcct">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">An account maintained with a travel agency, wholesaler or corporate account.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="CentralBill"/>
+								<xs:enumeration value="DirectBill"/>
+								<xs:enumeration value="Voucher"/>
+								<xs:enumeration value="Coupon"/>
+								<xs:enumeration value="BusinessCheck"/>
+								<xs:enumeration value="PersonalCheck"/>
+								<xs:enumeration value="Cash"/>
+								<xs:enumeration value="MoneyOrder"/>
+								<xs:enumeration value="Redemption">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Redemption of awards from a points program.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="Barter">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">An exchange of services through an arrangement with a business partner in which no monetary amounts are involved.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="CurrencyCode" type="xs:string" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProfileTypes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ProfileType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Profiles">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Profile" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RequiredPaymts">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of required payments that are part of the booking restriction.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RequiredPaymt" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RequiredPaymt">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A required payment, such as a deposit due or payment in the event of cancellation, and the deadline for such payment.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DeadlineOffset" minOccurs="0"/>
+				<xs:element ref="Amount" minOccurs="0"/>
+				<xs:element ref="AmountPercent" minOccurs="0"/>
+				<xs:element ref="AcceptedPayments" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="RetributionType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type defining the type of action taken when the deadline has been exceeded. Valid values: Res Automatically Cancelled, Res No Longer Guaranteed.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="ResAutoCancelled"/>
+						<xs:enumeration value="ResNotGuaranteed"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="AbsoluteDeadline" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">AbsoluteDeadline: A dateTime that indicates the absolute deadline for the required payment.  Either this or the offset attributes may be used.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TaxInclusive" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates whether taxes are included when figuring the cancel penalties.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FeesInclusive" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates whether fees, such as those imposed by a travel agency or other booking agent, are included when figuring cancel penalties.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

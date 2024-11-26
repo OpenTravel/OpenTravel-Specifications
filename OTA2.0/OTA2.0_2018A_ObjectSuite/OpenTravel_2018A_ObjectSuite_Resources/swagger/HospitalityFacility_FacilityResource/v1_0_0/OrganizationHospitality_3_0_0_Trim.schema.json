@@ -1,0 +1,836 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "OrganizationHospitality",
+  "x-otm-library": {
+    "LibraryName": "OrganizationHospitality",
+    "LibraryVersion": "3.0.0",
+    "LibraryStatus": "FINAL",
+    "SourceFile": "/OrganizationHospitality_3_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2018-04-05T08:59:58.191-0400"
+  },
+  "definitions": {
+    "HotelDetails": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "HotelDetails"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "supplierIntegrationLevel": {
+          "description": "Assigned Type: ota2-0400:NonNegativeInteger",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Changed type from {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}nonNegativeInteger.",
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "orghs",
+                "value": "1"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "maxGroupRoomQuantity": {
+          "description": "Assigned Type: ota2-0400:NonNegativeInteger",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Changed type from {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}nonNegativeInteger.",
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            }
+          },
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "currencyCode": {
+          "description": "Assigned Type: ota2-0400:CurrencyCode_ISO4217",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}AlphaLength3"
+              ]
+            },
+            "examples": [
+              {
+                "context": "orghs",
+                "value": "usd"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[a-zA-Z]{3}"
+        },
+        "hotelCodeContext": {
+          "description": "Assigned Type: ota2-0400:StringShort",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "orghs",
+                "value": "Sabre"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "tTICode": {
+          "description": "Note:   This code is maintained by the Travel Technology Initiative (TTI) and provides a unique way to identify a property across a multiplicity of channels, service providers, tour companies, representation companies and third parties involved in the booking, administration and fulfillment of travel within the hospitality industry. For more information: http:\\/\\/www.tti.org\\/tticodes.html.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "Recreation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recreation"
+          }
+        },
+        "BusinessService": {
+          "type": "array",
+          "items": {
+            "$ref": "Organization_3_0_0_Trim.schema.json#/definitions/BusinessService"
+          }
+        },
+        "Policy": {
+          "description": "Assigned Type: orghs-0300:HotelPolicy",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}Policy"
+              ]
+            }
+          },
+          "$ref": "#/definitions/HotelPolicy"
+        },
+        "MeetingCenter": {
+          "type": "array",
+          "items": {
+            "$ref": "Organization_3_0_0_Trim.schema.json#/definitions/MeetingCenter"
+          }
+        },
+        "Amenity": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Amenity"
+          }
+        },
+        "Ancillary": {
+          "description": "Assigned Type: ota2-0400:Ancillary_Summary",
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Ancillary"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "HotelPolicy": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "HotelPolicy"
+      },
+      "properties": {
+        "checkInTime": {
+          "description": "The checkin time required by this hotel for a room stay.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}time"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "orghs",
+                "value": ""
+              }
+            ],
+            "examples": [
+              {
+                "context": "orghs",
+                "value": "16:00:00"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "checkOutTime": {
+          "description": "The checkout time required by this hotel for a room stay.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}time"
+              ]
+            },
+            "examples": [
+              {
+                "context": "orghs",
+                "value": "12:00:00"
+              }
+            ]
+          },
+          "type": "string"
+        }
+      }
+    },
+    "SecurityFeatures": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "SecurityFeatures"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "SecurityFeature": {
+          "type": "array",
+          "items": {
+            "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/SecurityFeature_Enum"
+          },
+          "maxItems": 100
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "FeaturesAccessibility": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Features"
+      },
+      "allOf": [
+        {
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Features"
+        },
+        {
+          "properties": {
+            "AccessibilityFeatures": {
+              "description": "Assigned Type: orghs-0300:AccessibilityFeatures",
+              "$ref": "#/definitions/AccessibilityFeatures"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "FeaturesSecurity": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Features"
+      },
+      "allOf": [
+        {
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Features"
+        },
+        {
+          "properties": {
+            "SecurityFeatures": {
+              "description": "Assigned Type: orghs-0300:SecurityFeatures_Summary",
+              "$ref": "#/definitions/SecurityFeatures"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "AccessibilityFeatures": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "AccessibilityFeatures"
+      },
+      "description": "Describes accessibility featrues.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "AccessibilityFeatures": {
+          "description": "Assigned Type: ota2-0300:DisabilityFeature_Enum",
+          "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/DisabilityFeature_Enum"
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "AccessibilityFeaturesDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "AccessibilityFeatures"
+      },
+      "description": "Describes accessibility featrues.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AccessibilityFeatures"
+        },
+        {
+          "properties": {
+            "Description": {
+              "description": "Assigned Type: ota2-0400:Text",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Text"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "DetailedHotelSearchCriteria": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "DetailedHotelSearchCriteria"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "hotelCodeContext": {
+          "description": "Assigned Type: ota2-0400:StringTiny",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}StringLength1to32"
+              ]
+            },
+            "examples": [
+              {
+                "context": "orghs",
+                "value": "Sabre"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "tTIcode": {
+          "description": "Note:   This code is maintained by the Travel Technology Initiative (TTI) and provides a unique way to identify a property across a multiplicity of channels, service providers, tour companies, representation companies and third parties involved in the booking, administration and fulfillment of travel within the hospitality industry. For more information: http:\\/\\/www.tti.org\\/tticodes.html",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}positiveInteger"
+              ]
+            }
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "Features": {
+          "description": "Assigned Type: ota2-0400:Features",
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Features"
+        },
+        "BedType": {
+          "description": "Assigned Type: ota2-0300:BedType_Enum",
+          "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/BedType_Enum"
+        },
+        "HotelAmenity": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Code"
+          },
+          "maxItems": 100
+        },
+        "RoomAmenities": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Code"
+          },
+          "maxItems": 100
+        },
+        "Rating": {
+          "description": "The minimum hotel rating value of the hotels to be returned (e.g. only return hotels with a 3.5 rating or higher).",
+          "type": "number",
+          "format": "float",
+          "maximum": 5,
+          "exclusiveMaximum": false,
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "petsAllowedInd": {
+          "description": "When true, pets are allowed at the facility.",
+          "type": "boolean"
+        },
+        "smokingRoomsInd": {
+          "description": "When true, this hotel facility offers smoking rooms.",
+          "type": "boolean"
+        },
+        "aDACompliantInd": {
+          "description": "When true, this hotel facility is ADA compliant.",
+          "type": "boolean"
+        },
+        "exactMatchInd": {
+          "description": "When true, only properties\\/rate plans that exactly match the search criteria should be returned.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "FacilityHotel": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "description": "Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.",
+      "allOf": [
+        {
+          "$ref": "Organization_3_0_0_Trim.schema.json#/definitions/Facility"
+        },
+        {
+          "properties": {
+            "brandName": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "chainName": {
+              "description": "Assigned Type: ota2-0400:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "Features": {
+              "description": "Assigned Type: ota2-0400:Features",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Features"
+            },
+            "SegmentCategory": {
+              "description": "Assigned Type: ota2-0300:SegmentCategory_Enum",
+              "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/SegmentCategory_Enum"
+            },
+            "HotelDetails": {
+              "description": "Assigned Type: orghs-0300:HotelDetails",
+              "$ref": "#/definitions/HotelDetails"
+            },
+            "RateRange": {
+              "description": "Assigned Type: ota2-0400:RateRange",
+              "$ref": "Common_4_0_0_Trim.schema.json#/definitions/RateRange"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    },
+    "FacilityQueryHotel": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "description": "Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "HotelName": {
+          "description": "A name or partial name of hotel used in searching for a hotel facility.",
+          "type": "string",
+          "maxLength": 128
+        },
+        "BrandCode": {
+          "description": "A code that identifies the brand or flag of a hotel, often used for independently-owned or franchised properties who are known by a specific brand.",
+          "type": "string",
+          "maxLength": 128
+        },
+        "BrandName": {
+          "description": "The name of a brand of hotels (e.g., Courtyard, Hampton Inn).",
+          "type": "string",
+          "maxLength": 128
+        },
+        "ChainCode": {
+          "description": "The code that identifies a hotel chain or management group. The hotel chain code is decided between vendors. This attribute is optional if the hotel is an independent property that can be identified by the HotelCode attribute.",
+          "type": "string",
+          "maxLength": 128
+        },
+        "ChainName": {
+          "description": "The name of the hotel chain (e.g., Hilton, Marriott, Hyatt, Starwood).",
+          "type": "string",
+          "maxLength": 128
+        },
+        "Radius": {
+          "description": "Assigned Type: ota2-0400:Radius",
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Radius"
+        },
+        "ReferencePoint": {
+          "description": "Assigned Type: ota2-0400:ReferencePoint",
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/ReferencePoint"
+        },
+        "DetailedHotelSearchCriteria": {
+          "description": "Assigned Type: orghs-0300:DetailedHotelSearchCriteria",
+          "$ref": "#/definitions/DetailedHotelSearchCriteria"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "FacilityQueryHotelAvail": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "description": "Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "BaseHospitalityFacilityQuery": {
+          "description": "Assigned Type: orghs-0300:BaseHospitalityFacilityQuery",
+          "$ref": "#/definitions/BaseHospitalityFacilityQuery"
+        },
+        "PropertyInfo": {
+          "description": "Assigned Type: prod-0400:PropertyInfo",
+          "$ref": "Product_4_0_0_Trim.schema.json#/definitions/PropertyInfo"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "FacilityQueryHotelAvailRetrieve": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "description": "Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "FacilityIdentifier": {
+          "type": "array",
+          "items": {
+            "$ref": "Organization_3_0_0_Trim.schema.json#/definitions/FacilityID"
+          },
+          "maxItems": 100,
+          "minItems": 1
+        },
+        "BaseHospitalityFacilityQuery": {
+          "description": "Assigned Type: orghs-0300:BaseHospitalityFacilityQuery",
+          "$ref": "#/definitions/BaseHospitalityFacilityQuery"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type",
+        "FacilityIdentifier"
+      ],
+      "discriminator": "@type"
+    },
+    "FacilityKeyHotel": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "FacilityKey"
+      },
+      "description": "Allows for a facility to be identified by and Identifier element or other elements\\/attributes that are appropriate for the specific type of facility.",
+      "allOf": [
+        {
+          "$ref": "Organization_3_0_0_Trim.schema.json#/definitions/FacilityKey"
+        },
+        {
+          "properties": {
+            "FacilityCode": {
+              "description": "A code that identifies the facility.",
+              "type": "string",
+              "maxLength": 128
+            },
+            "ChainCode": {
+              "description": "A code that identifes the chain for which the facility belongs.",
+              "type": "string",
+              "maxLength": 128
+            },
+            "BrandCode": {
+              "description": "A code that identifes the brand for which the facility belongs.",
+              "type": "string",
+              "maxLength": 128
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "BaseHospitalityFacilityQuery": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BaseHospitalityFacilityQuery"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "numberOfRooms": {
+          "description": "1The number of rooms being queried for.",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "orghs",
+                "value": "1"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "DateTimeSpan": {
+          "description": "Assigned Type: ota2-0400:TimeSpan",
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/TimeSpan"
+        },
+        "GuestCount": {
+          "type": "array",
+          "items": {
+            "$ref": "Product_4_0_0_Trim.schema.json#/definitions/GuestCount"
+          },
+          "maxItems": 99
+        },
+        "RateRange": {
+          "description": "Assigned Type: ota2-0400:RateRange",
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/RateRange"
+        },
+        "DetailedHotelSearchCriteria": {
+          "description": "Assigned Type: orghs-0300:DetailedHotelSearchCriteria",
+          "$ref": "#/definitions/DetailedHotelSearchCriteria"
+        },
+        "RoomTypeCode": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Code"
+          },
+          "maxItems": 100
+        },
+        "RatePlanCode": {
+          "type": "array",
+          "items": {
+            "$ref": "Hospitality_1_0_0_Trim.schema.json#/definitions/RatePlanCode"
+          },
+          "maxItems": 100
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type",
+        "DateTimeSpan"
+      ],
+      "discriminator": "@type"
+    },
+    "Recreation": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "Recreation"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "recreationDescription": {
+          "description": "Assigned Type: ota2-0400:StringShort",
+          "type": "string",
+          "maxLength": 128
+        },
+        "Code": {
+          "description": "Assigned Type: ota2-0300:RecreationService_Enum",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}OTA_CodeType"
+              ]
+            }
+          },
+          "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/RecreationService_Enum"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "HotelDetails": {
+          "$ref": "#/definitions/HotelDetails"
+        }
+      },
+      "required": [
+        "HotelDetails"
+      ]
+    },
+    {
+      "properties": {
+        "SecurityFeatures": {
+          "$ref": "#/definitions/SecurityFeatures"
+        }
+      },
+      "required": [
+        "SecurityFeatures"
+      ]
+    },
+    {
+      "properties": {
+        "FeaturesAccessibility": {
+          "$ref": "#/definitions/FeaturesAccessibility"
+        }
+      },
+      "required": [
+        "FeaturesAccessibility"
+      ]
+    },
+    {
+      "properties": {
+        "FeaturesSecurity": {
+          "$ref": "#/definitions/FeaturesSecurity"
+        }
+      },
+      "required": [
+        "FeaturesSecurity"
+      ]
+    },
+    {
+      "properties": {
+        "AccessibilityFeaturesSummary": {
+          "$ref": "#/definitions/AccessibilityFeatures"
+        }
+      },
+      "required": [
+        "AccessibilityFeaturesSummary"
+      ]
+    },
+    {
+      "properties": {
+        "AccessibilityFeaturesDetail": {
+          "$ref": "#/definitions/AccessibilityFeaturesDetail"
+        }
+      },
+      "required": [
+        "AccessibilityFeaturesDetail"
+      ]
+    },
+    {
+      "properties": {
+        "DetailedHotelSearchCriteria": {
+          "$ref": "#/definitions/DetailedHotelSearchCriteria"
+        }
+      },
+      "required": [
+        "DetailedHotelSearchCriteria"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityHotel": {
+          "$ref": "#/definitions/FacilityHotel"
+        }
+      },
+      "required": [
+        "FacilityHotel"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityQueryHotel": {
+          "$ref": "#/definitions/FacilityQueryHotel"
+        }
+      },
+      "required": [
+        "FacilityQueryHotel"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityQueryHotelAvail": {
+          "$ref": "#/definitions/FacilityQueryHotelAvail"
+        }
+      },
+      "required": [
+        "FacilityQueryHotelAvail"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityQueryHotelAvailRetrieve": {
+          "$ref": "#/definitions/FacilityQueryHotelAvailRetrieve"
+        }
+      },
+      "required": [
+        "FacilityQueryHotelAvailRetrieve"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityKeyHotel": {
+          "$ref": "#/definitions/FacilityKeyHotel"
+        }
+      },
+      "required": [
+        "FacilityKeyHotel"
+      ]
+    },
+    {
+      "properties": {
+        "BaseHospitalityFacilityQuery": {
+          "$ref": "#/definitions/BaseHospitalityFacilityQuery"
+        }
+      },
+      "required": [
+        "BaseHospitalityFacilityQuery"
+      ]
+    },
+    {
+      "properties": {
+        "Recreation": {
+          "$ref": "#/definitions/Recreation"
+        }
+      },
+      "required": [
+        "Recreation"
+      ]
+    }
+  ]
+}

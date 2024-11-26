@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Product",
+  "x-otm-library": {
+    "ProjectName": "OTA_FacilityResource.otp",
+    "LibraryName": "Product",
+    "LibraryVersion": "5.1.0",
+    "LibraryStatus": "FINAL",
+    "SourceFile": "/Product_5_1_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2020-05-15T11:16:10.431-0500"
+  },
+  "definitions": {
+    "ReferenceListProduct": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "ReferenceList"
+      },
+      "allOf": [
+        {
+          "$ref": "Common_5_0_0.schema.json#/definitions/ReferenceList"
+        },
+        {
+          "properties": {
+            "Product": {
+              "type": "array",
+              "items": {
+                "$ref": "Product_5_0_0.schema.json#/definitions/ProductID"
+              }
+            },
+            "ExtensionPoint_Choice": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Choice"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "ReferenceListProduct": {
+          "$ref": "#/definitions/ReferenceListProduct"
+        }
+      },
+      "required": [
+        "ReferenceListProduct"
+      ]
+    }
+  ]
+}

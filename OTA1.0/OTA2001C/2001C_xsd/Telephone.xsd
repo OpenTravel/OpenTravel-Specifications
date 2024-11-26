@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="Privacy.xsd"/>
+	<xs:complexType name="Telephone">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Construct for holding a telephone number.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="PrivacyDetails" type="Privacy">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Privacy details for this telephone.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="TelephoneAttributes"/>
+	</xs:complexType>
+	<xs:attributeGroup name="TelephoneAttributes">
+		<xs:attribute name="PhoneTechType" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates type of technology associated with this telephone number, such as Voice, Data, Fax, Pager, Cell, TTY, etc.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CountryAccessCode" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Code assigned by telecommunications authorities for international country access identifier.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="AreaCityCode" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Code assigned for telephones in a specific region, city, or area.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PhoneNumber" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Telephone number assigned to a single location.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Extension" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Extension to reach a specific party at the phone number.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PIN" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Additional codes used for pager or telephone access rights.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+</xs:schema>

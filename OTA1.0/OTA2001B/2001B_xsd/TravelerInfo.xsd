@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="AirTraveler.xsd"/>
+	<xs:include schemaLocation="SpecialReqDetails.xsd"/>
+	<xs:element name="TravelerInfo">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies passenger(s) who will travel on the reservation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AirTraveler" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="SpecialReqDetails" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

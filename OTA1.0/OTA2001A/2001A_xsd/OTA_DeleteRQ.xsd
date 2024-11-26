@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2000 Open Travel Alliance -->
+<!--Publication 2001A -->
+<!-- OTA v2001A specification - generic Delete request message -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2000/10/XMLSchema" elementFormDefault="qualified">
+	<xsd:include schemaLocation="OTA_v2ent.xsd"/>
+	<xsd:element name="OTA_DeleteRQ">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="UniqueId"/>
+			</xsd:sequence>
+			<xsd:attribute name="EchoToken" type="xsd:string"/>
+			<xsd:attribute name="TimeStamp" type="xsd:string"/>
+			<xsd:attribute name="Target" use="default" value="Production">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="Test"/>
+						<xsd:enumeration value="Production"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="Version" type="xsd:string"/>
+			<xsd:attribute name="SequenceNmbr" type="xsd:integer"/>
+			<xsd:attribute name="ReqRespVersion" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

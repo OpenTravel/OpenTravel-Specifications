@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="PkgCodeList.xsd"/>
+	<xs:complexType name="PkgTravelJourney">
+		<xs:annotation>
+			<xs:documentation>Provides details of a return travel journey</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Type" type="xs:string"/>
+		<xs:attribute name="OriginAirportID" type="PkgAirportCode"/>
+		<xs:attribute name="DestinationAirportID" type="PkgAirportCode"/>
+		<xs:attribute name="OutwardDateTime" type="xs:dateTime"/>
+		<xs:attribute name="ReturnDateTime" type="xs:dateTime"/>
+		<xs:attribute name="TravelCode" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>The code allocated to a travel component by the supplier.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CarrierCode" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>The code representing the transport operator.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CarrierName" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>The name of the transport operator.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

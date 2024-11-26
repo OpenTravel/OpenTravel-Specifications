@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2001 Open Travel Alliance -->
+<!--Publication 2001A -->
+<!-- OTA v2001A specification - generic update request message -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2000/10/XMLSchema" elementFormDefault="qualified">
+	<xsd:include schemaLocation="OTA_v2ent.xsd"/>
+	<xsd:element name="OTA_UpdateRQ">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="UniqueId"/>
+				<xsd:element ref="Position" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="EchoToken" type="xsd:string"/>
+			<xsd:attribute name="TimeStamp" type="xsd:string"/>
+			<xsd:attribute name="Target" use="default" value="Production">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="Test"/>
+						<xsd:enumeration value="Production"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="Version" type="xsd:string"/>
+			<xsd:attribute name="SequenceNmbr" type="xsd:integer"/>
+			<xsd:attribute name="ReqRespVersion" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Position">
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:sequence>
+					<xsd:element ref="Attribute" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="Element" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="Subtree" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+				<xsd:element ref="Root"/>
+			</xsd:choice>
+			<xsd:attribute name="XPath" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Attribute">
+		<xsd:complexType>
+			<xsd:attribute name="Operation" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="insert"/>
+						<xsd:enumeration value="modify"/>
+						<xsd:enumeration value="delete"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="Name" type="xsd:string" use="required"/>
+			<xsd:attribute name="Value" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Element">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:any/>
+			</xsd:sequence>
+			<xsd:attribute name="Operation" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="insert"/>
+						<xsd:enumeration value="modify"/>
+						<xsd:enumeration value="delete"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="Child" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Subtree">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:any/>
+			</xsd:sequence>
+			<xsd:attribute name="Operation" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="insert"/>
+						<xsd:enumeration value="delete"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="Child" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Root">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:any/>
+			</xsd:sequence>
+			<xsd:attribute name="Operation" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="replace"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

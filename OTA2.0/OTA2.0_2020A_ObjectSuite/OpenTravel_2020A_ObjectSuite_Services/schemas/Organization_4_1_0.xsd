@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/organization/v4_1"
+    version="4.1.0"
+    xmlns:org-0400="http://www.opentravel.org/OTM/organization/v4"
+    xmlns:org-0401="http://www.opentravel.org/OTM/organization/v4_1"
+    xmlns:orggf-0300="http://www.opentravel.org/OTM/organization/golf/v3"
+    xmlns:orghs-0400="http://www.opentravel.org/OTM/organization/hospitality/v4"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0400="http://www.opentravel.org/OTM/Common/v4"
+    xmlns:ota2-0500="http://www.opentravel.org/OTM/Common/v5"
+    xmlns:ota2-0501="http://www.opentravel.org/OTM/Common/v5_1"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:ph-0200="http://www.opentravel.org/OTM/product/hospitality/v2"
+    xmlns:prod-0500="http://www.opentravel.org/OTM/product/v5" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:ProjectName>OTA_FacilityResource.otp</otm:ProjectName>
+                <otm:LibraryName>Organization</otm:LibraryName>
+                <otm:LibraryVersion>4.1.0</otm:LibraryVersion>
+                <otm:LibraryStatus>DRAFT</otm:LibraryStatus>
+                <otm:SourceFile>/Organization_4_1_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2020-05-15T11:15:59.383-05:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/golf/v3" schemaLocation="OrganizationGolf_3_0_0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v5_1" schemaLocation="Common_5_1_0.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/hospitality/v4" schemaLocation="OrganizationHospitality_4_0_0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v4" schemaLocation="CodeList_4_0_0.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/hospitality/v2" schemaLocation="Hospitality_2_0_0.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/v4" schemaLocation="Organization_4_0_0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/product/v5" schemaLocation="Product_5_0_0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v5" schemaLocation="Common_5_0_0.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element abstract="true" name="FacilitySubGrp" type="org-0401:Facility_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Facility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="FacilityID"
+        substitutionGroup="org-0401:FacilitySubGrp" type="org-0401:Facility_ID"/>
+    <xsd:element name="FacilityIdentifier" type="org-0401:Facility_ID"/>
+    <xsd:element name="Facility"
+        substitutionGroup="org-0401:FacilitySubGrp" type="org-0401:Facility"/>
+    <xsd:element name="FacilitySummary" type="org-0401:Facility"/>
+    <xsd:element name="FacilityMeeting"
+        substitutionGroup="org-0401:FacilitySubGrp" type="org-0401:Facility_Meeting"/>
+    
+    <xsd:complexType name="Facility_ID">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Facility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="FacilityRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the obj ID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="org-0400:FacilityKey">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Allows for the appropriate type of identifier to be used dependent on the type of facility being described.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Facility">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Facility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="org-0401:Facility_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2-0500:Location">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Location information for the facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="30" minOccurs="0" ref="ota2-0500:OperationSchedule">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Collection of operation schedules.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0500:MultimediaCollection">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Images, descriptions and movies that describe the facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="Rating" type="ota2-0500:Rating">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The actual award or rating received by the facility.  May also be used for user generated ratings.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="5" minOccurs="0" ref="ota2-0500:TelephoneSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Telephone number for the facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0500:Email">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Email address for the facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="10" minOccurs="0"
+                        name="Description" type="ota2-0500:Text">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Facility description.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="org-0400:PropertySubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">An identifierfor the property that this facility is associated with.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SiteURL" type="ota2-0500:URL">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The URL for the facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0500:RelativePosition">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The RelativePosition object contains information about the direction, distance and travel to the location.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="100" minOccurs="0" ref="org-0400:FeatureAccessibility">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Identifies an accessibility feature of a property.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="100" minOccurs="0" ref="org-0400:FeatureSecurity">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Identifies a security feature of a property.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="FacilityUnitCount" type="org-0400:FacilityUnitCount">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies the counts for facility units such as the number of guest rooms, the number of meeting rooms and the number of resaurants in a facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="100" minOccurs="0" ref="ota2-0501:NoticeSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Notices (alerts, promotions etc.) associated with this facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="ota2-0500:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Name of the facility.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Facility_Meeting">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Facility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="org-0401:Facility">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="org-0400:MeetingCenter">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Meeting center details.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+</xsd:schema>

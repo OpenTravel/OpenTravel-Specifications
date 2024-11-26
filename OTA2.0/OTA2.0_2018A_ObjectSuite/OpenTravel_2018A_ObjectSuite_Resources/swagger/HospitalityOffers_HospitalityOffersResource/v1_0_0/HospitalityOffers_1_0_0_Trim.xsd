@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/resources/HospitalityResources/v1"
+    version="1.0.0"
+    xmlns:fin-0300="http://www.opentravel.org/OTM/finance/v3"
+    xmlns:order-0300="http://www.opentravel.org/OTM/order/v3"
+    xmlns:org-0300="http://www.opentravel.org/OTM/organization/v3"
+    xmlns:orghs-0300="http://www.opentravel.org/OTM/organization/hospitality/v3"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0300="http://www.opentravel.org/OTM/Common/v3"
+    xmlns:ota2-0400="http://www.opentravel.org/OTM/Common/v4"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:pgt-0200="http://www.opentravel.org/OTM/product/Ground/v2"
+    xmlns:ph="http://www.opentravel.org/OTM/product/hospitality/v1"
+    xmlns:prod-0400="http://www.opentravel.org/OTM/product/v4"
+    xmlns:rh="http://www.opentravel.org/OTM/resources/HospitalityResources/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:LibraryName>HospitalityOffers</otm:LibraryName>
+                <otm:LibraryVersion>1.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                <otm:SourceFile>/HospitalityOffers_1_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2018-04-05T08:59:59.685-04:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v3" schemaLocation="CodeList_3_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/Ground/v2" schemaLocation="Ground_2_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/product/v4" schemaLocation="Product_4_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/v3" schemaLocation="Organization_3_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/order/v3" schemaLocation="Order_3_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/hospitality/v3" schemaLocation="OrganizationHospitality_3_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v4" schemaLocation="Common_4_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/finance/v3" schemaLocation="Finance_3_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/hospitality/v1" schemaLocation="Hospitality_1_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element name="MultiPropertyHospitalityOffers" type="rh:MultiPropertyHospitalityOffers"/>
+    
+    <xsd:complexType name="MultiPropertyHospitalityOffers">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">BaseResponse</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" ref="ph:HospitalityOffersSubGrp"/>
+            <xsd:element minOccurs="0" name="PayloadStdAttributes" type="ota2-0400:PayloadStdAttributes">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0400:Result">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="SinglePropertyHospitalityOffers" type="rh:SinglePropertyHospitalityOffers"/>
+    
+    <xsd:complexType name="SinglePropertyHospitalityOffers">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">BaseResponse</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ph:HospitalityOffersSubGrp"/>
+            <xsd:element minOccurs="0" name="PayloadStdAttributes" type="ota2-0400:PayloadStdAttributes">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0400:Result">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="HospitalityOffersQueryFindHospitalityOffers" type="rh:HospitalityOffers_Query_FindHospitalityOffers"/>
+    
+    <xsd:complexType name="HospitalityOffers_Query_FindHospitalityOffers">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">HospitalityOffers</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2-0400:BasePayload"/>
+            <xsd:element minOccurs="0" ref="ph:ProductQueriesHospitality"/>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+</xsd:schema>

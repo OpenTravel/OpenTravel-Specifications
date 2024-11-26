@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_Pos.xsd"/>
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="Profile.xsd"/>
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:element name="OTA_HotelAvailRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Requests availability of hotel properties by specific criteria that may include: dates, date ranges, price range, room types, regular and qualifying rates, and/or services and amenities.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="POS" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Point of sale object. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="BookingSegments" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="BookingSegment" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			<xs:attribute name="LanguageId" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The ISO code representing the language in which the confirmation will be delivered.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SummaryOnly" type="xs:boolean" use="optional"/>
+			<xs:attribute name="SortOrder" use="optional" default="A">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="A"/>
+						<xs:enumeration value="D"/>
+						<xs:enumeration value="N"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="AvailRatesOnly" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A boolean flag that indicates the response should include ONLY those rates that are available in the date range specified, or whether rates that are NOT available should be shown. "Yes" returns only available rates; "No" returns all rates.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="BestOnly" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A boolean flag that indicates the response message should send back only the best rate available at the hotel property, as there could be multiple room types and rates that meet the requested criteria (e.g.: rate range). Allowing that the term "best rate" is subjective, the intent means the lowest rate that meets the category of the input criteria, and may have the effect of limiting the return to one rate quote as opposed to multiples.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RateRangeOnly" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A boolean flag that indicates the response message should send back only those rates that are available within the range of the minimum and maximum amount specified.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ExactMatchOnly" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A boolean flag that indicates the response message should send back only those rates that are an exact match to the requested criteria.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BookingSegment">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">To accommodate the ability to perform multiple requests within one message, the availability request contains the repeating element, BookingSegment. Each booking segment includes a collection of criteria that requests a bookable entity, which may include designated rate plans, room types, amenities or services, and the request can be used for guest rooms or other inventory items for which availability is sought. Each Booking Segment would be presumed to have a unique date range for each request.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelReference" minOccurs="0"/>
+				<xs:element ref="StayDateRange" minOccurs="0"/>
+				<xs:element ref="RateRange" minOccurs="0"/>
+				<xs:element ref="StayPattern" minOccurs="0"/>
+				<xs:element ref="RatePlanCandidates" minOccurs="0"/>
+				<xs:element ref="ProfileRefs" minOccurs="0"/>
+				<xs:element ref="Profiles" minOccurs="0"/>
+				<xs:element ref="RoomStayCandidates" minOccurs="0"/>
+				<xs:element ref="SearchCodes" minOccurs="0"/>
+				<xs:element ref="TPA_Extensions" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="AvailReqType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type that indicates whether the availability request is for a room or non-room product, such as amenities or other activities (e.g.: banquet, conference room, etc.). Values: 1 = Room, 2 = Non-Room, 3 = Both.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Room"/>
+						<xs:enumeration value="NonRoom"/>
+						<xs:enumeration value="Both"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="BookingSegmentRPH" type="xs:integer" use="optional"/>
+			<xs:attribute name="MoreIndicator" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The availability response returns the attribute if there were addtional rates that could not fit within the availability response.  The text value should be echoed in this availability request to indicate where to begin the next block of availability data.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="StayDateRange">
+		<xs:annotation>
+			<xs:documentation xml:lang="en"> Total time span covered by this availability request (from the earliest arrival to the latest departure)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StayPattern" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="LOS" type="xs:duration" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The Length of Stay or duration expressed as timeDuration in the format prescribed by W3C Candidate Recommendation 24 October 2000XML Schema Part 2: Datatypes.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EndDate" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The ending date/time for the availability requested, expressed in dateTime format as prescribed by ISO 8601.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StartDate" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The beginning date/time for the availability requested, expressed in dateTime format as prescribed by ISO 8601.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="StayPattern">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Total time span covered by this availability request (from the earliest arrival to the latest departure).</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="MinLOS" type="xs:duration" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The minimum Length of Stay requested expressed as timeDuration in the format prescribed by W3C Candidate Recommendation 24 October 2000XML Schema Part 2: Datatypes.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MaxLOS" type="xs:duration" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The maximum Length of Stay requested expressed as timeDuration in the format prescribed by W3C Candidate Recommendation 24 October 2000XML Schema Part 2: Datatypes.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ArrivalDOW" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The Day of Week of the starting date for the availability requested. Enumerated values of StartDOW are the seven days of the week: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Mon"/>
+						<xs:enumeration value="Tues"/>
+						<xs:enumeration value="Wed"/>
+						<xs:enumeration value="Thurs"/>
+						<xs:enumeration value="Fri"/>
+						<xs:enumeration value="Sat"/>
+						<xs:enumeration value="Sun"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RateRange">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A range of monetary values within which the cost of the available products are requested.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="CurrencyCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The currency that the monetary value is expressed in, as defined by ISO 4217 - Codes for the representation of currencies and funds.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MinRate" type="xs:decimal" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A decimal value that indicates the minimum monetary value to be considered in a request for an available product.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MaxRate" type="xs:decimal" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A decimal value that indicates the maximum monetary value to be considered in a request for an available product.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RatePlanCandidates">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RatePlanCandidate" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RatePlanCandidate">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">element used to identify available products and rates.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="RatePlanType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type that allows the query to specify a rate category type, and provides major categories for comparison across brands.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Standard"/>
+						<xs:enumeration value="Club"/>
+						<xs:enumeration value="Corporate"/>
+						<xs:enumeration value="Deluxe"/>
+						<xs:enumeration value="Premium"/>
+						<xs:enumeration value="Economy"/>
+						<xs:enumeration value="Family"/>
+						<xs:enumeration value="Govt"/>
+						<xs:enumeration value="TrvlIndustry"/>
+						<xs:enumeration value="Military"/>
+						<xs:enumeration value="Senior"/>
+						<xs:enumeration value="Promotion"/>
+						<xs:enumeration value="SuperSaver"/>
+						<xs:enumeration value="Volume"/>
+						<xs:enumeration value="Weekend"/>
+						<xs:enumeration value="Group"/>
+						<xs:enumeration value="Negotiated"/>
+						<xs:enumeration value="Package"/>
+						<xs:enumeration value="TrvlAgent"/>
+						<xs:enumeration value="Convention"/>
+						<xs:enumeration value="Tour"/>
+						<xs:enumeration value="ALL"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="RatePlanCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A string value may be used to request a particular code or an ID if the guest qualifies for a specific rate, such as AARP, AAA, a corporate rate, etc., or to specify a negotiated code as a result of a negotiated rate. This is not a persistent value, therefore no length is defined for the string.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ID" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A text field used to indicate the associated  ID number that is associated with the rate and required in the reservation request in order to obtain the rate.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProfileRefs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ProfileRef" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProfileRef">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a profile by UniqueId, and can be used to exchange a reference to the profile and provide access to the data it contains, allowing the application processing the message to assemble the necessary profile information in order to complete the booking.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UniqueId" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RoomStayCandidates">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RoomStayCandidate" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RoomStayCandidate">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">element used to identify available room products and rates.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="GuestCount" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="RoomType" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">(formerly, RoomInventoryCode) A code value that indicates the type of room for which this request is made, e.g.: double, king, etc. Values may use the Hotel Descriptive Content table or a codes specific to the property or hotel brand.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RoomTypeCode" type="xs:string" use="optional"/>
+			<xs:attribute name="RoomId" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A string value representing the unique identification of a room if the request is looking for a specific room.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RoomCategoryCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A value that allows the query to specify a class of room, and provides major categories for comparison across brands. Recommended values are listed in the Hotel Descriptive Content table</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PromoCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A code that identifies a special promotion or publicity announcement.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InvBlockCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A code or identification number that identifies the room  stay as part of a group, package tour, or block of rooms designated in the inventory.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Quantity" type="xs:int" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Integer value that represents the number of units of the inventory, or number of rooms requested.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GuestCount">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A recurring element that identifies the number of guests and ages of the guests in the request that determines the rates based on business rules for occupancy at each property. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Count" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The number of guests in one AgeQualifyingCode. The total number of guests in a room is the total of the Count of guests in all AgeQualifyingCodes.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AgeQualCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">(AgeQualifyingCode) A code that indicates the ages of the guests. The code is specific to a property of hotel chain and represents a business rule that may determine the charges for a guest based upon age range. For example, Adult, Child, Senior, Child With Adult, Child Without Adult, etc. This attribute allows for an increase in rate by occupant class.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SearchCodes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Can include multiple CodeRef elements to obtain detailed information. The data returned is determined by the category code sent in the request. A detailed query response may return a collection of descriptive content for each category.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CodeRef" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CodeRef">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">(Code Reference) searches by category codes for location, type of property, class of accommodations, facilities, amenities, services, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Code" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The value of the Code attribute is a code agreed upon between trading partners that represents the criteria of the search. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CodeContext" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The CodeContext attribute allows for a reference to the external code table used as the source for the code.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Profiles">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Profile" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

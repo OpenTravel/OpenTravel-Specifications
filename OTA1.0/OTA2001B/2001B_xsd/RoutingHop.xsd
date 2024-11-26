@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.1 (http://www.xmlspy.com) by Marcel Jemio (OTA) -->
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:element name="RoutingHop">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A RoutingHop object conveys information about the path that this notification update took; e.g., how many and which systems it passed through.  Note that this object is also used by the Profile Sync Object Model, and the ObjectID attribute in that case is the Profile ID, rather than the ReservationID.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="SystemCode" type="xs:string" use="required"/>
+			<xs:attribute name="LocalRefId" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identifier within the System that refers to this specific document (reservation).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TimeStamp" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">TimeStamp : TimeInstant
+The date and time that the reservation passed through a routing hop.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Comment" type="xs:string" use="optional"/>
+			<xs:attribute name="SequenceNmbr" type="xs:integer" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Sequential number assigned to hops, Base 0</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Data" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Data : String
+This attribute is provided so that each system can put in whatever data it would like (e.g., auditing information).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

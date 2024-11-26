@@ -1,0 +1,463 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Hospitality",
+  "x-otm-library": {
+    "LibraryName": "Hospitality",
+    "LibraryVersion": "2.0.0",
+    "LibraryStatus": "FINAL",
+    "SourceFile": "/Hospitality_2_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2020-05-15T11:16:19.018-0500"
+  },
+  "definitions": {
+    "RatePlanCode": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "RatePlanCode"
+      },
+      "description": "A string value may be used to request a particular code or an ID if the guest qualifies for a specific rate, such as AARP, AAA, a corporate rate, etc., or to specify a negotiated code as a result of a negotiated rate.",
+      "x-otm-annotations": {
+        "documentation": {
+          "implementers": [
+            "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}StringLength1to64"
+          ]
+        }
+      },
+      "properties": {
+        "value": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "ratePlanType": {
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/RatePlanType_Enum_Base"
+        },
+        "ratePlanTypeExtension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "ratePlanID": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}StringLength1to64"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "RatePlanID"
+              }
+            ],
+            "examples": [
+              {
+                "context": "ph",
+                "value": "12345678"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "ratePlanCategory": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}StringLength1to64"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "RatePlanCategory"
+              }
+            ],
+            "examples": [
+              {
+                "context": "ph",
+                "value": "POD"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "promotionCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "L9Z"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "promotionVendorCode": {
+          "description": "Assigned Type: ota2-0500:ListOfTinyStrings",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "WT1"
+              }
+            ]
+          },
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 32
+          }
+        },
+        "ratePlanQualifierInd": {
+          "description": "The Rate Plan Qualifier is used to control the sort order of RatePlans. Those Rate Plans that are not qualified will appear first, those that are qualified will appear last.",
+          "type": "boolean"
+        }
+      }
+    },
+    "BasicPropertyInfo": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BasicPropertyInfo"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "WASJW"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "name": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "JW Marriott Washington DC"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "chainCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "MC"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "brandCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "FS"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "cityCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "WAS"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Site": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BasicPropertyInfo"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "WASJW"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "name": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "JW Marriott Washington DC"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "chainCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "MC"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "brandCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "FS"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "cityCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "WAS"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "BasicPropertyInfoDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BasicPropertyInfo"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BasicPropertyInfo"
+        },
+        {
+          "properties": {
+            "nameShort": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "chainName": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "Marriott"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 128
+            },
+            "brandName": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "Full Service"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 128
+            },
+            "areaID": {
+              "description": "Assigned Type: ota2-0500:String",
+              "type": "string",
+              "maxLength": 512
+            },
+            "hotelCode_TTI": {
+              "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0,
+              "exclusiveMinimum": false
+            },
+            "hotelCodeContext": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "SiteDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BasicPropertyInfo"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Site"
+        },
+        {
+          "properties": {
+            "nameShort": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "chainName": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "Marriott"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 128
+            },
+            "brandName": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "ph",
+                    "value": "Full Service"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 128
+            },
+            "areaID": {
+              "description": "Assigned Type: ota2-0500:String",
+              "type": "string",
+              "maxLength": 512
+            },
+            "hotelCode_TTI": {
+              "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0,
+              "exclusiveMinimum": false
+            },
+            "hotelCodeContext": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "BasicPropertyInfoSummary": {
+          "$ref": "#/definitions/BasicPropertyInfo"
+        }
+      },
+      "required": [
+        "BasicPropertyInfoSummary"
+      ]
+    },
+    {
+      "properties": {
+        "SiteSummary": {
+          "$ref": "#/definitions/BasicPropertyInfo"
+        }
+      },
+      "required": [
+        "SiteSummary"
+      ]
+    },
+    {
+      "properties": {
+        "BasicPropertyInfoDetail": {
+          "$ref": "#/definitions/BasicPropertyInfoDetail"
+        }
+      },
+      "required": [
+        "BasicPropertyInfoDetail"
+      ]
+    },
+    {
+      "properties": {
+        "SiteDetail": {
+          "$ref": "#/definitions/BasicPropertyInfoDetail"
+        }
+      },
+      "required": [
+        "SiteDetail"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:include schemaLocation="Profile.xsd"/>
+	<xs:element name="OTA_HotelAvailRS">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Returns information about hotel properties that meet the requested criteria, indicating whether the requested service, rate, room stay, etc. is available within the date(s) specified. The response message may include Warnings from business processing rules, or Errors if the request did not succeed.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element ref="Success"/>
+					<xs:element ref="Warnings" minOccurs="0"/>
+					<xs:element ref="SummaryResponse" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:element ref="Errors"/>
+			</xs:choice>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddlOccupancyCharge">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines the amount charge for additional occupants per age range. The AddlOccupancyCharge element may be repeated for each AgeQualifyingCode to define the amounts charged for occupants at each age level.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Amount" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A decimal value indicating the monetary amount that will be charged for each additional guest of the specified age range.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AgeQualCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A code indicating the age qualification of the additional occupants of the room.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DateRange">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">defines the start and end dates of the quoted rate</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="EndDate" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">the ending date/time for the availability requested, expressed in dateTime format as prescribed by ISO 8601.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StartDate" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">the beginning date/time for the availability requested, expressed in dateTime format as prescribed by ISO 8601..</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MarketingText">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A field that allows for any free-form text used to promote the hotel property. This field may include embedded graphics or other multimedia files to describe the hotel property.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true"/>
+	</xs:element>
+	<xs:element name="MaxOccupancy">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines the maximum number of guests that are allowed in the room type for the quoted rate plan. The MaxOccupancy element may be repeated for each AgeQualifyingCode to define the maximum number of occupants at each age.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Count" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An integer value indicating the maximum number of guests of that age range that are allowed to occupy the room.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AgeQualCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A code indicating the age qualification of the occupants of the room.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="QuotedRate">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The Quote Rate  indicates the amount of the rate and currency for the rate plan and room type identified in the Summary Response, as well as other restrictions that may apply to that rate, such as the minimum or maximum length of stay, or any  required stay-over dates (such as a Saturday night). It indicates the number of units that the quoted rate is based upon, as well as the TimeUnits type used that the rate is based upon, e.g.: 3days at $100.00 per day.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="RateAmount" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A decimal value indicating the monetary amount quoted for the hotel stay.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RateBasisUnitsQty" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The number of units that the quoted rate was based on.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TimeUnitType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type indicating the interval of time that the rate is based upon.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Year"/>
+						<xs:enumeration value="Month"/>
+						<xs:enumeration value="Week"/>
+						<xs:enumeration value="Day"/>
+						<xs:enumeration value="Hour"/>
+						<xs:enumeration value="Minute"/>
+						<xs:enumeration value="Second"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="MinLOS" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The minimum length of stay required by this rate plan.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MaxLOS" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The maximum length of stay allowed by this rate plan.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StayOverDate" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates a specific day on which the guest must stay over in order to be eligible for the quoted rate plan.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RateQuote">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The rate quote element returns the amount quoted for one room stay, but it can be used for fixed stay dates or for sliding soft dates for each rate plan. If a system is searching for availability with soft dates, it is possible to return different rates for room stays that start on different days of the week e.g.: 3 days with one rate, 3 days with another rate, etc. A guarantee type is associated with a specific rate in a one-to-one relationship.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DateRange" minOccurs="0"/>
+				<xs:element ref="QuotedRate" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="MaxOccupancy" minOccurs="0"/>
+				<xs:element ref="AddlOccupancyCharge" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GuestCount">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A recurring element that identifies the number of guests and ages of the guests in the request that determines the rates based on business rules for occupancy at each property. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Count" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The number of guests in one AgeQualifyingCode. The total number of guests in a room is the total of the Count of guests in all AgeQualifyingCodes.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AgeQualCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">(AgeQualifyingCode) A code that indicates the ages of the guests. The code is specific to a property of hotel chain and represents a business rule that may determine the charges for a guest based upon age range. For example, Adult, Child, Senior, Child With Adult, Child Without Adult, etc. This attribute allows for an increase in rate by occupant class.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Profiles">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Profile" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DetailDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">DetailDescription element contains the textual information for AdditionalDetail.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AdditionalDetail">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The AdditionalDetail element serves as a vehicule for textual information from property description and location to business rules for guarantees, deposits, cancellation fees, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DetailDescription" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="Type" use="optional">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="RateDescription"/>
+						<xs:enumeration value="PropertyDescription"/>
+						<xs:enumeration value="PropertyLocation"/>
+						<xs:enumeration value="RoomInformation"/>
+						<xs:enumeration value="GuaranteeInformation"/>
+						<xs:enumeration value="DepositInformation"/>
+						<xs:enumeration value="CancellationInformation"/>
+						<xs:enumeration value="CheckInCheckOutInformation"/>
+						<xs:enumeration value="ExtraChargeInformation"/>
+						<xs:enumeration value="TaxInformation"/>
+						<xs:enumeration value="ServiceChargeInformation"/>
+						<xs:enumeration value="PackageInformation"/>
+						<xs:enumeration value="CommissionInformation"/>
+						<xs:enumeration value="MiscellaneousInformation"/>
+						<xs:enumeration value="PromotionalInformation"/>
+						<xs:enumeration value="InclusionInformation"/>
+						<xs:enumeration value="AmenityInformation"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Code" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Trading partner code associated to AdditionalDetailType</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Amount" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A decimal value indicating the monetary amount that will be charged for AdditionalDetail</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AdditionalDetails">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of AdditionalDetail elements.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AdditionalDetail" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SummaryResponse">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The content model of the SummaryResponse element includes the identification of the hotel, by Hotel Reference, marketing text as determined by the supplier, and a RateQuote element that returns the information about the rate, room type, stay date range and any guarantees required. Each summary response element is for ONE rate plan code, for ONE room type, in other words, one inventoriable item.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelReference" minOccurs="0"/>
+				<xs:element ref="MarketingText" minOccurs="0"/>
+				<xs:element ref="RateQuote" minOccurs="0"/>
+				<xs:element ref="GuestCount" minOccurs="0"/>
+				<xs:element ref="Profiles" minOccurs="0"/>
+				<xs:element ref="AdditionalDetails" minOccurs="0"/>
+				<xs:element ref="TPA_Extensions" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="HotelName" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> A text field used to communicate the proper name of the hotel.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsRoom" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A boolean flag that if the product queried is a room or other services. Valid values: No indicate a Non-Room product or service, Yes indicates a Room.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="IsConverted" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A boolean flag that indicates whether the rate amount quoted has been converted from another currency.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ReqdGuaranteeType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> (Required Guarantee Type) An enumerated type indicating what type of required guarantee/ deposit policy is required with the reservation. Valid values: None (No Guarantee Required), Guarantee Required, Deposit Required, Immediate Payment Required.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="None"/>
+						<xs:enumeration value="GuaranteeReqd"/>
+						<xs:enumeration value="DepositReqd"/>
+						<xs:enumeration value="PaymentReqd"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="IsAlternate" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A boolean flag that indicates if the product is a match for the search criteria or is a suggested alternative product. Valid values: No (Not an Alternative), Yes (Alternative Product).</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="RatePlanCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification of the rate plan for which the RateQuote is made.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RoomTypeCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identifies the room type associated with the rate plan.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RateIndicator" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">   An enumerated type indicating special conditions with the rate  Valid values: ChangeDuringStay, MultipleNights, Exclusive, OnRequest, LimitedAvailability.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="ChangeDuringStay"/>
+						<xs:enumeration value="MultipleNights"/>
+						<xs:enumeration value="Exclusive"/>
+						<xs:enumeration value="OnRequest"/>
+						<xs:enumeration value="LimitedAvailability"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="MoreIndicator" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A text field used to indicate that there are additional rates that could not be fit within the availability response.  The text returned should be meaningful in identifying where to begin the next block of data and sent in the availability request.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CurrencyCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The currency that the monetary value is expressed in, as defined by ISO 4217 - Codes for the representation of currencies and funds.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CorporateID" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A text field used to indicate the associated corporate ID number that is associated with the rate and required in the reservation request in order to obtain the rate.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InvBlockCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> A code or identification number that identifies the room  stay as part of a group, package tour, or block of rooms designated in the inventory.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

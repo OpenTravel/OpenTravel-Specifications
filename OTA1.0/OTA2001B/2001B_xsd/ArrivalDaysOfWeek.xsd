@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="DOWPattern.xsd"/>
+	<xs:element name="ArrivalDaysOfWeek">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Days of the week that are valid days of arrival for this rate plan.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DOWPattern"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AvailableDaysOfWeek">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Days of the week that a guest can stay on this rate plan.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DOWPattern"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RequiredDaysOfWeek">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Days of the week that are required nights of stay for this rate plan.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DOWPattern"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

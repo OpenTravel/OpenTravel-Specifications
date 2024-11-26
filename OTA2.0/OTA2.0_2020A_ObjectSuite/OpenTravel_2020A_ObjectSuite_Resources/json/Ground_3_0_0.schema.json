@@ -1,0 +1,1653 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Ground",
+  "x-otm-library": {
+    "ProjectName": "HotelDescriptiveContent 103019.otp",
+    "LibraryName": "Ground",
+    "LibraryVersion": "3.0.0",
+    "LibraryStatus": "DRAFT",
+    "SourceFile": "/Ground_3_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2019-10-30T13:33:14.725-0400"
+  },
+  "definitions": {
+    "ProductGround": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "allOf": [
+        {
+          "$ref": "Product_5_0_0.schema.json#/definitions/Product"
+        },
+        {
+          "properties": {
+            "Segment": {
+              "description": "Assigned Type: prod-0500:Segment",
+              "$ref": "Product_5_0_0.schema.json#/definitions/SegmentID"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    },
+    "AssociatedProductGround": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Product"
+      },
+      "allOf": [
+        {
+          "$ref": "Product_5_0_0.schema.json#/definitions/AssociatedProductID"
+        },
+        {
+          "properties": {
+            "Segment": {
+              "description": "Assigned Type: prod-0500:Segment",
+              "$ref": "Product_5_0_0.schema.json#/definitions/SegmentID"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    },
+    "TransportTransfer": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Transport"
+      },
+      "allOf": [
+        {
+          "$ref": "Product_5_0_0.schema.json#/definitions/Transport"
+        },
+        {
+          "properties": {
+            "type": {
+              "description": "Identifies the type of service e.g. Private, Shared or Hourly.",
+              "x-otm-annotations": {
+                "equivalents": [
+                  {
+                    "context": "pgt",
+                    "value": ""
+                  }
+                ],
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "Private"
+                  }
+                ]
+              },
+              "$ref": "#/definitions/GroundService_Enum"
+            },
+            "ClassOfService": {
+              "description": "Assigned Type: prod-0500:ClassOfService",
+              "$ref": "Product_5_0_0.schema.json#/definitions/ClassOfService"
+            },
+            "PassengerPrefs": {
+              "description": "Assigned Type: pgt-0300:PassengerPrefs",
+              "$ref": "#/definitions/PassengerPrefs"
+            },
+            "OperatorCompany": {
+              "description": "Assigned Type: pgt-0300:Operator_Company",
+              "$ref": "#/definitions/OperatorCompany"
+            },
+            "Vehicle": {
+              "description": "Assigned Type: pgt-0300:Vehicle",
+              "$ref": "#/definitions/VehicleID"
+            },
+            "Driver": {
+              "description": "Assigned Type: pgt-0300:Driver",
+              "$ref": "#/definitions/DriverID"
+            },
+            "LanguageInfo": {
+              "description": "Assigned Type: pgt-0300:LanguageInfo",
+              "$ref": "#/definitions/LanguageInfo"
+            },
+            "Comments": {
+              "description": "Assigned Type: ota2-0500:TextFree",
+              "$ref": "Common_5_0_0.schema.json#/definitions/TextFree"
+            },
+            "ContactPerson": {
+              "description": "Assigned Type: ota2-0500:ContactPerson_Summary",
+              "$ref": "Common_5_0_0.schema.json#/definitions/ContactPerson"
+            },
+            "OperationSchedule": {
+              "description": "Assigned Type: ota2-0500:OperationSchedule_Summary",
+              "$ref": "Common_5_0_0.schema.json#/definitions/OperationSchedule"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "ProductQueriesGround": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "ProductQueries"
+      },
+      "allOf": [
+        {
+          "$ref": "Product_5_0_0.schema.json#/definitions/ProductQueries"
+        },
+        {
+          "properties": {
+            "GroundServiceQuery": {
+              "description": "Assigned Type: pgt-0300:GroundServiceQuery",
+              "$ref": "#/definitions/GroundServiceQuery"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "VehicleCategory_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "VehicleCategory_Enum"
+      },
+      "description": "Size category of ground transportation vehicle - extracted from 1.0 SIZ code table",
+      "type": "string",
+      "enum": [
+        "Luxury",
+        "Premium",
+        "Minivan",
+        "12 passenger van",
+        "Stretch",
+        "Car",
+        "Minibus",
+        "SUV"
+      ]
+    },
+    "DriverID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Driver"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "number": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0500:Identifier",
+          "$ref": "Common_5_0_0.schema.json#/definitions/Identifier"
+        },
+        "DriverRef": {
+          "description": "Refers to the objID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Driver": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Driver"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DriverID"
+        },
+        {
+          "properties": {
+            "PersonName": {
+              "description": "Assigned Type: ota2-0500:PersonName",
+              "$ref": "Common_5_0_0.schema.json#/definitions/PersonName"
+            },
+            "TelephoneDetail": {
+              "description": "Assigned Type: ota2-0500:Telephone_Detail_List",
+              "$ref": "Common_5_0_0.schema.json#/definitions/TelephoneDetail"
+            },
+            "SpokenLanguages": {
+              "description": "Assigned Type: pgt-0300:LanguagesSpoken",
+              "$ref": "#/definitions/LanguagesSpoken"
+            },
+            "Review": {
+              "description": "Assigned Type: pgt-0300:Review",
+              "$ref": "#/definitions/Review"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          },
+          "required": [
+            "PersonName"
+          ]
+        }
+      ]
+    },
+    "LanguageInfo": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "LanguageInfo"
+      },
+      "description": "Language details pertaining to the service.",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "primaryLanguageInd": {
+          "description": "If true, this is the primary language spoken by the driver or the guide.",
+          "type": "boolean"
+        },
+        "requestedInd": {
+          "description": "If true, it is preferred that the driver speak this language.",
+          "type": "boolean"
+        }
+      }
+    },
+    "Review": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "Review"
+      },
+      "description": "Review\u0027s score from 0 to 5, where 5 is the best.",
+      "properties": {
+        "text": {
+          "description": "Assigned Type: ota2-0500:Text",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "5: Excellent"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 4096
+        },
+        "language": {
+          "description": "The language in which the text is provided.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "AttributeGroup: LanguageGroup"
+              ]
+            },
+            "examples": [
+              {
+                "context": "Common",
+                "value": "en"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "textFormat": {
+          "description": "Indicates the format of text used in the description e.g. unformatted  or html.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: FormattedTextTextType_TextFormat"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "Common",
+                "value": "TextFormat"
+              }
+            ],
+            "examples": [
+              {
+                "context": "Common",
+                "value": "Sample Formatted text"
+              }
+            ]
+          },
+          "$ref": "Common_5_0_0.schema.json#/definitions/TextFormatType"
+        }
+      }
+    },
+    "FlightInfo": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "FlightInfo"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "flightDate": {
+          "description": "Assigned Type: ota2-0500:DateTimeLocal",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "2017-01-20T15:20:00"
+              }
+            ]
+          },
+          "type": "string",
+          "format": "date-time",
+          "pattern": ".+T[^Z+\\-]+"
+        },
+        "TransportNumber": {
+          "description": "Assigned Type: prod-0500:TransportNumber",
+          "$ref": "Product_5_0_0.schema.json#/definitions/TransportNumber"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "LanguagesSpoken": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "LanguagesSpoken"
+      },
+      "description": "One or more languages spoken by a person. Query: could the value be a text list of the language names, with \u0027best practice\u0027 having the primary language alwys first? e,g English French Spanish. Or is it sufficient for the relevant api to access and display it as required?",
+      "properties": {
+        "primaryLanguage": {
+          "description": "Assigned Type: ota2-0500:LanguageCode",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "en"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "alternateLanguages": {
+          "description": "Assigned Type: ota2-0500:Languages",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "es fr de"
+              }
+            ]
+          },
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VehicleID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Vehicle"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": ""
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0500:Identifier",
+          "$ref": "Common_5_0_0.schema.json#/definitions/Identifier"
+        },
+        "VehicleRef": {
+          "description": "Refers to the objID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Vehicle": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Vehicle"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/VehicleID"
+        },
+        {
+          "properties": {
+            "seats": {
+              "description": "The maximum seats in the vehicle - usually This figure is based on the quantity of seat belts in the vehicle.",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "4"
+                  }
+                ]
+              },
+              "type": "integer",
+              "format": "int32"
+            },
+            "category": {
+              "description": "e.g. car, van, limo etc.",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "Premium"
+                  }
+                ]
+              },
+              "$ref": "#/definitions/VehicleCategory_Enum"
+            },
+            "bkgClass": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "Business"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "modelYear": {
+              "description": "The year the vehicle was registered",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "2016"
+                  }
+                ]
+              },
+              "type": "integer",
+              "format": "int32"
+            },
+            "Description": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_5_0_0.schema.json#/definitions/Description"
+              },
+              "maxItems": 5
+            },
+            "Luggage": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Luggage"
+              },
+              "maxItems": 5
+            },
+            "Amenity": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_5_0_0.schema.json#/definitions/Amenity"
+              },
+              "maxItems": 10
+            },
+            "ExtensionPoint_Summary": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+            }
+          }
+        }
+      ]
+    },
+    "VehicleDetail": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Vehicle"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Vehicle"
+        },
+        {
+          "properties": {
+            "make": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "x-otm-annotations": {
+                "equivalents": [
+                  {
+                    "context": "pgt",
+                    "value": "Town Car"
+                  }
+                ],
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "Lincoln"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "model": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "x-otm-annotations": {
+                "equivalents": [
+                  {
+                    "context": "pgt",
+                    "value": ""
+                  }
+                ],
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "Suburban"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "year": {
+              "description": "The model year of the vehicle.\\nQuery: should this be a yyyy pattern?",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "2016"
+                  }
+                ]
+              },
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxPassengers": {
+              "description": "The maximum passengers allowed in  the vehicle.",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "7"
+                  }
+                ]
+              },
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxAccessible": {
+              "description": "The maximum accessible capacity of the vehicle.",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "2"
+                  }
+                ]
+              },
+              "type": "integer",
+              "format": "int32"
+            },
+            "color": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "Blue"
+                  }
+                ]
+              },
+              "type": "string",
+              "maxLength": 32
+            },
+            "Description": {
+              "description": "Assigned Type: ota2-0500:TextFree",
+              "$ref": "Common_5_0_0.schema.json#/definitions/TextFree"
+            },
+            "LicensePlate": {
+              "description": "Assigned Type: pgt-0300:LicensePlate",
+              "$ref": "#/definitions/LicensePlate"
+            },
+            "disabilityVehicleInd": {
+              "description": "If true, this vehicle is disability compatible.",
+              "type": "boolean"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "Operator": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Operator"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0500:Identifier",
+          "$ref": "Common_5_0_0.schema.json#/definitions/Identifier"
+        },
+        "Description": {
+          "description": "Assigned Type: ota2-0500:Description",
+          "$ref": "Common_5_0_0.schema.json#/definitions/Description"
+        },
+        "ExtensionPoint_Shared": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Shared"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "OperatorCompany": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Operator"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Operator"
+        },
+        {
+          "properties": {
+            "CompanyName": {
+              "description": "Assigned Type: ota2-0500:CompanyName",
+              "$ref": "Common_5_0_0.schema.json#/definitions/CompanyName"
+            },
+            "URL": {
+              "description": "Assigned Type: ota2-0500:URL",
+              "$ref": "Common_5_0_0.schema.json#/definitions/URL"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "OperatorDriver": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Operator"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Operator"
+        },
+        {
+          "properties": {
+            "Driver": {
+              "description": "Assigned Type: pgt-0300:Driver",
+              "$ref": "#/definitions/DriverID"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "LicensePlate": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "LicensePlate"
+      },
+      "description": "Offical vehicle identification.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "region": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "TN"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "category": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "Standard"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        }
+      }
+    },
+    "PassengerPrefs": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "PassengerPrefs"
+      },
+      "description": "Passenger preferences including service type, physically challenged vehicle and other vehicle preferences.",
+      "properties": {
+        "maximumPassengers": {
+          "description": "The maximum quantity of passengers this vehicle can accommodate. NOTE: This figure is based on the quantity of seat belts in the vehicle.",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "3"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "maximumBaggage": {
+          "description": "The (recommended) maximum baggage that can be stored in the vehicle\u0027s trunk.",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "3"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "shortDescription": {
+          "description": "Assigned Type: ota2-0500:StringText",
+          "type": "string",
+          "maxLength": 4096
+        },
+        "notes": {
+          "description": "Assigned Type: ota2-0500:StringText",
+          "type": "string",
+          "maxLength": 4096
+        },
+        "transferRequests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransferRequests_Enum"
+          }
+        }
+      }
+    },
+    "GroundService_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "GroundService_Enum"
+      },
+      "description": "Type of gound service e.g. Private, Shared or Hourly",
+      "type": "string",
+      "enum": [
+        "Private",
+        "Shared",
+        "Hourly"
+      ]
+    },
+    "CustomerCount": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "CustomerCount"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "ageQualifyingCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "A"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "description": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "Adult"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "quantity": {
+          "description": "The number of customers in this age band in the party.",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "2"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "AdditionalPassengers": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "CustomerCount"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "ageQualifyingCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "A"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "description": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "Adult"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "quantity": {
+          "description": "The number of customers in this age band in the party.",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "2"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "CustomerCountDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "CustomerCount"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomerCount"
+        },
+        {
+          "properties": {
+            "minAge": {
+              "description": "The minimum age for this age band of customer.",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "16"
+                  }
+                ]
+              },
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxAge": {
+              "description": "The maximum age for this age band of customer .",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "120"
+                  }
+                ]
+              },
+              "type": "integer",
+              "format": "int32"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "AdditionalPassengersDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "CustomerCount"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdditionalPassengers"
+        },
+        {
+          "properties": {
+            "minAge": {
+              "description": "The minimum age for this age band of customer.",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "16"
+                  }
+                ]
+              },
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxAge": {
+              "description": "The maximum age for this age band of customer .",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "120"
+                  }
+                ]
+              },
+              "type": "integer",
+              "format": "int32"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "Luggage": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "Luggage"
+      },
+      "description": "Quantity of luggage.",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "luggageType": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "Medium"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "remark": {
+          "description": "Assigned Type: ota2-0500:TextFree",
+          "type": "string",
+          "maxLength": 4096
+        },
+        "language": {
+          "description": "Language of the text.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "AttributeGroup: LanguageGroup"
+              ]
+            },
+            "examples": [
+              {
+                "context": "Common",
+                "value": "en"
+              }
+            ]
+          },
+          "type": "string"
+        }
+      }
+    },
+    "CustomerAgeBand": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "CustomerAgeBand"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "ageQualifyingCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "A"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "description": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "Adult"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "CustomerAgeBandDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "CustomerAgeBand"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomerAgeBand"
+        },
+        {
+          "properties": {
+            "minAge": {
+              "description": "The minimum age for this age band of customer.",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "16"
+                  }
+                ]
+              },
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxAge": {
+              "description": "The maximum age for this age band of customer .",
+              "x-otm-annotations": {
+                "examples": [
+                  {
+                    "context": "pgt",
+                    "value": "120"
+                  }
+                ]
+              },
+              "type": "integer",
+              "format": "int32"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "GroundServiceQuery": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GroundServiceQuery"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "Departure": {
+          "description": "Assigned Type: prod-0500:Departure",
+          "$ref": "Product_5_0_0.schema.json#/definitions/Departure"
+        },
+        "Arrival": {
+          "description": "Assigned Type: prod-0500:Arrival",
+          "$ref": "Product_5_0_0.schema.json#/definitions/Arrival"
+        },
+        "CustomerCount": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerCount"
+          },
+          "maxItems": 5
+        },
+        "TransportTransfer": {
+          "description": "Assigned Type: pgt-0300:Transport_Transfer",
+          "$ref": "#/definitions/TransportTransfer"
+        },
+        "Luggage": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Luggage"
+          },
+          "maxItems": 3
+        },
+        "PassengerPrefs": {
+          "description": "Assigned Type: pgt-0300:PassengerPrefs",
+          "$ref": "#/definitions/PassengerPrefs"
+        },
+        "Gratuity": {
+          "description": "Assigned Type: order-0400:Gratuity_Summary",
+          "$ref": "Order_4_0_0.schema.json#/definitions/Gratuity"
+        },
+        "MeetAndGreet": {
+          "description": "Assigned Type: pgt-0300:MeetAndGreet",
+          "$ref": "#/definitions/MeetAndGreet"
+        },
+        "LanguageInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LanguageInfo"
+          },
+          "maxItems": 2
+        },
+        "Comments": {
+          "description": "Assigned Type: ota2-0500:Text",
+          "$ref": "Common_5_0_0.schema.json#/definitions/Text"
+        },
+        "ProductAncillary": {
+          "type": "array",
+          "items": {
+            "$ref": "Product_5_0_0.schema.json#/definitions/ProductAncillary"
+          },
+          "maxItems": 10
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type",
+        "Departure",
+        "Arrival"
+      ],
+      "discriminator": "@type"
+    },
+    "MeetAndGreet": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "MeetAndGreet"
+      },
+      "description": "Details of a meet and greet service.",
+      "properties": {
+        "greetingSignName": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "pgt",
+                "value": "John Smith"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "complimentaryInd": {
+          "description": "When true, this service is complimentary.",
+          "type": "boolean"
+        }
+      }
+    },
+    "TransferRequests_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "TransferRequests_Enum"
+      },
+      "description": "Additional equirements for a transfer, e.g. child seat or meet and greet service.",
+      "type": "string",
+      "enum": [
+        "GuideDog",
+        "Multilingual",
+        "Guide",
+        "UnaccompaniedMinor",
+        "PersonalGreeter",
+        "MeetAndGreet",
+        "GreetingSign",
+        "FuelEfficientVehicle",
+        "PetFriendly",
+        "ChildSeat",
+        "FlightMonitoring",
+        "BabyStroller"
+      ]
+    },
+    "DeadlineDropTime_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "DeadlineDropTime_Enum"
+      },
+      "description": "An enumerated type indicating when the deadline drop time goes into effect.",
+      "type": "string",
+      "enum": [
+        "BeforeArrival",
+        "AfterBooking",
+        "AfterConfirmation",
+        "AfterArrival",
+        "AfterDeparture",
+        "BeforeDeparture"
+      ]
+    },
+    "GetGroundOffersRQ": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "GetGroundOffers_GetGroundOffers"
+      },
+      "x-otm-annotations": {
+        "documentation": {
+          "deprecations": [
+            "All operations on Ground are deprecated and will be removed in the next version.  Please use the operations on GroundOffers."
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Request_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0500:PayloadStdAttributes",
+              "$ref": "Common_5_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "POS": {
+              "description": "Assigned Type: ota2-0500:POS_Summary",
+              "$ref": "Common_5_0_0.schema.json#/definitions/POS"
+            },
+            "ProcessingInfo": {
+              "description": "Assigned Type: ota2-0500:ProcessingInfo",
+              "$ref": "Common_5_0_0.schema.json#/definitions/ProcessingInfo"
+            },
+            "ProductQueriesGround": {
+              "description": "Assigned Type: pgt-0300:ProductQueries_Ground",
+              "$ref": "#/definitions/ProductQueriesGround"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          },
+          "required": [
+            "PayloadStdAttributes"
+          ]
+        }
+      ]
+    },
+    "GetGroundOffersRS": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "GetGroundOffers_GetGroundOffers"
+      },
+      "x-otm-annotations": {
+        "documentation": {
+          "deprecations": [
+            "All operations on Ground are deprecated and will be removed in the next version.  Please use the operations on GroundOffers."
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Response_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0500:PayloadStdAttributes",
+              "$ref": "Common_5_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "Result": {
+              "description": "Assigned Type: ota2-0500:Result_Summary",
+              "$ref": "Common_5_0_0.schema.json#/definitions/Result"
+            },
+            "OfferSummary": {
+              "type": "array",
+              "items": {
+                "$ref": "Order_4_0_0.schema.json#/definitions/Offer"
+              },
+              "maxItems": 99
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          },
+          "required": [
+            "PayloadStdAttributes"
+          ]
+        }
+      ]
+    },
+    "GetGroundOffersNotif": {
+      "x-otm-entity": {
+        "EntityType": "Operation",
+        "EntityName": "GetGroundOffers_GetGroundOffers"
+      },
+      "x-otm-annotations": {
+        "documentation": {
+          "deprecations": [
+            "All operations on Ground are deprecated and will be removed in the next version.  Please use the operations on GroundOffers."
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "built-ins/OTA2_Message_v2.0.0.schema.json#/definitions/OTA2_Notif_Payload"
+        },
+        {
+          "properties": {
+            "PayloadStdAttributes": {
+              "description": "Assigned Type: ota2-0500:PayloadStdAttributes",
+              "$ref": "Common_5_0_0.schema.json#/definitions/PayloadStdAttributes"
+            },
+            "Result": {
+              "description": "Assigned Type: ota2-0500:Result_Summary",
+              "$ref": "Common_5_0_0.schema.json#/definitions/Result"
+            },
+            "OfferSummary": {
+              "description": "Assigned Type: order-0400:Offer_Summary",
+              "$ref": "Order_4_0_0.schema.json#/definitions/Offer"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          },
+          "required": [
+            "PayloadStdAttributes"
+          ]
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "ProductGround": {
+          "$ref": "#/definitions/ProductGround"
+        }
+      },
+      "required": [
+        "ProductGround"
+      ]
+    },
+    {
+      "properties": {
+        "AssociatedProductGround": {
+          "$ref": "#/definitions/ProductGround"
+        }
+      },
+      "required": [
+        "AssociatedProductGround"
+      ]
+    },
+    {
+      "properties": {
+        "TransportTransfer": {
+          "$ref": "#/definitions/TransportTransfer"
+        }
+      },
+      "required": [
+        "TransportTransfer"
+      ]
+    },
+    {
+      "properties": {
+        "ProductQueriesGround": {
+          "$ref": "#/definitions/ProductQueriesGround"
+        }
+      },
+      "required": [
+        "ProductQueriesGround"
+      ]
+    },
+    {
+      "properties": {
+        "DriverIdentifier": {
+          "$ref": "#/definitions/DriverID"
+        }
+      },
+      "required": [
+        "DriverIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "DriverSummary": {
+          "$ref": "#/definitions/Driver"
+        }
+      },
+      "required": [
+        "DriverSummary"
+      ]
+    },
+    {
+      "properties": {
+        "FlightInfo": {
+          "$ref": "#/definitions/FlightInfo"
+        }
+      },
+      "required": [
+        "FlightInfo"
+      ]
+    },
+    {
+      "properties": {
+        "VehicleIdentifier": {
+          "$ref": "#/definitions/VehicleID"
+        }
+      },
+      "required": [
+        "VehicleIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "VehicleSummary": {
+          "$ref": "#/definitions/Vehicle"
+        }
+      },
+      "required": [
+        "VehicleSummary"
+      ]
+    },
+    {
+      "properties": {
+        "VehicleDetail": {
+          "$ref": "#/definitions/VehicleDetail"
+        }
+      },
+      "required": [
+        "VehicleDetail"
+      ]
+    },
+    {
+      "properties": {
+        "OperatorShared": {
+          "$ref": "#/definitions/Operator"
+        }
+      },
+      "required": [
+        "OperatorShared"
+      ]
+    },
+    {
+      "properties": {
+        "OperatorCompany": {
+          "$ref": "#/definitions/OperatorCompany"
+        }
+      },
+      "required": [
+        "OperatorCompany"
+      ]
+    },
+    {
+      "properties": {
+        "OperatorDriver": {
+          "$ref": "#/definitions/OperatorDriver"
+        }
+      },
+      "required": [
+        "OperatorDriver"
+      ]
+    },
+    {
+      "properties": {
+        "CustomerCountSummary": {
+          "$ref": "#/definitions/CustomerCount"
+        }
+      },
+      "required": [
+        "CustomerCountSummary"
+      ]
+    },
+    {
+      "properties": {
+        "AdditionalPassengersSummary": {
+          "$ref": "#/definitions/CustomerCount"
+        }
+      },
+      "required": [
+        "AdditionalPassengersSummary"
+      ]
+    },
+    {
+      "properties": {
+        "CustomerCountDetail": {
+          "$ref": "#/definitions/CustomerCountDetail"
+        }
+      },
+      "required": [
+        "CustomerCountDetail"
+      ]
+    },
+    {
+      "properties": {
+        "AdditionalPassengersDetail": {
+          "$ref": "#/definitions/CustomerCountDetail"
+        }
+      },
+      "required": [
+        "AdditionalPassengersDetail"
+      ]
+    },
+    {
+      "properties": {
+        "CustomerAgeBandSummary": {
+          "$ref": "#/definitions/CustomerAgeBand"
+        }
+      },
+      "required": [
+        "CustomerAgeBandSummary"
+      ]
+    },
+    {
+      "properties": {
+        "CustomerAgeBandDetail": {
+          "$ref": "#/definitions/CustomerAgeBandDetail"
+        }
+      },
+      "required": [
+        "CustomerAgeBandDetail"
+      ]
+    },
+    {
+      "properties": {
+        "GroundServiceQuery": {
+          "$ref": "#/definitions/GroundServiceQuery"
+        }
+      },
+      "required": [
+        "GroundServiceQuery"
+      ]
+    },
+    {
+      "properties": {
+        "GetGroundOffersRQ": {
+          "$ref": "#/definitions/GetGroundOffersRQ"
+        }
+      },
+      "required": [
+        "GetGroundOffersRQ"
+      ]
+    },
+    {
+      "properties": {
+        "GetGroundOffersRS": {
+          "$ref": "#/definitions/GetGroundOffersRS"
+        }
+      },
+      "required": [
+        "GetGroundOffersRS"
+      ]
+    },
+    {
+      "properties": {
+        "GetGroundOffersNotif": {
+          "$ref": "#/definitions/GetGroundOffersNotif"
+        }
+      },
+      "required": [
+        "GetGroundOffersNotif"
+      ]
+    }
+  ]
+}

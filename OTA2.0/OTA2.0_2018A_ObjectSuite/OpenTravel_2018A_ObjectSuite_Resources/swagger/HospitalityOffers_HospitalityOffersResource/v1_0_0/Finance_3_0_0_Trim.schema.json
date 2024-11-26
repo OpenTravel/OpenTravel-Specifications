@@ -1,0 +1,1767 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Finance",
+  "x-otm-library": {
+    "LibraryName": "Finance",
+    "LibraryVersion": "3.0.0",
+    "LibraryStatus": "FINAL",
+    "SourceFile": "/Finance_3_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2018-04-05T08:59:59.759-0400"
+  },
+  "definitions": {
+    "EncryptionToken": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "EncryptionToken"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "encryptionKey": {
+          "description": "This contains a key required to retrieve the full payment instrument details compliant with PCI DSS standards.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "KHC32198gt4"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptionKeyMethod": {
+          "description": "This contains a reference to the key generation method being used - this is NOT the key value.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "RotatingKeyEnvironment_DailyKey"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptionMethod": {
+          "description": "When using the OpenTravel Encryption element, it is RECOMMENDED that all trading partners be informed of all encryption methods being used in advance of implementation to ensure message processing compatibility.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Triple DES"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptedValue": {
+          "description": "The value in an encrypted format.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "5dfc52b51bd35553df8592078de921bc"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "mask": {
+          "description": "Assigned Type: ota2-0400:EncryptionTokenTypeMask",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_Mask"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "xxxxxxxxxxxx9922"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "token": {
+          "description": "Assigned Type: fin-0300:EncryptionTokenType_Token",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_Token"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "AEGHV234AUD54367"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "tokenProviderID": {
+          "description": "This contains a provider ID if multiple providers are used for secure information exchange.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Shift4 (payment)"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "authenticationMethod": {
+          "description": "Specifies the method that was used to authenticate the card.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_AuthenticationMethod"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Check digit"
+              }
+            ]
+          },
+          "$ref": "#/definitions/AuthenticationMethod_Enum"
+        },
+        "PlainText": {
+          "description": "Non-secure (plain text) value.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            }
+          },
+          "type": "string"
+        },
+        "Warning": {
+          "description": "Assigned Type: ota2-0400:ErrorWarning",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}WarningType"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/ErrorWarning"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "BankAcctNumber": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "EncryptionToken"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "encryptionKey": {
+          "description": "This contains a key required to retrieve the full payment instrument details compliant with PCI DSS standards.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "KHC32198gt4"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptionKeyMethod": {
+          "description": "This contains a reference to the key generation method being used - this is NOT the key value.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "RotatingKeyEnvironment_DailyKey"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptionMethod": {
+          "description": "When using the OpenTravel Encryption element, it is RECOMMENDED that all trading partners be informed of all encryption methods being used in advance of implementation to ensure message processing compatibility.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Triple DES"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptedValue": {
+          "description": "The value in an encrypted format.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "5dfc52b51bd35553df8592078de921bc"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "mask": {
+          "description": "Assigned Type: ota2-0400:EncryptionTokenTypeMask",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_Mask"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "xxxxxxxxxxxx9922"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "token": {
+          "description": "Assigned Type: fin-0300:EncryptionTokenType_Token",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_Token"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "AEGHV234AUD54367"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "tokenProviderID": {
+          "description": "This contains a provider ID if multiple providers are used for secure information exchange.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Shift4 (payment)"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "authenticationMethod": {
+          "description": "Specifies the method that was used to authenticate the card.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_AuthenticationMethod"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Check digit"
+              }
+            ]
+          },
+          "$ref": "#/definitions/AuthenticationMethod_Enum"
+        },
+        "PlainText": {
+          "description": "Non-secure (plain text) value.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            }
+          },
+          "type": "string"
+        },
+        "Warning": {
+          "description": "Assigned Type: ota2-0400:ErrorWarning",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}WarningType"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/ErrorWarning"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "BankID": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "EncryptionToken"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "encryptionKey": {
+          "description": "This contains a key required to retrieve the full payment instrument details compliant with PCI DSS standards.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "KHC32198gt4"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptionKeyMethod": {
+          "description": "This contains a reference to the key generation method being used - this is NOT the key value.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "RotatingKeyEnvironment_DailyKey"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptionMethod": {
+          "description": "When using the OpenTravel Encryption element, it is RECOMMENDED that all trading partners be informed of all encryption methods being used in advance of implementation to ensure message processing compatibility.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Triple DES"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptedValue": {
+          "description": "The value in an encrypted format.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "5dfc52b51bd35553df8592078de921bc"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "mask": {
+          "description": "Assigned Type: ota2-0400:EncryptionTokenTypeMask",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_Mask"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "xxxxxxxxxxxx9922"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "token": {
+          "description": "Assigned Type: fin-0300:EncryptionTokenType_Token",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_Token"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "AEGHV234AUD54367"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "tokenProviderID": {
+          "description": "This contains a provider ID if multiple providers are used for secure information exchange.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Shift4 (payment)"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "authenticationMethod": {
+          "description": "Specifies the method that was used to authenticate the card.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_AuthenticationMethod"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Check digit"
+              }
+            ]
+          },
+          "$ref": "#/definitions/AuthenticationMethod_Enum"
+        },
+        "PlainText": {
+          "description": "Non-secure (plain text) value.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            }
+          },
+          "type": "string"
+        },
+        "Warning": {
+          "description": "Assigned Type: ota2-0400:ErrorWarning",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}WarningType"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/ErrorWarning"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "CardNumber": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "EncryptionToken"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "encryptionKey": {
+          "description": "This contains a key required to retrieve the full payment instrument details compliant with PCI DSS standards.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "KHC32198gt4"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptionKeyMethod": {
+          "description": "This contains a reference to the key generation method being used - this is NOT the key value.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "RotatingKeyEnvironment_DailyKey"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptionMethod": {
+          "description": "When using the OpenTravel Encryption element, it is RECOMMENDED that all trading partners be informed of all encryption methods being used in advance of implementation to ensure message processing compatibility.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Triple DES"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptedValue": {
+          "description": "The value in an encrypted format.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "5dfc52b51bd35553df8592078de921bc"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "mask": {
+          "description": "Assigned Type: ota2-0400:EncryptionTokenTypeMask",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_Mask"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "xxxxxxxxxxxx9922"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "token": {
+          "description": "Assigned Type: fin-0300:EncryptionTokenType_Token",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_Token"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "AEGHV234AUD54367"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "tokenProviderID": {
+          "description": "This contains a provider ID if multiple providers are used for secure information exchange.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Shift4 (payment)"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "authenticationMethod": {
+          "description": "Specifies the method that was used to authenticate the card.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_AuthenticationMethod"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Check digit"
+              }
+            ]
+          },
+          "$ref": "#/definitions/AuthenticationMethod_Enum"
+        },
+        "PlainText": {
+          "description": "Non-secure (plain text) value.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            }
+          },
+          "type": "string"
+        },
+        "Warning": {
+          "description": "Assigned Type: ota2-0400:ErrorWarning",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}WarningType"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/ErrorWarning"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "SeriesCode": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "EncryptionToken"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "encryptionKey": {
+          "description": "This contains a key required to retrieve the full payment instrument details compliant with PCI DSS standards.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "KHC32198gt4"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptionKeyMethod": {
+          "description": "This contains a reference to the key generation method being used - this is NOT the key value.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "RotatingKeyEnvironment_DailyKey"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptionMethod": {
+          "description": "When using the OpenTravel Encryption element, it is RECOMMENDED that all trading partners be informed of all encryption methods being used in advance of implementation to ensure message processing compatibility.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Triple DES"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptedValue": {
+          "description": "The value in an encrypted format.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "5dfc52b51bd35553df8592078de921bc"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "mask": {
+          "description": "Assigned Type: ota2-0400:EncryptionTokenTypeMask",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_Mask"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "xxxxxxxxxxxx9922"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "token": {
+          "description": "Assigned Type: fin-0300:EncryptionTokenType_Token",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_Token"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "AEGHV234AUD54367"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "tokenProviderID": {
+          "description": "This contains a provider ID if multiple providers are used for secure information exchange.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Shift4 (payment)"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "authenticationMethod": {
+          "description": "Specifies the method that was used to authenticate the card.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_AuthenticationMethod"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Check digit"
+              }
+            ]
+          },
+          "$ref": "#/definitions/AuthenticationMethod_Enum"
+        },
+        "PlainText": {
+          "description": "Non-secure (plain text) value.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            }
+          },
+          "type": "string"
+        },
+        "Warning": {
+          "description": "Assigned Type: ota2-0400:ErrorWarning",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}WarningType"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/ErrorWarning"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "MagneticStripe": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "EncryptionToken"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "encryptionKey": {
+          "description": "This contains a key required to retrieve the full payment instrument details compliant with PCI DSS standards.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "KHC32198gt4"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptionKeyMethod": {
+          "description": "This contains a reference to the key generation method being used - this is NOT the key value.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "RotatingKeyEnvironment_DailyKey"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptionMethod": {
+          "description": "When using the OpenTravel Encryption element, it is RECOMMENDED that all trading partners be informed of all encryption methods being used in advance of implementation to ensure message processing compatibility.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Triple DES"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptedValue": {
+          "description": "The value in an encrypted format.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "5dfc52b51bd35553df8592078de921bc"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "mask": {
+          "description": "Assigned Type: ota2-0400:EncryptionTokenTypeMask",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_Mask"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "xxxxxxxxxxxx9922"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "token": {
+          "description": "Assigned Type: fin-0300:EncryptionTokenType_Token",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_Token"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "AEGHV234AUD54367"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "tokenProviderID": {
+          "description": "This contains a provider ID if multiple providers are used for secure information exchange.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Shift4 (payment)"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "authenticationMethod": {
+          "description": "Specifies the method that was used to authenticate the card.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_AuthenticationMethod"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Check digit"
+              }
+            ]
+          },
+          "$ref": "#/definitions/AuthenticationMethod_Enum"
+        },
+        "PlainText": {
+          "description": "Non-secure (plain text) value.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            }
+          },
+          "type": "string"
+        },
+        "Warning": {
+          "description": "Assigned Type: ota2-0400:ErrorWarning",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}WarningType"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/ErrorWarning"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "AuthenticationVerification": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "EncryptionToken"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "encryptionKey": {
+          "description": "This contains a key required to retrieve the full payment instrument details compliant with PCI DSS standards.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "KHC32198gt4"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptionKeyMethod": {
+          "description": "This contains a reference to the key generation method being used - this is NOT the key value.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "RotatingKeyEnvironment_DailyKey"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptionMethod": {
+          "description": "When using the OpenTravel Encryption element, it is RECOMMENDED that all trading partners be informed of all encryption methods being used in advance of implementation to ensure message processing compatibility.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Triple DES"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptedValue": {
+          "description": "The value in an encrypted format.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "5dfc52b51bd35553df8592078de921bc"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "mask": {
+          "description": "Assigned Type: ota2-0400:EncryptionTokenTypeMask",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_Mask"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "xxxxxxxxxxxx9922"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "token": {
+          "description": "Assigned Type: fin-0300:EncryptionTokenType_Token",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_Token"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "AEGHV234AUD54367"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "tokenProviderID": {
+          "description": "This contains a provider ID if multiple providers are used for secure information exchange.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Shift4 (payment)"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "authenticationMethod": {
+          "description": "Specifies the method that was used to authenticate the card.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_AuthenticationMethod"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Check digit"
+              }
+            ]
+          },
+          "$ref": "#/definitions/AuthenticationMethod_Enum"
+        },
+        "PlainText": {
+          "description": "Non-secure (plain text) value.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            }
+          },
+          "type": "string"
+        },
+        "Warning": {
+          "description": "Assigned Type: ota2-0400:ErrorWarning",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}WarningType"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/ErrorWarning"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "TransactionPassword": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "EncryptionToken"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "encryptionKey": {
+          "description": "This contains a key required to retrieve the full payment instrument details compliant with PCI DSS standards.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "KHC32198gt4"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptionKeyMethod": {
+          "description": "This contains a reference to the key generation method being used - this is NOT the key value.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "RotatingKeyEnvironment_DailyKey"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptionMethod": {
+          "description": "When using the OpenTravel Encryption element, it is RECOMMENDED that all trading partners be informed of all encryption methods being used in advance of implementation to ensure message processing compatibility.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Triple DES"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "encryptedValue": {
+          "description": "The value in an encrypted format.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "5dfc52b51bd35553df8592078de921bc"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "mask": {
+          "description": "Assigned Type: ota2-0400:EncryptionTokenTypeMask",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_Mask"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "xxxxxxxxxxxx9922"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "token": {
+          "description": "Assigned Type: fin-0300:EncryptionTokenType_Token",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_Token"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "AEGHV234AUD54367"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "[0-9a-zA-Z]{1,32}"
+        },
+        "tokenProviderID": {
+          "description": "This contains a provider ID if multiple providers are used for secure information exchange.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Shift4 (payment)"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "authenticationMethod": {
+          "description": "Specifies the method that was used to authenticate the card.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "LocalAnonymousType: EncryptionTokenType_AuthenticationMethod"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "Check digit"
+              }
+            ]
+          },
+          "$ref": "#/definitions/AuthenticationMethod_Enum"
+        },
+        "PlainText": {
+          "description": "Non-secure (plain text) value.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            }
+          },
+          "type": "string"
+        },
+        "Warning": {
+          "description": "Assigned Type: ota2-0400:ErrorWarning",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}WarningType"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/ErrorWarning"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "PaymentCard": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "PaymentCard"
+      },
+      "description": "Specifies the details of the debit or credit card.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "id": {
+          "description": "XML ID only for use within the document.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}RPH_Type"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "fin",
+                "value": "RPH"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "effectiveDate": {
+          "description": "Assigned Type: ota2-0400:DateMMYY",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "AttributeGroup: PaymentCardDateGroup"
+              ]
+            },
+            "examples": [
+              {
+                "context": "fin",
+                "value": "0116"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "(0[1-9]|1[0-2])[0-9][0-9]"
+        },
+        "expireDate": {
+          "description": "Assigned Type: ota2-0400:DateMMYY",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "fin",
+                "value": "0117"
+              }
+            ]
+          },
+          "type": "string",
+          "pattern": "(0[1-9]|1[0-2])[0-9][0-9]"
+        },
+        "Privacy": {
+          "description": "Assigned Type: ota2-0400:Privacy",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "AttributeGroup: PrivacyGroup"
+              ]
+            }
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/Privacy"
+        },
+        "CardCode": {
+          "description": "Card code association such as VI for Visa, MC for Mastercard or AX for American Express, etc.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}PaymentCardCodeType"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "fin",
+                "value": "CardCode"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32,
+          "pattern": "([a-zA-Z]{2})?"
+        },
+        "CardType": {
+          "description": "Assigned Type: fin-0300:PaymentCardType_Issuer",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}Issuer"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "fin",
+                "value": "Issuer"
+              }
+            ]
+          },
+          "$ref": "#/definitions/PaymentCardType_Issuer"
+        },
+        "Issuer": {
+          "description": "Assigned Type: ota2-0400:CodeExternal",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}List_PaymentCardIssuer"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "fin",
+                "value": "CardType"
+              }
+            ]
+          },
+          "$ref": "Common_4_0_0_Trim.schema.json#/definitions/CodeExternal"
+        },
+        "CardHolderName": {
+          "description": "Card holder name.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}StringLength1to64"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "fin",
+                "value": "CardHolderName"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "CardNumber": {
+          "description": "Assigned Type: fin-0300:CardNumber",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}EncryptionTokenType"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "fin",
+                "value": "CardNumber"
+              }
+            ]
+          },
+          "$ref": "#/definitions/CardNumber"
+        },
+        "AuthenticationVerification": {
+          "description": "Assigned Type: fin-0300:AuthenticationVerification",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}EncryptionTokenType"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "fin",
+                "value": "SeriesCode"
+              }
+            ]
+          },
+          "$ref": "#/definitions/AuthenticationVerification"
+        },
+        "MagneticStripe": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MagneticStripe"
+          },
+          "maxItems": 3
+        },
+        "SeriesCode": {
+          "description": "Assigned Type: fin-0300:SeriesCode",
+          "$ref": "#/definitions/SeriesCode"
+        },
+        "secureInd": {
+          "description": "If true, all or a portion of this data is secure, via tokenization, encryption and\\/or masking.",
+          "type": "boolean"
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "PaymentCardType_Issuer": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "PaymentCardType_Issuer"
+      },
+      "description": "Code of the payment card issuer.",
+      "x-otm-annotations": {
+        "documentation": {
+          "implementers": [
+            "Extension: List_PaymentCardIssuer"
+          ]
+        }
+      },
+      "properties": {
+        "value": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "issuerCode": {
+          "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/PaymentCardIssuer_Enum_Base"
+        },
+        "issuerCodeExtension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "AuthenticationMethod_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "AuthenticationMethod_Enum"
+      },
+      "type": "string",
+      "enum": [
+        "SecurityCode",
+        "MagneticStripe"
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "EncryptionToken": {
+          "$ref": "#/definitions/EncryptionToken"
+        }
+      },
+      "required": [
+        "EncryptionToken"
+      ]
+    },
+    {
+      "properties": {
+        "BankAcctNumber": {
+          "$ref": "#/definitions/EncryptionToken"
+        }
+      },
+      "required": [
+        "BankAcctNumber"
+      ]
+    },
+    {
+      "properties": {
+        "BankID": {
+          "$ref": "#/definitions/EncryptionToken"
+        }
+      },
+      "required": [
+        "BankID"
+      ]
+    },
+    {
+      "properties": {
+        "CardNumber": {
+          "$ref": "#/definitions/EncryptionToken"
+        }
+      },
+      "required": [
+        "CardNumber"
+      ]
+    },
+    {
+      "properties": {
+        "SeriesCode": {
+          "$ref": "#/definitions/EncryptionToken"
+        }
+      },
+      "required": [
+        "SeriesCode"
+      ]
+    },
+    {
+      "properties": {
+        "MagneticStripe": {
+          "$ref": "#/definitions/EncryptionToken"
+        }
+      },
+      "required": [
+        "MagneticStripe"
+      ]
+    },
+    {
+      "properties": {
+        "AuthenticationVerification": {
+          "$ref": "#/definitions/EncryptionToken"
+        }
+      },
+      "required": [
+        "AuthenticationVerification"
+      ]
+    },
+    {
+      "properties": {
+        "TransactionPassword": {
+          "$ref": "#/definitions/EncryptionToken"
+        }
+      },
+      "required": [
+        "TransactionPassword"
+      ]
+    },
+    {
+      "properties": {
+        "PaymentCardSummary": {
+          "$ref": "#/definitions/PaymentCard"
+        }
+      },
+      "required": [
+        "PaymentCardSummary"
+      ]
+    }
+  ]
+}

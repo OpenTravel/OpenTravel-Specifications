@@ -1,0 +1,397 @@
+{
+  "swagger": "2.0",
+  "x-otm-resource": {
+    "namespace": "http://www.opentravel.org/OTM/resources/HospitalityResources/v1",
+    "localName": "HotelDescriptiveContentResource"
+  },
+  "info": {
+    "title": "HotelDescriptiveContentResource",
+    "x-otm-library": {
+      "ResourceName": "HotelDescriptiveContentResource",
+      "LibraryName": "HospitalityContent",
+      "LibraryVersion": "1.0.0",
+      "LibraryStatus": "DRAFT",
+      "SourceFile": "/HospitalityContent_1_0_0.otm",
+      "CompilerVersion": "4.0-SNAPSHOT",
+      "CompileDate": "2019-10-30T13:33:14.799-0400"
+    },
+    "version": "1.0.0"
+  },
+  "host": "127.0.0.1",
+  "basePath": "/v1_0",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/HotelDescriptiveContents": {
+      "get": {
+        "summary": "HotelDescriptiveContentResource - Get",
+        "operationId": "Get",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "displayCurrency",
+            "in": "query",
+            "description": "Preferred currencty code is a 3 char currency code as defined in ISO 4127",
+            "x-otm-annotations": {
+              "documentation": {
+                "references": [
+                  "http:\\/\\/www.opentraveldevelopersnetwork.com\\/Supported_ISO_Standards.php"
+                ],
+                "more-info": [
+                  "http:\\/\\/www.opentraveldevelopersnetwork.com\\/2012A_SchemaDoc\\/DisplayCurrency"
+                ]
+              }
+            },
+            "required": false,
+            "type": "string",
+            "pattern": "[a-zA-Z]{3}"
+          },
+          {
+            "name": "maxResponses",
+            "in": "query",
+            "description": "The maximum quantity of search results in the response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "summaryResultsInd",
+            "in": "query",
+            "description": "If true, summary information is requested in the search results.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "Uniquely identifies a single property for a reservation.",
+            "x-otm-annotations": {
+              "examples": [
+                {
+                  "context": "ph",
+                  "value": "WASJW"
+                }
+              ]
+            },
+            "required": false,
+            "type": "string",
+            "maxLength": 32
+          },
+          {
+            "name": "chainCode",
+            "in": "query",
+            "description": "Identifies the chain.",
+            "x-otm-annotations": {
+              "examples": [
+                {
+                  "context": "ph",
+                  "value": "MC"
+                }
+              ]
+            },
+            "required": false,
+            "type": "string",
+            "maxLength": 32
+          },
+          {
+            "name": "brandCode",
+            "in": "query",
+            "description": "Identifies a brand with in a chain (e.g. Courtyard, Hampton Inn).  This code is optional if the hotel is an independent property that can be identified by a propert code alone.",
+            "x-otm-annotations": {
+              "examples": [
+                {
+                  "context": "ph",
+                  "value": "FS"
+                }
+              ]
+            },
+            "required": false,
+            "type": "string",
+            "maxLength": 32
+          },
+          {
+            "name": "cityCode",
+            "in": "query",
+            "description": "Specifies the three character IATA city code.",
+            "x-otm-annotations": {
+              "examples": [
+                {
+                  "context": "ph",
+                  "value": "WAS"
+                }
+              ]
+            },
+            "required": false,
+            "type": "string",
+            "maxLength": 32
+          },
+          {
+            "name": "areaID",
+            "in": "query",
+            "description": "An identifier of an area as defined by a hotel reservation system to allow for seaches in areas such as suburbs or regions.",
+            "required": false,
+            "type": "string",
+            "maxLength": 512
+          },
+          {
+            "name": "hotelCode_TTI",
+            "in": "query",
+            "description": "TTI hotel reference code.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "exclusiveMinimum": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "402": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "403": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "HospitalityContent_HospitalityResources_1_0_0_Trim.schema.json#/definitions/HotelDescriptiveContentListResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "HospitalityContent_HospitalityResources_1_0_0_Trim.xsd#/HotelDescriptiveContentListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/HotelDescriptiveContents/Notifications": {
+      "post": {
+        "summary": "HotelDescriptiveContentResource - Notification",
+        "operationId": "Notification",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "HotelDescriptiveContentID",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "OrganizationHospitality_4_0_0_Trim.schema.json#/definitions/HotelDescriptiveContentID"
+            },
+            "x-xml-schema": {
+              "$ref": "OrganizationHospitality_4_0_0_Trim.xsd#/HotelDescriptiveContent"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "402": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "403": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/HotelDescriptiveContents/Query": {
+      "post": {
+        "summary": "HotelDescriptiveContentResource - Query",
+        "operationId": "Query",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "HotelDescriptiveContentQueryInfo",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "HospitalityContent_HospitalityResources_1_0_0_Trim.schema.json#/definitions/HotelDescriptiveContentQueryInfo"
+            },
+            "x-xml-schema": {
+              "$ref": "HospitalityContent_HospitalityResources_1_0_0_Trim.xsd#/HotelDescriptiveContentQueryInfo"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "402": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "403": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/BaseResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "Common_5_0_0_Trim.xsd#/BaseResponse"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "HospitalityContent_HospitalityResources_1_0_0_Trim.schema.json#/definitions/HotelDescriptiveContentListResponse"
+            },
+            "x-xml-schema": {
+              "$ref": "HospitalityContent_HospitalityResources_1_0_0_Trim.xsd#/HotelDescriptiveContentListResponse"
+            }
+          }
+        }
+      }
+    }
+  }
+}

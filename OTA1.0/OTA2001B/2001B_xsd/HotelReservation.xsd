@@ -1,0 +1,1267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:include schemaLocation="RoutingHop.xsd"/>
+	<xs:include schemaLocation="Profile.xsd"/>
+	<xs:include schemaLocation="DateTimeSpan.xsd"/>
+	<xs:element name="Amount" type="AmountType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Amount : Currency : The actual payment amount in the appropriate type of currency.
+	</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AnticipatedSettlement">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">AnticipatedSettlement
+An AnticipatedSettlement object is used by the RoomStay and Service objects to indicate anticipated billing and payment arrangements.  </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ApplicableRevenueCodes"/>
+			</xs:sequence>
+			<xs:attribute name="SettlementType" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">SettlementType : SettlementType
+Values: Direct bill, City ledger, Bill to master.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AnticipatedSettlementRPH" type="xs:integer" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">AnticipatedSettlementRPHs : Integers
+A collection of unsigned integers serving as reference placeholders, and used as an index for the anticipated billing/payment arrangements for this room stay. NOTE: Where new items are to be added to any RPH collection, the OTA X-Path operation should be used.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MasterRoomStayRPH" type="xs:integer" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">MasterRoomStayRPH : Integer
+This is a reference placeholder, used as an index for the RoomStay object that is the master (e.g., SettlementType = BillToMaster).
+</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AnticipatedSettlementRPH">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">AnticipatedSettlementRPH : Integer
+This is a reference placeholder used as an index for the settlement or payment arrangements associated with this stay.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:integer"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="AnticipatedSettlementRPHs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">AnticipatedSettlementRPHs : Integers
+A collection of unsigned integers serving as reference placeholders, and used as an index for the anticipated billing/payment arrangements for this service.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AnticipatedSettlementRPH" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AnticipatedSettlements">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">AnticipatedSettlements : AnticipatedSettlement
+A collection of AnticipatedSettlement objects, including credit card or voucher information used to indicate anticipated billing/payment arrangements for this service. 
+This is the collection of all anticipated settlements for any part of this reservation (one or more roomstays or one or more services). Which settlements are associated 
+with which part is determined by each objects AnticipatedSettlementRPHs collection.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AnticipatedSettlement" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ApplicableRevenueCodes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ApplicableRevenueCodes : Strings
+Collection of strings indicating the revenue codes this settlement arrangement applies to. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RevenueCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ArrivalTransport">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ArrivalTransport : TransportInfo
+The details regarding how and when this guest will arrive, e.g., flight info.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TransportInfo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CancelPenalties">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">CancelPenalties : CancelPenalty
+The information about cancellation penalties that relate to this service. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CancelPenalty" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CancelPenalty">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">CancelPenalty
+A CancelPenalty object specifies textual information pertaining to cancellation penalties that apply to a product or set of products.
+Public Elements:</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:sequence>
+					<xs:element ref="ResCommentRPHs" minOccurs="0"/>
+				</xs:sequence>
+				<xs:element ref="Amount" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Amount : Currency
+The penalty amount imposed if payment is not received by the cancellation date.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="CancelByDate" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">CancelByDate : TimeInstant
+The date cancellation must be made by without incurring a penalty amount.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Comment" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Comment : String
+The actual comment in free-form text.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DepartureTransport">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">DepartureTransport : TransportInfo
+The details regarding how and when this guest will Depart. e.g., flight info.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TransportInfo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GuaranteeDeposits">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">GuaranteeDeposits : GuaranteeDeposit
+A collection of GuaranteeDeposit objects. This links all guarantees and/or deposits with Service and RoomStay objects</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="GuaranteeDeposit" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GuaranteeDeposit">
+		<xs:annotation>
+			<xs:documentation>GuaranteeDeposit
+The Service and the RoomStay objects use GuaranteeDeposit object to indicate  a specific guarantee or deposit information</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="Deposit" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Guarantee" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Guarantee">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Guarantee
+Type of Guarantee</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ResCommentRPHs" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="DropTime" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation>DropTime : TimeInstant
+The time that the reservation can be automatically dropped, and inventory released to be resold.  This attribute is used if the GuaranteeType = None.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ResCreditCardRPH" type="xs:integer" use="optional">
+				<xs:annotation>
+					<xs:documentation>ResCreditCardRPH : Integer
+This is a reference placeholder, used as an index for the ResCreditCard object associated with this guarantee.  This attribute is used if GuaranteeCode = CC/DC/Voucher.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ResProfileRPH" type="xs:integer" use="optional">
+				<xs:annotation>
+					<xs:documentation>ResProfileRPH : Integer
+This is a reference placeholder, used as an index for the ResProfile object associated with this guarantee. This attribute is used if the GuaranteeType = Profile.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="GuaranteeCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>GuaranteeCode: String
+Hotel guarantee code</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="GuaranteeType" use="optional">
+				<xs:annotation>
+					<xs:documentation>GuaranteeType : GuaranteeType
+An enumerated type defining the guarantee to be applied to this reservation.
+</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="None"/>
+						<xs:enumeration value="CC/DC/Voucher"/>
+						<xs:enumeration value="Profile"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Deposit">
+		<xs:annotation>
+			<xs:documentation>Deposit : PaymentsInstructions
+Refers to the PaymentsInstructions information.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PaymentInstructions"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PaymentInstructions">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">PaymentInstructions : PaymentInstruction
+The information about payment instructions that relate to this service. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PaymentInstruction"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PaymentInstruction">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">PaymentInstruction
+A PaymentInstruction object specifies textual information pertaining to policies and/or restrictions that apply to a product or set of products.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PaymentDue"/>
+			</xs:sequence>
+			<xs:attribute name="PaymentMethodType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">PaymentMethodType: PaymentMethodType
+An enumerated type that defines a method of payment for this stay. </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Cash"/>
+						<xs:enumeration value="Credit Card"/>
+						<xs:enumeration value="Debit Card"/>
+						<xs:enumeration value="Voucher"/>
+						<xs:enumeration value="Check"/>
+						<xs:enumeration value="Other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ResCreditCardRPH" type="xs:integer" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">ResCreditCardRPH : Integer
+This is a reference placeholder, used as an index for the ResCreditCard object associated with this payment instruction.  This 
+attribute is mandatory if PaymentMethodType is 2 = Credit Card, Debit Card, or Voucher.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PaymentDue">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">PaymentDue: This object defines the terms of payment for the reservation, including the due date, the amount due, and any cancellation terms.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="Amount">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Amount : Currency
+The actual payment amount in the appropriate type of currency.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:attribute name="DueDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">DueDate : TimeInstant
+This is the actual due date for the payment.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CancelIfNotReceived" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">CancelIfNotReceived : Boolean
+If Yes, the reservation is to be canceled automatically if payment not received.  If No, and payment is not received, the reservation is not canceled, but is no longer guaranteed for late arrival. 
+Values: False or No, and True or Yes.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GuestCount">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">GuestCount
+The GuestCount object indicates the number of guests attached to a specific reservation, room stay, or service. The total number 
+of guests in a room is the total of the Count of guests in all AgeQualifyingCodes.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="AgeQualifyingCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">AgeQualifyingCode : String
+A code representing a business rule that determines the charges for a guest based upon age range. For example, Adult, Child, Senior, Child With Adult, Child Without Adult, etc. This attribute allows for an increase in rate by occupant class.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Count" type="xs:integer" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Count : Integer : The number of guests in one AgeQualifyingCode.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GuestCounts">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">GuestCounts : GuestCount : Categorization of all guests in this reservation.  The total number of guests will equal the sum of the Count attribute of all GuestCount objects in this collection and assumes that the AgeQualifyingCode will be used to determine how each guest should be billed. Each roomstay and service has its own GuestCount attribute to help determine billing, headcount, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="GuestCount" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="GuestOccupancyInd" type="xs:string" use="optional" default="EachRoom">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">GuestOccupancyInd :  Value of "EachRoom" means that the guests defined in the GuestCounts object apply to each room in the NumberOfRooms for the RoomStay.  Value of "AllRooms" means that the guests defined in the GuestCounts object apply to all rooms combined in the NumberOfRooms for the RoomStay.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsPerRoom" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation>Boolean Is for each room of a RoomStay</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InHouseTimeSpan">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">InHouseTimeSpan : DateTimeSpan
+The time span during which this guest will be at the hotel, for billing purposes.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DateTimeSpan"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OriginalRoutingHops">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">OriginalRoutingHops : RoutingHop
+A collection of RoutingHop objects. This details the path that the original request or notification traveled.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RoutingHop" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Price" type="PriceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Price : Currency
+The price charged for this service.  Whether it is the total or per person/per night/per use charge depends on the setting of the PricingType attribute.  
+Each system vendor pair must decide what to do if the price doesn't match what its system calculates the correct price should be.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ProfileRPH">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ProfileRPHs : Integers
+A collection of unsigned integers serving as reference placeholders, and used as an index for the profiles associated with this guest, e.g., a corporate account. 
+		</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:integer"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ProfileRPHs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ResProfileRPHs : Integers
+A collection of unsigned integers that reference the RPH (Reference Place holder) attribute in the ResProfile object. The ResProfileRPH attribute in the ResProfile object is an indexing attribute that identifies other profiles attached to the reservation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ProfileRPH" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Rate">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Rate
+One of the rates in effect for a rate plan within a room stay.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Amount">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Amount : Currency
+The rate in effect for this time period.  Each system vendor group must decide what to do if the rate doesn't match what its system calculates the correct rate should be.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="RateBasisUnits" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">RateBasisUnits : Integer
+Number of units of the RateBasisTimeUnitTypes.  For example; for a 3-night package at $200, this attribute is 3, and the Amount is $200. For a corporate rate plan for $75 per night, this attribute is 1, and the Amount is $75.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="TimeSpan">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">TimeSpan : DateTimeSpan
+The time span covered by this rate.
+</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="RateRPH" type="xs:integer" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">RateRPH : Integer
+This is a reference placeholder used as an index for rates in effect for this rate plan. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AmountGuaranteed" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">AmountGuaranteed : Boolean
+Whether the amount for this rate is guaranteed instead of quoted and subject to change.
+Values: 0 = False or No, and 1 = True or Yes.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsComp" type="xs:boolean" use="optional" default="false">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">IsComp : Boolean
+Whether the amount for this rate was comped out (zero), such as a manager's free night for an old friend.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsOverride" type="xs:boolean" use="optional" default="false">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">IsOverride : Boolean
+Whether the amount for this rate was overridden by the person making the reservation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsTaxExempt" type="xs:boolean" use="optional" default="false">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">IsTaxExempt : Boolean
+Whether the amount for this rate has a tax exemption status.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RateBasisUnits">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Number of units for this rate basis</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:byte">
+					<xs:attribute name="RateBasisTimeUnitType" type="xs:string" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">RateBasisTimeUnitType : TimeUnitType Interval of time upon which the RateBasisUnits are based. </xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RatePlan">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">RatePlan
+One of the rate plans in effect for a room stay.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TimeSpan" minOccurs="0"/>
+				<xs:element ref="Rates"/>
+			</xs:sequence>
+			<xs:attribute name="RatePlanRPH" type="xs:integer" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">RatePlanRPH : Integer
+This is a reference placeholder used as an index for rateplans in effect for this room stay. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RatePlanCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">RatePlanCode : String
+The representation of the rate plan under which this service was booked.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RatePlans">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">RatePlans : RatePlan
+A collection of RatePlan objects indicating the rate plans in effect during this room stay</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RatePlan"/>
+			</xs:sequence>
+			<xs:attribute name="IsPerRoom" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation>Boolean Is for each room of a RoomStay</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Rates">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Rates : Rate
+A collection of Rate objects indicating the rates (prices) in effect during this rate plan. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Rate" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ResComment">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ResComment : The ResComment object is used to store a further information (comments) pertaining to a reservation. Comments appended to the reservation may be retained as the reservation passes through multiple channels.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Comment"/>
+			</xs:sequence>
+			<xs:attribute name="ResCommentRPH" type="xs:integer" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">ResCommentRPH : Integer
+This is a reference placeholder, used as an index for this object.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CommentOriginatorCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">CommentOriginatorCode : String
+Unique identifier for the system which created the comment.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="GuestViewable" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">GuestViewable : Boolean
+Whether or not this comment should be shown to the guest.
+Values: False or No, and True or Yes.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ResCommentRPH">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ResCommentRPHs : Integers
+A collection of unsigned integers serving as reference placeholders, and used as an index for the comments associated with this service. </xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:integer"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ResCommentRPHs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ResCommentRPHs : Integers A collection of unsigned integers that reference the RPH (Reference Place holder) attribute in the ResComment object. The ResCommentRPH attribute in the ResComment object is an indexing attribute that identifies a specific comment attached to the reservation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ResCommentRPH" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ResComments">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ResComments : ResComment
+A collection of ResComment objects. Comments which apply to any part of the reservation (the reservation in its entirety, one or more guests, 
+one or more services, or one or more roomstays).  Which comments apply to which part is determined by each object's ResCommentsRPHs collection.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ResComment" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ResCreditCard">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ResCreditCard
+The ResCreditCard object derives from the CreditCard object and inherits all of its attributes. The ResCreditCard object identifies a 
+credit card (or debit card) associated with a reservation. The CreditCard object is defined in the CRS Profile Synchronization standard. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CreditCard"/>
+			</xs:sequence>
+			<xs:attribute name="ResCreditCardRPH" type="xs:integer" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Used as an index to the specific ResCreditCard object.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ResCreditCards">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ResCreditCards : ResCreditCard
+A collection of ResCreditCard objects. The collection of credit cards which apply to any part of the reservation (like GuaranteeInfo or PaymentInstruction object).  Which credit card applies to which part is determined by each object's ResCreditCardRPH attribute. This object can be used to indicate vouchers or credit/debit cards attached to a specific reservation (e.g., as a guarantee) as well as traditional credit cards.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ResCreditCard"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ResGuest">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ResGuest
+The ResGuest object contains the information about a guest associated with a reservation. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ProfileRPHs" minOccurs="0"/>
+				<xs:element ref="SpecialRequestRPHs" minOccurs="0"/>
+				<xs:element ref="ResCommentRPHs" minOccurs="0"/>
+				<xs:element ref="ServiceRPHs" minOccurs="0"/>
+				<xs:element ref="InHouseTimeSpan" minOccurs="0"/>
+				<xs:element ref="ArrivalTransport" minOccurs="0"/>
+				<xs:element ref="DepartureTransport" minOccurs="0"/>
+				<xs:element ref="GuestCounts" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="ResGuestRPH" type="xs:integer" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">ResGuestRPH : Integer
+This is a reference placeholder, used as an index for this guest in this reservation. In the ResGuest object it is used like all other RPH attributes to send the delta of a reservation. It is used by the RoomStay and Service objects to indicate which guests are associated with that room stay or service.  </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AgeQualifyingCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">AgeQualifyingCode : String
+A code representing a business rule that determines the charges for a guest based upon age range. For example, Adult, Child, Senior, Child With Adult, 
+Child Without Adult, etc. This attribute allows for an increase in rate by occupant class.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ArrivalTime" type="xs:time" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">ArrivalTime : TimeInstant
+This TimeInstant represents the date and time of the guest's arrival at the hotel.  For example, this could be used to indicate a late arrival.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DepartureTime" type="xs:time" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">DepartureTime : TimeInstant
+This TimeInstant represents the date and time of the guest's departure from the hotel. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="GroupEventCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">GroupEventCode : String
+The identification of a group meeting or convention.  Used to track a guest who is part of an inventory block (e.g.: group), and can be used for a pick-up when the guest calls in to reserve a room as part of the block. Whether this is taken from inventory depends upon the InventoryBlockCode in the Room Stay class.  This code is associated with a group or event as agreed between two parties.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ResGuestRPH">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ResGuestRPH : Integer
+This is a reference placeholder, used as an index for this guest in this reservation. In the ResGuest object it is used like all other RPH attributes to send the delta of a reservation. 
+It is used by the RoomStay and Service objects to indicate which guests are associated with that room stay or service.  </xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:integer"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ResGuestRPHs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ResGuestRPHs : Integers
+A collection of unsigned integers serving as reference placeholders, and used as an index identifying which guests occupy this room.  Note that the Add operation on this collection should create a new index (UInt), then copy the passed parameter into it.  Application code 
+can call the Add operation repeatedly, using the same variable as the parameter, and just changing its value each time.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ResGuestRPH" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ResGuests">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ResGuests : ResGuest
+A collection of ResGuest objects, identifying the guests associated with this reservation. Which guests are in which room is determined by each RoomStays ResGuestRPHs collection.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ResGuest"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ResProfile">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ResProfile
+The ResProfile object derives from the Profile object and inherits all of its attributes. The ResProfile object identifies a Profile associated with a reservation. 
+The Profile object is defined in the CRS Profile Synchronization standard.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Profile"/>
+			</xs:sequence>
+			<xs:attribute name="ResProfileRPH" type="xs:integer" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ResProfileRPH">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ResProfileRPH : Integer
+This is a reference placeholder, used as an index for this object.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:integer"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ResProfileRPHs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ResProfileRPHs : Integers
+A collection of unsigned integers that reference the RPH (Reference Place holder) attribute in the ResProfile object. The ResProfileRPH attribute in the ResProfile object is an indexing attribute that identifies other profiles attached to the reservation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ResProfileRPH" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ResProfiles">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ResProfiles : ResProfile
+A collection of ResProfile objects. The collection of all profiles associated with any part of the reservation.  This could include the reservation in its entirety (e.g., a travel agent), or one or more guests.  Which profiles are associated with which part is determined by each objects 
+ResProfileRPHs collection or ResProfileRPH attribute. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ResProfile" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelReservationIDs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">HotelReservationIDs:HotelReservationID 
+A Collection of HotelReservationID objects. The collection of all ReservationIDs can include Passenger Name Record (PNR), Guest Name Record (GNR) and Guest Folio numbers. Associated with each can be a Confirmation number which is usually given to the guest.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelReservationID" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelReservationID">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">HotelReservationID
+The HotelReservationID  object contains various unique (ReservationID) and non unique (ConfirmationID, CancellationID) identifiers that the trading partners associate to the reservation</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="ResIDType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">ResIDType : ResIDType
+An enumerated type that defines the type of  Reservation ID. 
+</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Account"/>
+						<xs:enumeration value="PNR"/>
+						<xs:enumeration value="Locator"/>
+						<xs:enumeration value="GNR"/>
+						<xs:enumeration value="Folio"/>
+						<xs:enumeration value="Confirmation"/>
+						<xs:enumeration value="Reservation"/>
+						<xs:enumeration value="Cancellation"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ResIDValue" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">ResIDValue : String
+This is the actual value associated with ResIDType as generated by the system that is the source of the ResIDType</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ResIDSource" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">ResIDSource : String
+A unique identifier to indicate the source system which generated the ResIDValue</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ForGuest" type="xs:boolean" use="optional" default="false">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">ForGuest : Boolean
+Boolean used to determine if the ResIDValue is given to guest</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ResGuestRPH" type="xs:integer" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">ResGuestRPH : Integer
+This is a reference placeholder, used as an index for this guest in this reservation. In the ResGuest object it is used like all other RPH attributes to send the delta of a reservation. 
+It is used by the RoomStay and Service objects to indicate which guests are associated with that room stay or service.  It is also used to link a guest with a ReservationID</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelReservation">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The Reservation class contains the data of the reservation that will be preserved in the Guest Stay History once the guest's stay is complete.
+</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StayDateRange" minOccurs="0"/>
+				<xs:element ref="GuestCounts" minOccurs="0"/>
+				<xs:element ref="ResComments" minOccurs="0"/>
+				<xs:element ref="ResCreditCards" minOccurs="0"/>
+				<xs:element ref="ResGuests" minOccurs="0"/>
+				<xs:element ref="ResProfiles" minOccurs="0"/>
+				<xs:element ref="RoomStays" minOccurs="0"/>
+				<xs:element ref="SelectedMemberships" minOccurs="0"/>
+				<xs:element ref="AnticipatedSettlements" minOccurs="0"/>
+				<xs:element ref="SpecialRequests" minOccurs="0"/>
+				<xs:element ref="Services" minOccurs="0"/>
+				<xs:element ref="OriginalRoutingHops" minOccurs="0"/>
+				<xs:element ref="ResCommentRPHs" minOccurs="0"/>
+				<xs:element ref="ResProfileRPHs" minOccurs="0"/>
+				<xs:element ref="SpecialRequestRPHs" minOccurs="0"/>
+				<xs:element ref="ServiceRPHs" minOccurs="0"/>
+				<xs:element ref="HotelReservationIDs" minOccurs="0"/>
+				<xs:element ref="TPA_Extensions" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="RoomStayReservation" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">RoomStayReservation : Boolean
+True if this reservation is reserving rooms.  False if it is only reserving services.
+Values: False or No, and True or Yes.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ReservationOriginatorCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">ReservationOriginatorCode : String
+Identifying code of the originating system for this reservation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OriginalBookingDate" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">OriginalBookingDate : TimeInstant
+Date of the creation of this reservation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CancelOriginatorCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">CancelOriginatorCode : String
+Identifying code of the system that initiated the cancel of this reservation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CancellationDate" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">CancellationDate : TimeInstant
+Date this reservation was cancelled. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RevenueCode">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">RevenueCode : String
+Code defining the category to be used for accumulation of revenue</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="RoomStay">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">RoomStay
+The RoomStay object is a representation of one reserved room for a contiguous period.  If there is a change of room or room occupancy, a new RoomStay object must be created and added to the collection.  
+A simple example follows:  A guest is staying in a standard king room for three nights (Tuesday the 3rd through Thursday the 5th).  His wife and two children are joining him for the weekend (Friday the 6th through Saturday the 7th) when they will stay in a suite.  This reservation will have two room stays.  The first will be for one standard king room, starting on the 3rd for three nights.  The second will be for one suite, starting on the 6th for two nights.  </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelReference" minOccurs="0"/>
+				<xs:element ref="TimeSpan" minOccurs="0"/>
+				<xs:element ref="GuestCounts" minOccurs="0"/>
+				<xs:element ref="RatePlans" minOccurs="0"/>
+				<xs:element ref="AnticipatedSettlementRPHs" minOccurs="0"/>
+				<xs:element ref="ResGuestRPHs" minOccurs="0"/>
+				<xs:element ref="SelectedMembershipRPHs" minOccurs="0"/>
+				<xs:element ref="ResCommentRPHs" minOccurs="0"/>
+				<xs:element ref="SpecialRequestRPHs" minOccurs="0"/>
+				<xs:element ref="ServiceRPHs" minOccurs="0"/>
+				<xs:element ref="GuaranteeDeposits" minOccurs="0"/>
+				<xs:element ref="CancelPenalties" minOccurs="0"/>
+				<xs:element ref="PaymentInstructions" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="ReservationStatusType" type="xs:string" use="optional"/>
+			<xs:attribute name="RoomStayRPH" type="xs:integer" use="optional"/>
+			<xs:attribute name="RoomType" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Long form textual description of room type</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RoomTypeCode" type="xs:string" use="optional"/>
+			<xs:attribute name="RoomID" type="xs:string" use="optional"/>
+			<xs:attribute name="InvBlockCode" type="xs:string" use="optional"/>
+			<xs:attribute name="MarketSegmentCode" type="xs:string" use="optional"/>
+			<xs:attribute name="PromoCode" type="xs:string" use="optional"/>
+			<xs:attribute name="TACommissionPlanCode" type="xs:string" use="optional"/>
+			<xs:attribute name="NumberOfRooms" type="xs:integer" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Number of actual rooms to take out inventory.  If this attribute is used, the 
+IsPerRoom attributes of child elements GuestCounts, RatePlans, ServiceRPH, and SpecialRequestRPH must be specified.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RoomStays">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">RoomStays : RoomStay
+A collection of RoomStay objects.  Room stays associated with this reservation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RoomStay"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SelectedMembership">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">SelectedMembership
+The SelectedMembership object identifies the frequent customer reward program and (optionally) indicates points awarded for stay activity. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="SelectedMembershipRPH" type="xs:integer" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">SelectedMembershipRPH : Integer
+This is a reference placeholder used as an index for the membership program to be associated with this stay.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ProgramCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">ProgramCode : String
+The code or name of the membership program (e.g., 'Hertz', 'AAdvantage', etc.).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="BonusCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">BonusCode : String
+The code or name of the bonus program. BonusCode can be used to indicate the level of membership (e.g.; Gold Club, Platinum member, etc.)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AccountID" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">AccountID : String
+The account identification number for this particular member in this particular program.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PointsEarned" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">PointsEarned : Integer
+The total number of points earned through the selected membership.
+</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SelectedMembershipRPH">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">SelectedMembershipRPHs : Integers
+A collection of unsigned integers that reference the RPH (Reference Place Holder) attribute in the SelectedMembership object. </xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:integer"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SelectedMembershipRPHs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">SelectedMembershipRPHs : Integers
+A collection of unsigned integers that reference the RPH (Reference Place Holder) attribute in the SelectedMembership object.  Note that the Add operation on this collection should create a new index (UInt), then copy the passed parameter into it.  Application code can call the Add operation repeatedly, using the same variable as the parameter, and just changing its value each time.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="SelectedMembershipRPH" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SelectedMemberships">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">SelectedMemberships : SelectedMembership
+A collection of SelectedMembership objects to be applied to any part of the reservation (any service or roomstay). Selected memberships associated with this reservation that provides a list of reward programs which may be credited with points accrued from the guest's stay. Which memberships are to be applied to which part is determined by each object's SelectedMembershipRPHs collection. 
+</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="SelectedMembership" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Service">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Service
+A Service object represents a non-room product provided to guests.  Service products may have associated inventory and charges.  </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AnticipatedSettlementRPHs"/>
+				<xs:element ref="ResCommentRPHs"/>
+				<xs:element ref="SelectedMembershipRPHs"/>
+				<xs:element ref="TimeSpan"/>
+				<xs:element ref="Price"/>
+				<xs:element ref="GuaranteeDeposits"/>
+				<xs:element ref="CancelPenalties"/>
+				<xs:element ref="PaymentInstructions"/>
+				<xs:element ref="GuestCounts"/>
+				<xs:element ref="ResGuestRPHs"/>
+			</xs:sequence>
+			<xs:attribute name="ServicePricingType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">PricingType : ServicePricingType
+An enumerated type that defines how a service is priced.  Values:  Per stay,  Per person, Per night, Per person per night,  Per use.  </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Per stay"/>
+						<xs:enumeration value="Per person"/>
+						<xs:enumeration value="Per night"/>
+						<xs:enumeration value="Per person per night"/>
+						<xs:enumeration value="Per use"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ReservationStatusType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">StatusType : ReservationStatusType
+An enumerated type that defines the status of the reservation for this service. 
+</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Reserved"/>
+						<xs:enumeration value="Requested"/>
+						<xs:enumeration value="Request denied"/>
+						<xs:enumeration value="No-show"/>
+						<xs:enumeration value="Cancelled"/>
+						<xs:enumeration value="In-house"/>
+						<xs:enumeration value="Checked out"/>
+						<xs:enumeration value="Waitlisted"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ServiceRPH" type="xs:integer" use="required"/>
+			<xs:attribute name="ServiceInventoryCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">ServiceInventoryCode : String
+The representation of the specific service being reserved.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RatePlanCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">RatePlanCode : String
+The representation of the rate plan under which this service was booked.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventoryBlockCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">InventoryBlockCode : String
+The representation of the block code under which the inventory for this service is categorized.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PriceGuaranteed" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">PriceGuaranteed : Boolean
+Whether the price for this service is guaranteed or quoted and subject to change.
+Values: False or No, (Price NOT guaranteed) and True or Yes, Price is guaranteed.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Inclusive" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Inclusive : Boolean
+Whether the price for this service is included in the room rate. 
+Values: False or No, and True or Yes.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Quantity" type="xs:integer" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Quantity : Integer
+The number of tickets, rounds of golf, etc.  Also serves as the number of persons when pricing class is per person or per person per night.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ServiceRPH">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ServiceRPH : Integer
+This is a reference placeholder used as an index for a service to be associated with this stay</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:integer">
+					<xs:attribute name="IsPerRoom" type="xs:boolean" use="optional">
+						<xs:annotation>
+							<xs:documentation>Boolean Is for each room of a RoomStay</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ServiceRPHs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ServiceRPHs : Integers
+A collection of unsigned integers that reference the RPH (Reference Place holder) attribute in the Service object. The ServiceRPH attribute in the Service object is an indexing attribute that identifies the services attached to a specific guest or to the reservation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ServiceRPH" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Services">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Services : Service
+A collection of Service objects. This is the collection of all services associated with any part of this reservation (the reservation in its entirety, one or more guests, or one or more room stays).  
+Which services are attributable to which part is determined by each object's ServiceRPHs collection.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Service"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpecialRequest">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">SpecialRequest
+The SpecialRequest object indicates special requests for a particular guest, service or reservation.  Each of these may be independent of any that are tied to the profile (see Profile Synchronization standard).</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="SpecialRequestRPH" type="xs:integer" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">SpecialRequestRPH : Integer
+This is a reference placeholder used as an index for a special request to be associated with this reservation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RequestCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">RequestCode : String
+Identifies a request for this reservation from the Special Request code list for Hotels, Amenities, etc.  Refers to the Hotel Descriptive Content Notification in the CRS Availability, Rate and Inventory standard.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RequestComments" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">RequestComments : String
+Further information about this request.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpecialRequestRPH">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">SpecialRequestRPH : Integer
+This is a reference placeholder used as an index for a special request to be associated with this reservation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:integer">
+					<xs:attribute name="IsPerRoom" type="xs:boolean" use="optional">
+						<xs:annotation>
+							<xs:documentation>Boolean Is for each room of a RoomStay</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpecialRequestRPHs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">SpecialRequestRPHs : Integers
+A collection of unsigned integers that reference the RPH (Reference Place holder) attribute in the SpecialRequest object. The SpecialRequestRPH attribute in the Special Request object is an indexing attribute that identifies the special requests of a specific guest or of the reservation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="SpecialRequestRPH" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpecialRequests">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">SpecialRequests : SpecialRequest
+A collection of SpecialRequest objects. The collection of all special requests associated with any part of the reservation (the reservation in its entirety, one or more guests, or one or more room stays).  Which special requests belong to which part is determined by each object's SpecialRequestRPHs collection.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="SpecialRequest" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="StayDateRange">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">StayDateRange : DateTimeSpan
+Total time span covered by this reservation (earliest arrival to latest departure).</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DateTimeSpan"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TimeSpan">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">TimeSpan : DateTimeSpan
+The time span covered by this service.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="DateTimeSpan"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TransportInfo">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">TransportInfo
+A TransportInfo object is used to indicate transportation information for a guest.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="TransportType" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">TransportType : TransportType
+Method of conveyance of this guest.  Values: Air, Rail, Bus, Boat, Private Auto, Other. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TransportID" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">TransportID : String
+Identifier of this transportation method (e.g., flight number).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LocationCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">LocationCode : String
+Identifier of the arrival or delivery point (e.g., airport code)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TransportTime" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">TransportTime : TimeInstant
+Time of transportation.  Local time of the location indicated by the LocationCode. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="AmountType">
+		<xs:simpleContent>
+			<xs:restriction base="xs:decimal">
+				<xs:attribute name="CurrencyCode" type="xs:string" use="required">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">CurrencyCode : String
+CurrencyCode, a 3-character string indicating the ISO currency code (e.g., "USD", "CAD", etc.). The currency code is ISO standard # 4217 (1995).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PriceType">
+		<xs:simpleContent>
+			<xs:restriction base="xs:decimal">
+				<xs:attribute name="CurrencyCode" type="xs:string" use="required"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>

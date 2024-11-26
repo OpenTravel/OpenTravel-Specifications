@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.1 U (http://www.xmlspy.com) by John Lambe (Product Strategy) -->
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="CompanyName.xsd"/>
+	<xs:include schemaLocation="CommonAirSchema.xsd"/>
+	<xs:element name="SpecialReqDetails">
+		<xs:annotation>
+			<xs:documentation>Remarks, OSIs, Seat Requests etc.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SeatRequest" type="SeatRequestType" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Seating requests for each passenger for each air leg of this trip.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="SpecialServiceRequest" type="SpecialServiceRequestType" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Special Service Requests (SSR) for this booking. Examples Include:
+									 WCHR-WHEELCHAIR/PSGR CAN WALK UP STAIRS  
+ 									 WCHS-WHEELCHAIR/PSGR CAN WALK TO SEAT    
+									 WCHC-WHEELCHAIR/PSGR MUST BE CARRIED     
+									 WCBD-WHEELCHAIR WITH DRY CELL BATTERY    
+									 WCBW-WHEELCHAIR WITH WET CELL BATTERY    
+									 WCMP-WHEELCHAIR, MANUAL POWER            
+									 WCOB-WHEELCHAIR, ON-BOARD                
+									 STCR-STRETCHER ASSISTANCE                
+									 BLND-BLIND PSGR                          
+									 DEAF-DEAF PSGR                           
+									 UMNR-UNACCOMPANIED MINOR                 
+									 SMST-SMOKING SEAT                        
+									 FQTV-FREQUENT TRAVELER                   
+									 OTHS-OTHER REQUESTS                      
+									 TKNM - TICKET NUMBER ISSUED MANUALLY
+									 PCTC -CONTACT NAME/COUNTRY AND PHONE FOR INTERNATIONAL TRAVELER
+									 PSPT – PASSPORT NUMBER
+									TKNC -TICKET CONTROL NUMBER
+
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="OtherServiceInformation" type="OtherServiceInfoType" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Other Service Information (OSI) for relevent airlines </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Remark" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Supplementary information for this booking</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="UniqueRemark" type="UniqueRemarkType" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Categorised remark information for the booking</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="SpecialRemark" type="SpecialRemarkType" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Itinerary Remarks, Invoice Remarks, etc.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SpecialServiceRequestType">
+		<xs:annotation>
+			<xs:documentation>SSR's for this booking request eg. meals</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TravelerReferenceNumber" type="xs:positiveInteger" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>One or more travelers to whom this request applies</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FlightSequenceNumber" type="xs:positiveInteger" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>One or more flights to whom this request applies</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Airline" type="CompanyName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specify airline to request availability for.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Text" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Text associated with remark</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="SSRCode" type="SSRCodeType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="OtherServiceInfoType">
+		<xs:annotation>
+			<xs:documentation>Other Service Information (OSI) for relevent airlines </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TravelerReferenceNumber" type="xs:positiveInteger" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>One or more travelers to whom this request applies</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Airline" type="CompanyName">
+				<xs:annotation>
+					<xs:documentation>Specify airline to request availability for.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Text" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Text associated with remark</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UniqueRemarkType">
+		<xs:annotation>
+			<xs:documentation>Categorised remark information for the booking</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="RemarkType" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SpecialRemarkType">
+		<xs:annotation>
+			<xs:documentation>Itinerary Remarks, Invoice Remarks, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TravelerReferenceNumber" type="xs:positiveInteger" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>One or more travelers to whom this request applies</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FlightSequenceNumber" type="xs:positiveInteger" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>One or more flights to whom this request applies</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Text" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Text associated with remark</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="RemarkType" type="SpecialRemarkOptionType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="SeatRequestType">
+		<xs:annotation>
+			<xs:documentation>Object to hold a passengers' seat request</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TravelerReferenceNumber" type="xs:positiveInteger" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>One or more travelers to whom this request applies</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FlightSequenceNumber" type="xs:positiveInteger" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>One or more flights to whom this request applies</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DepartureAirport" type="LocationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Departure point of flight segment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ArrivalAirport" type="LocationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Arrival point of flight segment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="SeatRequestAttributes"/>
+	</xs:complexType>
+	<xs:attributeGroup name="SeatRequestAttributes">
+		<xs:annotation>
+			<xs:documentation>Attributes for seat request. Note: you can choose a specific seat or just a general preference</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="SeatNumber" type="xs:string" use="optional"/>
+		<xs:attribute name="SeatPreference" type="SeatPreferenceType" use="optional"/>
+		<xs:attribute name="Smoking" type="xs:boolean" default="false"/>
+	</xs:attributeGroup>
+	<xs:simpleType name="SeatPreferenceType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="None"/>
+			<xs:enumeration value="Together"/>
+			<xs:enumeration value="Aisle"/>
+			<xs:enumeration value="Window"/>
+			<xs:enumeration value="Specific"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SSRCodeType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z]{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SpecialRemarkOptionType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Itinerary"/>
+			<xs:enumeration value="Invoice"/>
+			<xs:enumeration value="Endorsement"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

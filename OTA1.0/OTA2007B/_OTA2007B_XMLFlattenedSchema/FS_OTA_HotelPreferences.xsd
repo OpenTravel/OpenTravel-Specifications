@@ -1,0 +1,771 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="2.002" id="OTA2003A2007B">
+	
+	<xs:annotation>
+		<xs:documentation xml:lang="en">All Schema files in the OTA specification are made available according to the terms defined by the OTA License Agreement at http://www.opentravel.org/ota_downloads_form.cfm</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="BedTypePrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates preferences for the size and features of hotel bed types.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to128">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Indicates the level of preference for the bed type requested.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="BedType" type="OTA_CodeType">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Indicates the hotel bed type requested. Refer to OTA Code List Bed Type (BED).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="BusinessSrvcPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates preferences for type of business services in a hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to128">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the customer's level of preference for the hotel business service identified.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="BusinessSrvcType" type="OTA_CodeType">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the types of business services offered by the hotel. Refer to OTA Code ListBusiness Srvc Type (BUS).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="FoodSrvcPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates preferences for type of food service facilities in a hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to128">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the customer's level of preference for the hotel food service identified.
+							</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="FoodSrvcType" type="OTA_CodeType">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the types of food services offered by the hotel. Refer to OTA Code List Main Cuisine Code (CUI).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="HotelPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">These are the hotel preference elements used on an instance of a profile.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="LoyaltyPref" type="LoyaltyPrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PaymentFormPref" type="PaymentFormPrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="HotelChainPref" type="CompanyNamePrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PropertyNamePref" type="PropertyNamePrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PropertyLocationPref" type="PropertyLocationPrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PropertyTypePref" type="PropertyTypePrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PropertyClassPref" type="PropertyClassPrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PropertyAmenityPref" type="PropertyAmenityPrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="RoomAmenityPref" type="RoomAmenityPrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="RoomLocationPref" type="RoomLocationPrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="BedTypePref" type="BedTypePrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="FoodSrvcPref" type="FoodSrvcPrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="MediaEntertainPref" type="MediaEntertainPrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PetInfoPref" type="PetInfoPrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="MealPref" type="MealPrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="RecreationSrvcPref" type="RecreationSrvcPrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="BusinessSrvcPref" type="BusinessSrvcPrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PersonalSrvcPref" type="PersonalSrvcPrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SecurityFeaturePref" type="SecurityFeaturePrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PhysChallFeaturePref" type="PhysChallFeaturePrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SpecRequestPref" type="SpecRequestPrefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="TPA_Extensions" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="PreferLevelGroup"/>
+		<xs:attributeGroup ref="PrivacyGroup"/>
+		<xs:attributeGroup ref="SmokingIndicatorGroup"/>
+		<xs:attribute name="RatePlanCode" type="StringLength1to128">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Code identifying preferred hotel rate plan for this travel situation</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HotelGuestType" type="OTA_CodeType">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Category of hotel guest. Refer to OTA Code List Hotel Guest Type (GUE).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="PersonalSrvcPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates preferences for type of personal services in a hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to128">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the customer's level of preference for the hotel personal service identified.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PhysChallFeaturePrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates preferences for type of features required to meet the needs of persons with physical challenges, disabilities, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to128">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the customer's level of preference for the hotel physically challenged feature identified.
+							</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="PhysChallFeatureType" type="OTA_CodeType">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the types of features the hotel offers to service physically challenged guests. Refer to OTA Code List Physically Challenged Feature Code (PHY).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PropertyAmenityPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates preferences for hotel property amenities.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to128">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the customer's level of preference for the hotel property amenity identified.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="PropertyAmenityType" type="OTA_CodeType">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the amenities offered by the hotel. Refer to OTA Code List Hotel Amenity Code (HAC).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PropertyClassPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates preferences for class of hotel property.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to128">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the customer's level of preference for the hotel property class identified.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="PropertyClassType" type="OTA_CodeType" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifes the classification of the property. Refer to OTA Code List Brand Category Code (BCC).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PropertyLocationPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates preferences for hotel property locations.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to128">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Indicates the level of preference for the property location identified.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="PropertyLocationType" type="OTA_CodeType">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the propery location type. Refer to OTA Code List Location Category Codes (LOC).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PropertyNamePrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of preferred hotel property associated with this collection.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to128">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the customer's level of preference for the hotel property identified.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="HotelCode" type="StringLength1to16" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The code that uniquely identifies a single hotel property. The hotel code is decided between vendors.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PropertyTypePrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates preference for hotel property types.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to128">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the customer's level of preference for the hotel type identified.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="PropertyType" type="StringLength1to128"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="RecreationSrvcPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates preferences for type of recreation services in a hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to128">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the customer's level of preference for the hotel recreational service identified.
+							</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="RecreationSrvcType" type="OTA_CodeType">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the recreational services offered by the hotel. Refer to OTA Code List Recreation Srvc Type (RST).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="RoomAmenityPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates preferences for hotel room amenities.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to128">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the customer's level of preference for the hotel room amenity identified.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="RoomAmenity" type="OTA_CodeType" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifes the types of room amenities offered by the property. Refer to OTA Code List Room Amenity Type (RMA).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="ExistsCode" type="OTA_CodeType" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">This attribute is used to explicitly define whether an amenity or service is offered. Refer to OTA Code list Option Type Code (OTC). This is used in conjunction with RoomAmenity.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attributeGroup ref="QuantityGroup"/>
+				<xs:attribute name="QualityLevel" type="StringLength1to16" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Used to designate the quality level of the RoomAmenity e.g., premium, deluxe, standard, economy.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="RoomLocationPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates preferences for hotel room locations.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to128">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the customer's level of preference for the hotel room location identified.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="RoomLocationType" type="OTA_CodeType">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the location of the room within the property. Refer to OTA Code List Room Location Type (RLT).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SecurityFeaturePrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates preferences for type of security features in a hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="OTA_CodeType">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the customer's level of preference for the hotel security feature identified. Refer to OTA Code List Security Feature Code (SEC).</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+<!-- OTA_SimpleTypes.xsd --><xs:simpleType name="MealType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Airline meal types.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AVML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">AVML - Asian Veg</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BBML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">BBML - Baby/Infant Food</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BLML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">BLML - Bland Meal</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">CHML - Child Meal</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DBML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">DBML - Diabetic</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FPML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">FPML - Fruit Meal</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GFML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">GFML - Gluten Free</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HFML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">HFML - High Fiber</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HNML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">HNML - Hindu Meal</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KSML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">KSML - Kosher</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LCML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">LCML - Low Calorie</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LFML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">LFML - Low Cholesterol</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LPML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">LPML - Low Protein</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LSML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">LSML - Low Sodium/No Salt</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MOML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">MOML - Moslem</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NLML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">NLML - Non-Lactose</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ORML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">ORML - Oriental</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">PRML - Low Purin</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RVML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">RVML - Raw Vegetarian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SFML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">SFML - Seafood</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">SPML - Special/Specify</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VGML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">VGML - Vegetarian/Non Dairy</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VLML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">VLML - Vegetarian/Milk/Eggs</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RGML">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Designates a regular meal.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="OTA_CodeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for codes in the OTA code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9A-Z]{1,3}(\.[A-Z]{3}(\.X){0,1}){0,1}"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="PreferLevelType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used to specify a preference level for something that is or will be requested (e.g. a supplier of a service, a type of service, a form of payment, etc.).
+	</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Only">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Preference level that indicates request is only for a specific criterion.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unacceptable">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Preference level that indicates request is unnacceptable for a specific criterion.
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Preferred">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Preference level that indicates request is preferred for a specific criterion.
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Preference level that indicates request is required for a specific criterion.
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoPreference">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Preference level that indicates there is no preference.
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="RPH_Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">(Reference Place Holder) - an index code to identify an instance in a collection of like items.. For example,  used to assign individual passengers or clients to particular itinerary items.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{1,8}"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="StringLength0to128">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 0 to 128</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"/>
+			<xs:maxLength value="128"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="StringLength0to64">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 0 to 64</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"/>
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="StringLength1to128">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 128</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="128"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="StringLength1to16">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 16</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="StringLength1to32">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 32</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="StringLength1to64">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 64</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType><!-- OTA_CommonPrefs.xsd --><xs:complexType name="CompanyNamePrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a preferred company by name.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="CompanyNameType">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Used to specify the preference level for this company.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="LoyaltyPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a preference for a loyalty program.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to64">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Used to specify the preference level for this loyalty program.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="RPH" type="RPH_Type">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identification of loyalty program by reference number or index.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="MealPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a food and beverage preference.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to64">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Used to specify the preference level for a meal type.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="MealType" type="MealType">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Type of meal required (e.g.,vegetarian, Kosher, low fat, etc.)</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="FavoriteFood" type="StringLength1to64">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Dining preferences used with this collection.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="Beverage" type="StringLength1to64">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Type of drink(s) preferred.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="MediaEntertainPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Media and entertainment information preferences.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to64">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Used to indicate a level of preference for media or entertainment.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="PaymentFormPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a form of payment preference.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to64">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Used to indicate a level of preference for a form of payment.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="RPH" type="RPH_Type">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The unique reference for a payment form within this message.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="PetInfoPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indentifies preferences regarding a pet.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to64">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Used to indicate a level of preference for pet information.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="SpecRequestPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies special request preference.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to64">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Used to indicate a level of preference for a special request.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><!-- OTA_CommonTypes.xsd --><xs:element name="TPA_Extensions" type="TPA_ExtensionsType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A placeholder in the schema to allow for additional elements and attributes to be included if required, per Trading Partner Agreement (TPA).</xs:documentation>
+		</xs:annotation>
+	</xs:element><xs:complexType name="CompanyNameType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a company by name.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to128">
+				<xs:attributeGroup ref="CompanyID_AttributesGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Provides detailed information on a company.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="Division" type="StringLength1to32" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The division name or ID with which the contact is associated.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="Department" type="StringLength1to32" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The department name or ID with which the contact is associated.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="TPA_ExtensionsType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Allows extensions 
+to be added to the OTA specification per trading partner agreement.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType><xs:attributeGroup name="CompanyID_AttributesGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides detailed information on a company.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="CompanyShortName" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to provide the company common name.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TravelSector" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">
+Refer to OTA Code List Travel Sector (TVS).
+		</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Code" type="StringLength1to16" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies a company by the company code.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CodeContext" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies the context of the identifying code, such as DUNS, IATA or internal code, etc.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="PreferLevelGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used to indicate a level of preference for an associated item (i.e., only, unacceptable, preferred).</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional" default="Preferred">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to indicate a level of preference for an associated item.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="PrivacyGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Allows for control of the sharing of data between parties.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ShareSynchInd" use="optional">
+			<xs:simpleType>
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Inherit" Permission for sharing data for synchronization of information held by other travel service providers.							</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Yes"/>
+					<xs:enumeration value="No"/>
+					<xs:enumeration value="Inherit"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="ShareMarketInd" use="optional">
+			<xs:simpleType>
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Inherit" Permission for sharing data for marketing purposes.</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Yes"/>
+					<xs:enumeration value="No"/>
+					<xs:enumeration value="Inherit"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="QuantityGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used to define a quantity.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Quantity" type="xs:nonNegativeInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to define the quantity for an associated element or attribute.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="SmokingIndicatorGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a position with regard to the smoking of cigarettes, either Allowed or NotAllowed.  This may be of use when expressing a preference (I prefer a room that allows smoking) or when stating the attributes of an item (smoking in this rental car is not allowed).</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="SmokingAllowed" type="xs:boolean" use="optional" default="false">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates smoking is allowed when true and is not allowed when false.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup></xs:schema>

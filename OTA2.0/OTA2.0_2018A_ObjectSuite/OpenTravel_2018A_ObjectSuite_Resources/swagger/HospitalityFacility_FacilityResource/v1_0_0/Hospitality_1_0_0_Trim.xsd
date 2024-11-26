@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/product/hospitality/v1"
+    version="1.0.0"
+    xmlns:org-0300="http://www.opentravel.org/OTM/organization/v3"
+    xmlns:orghs-0300="http://www.opentravel.org/OTM/organization/hospitality/v3"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0300="http://www.opentravel.org/OTM/Common/v3"
+    xmlns:ota2-0400="http://www.opentravel.org/OTM/Common/v4"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:ph="http://www.opentravel.org/OTM/product/hospitality/v1"
+    xmlns:prod-0400="http://www.opentravel.org/OTM/product/v4" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:LibraryName>Hospitality</otm:LibraryName>
+                <otm:LibraryVersion>1.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                <otm:SourceFile>/Hospitality_1_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2018-04-05T08:59:58.158-04:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v3" schemaLocation="CodeList_3_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/product/v4" schemaLocation="Product_4_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/v3" schemaLocation="Organization_3_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/hospitality/v3" schemaLocation="OrganizationHospitality_3_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v4" schemaLocation="Common_4_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:complexType name="RatePlanCode">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A string value may be used to request a particular code or an ID if the guest qualifies for a specific rate, such as AARP, AAA, a corporate rate, etc., or to specify a negotiated code as a result of a negotiated rate.</xsd:documentation>
+            <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to64</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">RatePlanCode</otm:OTA2Entity>
+                <otm:Equivalent context="ph">RatePlanGroup</otm:Equivalent>
+                <otm:Example context="ph">AAAB</otm:Example>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0400:StringShort">
+                <xsd:attribute name="ratePlanType"
+                    type="ota2-0300:RatePlanType_Enum_Base" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">An enumerated type that allows the query to specify a rate category type, and provides major categories for comparison across brands.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}OTA_CodeType</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="ph">RatePlanType</otm:Equivalent>
+                            <otm:Example context="ph">11.RPT</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="ratePlanTypeExtension" type="ota2:String_EnumExtension"/>
+                <xsd:attribute name="ratePlanID"
+                    type="ota2-0400:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A text field used to indicate a unique ID that is associated with the rate plan and is essential in the reservation request in order to obtain the rate.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to64</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="ph">RatePlanID</otm:Equivalent>
+                            <otm:Example context="ph">12345678</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="ratePlanCategory"
+                    type="ota2-0400:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Hotel systems often group multiple rate plans into a single category. This refers to that category that is specific to the hotel CRS/ PMS and should not be confused with a GDS rate category.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to64</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="ph">RatePlanCategory</otm:Equivalent>
+                            <otm:Example context="ph">POD</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="promotionCode"
+                    type="ota2-0400:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Used to provide a promotion code of the loyalty redemption.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">L9Z</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="promotionVendorCode"
+                    type="ota2-0400:ListOfTinyStrings" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">List of the vendor codes associated with a promotion.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">WT1</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="ratePlanQualifierInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The Rate Plan Qualifier is used to control the sort order of RatePlans. Those Rate Plans that are not qualified will appear first, those that are qualified will appear last.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+</xsd:schema>

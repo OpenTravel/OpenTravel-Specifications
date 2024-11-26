@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:include schemaLocation="PkgReservation.xsd"/>
+	<xs:complexType name="PackageRequest">
+		<xs:sequence>
+			<xs:element name="DateRange" type="PkgDateRange" minOccurs="0"/>
+			<xs:element name="InventoryItems" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A collection of elements to allow any item of inventory to be requested for a booking.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="InventoryItem" type="InventoryItem" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CustomerCounts" type="CustomerCounts" minOccurs="0"/>
+		<xs:element name="TPA_Extension" type="xs:anyType"/>
+		</xs:sequence>
+		<xs:attribute name="PackageType" type="PkgProductType" use="optional"/>
+		<xs:attribute name="CompanyCode" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>A coded reference to the supplier of a service or package.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TourCode" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>The supplier’s code to identify the tour or accommodation arrangement for the package</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TravelCode" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>The supplier’s code to identify the travel arrangement for the package</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="BoardCode" type="PkgBoardCode" use="optional"/>
+		<xs:attribute name="SKU" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>An alternative method of identifying the full tour package</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="URL" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Another alternative method of identifying the full tour package</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PromotionCode" type="PromotionCode" use="optional"/>
+	</xs:complexType>
+</xs:schema>

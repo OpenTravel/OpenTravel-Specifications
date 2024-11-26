@@ -1,0 +1,976 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DeleteOrderRQ xmlns="http://www.opentravel.org/OTM/order/v2"
+    timeStamp="2017-05-24T10:17:01.010-04:00" version="2"
+    xmlns:fin-0200="http://www.opentravel.org/OTM/finance/v2"
+    xmlns:ota2-0300="http://www.opentravel.org/OTM/Common/v3"
+    xmlns:prod-0300="http://www.opentravel.org/OTM/product/v3"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opentravel.org/OTM/order/v2 ../Order_2_0_0_Trim.xsd">
+    <PayloadStdAttributes altLangID="es"
+        correlationID="Example String Value"
+        echoToken="Example String Value" primaryLangID="en"
+        retransmissionIndicatorInd="true"
+        sequenceNmbr="Example String Value" target="Test"
+        targetName="Example String Value"
+        timeStamp="2011-01-24T09:45:00-06:00"
+        transactionIdentifier="Example String Value"
+        transactionStatusCode="Start" version="12"/>
+    <ota2-0300:POS>
+        <ota2-0300:Source agentDutyCode="Example String Value"
+            agentSine="Example String Value" airlineVendorID="B6"
+            airportCode="IAD" eRSP_UserID="Example String Value"
+            firstDepartPoint="Example String Value" iSOCountry="IR"
+            iSOCurrency="USD" pseudoCityCode="Example String Value" terminalID="Example String Value">
+            <ota2-0300:RequestorID>
+                <ota2-0300:Identifier organization="Acme"
+                    system="sysABC3344" url="http://www.w3.org/2001/XMLSchema">guid12345</ota2-0300:Identifier>
+            </ota2-0300:RequestorID>
+            <ota2-0300:Position altitude="Example String Value"
+                altitudeUnitOfMeasure_Enum="Miles"
+                formatURL="http://www.w3.org/2001/XMLSchema"
+                latitude="Example String Value"
+                longitude="Example String Value" mapURL="http://www.OpenTravel.org/ns/OTA2/Common_v01_00"/>
+            <ota2-0300:BookingChannel primaryInd="true">
+                <ota2-0300:CompanyName code="AI"
+                    codeContext="Example String Value"
+                    department="Adventure department"
+                    description="Example String Value"
+                    division="Travel Division" shortName="Adventure Inc">Travel Adventure Partners Incorporated</ota2-0300:CompanyName>
+                <ota2-0300:Type>Agent</ota2-0300:Type>
+            </ota2-0300:BookingChannel>
+        </ota2-0300:Source>
+    </ota2-0300:POS>
+    <Order objID="order_1">
+        <Identifier organization="Acme" system="sysABC3344" url="http://www.OpenTravel.org/ns/OTA2/Common_v01_00">guid12345</Identifier>
+        <OrderRef>order_1</OrderRef>
+        <Offer objID="offer_1" vendor="Vendor Name">
+            <Identifier organization="Acme" system="sysABC3344" url="http://www.w3.org/2001/XMLSchema">guid12345</Identifier>
+            <OfferRef>offer_1</OfferRef>
+            <TotalPrice estimateInd="true" taxExcludedInd="true">
+                <Total currencyCode="USD" minorUnit="2">80000</Total>
+                <ProductPrice feesExcludedInd="true"
+                    gratuityIncludedInd="true" taxExcludedInd="true">
+                    <ota2-0300:Price description="Example String Value"
+                        percentage="10" quantity="1234"
+                        unitName="Example String Value" unitPrice="100.00">
+                        <ota2-0300:Total currencyCode="USD" minorUnit="2">80000</ota2-0300:Total>
+                        <ota2-0300:ChargeUnit>Per unit</ota2-0300:ChargeUnit>
+                    </ota2-0300:Price>
+                    <Taxes>
+                        <Total currencyCode="USD" minorUnit="2">80000</Total>
+                        <Tax sequenceNbr="Example String Value">
+                            <ota2-0300:Amount
+                                description="Example String Value"
+                                percentage="10" quantity="2345"
+                                unitName="Example String Value" unitPrice="100.00">
+                                <ota2-0300:Total currencyCode="USD" minorUnit="2">80000</ota2-0300:Total>
+                                <ota2-0300:ChargeUnit>Per order</ota2-0300:ChargeUnit>
+                            </ota2-0300:Amount>
+                            <EffectiveExpire effective="2011-01-24"
+                                expire="2011-07-04" expireDateExclusiveInd="true"/>
+                            <TaxType_Enum>Assessment/license tax</TaxType_Enum>
+                        </Tax>
+                    </Taxes>
+                    <Fee taxExcludedInd="true">
+                        <ota2-0300:Price
+                            description="Example String Value"
+                            percentage="10" quantity="3456"
+                            unitName="Example String Value" unitPrice="100.00">
+                            <ota2-0300:Total currencyCode="USD" minorUnit="2">80000</ota2-0300:Total>
+                            <ota2-0300:ChargeUnit>Per tray</ota2-0300:ChargeUnit>
+                        </ota2-0300:Price>
+                        <FeeType>Adult rollaway fee</FeeType>
+                    </Fee>
+                    <ProductRef>product_2</ProductRef>
+                    <Gratuity mandatoryInd="true">
+                        <ota2-0300:AmountOrPercentPercent/>
+                    </Gratuity>
+                </ProductPrice>
+                <PriceModifiers>
+                    <Promotion code="Example String Value"
+                        name="Example String Value" promotionVendorCode="Example String Value Example String Value Example String Value">Example String Value</Promotion>
+                    <RateQualifier code="Example String Value"
+                        description="Example String Value"
+                        rateAuthorizationCode="Example String Value"
+                        rateID="Example String Value" ratePeriod="Hourly">Example String Value</RateQualifier>
+                    <ota2-0300:PersonIdentifier objID="person_1">
+                        <ota2-0300:Identifier organization="Acme"
+                            system="sysABC3344" url="http://www.OpenTravel.org/ns/OTA2/Common_v01_00">guid12345</ota2-0300:Identifier>
+                        <ota2-0300:OtherID organization="Acme"
+                            system="sysABC3344" url="http://www.w3.org/2001/XMLSchema">guid12345</ota2-0300:OtherID>
+                        <ota2-0300:PersonRef>person_1</ota2-0300:PersonRef>
+                    </ota2-0300:PersonIdentifier>
+                    <ProductRef>product_4</ProductRef>
+                </PriceModifiers>
+                <Fee taxExcludedInd="true">
+                    <ota2-0300:Price description="Example String Value"
+                        percentage="10" quantity="4567"
+                        unitName="Example String Value" unitPrice="100.00">
+                        <ota2-0300:Total currencyCode="USD" minorUnit="2">80000</ota2-0300:Total>
+                        <ota2-0300:ChargeUnit>Per dozen</ota2-0300:ChargeUnit>
+                    </ota2-0300:Price>
+                    <FeeType>Application Fee</FeeType>
+                </Fee>
+                <Taxes>
+                    <Total currencyCode="USD" minorUnit="2">80000</Total>
+                    <Tax sequenceNbr="Example String Value">
+                        <ota2-0300:Amount
+                            description="Example String Value"
+                            percentage="10" quantity="1234"
+                            unitName="Example String Value" unitPrice="100.00">
+                            <ota2-0300:Total currencyCode="USD" minorUnit="2">80000</ota2-0300:Total>
+                            <ota2-0300:ChargeUnit>Per gallon</ota2-0300:ChargeUnit>
+                        </ota2-0300:Amount>
+                        <EffectiveExpire effective="2011-12-05"
+                            expire="2011-01-24" expireDateExclusiveInd="true"/>
+                        <TaxType_Enum>Bed tax</TaxType_Enum>
+                    </Tax>
+                </Taxes>
+            </TotalPrice>
+            <TermsAndConditions duration="1234" objID="termsAndConditions_1">
+                <Identifier organization="Acme" system="sysABC3344" url="http://www.OpenTravel.org/ns/OTA2/Common_v01_00">guid12345</Identifier>
+                <TermsAndConditionsRef>termsAndConditions_1</TermsAndConditionsRef>
+                <Promotion code="Example String Value"
+                    name="Example String Value" promotionVendorCode="Example String Value Example String Value Example String Value">Example String Value</Promotion>
+                <RebateProgram participationInd="true" programName="Example String Value">
+                    <fin-0200:PaymentCard effectiveDate="0116"
+                        expireDate="0117" id="paymentCard_1" secureInd="true">
+                        <fin-0200:Privacy
+                            optInDate="2011-07-04T14:15:00+06:00"
+                            optInStatus="OptedIn"
+                            optOutDate="2011-12-05T06:00:00Z"
+                            shareMarketInd="Yes" shareSyncInd="No"/>
+                        <fin-0200:CardCode>AX</fin-0200:CardCode>
+                        <fin-0200:CardType issuerCode="VISA" issuerCodeExtension="issuerCode_Other_Value">786</fin-0200:CardType>
+                        <fin-0200:Issuer description="Visa"
+                            id="codeExternal_1"
+                            name="Example String Value" uRL="http://www.w3.org/2001/XMLSchema">Example String Value</fin-0200:Issuer>
+                        <fin-0200:CardHolderName>Example String Value</fin-0200:CardHolderName>
+                        <fin-0200:CardNumber
+                            authenticationMethod="SecurityCode"
+                            encryptedValue="5dfc52b51bd35553df8592078de921bc"
+                            encryptionKey="KHC32198gt4"
+                            encryptionKeyMethod="RotatingKeyEnvironment_DailyKey"
+                            encryptionMethod="Triple DES"
+                            mask="xxxxxxxxxxxx9922"
+                            token="AEGHV234AUD54367" tokenProviderID="Shift4 (payment)">
+                            <fin-0200:PlainText>Example String Value</fin-0200:PlainText>
+                            <fin-0200:Warning
+                                DocURL="http://www.OpenTravel.org/ns/OTA2/Common_v01_00"
+                                code="2" language="en"
+                                nodeList="Example String Value"
+                                recordID="Example String Value"
+                                shortText="Example String Value"
+                                status="Complete"
+                                statusExtension="status_Other_Value"
+                                tag="Example String Value"
+                                type="Advisory" typeExtension="type_Other_Value">Example String Value</fin-0200:Warning>
+                        </fin-0200:CardNumber>
+                        <fin-0200:AuthenticationVerification
+                            authenticationMethod="MagneticStripe"
+                            encryptedValue="5dfc52b51bd35553df8592078de921bc"
+                            encryptionKey="KHC32198gt4"
+                            encryptionKeyMethod="RotatingKeyEnvironment_DailyKey"
+                            encryptionMethod="Triple DES"
+                            mask="xxxxxxxxxxxx9922"
+                            token="AEGHV234AUD54367" tokenProviderID="Shift4 (payment)">
+                            <fin-0200:PlainText>Example String Value</fin-0200:PlainText>
+                            <fin-0200:Warning
+                                DocURL="http://www.w3.org/2001/XMLSchema"
+                                code="2" language="en"
+                                nodeList="Example String Value"
+                                recordID="Example String Value"
+                                shortText="Example String Value"
+                                status="Incomplete"
+                                statusExtension="status_Other_Value"
+                                tag="Example String Value"
+                                type="Application error" typeExtension="type_Other_Value">Example String Value</fin-0200:Warning>
+                        </fin-0200:AuthenticationVerification>
+                        <fin-0200:MagneticStripe
+                            authenticationMethod="SecurityCode"
+                            encryptedValue="5dfc52b51bd35553df8592078de921bc"
+                            encryptionKey="KHC32198gt4"
+                            encryptionKeyMethod="RotatingKeyEnvironment_DailyKey"
+                            encryptionMethod="Triple DES"
+                            mask="xxxxxxxxxxxx9922"
+                            token="AEGHV234AUD54367" tokenProviderID="Shift4 (payment)">
+                            <fin-0200:PlainText>Example String Value</fin-0200:PlainText>
+                            <fin-0200:Warning
+                                DocURL="http://www.OpenTravel.org/ns/OTA2/Common_v01_00"
+                                code="2" language="en"
+                                nodeList="Example String Value"
+                                recordID="Example String Value"
+                                shortText="Example String Value"
+                                status="Not processed"
+                                statusExtension="status_Other_Value"
+                                tag="Example String Value"
+                                type="Authentication" typeExtension="type_Other_Value">Example String Value</fin-0200:Warning>
+                        </fin-0200:MagneticStripe>
+                    </fin-0200:PaymentCard>
+                    <ProgramRestrictions language="en">Some fee text.</ProgramRestrictions>
+                </RebateProgram>
+                <ota2-0300:Description name="paragraph name" number="2345">
+                    <ota2-0300:Text language="en" textFormat="PlainText">Formatted text example.</ota2-0300:Text>
+                    <ota2-0300:Image colorSpace="Example String Value"
+                        dimensionCategory="Example String Value"
+                        fileName="Example String Value" fileSize="1234"
+                        format="2" height="4567" language="en"
+                        latitude="Example String Value"
+                        longitude="Example String Value" objID="image_1"
+                        originalFileName="Example String Value"
+                        originalIndicatorInd="true" resolution="3456"
+                        sort="2345" unitOfMeasureCode="2"
+                        version="Example String Value" width="3456">
+                        <ota2-0300:Identifier organization="Acme"
+                            system="sysABC3344" url="http://www.w3.org/2001/XMLSchema">guid12345</ota2-0300:Identifier>
+                        <ota2-0300:ImageRef>image_1</ota2-0300:ImageRef>
+                        <ota2-0300:URL>http://www.OpenTravel.org/ns/OTA2/Common_v01_00</ota2-0300:URL>
+                        <ota2-0300:Details applicableEnd="2011-12-05"
+                            applicableStart="2011-07-04"
+                            author="Example String Value"
+                            copyrightEnd="2011-07-04T14:15:00+06:00"
+                            copyrightNotice="Example String Value"
+                            copyrightOwner="Example String Value"
+                            copyrightStart="2011-01-24T09:45:00-06:00"
+                            effectiveEnd="2011-01-24T09:45:00-06:00" effectiveStart="2011-12-05T06:00:00Z">Example String Value</ota2-0300:Details>
+                        <ota2-0300:MultimediaDescription
+                            caption="The Empire State Building at sunset."
+                            language="en" title="Example String Value">
+                             <ota2-0300:FormattedTextSubSection
+                                subCode="Example String Value"
+                                subSectionNumber="4567" subTitle="Example String Value">
+                                <ota2-0300:TextParagraph></ota2-0300:TextParagraph>                                
+                                </ota2-0300:FormattedTextSubSection>
+                        </ota2-0300:MultimediaDescription>
+                        <ota2-0300:DateTimeStamp
+                            create="2011-12-05T06:00:00Z"
+                            creatorID="c123456789"
+                            lastModifierID="m987654321"
+                            lastModify="2011-01-24T09:45:00-06:00" purge="2011-01-24">2011-07-04T14:15:00+06:00</ota2-0300:DateTimeStamp>
+                        <ota2-0300:Email defaultInd="true"
+                            remark="Example String Value"
+                            textFormat="Example String Value" validInd="true">
+                            <ota2-0300:Address>Example String Value</ota2-0300:Address>
+                            <ota2-0300:Type>Business</ota2-0300:Type>
+                            <ota2-0300:Privacy
+                                optInDate="2011-07-04T14:15:00+06:00"
+                                optInStatus="OptedOut"
+                                optOutDate="2011-12-05T06:00:00Z"
+                                shareMarketInd="Inherit" shareSyncInd="Yes"/>
+                        </ota2-0300:Email>
+                    </ota2-0300:Image>
+                    <ota2-0300:URL>http://www.w3.org/2001/XMLSchema</ota2-0300:URL>
+                    <ota2-0300:ParagraphListItem language="en"
+                        listItem="2345" text2="Formatted text example." textFormat="HTML"/>
+                    <ota2-0300:DateTimeStamp
+                        create="2011-07-04T14:15:00+06:00"
+                        creatorID="c123456789"
+                        lastModifierID="m987654321"
+                        lastModify="2011-12-05T06:00:00Z" purge="2011-07-04">2011-01-24T09:45:00-06:00</ota2-0300:DateTimeStamp>
+                </ota2-0300:Description>
+                <CancelPenalty>
+                    <DeadlineTimePeriod deadlineType="BeforeArrival"/>
+                    <AmountPercent amount="5000" currencyCode="USD"
+                        decimalPlaces="2" percent="5"/>
+                    <ota2-0300:Description name="paragraph name" number="1234">
+                        <ota2-0300:Text language="en" textFormat="PlainText">Formatted text example.</ota2-0300:Text>
+                        <ota2-0300:Image
+                            colorSpace="Example String Value"
+                            dimensionCategory="Example String Value"
+                            fileName="Example String Value"
+                            fileSize="4567" format="2" height="3456"
+                            language="en"
+                            latitude="Example String Value"
+                            longitude="Example String Value"
+                            objID="image_2"
+                            originalFileName="Example String Value"
+                            originalIndicatorInd="true"
+                            resolution="2345" sort="1234"
+                            unitOfMeasureCode="2"
+                            version="Example String Value" width="2345">
+                            <ota2-0300:Identifier organization="Acme"
+                                system="sysABC3344" url="http://www.OpenTravel.org/ns/OTA2/Common_v01_00">guid12345</ota2-0300:Identifier>
+                            <ota2-0300:ImageRef>image_2</ota2-0300:ImageRef>
+                            <ota2-0300:URL>http://www.w3.org/2001/XMLSchema</ota2-0300:URL>
+                            <ota2-0300:Details
+                                applicableEnd="2011-01-24"
+                                applicableStart="2011-12-05"
+                                author="Example String Value"
+                                copyrightEnd="2011-07-04T14:15:00+06:00"
+                                copyrightNotice="Example String Value"
+                                copyrightOwner="Example String Value"
+                                copyrightStart="2011-01-24T09:45:00-06:00"
+                                effectiveEnd="2011-01-24T09:45:00-06:00" effectiveStart="2011-12-05T06:00:00Z">Example String Value</ota2-0300:Details>
+                            <ota2-0300:MultimediaDescription
+                                caption="The Empire State Building at sunset."
+                                language="en" title="Example String Value">
+                                 <ota2-0300:FormattedTextSubSection
+                                subCode="Example String Value"
+                                subSectionNumber="4567" subTitle="Example String Value">
+                                <ota2-0300:TextParagraph></ota2-0300:TextParagraph>                                
+                                </ota2-0300:FormattedTextSubSection>
+                            </ota2-0300:MultimediaDescription>
+                            <ota2-0300:DateTimeStamp
+                                create="2011-12-05T06:00:00Z"
+                                creatorID="c123456789"
+                                lastModifierID="m987654321"
+                                lastModify="2011-01-24T09:45:00-06:00" purge="2011-07-04">2011-07-04T14:15:00+06:00</ota2-0300:DateTimeStamp>
+                            <ota2-0300:Email defaultInd="true"
+                                remark="Example String Value"
+                                textFormat="Example String Value" validInd="true">
+                                <ota2-0300:Address>Example String Value</ota2-0300:Address>
+                                <ota2-0300:Type>Listserve</ota2-0300:Type>
+                                <ota2-0300:Privacy
+                                    optInDate="2011-07-04T14:15:00+06:00"
+                                    optInStatus="Unknown"
+                                    optOutDate="2011-12-05T06:00:00Z"
+                                    shareMarketInd="No" shareSyncInd="Inherit"/>
+                            </ota2-0300:Email>
+                        </ota2-0300:Image>
+                        <ota2-0300:URL>http://www.OpenTravel.org/ns/OTA2/Common_v01_00</ota2-0300:URL>
+                        <ota2-0300:ParagraphListItem language="en"
+                            listItem="3456"
+                            text2="Formatted text example." textFormat="HTML"/>
+                        <ota2-0300:DateTimeStamp
+                            create="2011-07-04T14:15:00+06:00"
+                            creatorID="c123456789"
+                            lastModifierID="m987654321"
+                            lastModify="2011-12-05T06:00:00Z" purge="2011-12-05">2011-01-24T09:45:00-06:00</ota2-0300:DateTimeStamp>
+                    </ota2-0300:Description>
+                </CancelPenalty>
+                <AcceptableGuarantee code="Example String Value"
+                    guaranteePolicyType="CC/DC/Voucher"
+                    holdTime="09:45:00-06:00"
+                    retribution="ResAutoCancelled" type="GuaranteeRequired">
+                    <DeadlineTimePeriod deadlineType="AfterBooking"/>
+                    <ota2-0300:Comment name="paragraph name" number="4567">
+                        <ota2-0300:Text language="en" textFormat="PlainText">Formatted text example.</ota2-0300:Text>
+                        <ota2-0300:Image
+                            colorSpace="Example String Value"
+                            dimensionCategory="Example String Value"
+                            fileName="Example String Value"
+                            fileSize="3456" format="2" height="2345"
+                            language="en"
+                            latitude="Example String Value"
+                            longitude="Example String Value"
+                            objID="image_3"
+                            originalFileName="Example String Value"
+                            originalIndicatorInd="true"
+                            resolution="1234" sort="4567"
+                            unitOfMeasureCode="2"
+                            version="Example String Value" width="1234">
+                            <ota2-0300:Identifier organization="Acme"
+                                system="sysABC3344" url="http://www.w3.org/2001/XMLSchema">guid12345</ota2-0300:Identifier>
+                            <ota2-0300:ImageRef>image_3</ota2-0300:ImageRef>
+                            <ota2-0300:URL>http://www.OpenTravel.org/ns/OTA2/Common_v01_00</ota2-0300:URL>
+                            <ota2-0300:Details
+                                applicableEnd="2011-07-04"
+                                applicableStart="2011-01-24"
+                                author="Example String Value"
+                                copyrightEnd="2011-07-04T14:15:00+06:00"
+                                copyrightNotice="Example String Value"
+                                copyrightOwner="Example String Value"
+                                copyrightStart="2011-01-24T09:45:00-06:00"
+                                effectiveEnd="2011-01-24T09:45:00-06:00" effectiveStart="2011-12-05T06:00:00Z">Example String Value</ota2-0300:Details>
+                            <ota2-0300:MultimediaDescription
+                                caption="The Empire State Building at sunset."
+                                language="en" title="Example String Value">
+                                 <ota2-0300:FormattedTextSubSection
+                                subCode="Example String Value"
+                                subSectionNumber="4567" subTitle="Example String Value">
+                                <ota2-0300:TextParagraph></ota2-0300:TextParagraph>                                
+                                </ota2-0300:FormattedTextSubSection>
+                            </ota2-0300:MultimediaDescription>
+                            <ota2-0300:DateTimeStamp
+                                create="2011-12-05T06:00:00Z"
+                                creatorID="c123456789"
+                                lastModifierID="m987654321"
+                                lastModify="2011-01-24T09:45:00-06:00" purge="2011-12-05">2011-07-04T14:15:00+06:00</ota2-0300:DateTimeStamp>
+                            <ota2-0300:Email defaultInd="true"
+                                remark="Example String Value"
+                                textFormat="Example String Value" validInd="true">
+                                <ota2-0300:Address>Example String Value</ota2-0300:Address>
+                                <ota2-0300:Type>Managing company</ota2-0300:Type>
+                                <ota2-0300:Privacy
+                                    optInDate="2011-07-04T14:15:00+06:00"
+                                    optInStatus="OptedIn"
+                                    optOutDate="2011-12-05T06:00:00Z"
+                                    shareMarketInd="Yes" shareSyncInd="No"/>
+                            </ota2-0300:Email>
+                        </ota2-0300:Image>
+                        <ota2-0300:URL>http://www.w3.org/2001/XMLSchema</ota2-0300:URL>
+                        <ota2-0300:ParagraphListItem language="en"
+                            listItem="4567"
+                            text2="Formatted text example." textFormat="HTML"/>
+                        <ota2-0300:DateTimeStamp
+                            create="2011-07-04T14:15:00+06:00"
+                            creatorID="c123456789"
+                            lastModifierID="m987654321"
+                            lastModify="2011-12-05T06:00:00Z" purge="2011-01-24">2011-01-24T09:45:00-06:00</ota2-0300:DateTimeStamp>
+                    </ota2-0300:Comment>
+                    <ota2-0300:Description name="paragraph name" number="3456">
+                        <ota2-0300:Text language="en" textFormat="PlainText">Formatted text example.</ota2-0300:Text>
+                        <ota2-0300:Image
+                            colorSpace="Example String Value"
+                            dimensionCategory="Example String Value"
+                            fileName="Example String Value"
+                            fileSize="2345" format="2" height="1234"
+                            language="en"
+                            latitude="Example String Value"
+                            longitude="Example String Value"
+                            objID="image_4"
+                            originalFileName="Example String Value"
+                            originalIndicatorInd="true"
+                            resolution="4567" sort="3456"
+                            unitOfMeasureCode="2"
+                            version="Example String Value" width="4567">
+                            <ota2-0300:Identifier organization="Acme"
+                                system="sysABC3344" url="http://www.OpenTravel.org/ns/OTA2/Common_v01_00">guid12345</ota2-0300:Identifier>
+                            <ota2-0300:ImageRef>image_4</ota2-0300:ImageRef>
+                            <ota2-0300:URL>http://www.w3.org/2001/XMLSchema</ota2-0300:URL>
+                            <ota2-0300:Details
+                                applicableEnd="2011-12-05"
+                                applicableStart="2011-07-04"
+                                author="Example String Value"
+                                copyrightEnd="2011-07-04T14:15:00+06:00"
+                                copyrightNotice="Example String Value"
+                                copyrightOwner="Example String Value"
+                                copyrightStart="2011-01-24T09:45:00-06:00"
+                                effectiveEnd="2011-01-24T09:45:00-06:00" effectiveStart="2011-12-05T06:00:00Z">Example String Value</ota2-0300:Details>
+                            <ota2-0300:MultimediaDescription
+                                caption="The Empire State Building at sunset."
+                                language="en" title="Example String Value">
+                                 <ota2-0300:FormattedTextSubSection
+                                subCode="Example String Value"
+                                subSectionNumber="4567" subTitle="Example String Value">
+                                <ota2-0300:TextParagraph></ota2-0300:TextParagraph>                                
+                                </ota2-0300:FormattedTextSubSection>
+                            </ota2-0300:MultimediaDescription>
+                            <ota2-0300:DateTimeStamp
+                                create="2011-12-05T06:00:00Z"
+                                creatorID="c123456789"
+                                lastModifierID="m987654321"
+                                lastModify="2011-01-24T09:45:00-06:00" purge="2011-01-24">2011-07-04T14:15:00+06:00</ota2-0300:DateTimeStamp>
+                            <ota2-0300:Email defaultInd="true"
+                                remark="Example String Value"
+                                textFormat="Example String Value" validInd="true">
+                                <ota2-0300:Address>Example String Value</ota2-0300:Address>
+                                <ota2-0300:Type>Personal</ota2-0300:Type>
+                                <ota2-0300:Privacy
+                                    optInDate="2011-07-04T14:15:00+06:00"
+                                    optInStatus="OptedOut"
+                                    optOutDate="2011-12-05T06:00:00Z"
+                                    shareMarketInd="Inherit" shareSyncInd="Yes"/>
+                            </ota2-0300:Email>
+                        </ota2-0300:Image>
+                        <ota2-0300:URL>http://www.OpenTravel.org/ns/OTA2/Common_v01_00</ota2-0300:URL>
+                        <ota2-0300:ParagraphListItem language="en"
+                            listItem="1234"
+                            text2="Formatted text example." textFormat="HTML"/>
+                        <ota2-0300:DateTimeStamp
+                            create="2011-07-04T14:15:00+06:00"
+                            creatorID="c123456789"
+                            lastModifierID="m987654321"
+                            lastModify="2011-12-05T06:00:00Z" purge="2011-07-04">2011-01-24T09:45:00-06:00</ota2-0300:DateTimeStamp>
+                    </ota2-0300:Description>
+                    <CurrencyCode decimalPlaces="2">USD</CurrencyCode>
+                    <PaymentType>Air travel card</PaymentType>
+                </AcceptableGuarantee>
+            </TermsAndConditions>
+            <prod-0300:Product objID="product_1">
+                <prod-0300:Identifier organization="Acme"
+                    system="sysABC3344" url="http://www.w3.org/2001/XMLSchema">guid12345</prod-0300:Identifier>
+                <prod-0300:ProductRef>product_2</prod-0300:ProductRef>
+                <prod-0300:ProductIdentifier objID="product_2">
+                    <prod-0300:Identifier organization="Acme"
+                        system="sysABC3344" url="http://www.OpenTravel.org/ns/OTA2/Common_v01_00">guid12345</prod-0300:Identifier>
+                    <prod-0300:ProductRef>product_4</prod-0300:ProductRef>
+                </prod-0300:ProductIdentifier>
+            </prod-0300:Product>
+            <GuaranteesAccepted addressReqInd="true"
+                bookingSourceAllowedInd="true"
+                corpDiscountNbrAllowedInd="true" defaultInd="true"
+                interbankNbrReqInd="true" nameReqInd="true"
+                noCardHolderInfoReqInd="true" phoneReqInd="true">
+                <fin-0200:FormOfPayment
+                    costCenterID="Example String Value"
+                    guaranteeID="Example String Value"
+                    guaranteeIndicatorInd="true" objID="formOfPayment_1"
+                    paymentTransactionTypeCode="charge" remark="Example String Value">
+                    <fin-0200:Identifier organization="Acme"
+                        system="sysABC3344" url="http://www.w3.org/2001/XMLSchema">guid12345</fin-0200:Identifier>
+                    <fin-0200:FormOfPaymentRef>formOfPayment_1</fin-0200:FormOfPaymentRef>
+                    <fin-0200:Privacy
+                        optInDate="2011-01-24T09:45:00-06:00"
+                        optInStatus="Unknown"
+                        optOutDate="2011-07-04T14:15:00+06:00"
+                        shareMarketInd="No" shareSyncInd="Inherit"/>
+                    <fin-0200:GuaranteeTypeCode>Airline payment card</fin-0200:GuaranteeTypeCode>
+                </fin-0200:FormOfPayment>
+            </GuaranteesAccepted>
+        </Offer>
+        <ota2-0300:Traveler birthDate="2011-12-05" gender="Male"
+            maritalStatus_Enum="Annulled" nationality="IR" objID="traveler_1">
+            <ota2-0300:Identifier organization="Acme"
+                system="sysABC3344" url="http://www.OpenTravel.org/ns/OTA2/Common_v01_00">guid12345</ota2-0300:Identifier>
+            <ota2-0300:OtherID organization="Acme" system="sysABC3344" url="http://www.w3.org/2001/XMLSchema">guid12345</ota2-0300:OtherID>
+            <ota2-0300:PersonRef>person_3</ota2-0300:PersonRef>
+            <ota2-0300:TravelerRef>traveler_1</ota2-0300:TravelerRef>
+            <ota2-0300:PersonName>
+                <ota2-0300:Prefix>Mr.</ota2-0300:Prefix>
+                <ota2-0300:Given>John</ota2-0300:Given>
+                <ota2-0300:Middle>Example String Value</ota2-0300:Middle>
+                <ota2-0300:Surname>Smith</ota2-0300:Surname>
+            </ota2-0300:PersonName>
+            <ota2-0300:Address role="Home">
+                <ota2-0300:AddressLine>111 Travers St, Dun Laoghaire Co. Dublin Ireland</ota2-0300:AddressLine>
+                <ota2-0300:BldgRoom buldingInd="true">Bldg H</ota2-0300:BldgRoom>
+                <ota2-0300:Number pO_Box="98567499" ruralRouteNmbr="88"
+                    streetDirection="NNW" streetNmbrSuffix="B">563</ota2-0300:Number>
+                <ota2-0300:Street>Travers Street</ota2-0300:Street>
+                <ota2-0300:City>Dublin</ota2-0300:City>
+                <ota2-0300:County>Fairfax</ota2-0300:County>
+                <ota2-0300:StateProv name="Texas">TX</ota2-0300:StateProv>
+                <ota2-0300:Country name="Ireland">IR</ota2-0300:Country>
+                <ota2-0300:PostalCode>32165-9999</ota2-0300:PostalCode>
+            </ota2-0300:Address>
+            <ota2-0300:Telephone areaCityCode="202"
+                countryAccessCode="01" extension="237" id="telephone_1"
+                phoneNumber="5555555" role="Home"/>
+            <ota2-0300:Email defaultInd="true"
+                remark="Example String Value"
+                textFormat="Example String Value" validInd="true">
+                <ota2-0300:Address>Example String Value</ota2-0300:Address>
+                <ota2-0300:Type>Property</ota2-0300:Type>
+                <ota2-0300:Privacy optInDate="2011-12-05T06:00:00Z"
+                    optInStatus="OptedIn"
+                    optOutDate="2011-01-24T09:45:00-06:00"
+                    shareMarketInd="Yes" shareSyncInd="No"/>
+            </ota2-0300:Email>
+            <ota2-0300:Privacy optInDate="2011-07-04T14:15:00+06:00"
+                optInStatus="OptedOut" optOutDate="2011-12-05T06:00:00Z"
+                shareMarketInd="Inherit" shareSyncInd="Yes"/>
+            <ota2-0300:Comments language="en">Some fee text.</ota2-0300:Comments>
+            <ota2-0300:VIP description="Example String Value" source="Example String Value">Example String Value</ota2-0300:VIP>
+            <ota2-0300:PersonDocument>
+                <ota2-0300:DocType>NaturalizationCertificate</ota2-0300:DocType>
+            </ota2-0300:PersonDocument>
+        </ota2-0300:Traveler>
+        <ota2-0300:RelatedTraveler relation="Example String Value">
+            <ota2-0300:Traveler birthDate="2011-01-24" gender="Female"
+                maritalStatus_Enum="Co-habiting" nationality="IR" objID="traveler_2">
+                <ota2-0300:Identifier organization="Acme"
+                    system="sysABC3344" url="http://www.OpenTravel.org/ns/OTA2/Common_v01_00">guid12345</ota2-0300:Identifier>
+                <ota2-0300:OtherID organization="Acme"
+                    system="sysABC3344" url="http://www.w3.org/2001/XMLSchema">guid12345</ota2-0300:OtherID>
+                <ota2-0300:PersonRef>person_4</ota2-0300:PersonRef>
+                <ota2-0300:TravelerRef>traveler_2</ota2-0300:TravelerRef>
+                <ota2-0300:PersonName>
+                    <ota2-0300:Prefix>Mr.</ota2-0300:Prefix>
+                    <ota2-0300:Given>John</ota2-0300:Given>
+                    <ota2-0300:Middle>Example String Value</ota2-0300:Middle>
+                    <ota2-0300:Surname>Smith</ota2-0300:Surname>
+                </ota2-0300:PersonName>
+                <ota2-0300:Address role="Business">
+                    <ota2-0300:AddressLine>111 Travers St, Dun Laoghaire Co. Dublin Ireland</ota2-0300:AddressLine>
+                    <ota2-0300:BldgRoom buldingInd="true">Bldg H</ota2-0300:BldgRoom>
+                    <ota2-0300:Number pO_Box="98567499"
+                        ruralRouteNmbr="88" streetDirection="NNW" streetNmbrSuffix="B">563</ota2-0300:Number>
+                    <ota2-0300:Street>Travers Street</ota2-0300:Street>
+                    <ota2-0300:City>Dublin</ota2-0300:City>
+                    <ota2-0300:County>Fairfax</ota2-0300:County>
+                    <ota2-0300:StateProv name="Texas">TX</ota2-0300:StateProv>
+                    <ota2-0300:Country name="Ireland">IR</ota2-0300:Country>
+                    <ota2-0300:PostalCode>32165-9999</ota2-0300:PostalCode>
+                </ota2-0300:Address>
+                <ota2-0300:Telephone areaCityCode="202"
+                    countryAccessCode="01" extension="237"
+                    id="telephone_2" phoneNumber="5555555" role="Office"/>
+                <ota2-0300:Email defaultInd="true"
+                    remark="Example String Value"
+                    textFormat="Example String Value" validInd="true">
+                    <ota2-0300:Address>Example String Value</ota2-0300:Address>
+                    <ota2-0300:Type>Reservation office</ota2-0300:Type>
+                    <ota2-0300:Privacy
+                        optInDate="2011-01-24T09:45:00-06:00"
+                        optInStatus="Unknown"
+                        optOutDate="2011-07-04T14:15:00+06:00"
+                        shareMarketInd="No" shareSyncInd="Inherit"/>
+                </ota2-0300:Email>
+                <ota2-0300:Privacy optInDate="2011-12-05T06:00:00Z"
+                    optInStatus="OptedIn"
+                    optOutDate="2011-01-24T09:45:00-06:00"
+                    shareMarketInd="Yes" shareSyncInd="No"/>
+                <ota2-0300:Comments language="en">Some fee text.</ota2-0300:Comments>
+                <ota2-0300:VIP description="Example String Value" source="Example String Value">Example String Value</ota2-0300:VIP>
+                <ota2-0300:PersonDocument>
+                    <ota2-0300:DocType>PassportCard</ota2-0300:DocType>
+                </ota2-0300:PersonDocument>
+            </ota2-0300:Traveler>
+            <ota2-0300:Privacy optInDate="2011-07-04T14:15:00+06:00"
+                optInStatus="OptedOut" optOutDate="2011-12-05T06:00:00Z"
+                shareMarketInd="Inherit" shareSyncInd="Yes"/>
+        </ota2-0300:RelatedTraveler>
+        <Payment objID="payment_1">
+            <Identifier organization="Acme" system="sysABC3344" url="http://www.OpenTravel.org/ns/OTA2/Common_v01_00">guid12345</Identifier>
+            <PaymentRef>payment_1</PaymentRef>
+            <fin-0200:FormOfPayment costCenterID="Example String Value"
+                guaranteeID="Example String Value"
+                guaranteeIndicatorInd="true" objID="formOfPayment_2"
+                paymentTransactionTypeCode="reserve" remark="Example String Value">
+                <fin-0200:Identifier organization="Acme"
+                    system="sysABC3344" url="http://www.w3.org/2001/XMLSchema">guid12345</fin-0200:Identifier>
+                <fin-0200:FormOfPaymentRef>formOfPayment_2</fin-0200:FormOfPaymentRef>
+                <fin-0200:Privacy optInDate="2011-01-24T09:45:00-06:00"
+                    optInStatus="Unknown"
+                    optOutDate="2011-07-04T14:15:00+06:00"
+                    shareMarketInd="No" shareSyncInd="Inherit"/>
+                <fin-0200:GuaranteeTypeCode>Barter</fin-0200:GuaranteeTypeCode>
+            </fin-0200:FormOfPayment>
+            <Amount currencyCode="USD" minorUnit="2">80000</Amount>
+            <ota2-0300:Person birthDate="2011-07-04" gender="Unknown"
+                maritalStatus_Enum="Divorced" objID="person_2">
+                <ota2-0300:Identifier organization="Acme"
+                    system="sysABC3344" url="http://www.OpenTravel.org/ns/OTA2/Common_v01_00">guid12345</ota2-0300:Identifier>
+                <ota2-0300:OtherID organization="Acme"
+                    system="sysABC3344" url="http://www.w3.org/2001/XMLSchema">guid12345</ota2-0300:OtherID>
+                <ota2-0300:PersonRef>person_5</ota2-0300:PersonRef>
+                <ota2-0300:PersonName>
+                    <ota2-0300:Prefix>Mr.</ota2-0300:Prefix>
+                    <ota2-0300:Given>John</ota2-0300:Given>
+                    <ota2-0300:Middle>Example String Value</ota2-0300:Middle>
+                    <ota2-0300:Surname>Smith</ota2-0300:Surname>
+                </ota2-0300:PersonName>
+                <ota2-0300:Address role="Destination">
+                    <ota2-0300:AddressLine>111 Travers St, Dun Laoghaire Co. Dublin Ireland</ota2-0300:AddressLine>
+                    <ota2-0300:BldgRoom buldingInd="true">Bldg H</ota2-0300:BldgRoom>
+                    <ota2-0300:Number pO_Box="98567499"
+                        ruralRouteNmbr="88" streetDirection="NNW" streetNmbrSuffix="B">563</ota2-0300:Number>
+                    <ota2-0300:Street>Travers Street</ota2-0300:Street>
+                    <ota2-0300:City>Dublin</ota2-0300:City>
+                    <ota2-0300:County>Fairfax</ota2-0300:County>
+                    <ota2-0300:StateProv name="Texas">TX</ota2-0300:StateProv>
+                    <ota2-0300:Country name="Ireland">IR</ota2-0300:Country>
+                    <ota2-0300:PostalCode>32165-9999</ota2-0300:PostalCode>
+                </ota2-0300:Address>
+                <ota2-0300:Telephone areaCityCode="202"
+                    countryAccessCode="01" extension="237"
+                    id="telephone_3" phoneNumber="5555555" role="Mobile"/>
+                <ota2-0300:Email defaultInd="true"
+                    remark="Example String Value"
+                    textFormat="Example String Value" validInd="true">
+                    <ota2-0300:Address>Example String Value</ota2-0300:Address>
+                    <ota2-0300:Type>Sales office</ota2-0300:Type>
+                    <ota2-0300:Privacy optInDate="2011-12-05T06:00:00Z"
+                        optInStatus="OptedIn"
+                        optOutDate="2011-01-24T09:45:00-06:00"
+                        shareMarketInd="Yes" shareSyncInd="No"/>
+                </ota2-0300:Email>
+                <ota2-0300:Privacy optInDate="2011-07-04T14:15:00+06:00"
+                    optInStatus="OptedOut"
+                    optOutDate="2011-12-05T06:00:00Z"
+                    shareMarketInd="Inherit" shareSyncInd="Yes"/>
+                <ota2-0300:Comments language="en">Some fee text.</ota2-0300:Comments>
+            </ota2-0300:Person>
+            <OfferRef>offer_1</OfferRef>
+        </Payment>
+        <TotalPrice estimateInd="true" taxExcludedInd="true">
+            <Total currencyCode="USD" minorUnit="2">80000</Total>
+            <ProductPrice feesExcludedInd="true"
+                gratuityIncludedInd="true" taxExcludedInd="true">
+                <ota2-0300:Price description="Example String Value"
+                    percentage="10" quantity="2345"
+                    unitName="Example String Value" unitPrice="100.00">
+                    <ota2-0300:Total currencyCode="USD" minorUnit="2">80000</ota2-0300:Total>
+                    <ota2-0300:ChargeUnit>Round trip</ota2-0300:ChargeUnit>
+                </ota2-0300:Price>
+                <Taxes>
+                    <Total currencyCode="USD" minorUnit="2">80000</Total>
+                    <Tax sequenceNbr="Example String Value">
+                        <ota2-0300:Amount
+                            description="Example String Value"
+                            percentage="10" quantity="3456"
+                            unitName="Example String Value" unitPrice="100.00">
+                            <ota2-0300:Total currencyCode="USD" minorUnit="2">80000</ota2-0300:Total>
+                            <ota2-0300:ChargeUnit>Per room</ota2-0300:ChargeUnit>
+                        </ota2-0300:Amount>
+                        <EffectiveExpire effective="2011-12-05"
+                            expire="2011-01-24" expireDateExclusiveInd="true"/>
+                        <TaxType_Enum>City tax</TaxType_Enum>
+                    </Tax>
+                </Taxes>
+                <Fee taxExcludedInd="true">
+                    <ota2-0300:Price description="Example String Value"
+                        percentage="10" quantity="4567"
+                        unitName="Example String Value" unitPrice="100.00">
+                        <ota2-0300:Total currencyCode="USD" minorUnit="2">80000</ota2-0300:Total>
+                        <ota2-0300:ChargeUnit>Per item</ota2-0300:ChargeUnit>
+                    </ota2-0300:Price>
+                    <FeeType>Banquet service fee</FeeType>
+                </Fee>
+                <ProductRef>product_2</ProductRef>
+                <Gratuity mandatoryInd="true">
+                    <ota2-0300:AmountOrPercentPercent/>
+                </Gratuity>
+            </ProductPrice>
+            <PriceModifiers>
+                <Promotion code="Example String Value"
+                    name="Example String Value" promotionVendorCode="Example String Value Example String Value Example String Value">Example String Value</Promotion>
+                <RateQualifier code="Example String Value"
+                    description="Example String Value"
+                    rateAuthorizationCode="Example String Value"
+                    rateID="Example String Value" ratePeriod="Daily">Example String Value</RateQualifier>
+                <ota2-0300:PersonIdentifier objID="person_3">
+                    <ota2-0300:Identifier organization="Acme"
+                        system="sysABC3344" url="http://www.OpenTravel.org/ns/OTA2/Common_v01_00">guid12345</ota2-0300:Identifier>
+                    <ota2-0300:OtherID organization="Acme"
+                        system="sysABC3344" url="http://www.w3.org/2001/XMLSchema">guid12345</ota2-0300:OtherID>
+                    <ota2-0300:PersonRef>person_1</ota2-0300:PersonRef>
+                </ota2-0300:PersonIdentifier>
+                <ProductRef>product_4</ProductRef>
+            </PriceModifiers>
+            <Fee taxExcludedInd="true">
+                <ota2-0300:Price description="Example String Value"
+                    percentage="10" quantity="1234"
+                    unitName="Example String Value" unitPrice="100.00">
+                    <ota2-0300:Total currencyCode="USD" minorUnit="2">80000</ota2-0300:Total>
+                    <ota2-0300:ChargeUnit>Per rental</ota2-0300:ChargeUnit>
+                </ota2-0300:Price>
+                <FeeType>Beverage with alcohol</FeeType>
+            </Fee>
+            <Taxes>
+                <Total currencyCode="USD" minorUnit="2">80000</Total>
+                <Tax sequenceNbr="Example String Value">
+                    <ota2-0300:Amount description="Example String Value"
+                        percentage="10" quantity="2345"
+                        unitName="Example String Value" unitPrice="100.00">
+                        <ota2-0300:Total currencyCode="USD" minorUnit="2">80000</ota2-0300:Total>
+                        <ota2-0300:ChargeUnit>Per person per night</ota2-0300:ChargeUnit>
+                    </ota2-0300:Amount>
+                    <EffectiveExpire effective="2011-07-04"
+                        expire="2011-12-05" expireDateExclusiveInd="true"/>
+                    <TaxType_Enum>Convention tax</TaxType_Enum>
+                </Tax>
+            </Taxes>
+        </TotalPrice>
+        <AcceptableGuarantee code="Example String Value"
+            guaranteePolicyType="NoGuaranteesAccepted"
+            holdTime="14:15:00+06:00" retribution="ResNotGuaranteed" type="Profile">
+            <DeadlineTimePeriod deadlineType="AfterConfirmation"/>
+            <ota2-0300:Comment name="paragraph name" number="2345">
+                <ota2-0300:Text language="en" textFormat="PlainText">Formatted text example.</ota2-0300:Text>
+                <ota2-0300:Image colorSpace="Example String Value"
+                    dimensionCategory="Example String Value"
+                    fileName="Example String Value" fileSize="1234"
+                    format="2" height="4567" language="en"
+                    latitude="Example String Value"
+                    longitude="Example String Value" objID="image_5"
+                    originalFileName="Example String Value"
+                    originalIndicatorInd="true" resolution="3456"
+                    sort="2345" unitOfMeasureCode="2"
+                    version="Example String Value" width="3456">
+                    <ota2-0300:Identifier organization="Acme"
+                        system="sysABC3344" url="http://www.OpenTravel.org/ns/OTA2/Common_v01_00">guid12345</ota2-0300:Identifier>
+                    <ota2-0300:ImageRef>image_5</ota2-0300:ImageRef>
+                    <ota2-0300:URL>http://www.w3.org/2001/XMLSchema</ota2-0300:URL>
+                    <ota2-0300:Details applicableEnd="2011-07-04"
+                        applicableStart="2011-01-24"
+                        author="Example String Value"
+                        copyrightEnd="2011-07-04T14:15:00+06:00"
+                        copyrightNotice="Example String Value"
+                        copyrightOwner="Example String Value"
+                        copyrightStart="2011-01-24T09:45:00-06:00"
+                        effectiveEnd="2011-01-24T09:45:00-06:00" effectiveStart="2011-12-05T06:00:00Z">Example String Value</ota2-0300:Details>
+                    <ota2-0300:MultimediaDescription
+                        caption="The Empire State Building at sunset."
+                        language="en" title="Example String Value">
+                         <ota2-0300:FormattedTextSubSection
+                                subCode="Example String Value"
+                                subSectionNumber="4567" subTitle="Example String Value">
+                                <ota2-0300:TextParagraph></ota2-0300:TextParagraph>                                
+                                </ota2-0300:FormattedTextSubSection>
+                    </ota2-0300:MultimediaDescription>
+                    <ota2-0300:DateTimeStamp
+                        create="2011-12-05T06:00:00Z"
+                        creatorID="c123456789"
+                        lastModifierID="m987654321"
+                        lastModify="2011-01-24T09:45:00-06:00" purge="2011-12-05">2011-07-04T14:15:00+06:00</ota2-0300:DateTimeStamp>
+                    <ota2-0300:Email defaultInd="true"
+                        remark="Example String Value"
+                        textFormat="Example String Value" validInd="true">
+                        <ota2-0300:Address>Example String Value</ota2-0300:Address>
+                        <ota2-0300:Type>Business</ota2-0300:Type>
+                        <ota2-0300:Privacy
+                            optInDate="2011-07-04T14:15:00+06:00"
+                            optInStatus="Unknown"
+                            optOutDate="2011-12-05T06:00:00Z"
+                            shareMarketInd="No" shareSyncInd="Inherit"/>
+                    </ota2-0300:Email>
+                </ota2-0300:Image>
+                <ota2-0300:URL>http://www.OpenTravel.org/ns/OTA2/Common_v01_00</ota2-0300:URL>
+                <ota2-0300:ParagraphListItem language="en"
+                    listItem="3456" text2="Formatted text example." textFormat="HTML"/>
+                <ota2-0300:DateTimeStamp
+                    create="2011-07-04T14:15:00+06:00"
+                    creatorID="c123456789" lastModifierID="m987654321"
+                    lastModify="2011-12-05T06:00:00Z" purge="2011-01-24">2011-01-24T09:45:00-06:00</ota2-0300:DateTimeStamp>
+            </ota2-0300:Comment>
+            <ota2-0300:Description name="paragraph name" number="1234">
+                <ota2-0300:Text language="en" textFormat="PlainText">Formatted text example.</ota2-0300:Text>
+                <ota2-0300:Image colorSpace="Example String Value"
+                    dimensionCategory="Example String Value"
+                    fileName="Example String Value" fileSize="4567"
+                    format="2" height="3456" language="en"
+                    latitude="Example String Value"
+                    longitude="Example String Value" objID="image_6"
+                    originalFileName="Example String Value"
+                    originalIndicatorInd="true" resolution="2345"
+                    sort="1234" unitOfMeasureCode="2"
+                    version="Example String Value" width="2345">
+                    <ota2-0300:Identifier organization="Acme"
+                        system="sysABC3344" url="http://www.w3.org/2001/XMLSchema">guid12345</ota2-0300:Identifier>
+                    <ota2-0300:ImageRef>image_6</ota2-0300:ImageRef>
+                    <ota2-0300:URL>http://www.OpenTravel.org/ns/OTA2/Common_v01_00</ota2-0300:URL>
+                    <ota2-0300:Details applicableEnd="2011-12-05"
+                        applicableStart="2011-07-04"
+                        author="Example String Value"
+                        copyrightEnd="2011-07-04T14:15:00+06:00"
+                        copyrightNotice="Example String Value"
+                        copyrightOwner="Example String Value"
+                        copyrightStart="2011-01-24T09:45:00-06:00"
+                        effectiveEnd="2011-01-24T09:45:00-06:00" effectiveStart="2011-12-05T06:00:00Z">Example String Value</ota2-0300:Details>
+                    <ota2-0300:MultimediaDescription
+                        caption="The Empire State Building at sunset."
+                        language="en" title="Example String Value">
+                         <ota2-0300:FormattedTextSubSection
+                                subCode="Example String Value"
+                                subSectionNumber="4567" subTitle="Example String Value">
+                                <ota2-0300:TextParagraph></ota2-0300:TextParagraph>                                
+                                </ota2-0300:FormattedTextSubSection>
+                    </ota2-0300:MultimediaDescription>
+                    <ota2-0300:DateTimeStamp
+                        create="2011-12-05T06:00:00Z"
+                        creatorID="c123456789"
+                        lastModifierID="m987654321"
+                        lastModify="2011-01-24T09:45:00-06:00" purge="2011-01-24">2011-07-04T14:15:00+06:00</ota2-0300:DateTimeStamp>
+                    <ota2-0300:Email defaultInd="true"
+                        remark="Example String Value"
+                        textFormat="Example String Value" validInd="true">
+                        <ota2-0300:Address>Example String Value</ota2-0300:Address>
+                        <ota2-0300:Type>Listserve</ota2-0300:Type>
+                        <ota2-0300:Privacy
+                            optInDate="2011-07-04T14:15:00+06:00"
+                            optInStatus="OptedIn"
+                            optOutDate="2011-12-05T06:00:00Z"
+                            shareMarketInd="Yes" shareSyncInd="No"/>
+                    </ota2-0300:Email>
+                </ota2-0300:Image>
+                <ota2-0300:URL>http://www.w3.org/2001/XMLSchema</ota2-0300:URL>
+                <ota2-0300:ParagraphListItem language="en"
+                    listItem="4567" text2="Formatted text example." textFormat="HTML"/>
+                <ota2-0300:DateTimeStamp
+                    create="2011-07-04T14:15:00+06:00"
+                    creatorID="c123456789" lastModifierID="m987654321"
+                    lastModify="2011-12-05T06:00:00Z" purge="2011-07-04">2011-01-24T09:45:00-06:00</ota2-0300:DateTimeStamp>
+            </ota2-0300:Description>
+            <CurrencyCode decimalPlaces="2">USD</CurrencyCode>
+            <PaymentType>Business account</PaymentType>
+        </AcceptableGuarantee>
+        <Commission billToID="Example String Value" capAmount="100.00"
+            maxCommissionUnitApplies="4567" percent="10"
+            reasonCode="Example String Value" statusType="Full">
+            <CurrencyCode decimalPlaces="2">USD</CurrencyCode>
+            <Frequency>Per person per stay</Frequency>
+            <ota2-0300:PersonIdentifier objID="person_4">
+                <ota2-0300:Identifier organization="Acme"
+                    system="sysABC3344" url="http://www.OpenTravel.org/ns/OTA2/Common_v01_00">guid12345</ota2-0300:Identifier>
+                <ota2-0300:OtherID organization="Acme"
+                    system="sysABC3344" url="http://www.w3.org/2001/XMLSchema">guid12345</ota2-0300:OtherID>
+                <ota2-0300:PersonRef>person_3</ota2-0300:PersonRef>
+            </ota2-0300:PersonIdentifier>
+            <CommissionableAmount taxInclusiveInd="true">
+                <CurrencyAmountGroup currencyCode="USD" minorUnit="2">80000</CurrencyAmountGroup>
+            </CommissionableAmount>
+            <PrepaidAmount currencyCode="USD" minorUnit="2">80000</PrepaidAmount>
+            <FlatCommission currencyCode="USD" minorUnit="2">80000</FlatCommission>
+            <PayableAmount currencyCode="USD" minorUnit="2">80000</PayableAmount>
+            <ota2-0300:Comment name="paragraph name" number="1234">
+                <ota2-0300:Text language="en" textFormat="PlainText">Formatted text example.</ota2-0300:Text>
+                <ota2-0300:Image colorSpace="Example String Value"
+                    dimensionCategory="Example String Value"
+                    fileName="Example String Value" fileSize="4567"
+                    format="2" height="3456" language="en"
+                    latitude="Example String Value"
+                    longitude="Example String Value" objID="image_7"
+                    originalFileName="Example String Value"
+                    originalIndicatorInd="true" resolution="2345"
+                    sort="1234" unitOfMeasureCode="2"
+                    version="Example String Value" width="2345">
+                    <ota2-0300:Identifier organization="Acme"
+                        system="sysABC3344" url="http://www.OpenTravel.org/ns/OTA2/Common_v01_00">guid12345</ota2-0300:Identifier>
+                    <ota2-0300:ImageRef>image_7</ota2-0300:ImageRef>
+                    <ota2-0300:URL>http://www.w3.org/2001/XMLSchema</ota2-0300:URL>
+                    <ota2-0300:Details applicableEnd="2011-01-24"
+                        applicableStart="2011-12-05"
+                        author="Example String Value"
+                        copyrightEnd="2011-07-04T14:15:00+06:00"
+                        copyrightNotice="Example String Value"
+                        copyrightOwner="Example String Value"
+                        copyrightStart="2011-01-24T09:45:00-06:00"
+                        effectiveEnd="2011-01-24T09:45:00-06:00" effectiveStart="2011-12-05T06:00:00Z">Example String Value</ota2-0300:Details>
+                    <ota2-0300:MultimediaDescription
+                        caption="The Empire State Building at sunset."
+                        language="en" title="Example String Value">
+                         <ota2-0300:FormattedTextSubSection
+                                subCode="Example String Value"
+                                subSectionNumber="4567" subTitle="Example String Value">
+                                <ota2-0300:TextParagraph></ota2-0300:TextParagraph>                                
+                                </ota2-0300:FormattedTextSubSection>
+                    </ota2-0300:MultimediaDescription>
+                    <ota2-0300:DateTimeStamp
+                        create="2011-12-05T06:00:00Z"
+                        creatorID="c123456789"
+                        lastModifierID="m987654321"
+                        lastModify="2011-01-24T09:45:00-06:00" purge="2011-07-04">2011-07-04T14:15:00+06:00</ota2-0300:DateTimeStamp>
+                    <ota2-0300:Email defaultInd="true"
+                        remark="Example String Value"
+                        textFormat="Example String Value" validInd="true">
+                        <ota2-0300:Address>Example String Value</ota2-0300:Address>
+                        <ota2-0300:Type>Managing company</ota2-0300:Type>
+                        <ota2-0300:Privacy
+                            optInDate="2011-07-04T14:15:00+06:00"
+                            optInStatus="OptedOut"
+                            optOutDate="2011-12-05T06:00:00Z"
+                            shareMarketInd="Inherit" shareSyncInd="Yes"/>
+                    </ota2-0300:Email>
+                </ota2-0300:Image>
+                <ota2-0300:URL>http://www.OpenTravel.org/ns/OTA2/Common_v01_00</ota2-0300:URL>
+                <ota2-0300:ParagraphListItem language="en"
+                    listItem="1234" text2="Formatted text example." textFormat="HTML"/>
+                <ota2-0300:DateTimeStamp
+                    create="2011-07-04T14:15:00+06:00"
+                    creatorID="c123456789" lastModifierID="m987654321"
+                    lastModify="2011-12-05T06:00:00Z" purge="2011-12-05">2011-01-24T09:45:00-06:00</ota2-0300:DateTimeStamp>
+            </ota2-0300:Comment>
+        </Commission>
+        <PersonProductRef>
+            <prod-0300:Product objID="product_3">
+                <prod-0300:Identifier organization="Acme"
+                    system="sysABC3344" url="http://www.w3.org/2001/XMLSchema">guid12345</prod-0300:Identifier>
+                <prod-0300:ProductRef>product_2</prod-0300:ProductRef>
+                <prod-0300:ProductIdentifier objID="product_4">
+                    <prod-0300:Identifier organization="Acme"
+                        system="sysABC3344" url="http://www.OpenTravel.org/ns/OTA2/Common_v01_00">guid12345</prod-0300:Identifier>
+                    <prod-0300:ProductRef>product_4</prod-0300:ProductRef>
+                </prod-0300:ProductIdentifier>
+            </prod-0300:Product>
+            <ota2-0300:PersonIdentifier objID="person_5">
+                <ota2-0300:Identifier organization="Acme"
+                    system="sysABC3344" url="http://www.w3.org/2001/XMLSchema">guid12345</ota2-0300:Identifier>
+                <ota2-0300:OtherID organization="Acme"
+                    system="sysABC3344" url="http://www.OpenTravel.org/ns/OTA2/Common_v01_00">guid12345</ota2-0300:OtherID>
+                <ota2-0300:PersonRef>person_4</ota2-0300:PersonRef>
+            </ota2-0300:PersonIdentifier>
+        </PersonProductRef>
+        <TripPurpose codeContext="Example String Value" description="Example String Value">Example String Value</TripPurpose>
+    </Order>
+</DeleteOrderRQ>

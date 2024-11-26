@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="PkgStdTypes.xsd"/>
+	<xs:include schemaLocation="PersonName.xsd"/>
+	<xs:complexType name="PkgPassengerListItem">
+		<xs:annotation>
+			<xs:documentation>Details of a passenger. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="PersonName"/>
+			<xs:element name="SpecialNeeds" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A collection of special need items.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="SpecialNeed" type="SpecialNeed" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="RPH" type="RPH_Type" use="optional"/>
+		<xs:attribute name="InsuranceRPH" type="RPH_Type" use="optional"/>
+		<xs:attribute name="Gender" type="PkgGenderCode" use="optional"/>
+		<xs:attribute name="Nationality" type="NationalityCode" use="optional"/>
+		<xs:attribute name="Age" type="xs:integer" use="optional"/>
+		<xs:attribute name="BirthDate" type="xs:date" use="optional"/>
+	</xs:complexType>
+	<!-- ======================================================================================================================= -->
+	<xs:complexType name="SpecialNeed">
+		<xs:annotation>
+			<xs:documentation>A special requirement e.g. wheelchair or vegetarian meal.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="Code" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>

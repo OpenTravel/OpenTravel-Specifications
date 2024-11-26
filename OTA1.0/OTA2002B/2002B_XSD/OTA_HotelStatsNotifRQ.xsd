@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA/2002/11" xmlns="http://www.opentravel.org/OTA/2002/11" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="2002B">
+	<xs:include schemaLocation="OTA_HotelCommonTypes.xsd"/>
+	<xs:element name="OTA_HotelStatsNotifRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The StatisticNotificationRequest is a report that may be generated at regular intervals by the Property Management System and sent to a Chain CRO or Management Company System. It provides an update for analysis of hotel statistics and may be sent unsolicited by the PMS to the receiving system.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Statistics" type="StatisticsType"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+

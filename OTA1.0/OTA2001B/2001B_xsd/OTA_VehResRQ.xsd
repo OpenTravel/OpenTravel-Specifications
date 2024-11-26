@@ -1,0 +1,1165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="OTA_POS.xsd"/>
+	<xs:element name="OTA_VehResRQ">
+		<xs:annotation>
+			<xs:documentation>The root tag of OTA_VehResRQ contains standard payload attributes found in all OTA payload documents. The attribute 
+ReqRespVersion is a positive integer value that indicates the version number requested for the response message.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="POS"/>
+				<xs:element ref="VehRequest"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Address">
+		<xs:annotation>
+			<xs:documentation>Defines a physical address associated with the rental of a vehicle.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StreetNmbr" minOccurs="0"/>
+				<xs:element ref="BldgRoom" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AddressLine" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="CityName" minOccurs="0"/>
+				<xs:element ref="StateProv" minOccurs="0"/>
+				<xs:element ref="CountryName" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddressInfo">
+		<xs:annotation>
+			<xs:documentation>Provides information about an address, including the address and its usage.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Address"/>
+			</xs:sequence>
+			<xs:attribute name="DefaultInd">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ShareSynchInd" default="Inherit">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+						<xs:enumeration value="Inherit"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ShareMarketInd" default="Inherit">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+						<xs:enumeration value="Inherit"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="AddressType">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Home"/>
+						<xs:enumeration value="Business"/>
+						<xs:enumeration value="Delivery"/>
+						<xs:enumeration value="Mailing"/>
+						<xs:enumeration value="Billing"/>
+						<xs:enumeration value="CreditCard"/>
+						<xs:enumeration value="Other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddressLine">
+		<xs:annotation>
+			<xs:documentation>Line of information within an address.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="ParsedInd">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Yes"/>
+								<xs:enumeration value="No"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AirConditionPref">
+		<xs:annotation>
+			<xs:documentation>Indicates the preference for the presence of air conditioning in the rental vehicle.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="PreferLevel" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Only"/>
+						<xs:enumeration value="Unacceptable"/>
+						<xs:enumeration value="Preferred"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BldgRoom" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Information on a specific building or room within an address.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CityName">
+		<xs:annotation>
+			<xs:documentation>The name of a city that is used as part of an address.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PostalCode" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CompanyName">
+		<xs:annotation>
+			<xs:documentation>The name of the company from which the vehicle is to be rented.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="CompanyCode" type="xs:string"/>
+					<xs:attribute name="CodeContext" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CountryName">
+		<xs:annotation>
+			<xs:documentation>The name of a country that is used as part of an address.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="CountryCode" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CountryOfResidence">
+		<xs:annotation>
+			<xs:documentation> Country of residence of the requestor, identified by ISO country code.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="CountryCode" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Coverage">
+		<xs:annotation>
+			<xs:documentation>Insurance Coverage needed for the rental.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="CoverageType">
+				<xs:annotation>
+					<xs:documentation>Coverage Type identifies the categories of insurance that may be preferred by the customer, such as:  Personal Effects, Baggage, VehicleDamage, Liability, Theft, YoungDriver, etc.
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="VehDamage"/>
+						<xs:enumeration value="Baggage"/>
+						<xs:enumeration value="PersonalEffects"/>
+						<xs:enumeration value="Liability"/>
+						<xs:enumeration value="Theft"/>
+						<xs:enumeration value="YoungDriver"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="CoverageCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>CoverageCode - Industry code for type of insurance coverages.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CustLoyalty">
+		<xs:annotation>
+			<xs:documentation>Provides information on loyalty information (frequent renter number) associated with the renter of the vehicle.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="ProgramCode" type="xs:string"/>
+					<xs:attribute name="ShareSynchInd" default="Inherit">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Yes"/>
+								<xs:enumeration value="No"/>
+								<xs:enumeration value="Inherit"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="ShareMarketInd" default="Inherit">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Yes"/>
+								<xs:enumeration value="No"/>
+								<xs:enumeration value="Inherit"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="MembershipId" type="xs:string"/>
+					<xs:attribute name="SingleVendorInd">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="SingleVndr"/>
+								<xs:enumeration value="Alliance"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="LoyalLevel" type="xs:string"/>
+					<xs:attribute name="SignupDate" type="xs:string"/>
+					<xs:attribute name="EffectiveDate" type="xs:string"/>
+					<xs:attribute name="ExpireDate" type="xs:string"/>
+					<xs:attribute name="RPH" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Customer">
+		<xs:annotation>
+			<xs:documentation>Provides information about the person renting the vehicle.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ProfileRef" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PersonName" minOccurs="0"/>
+				<xs:element ref="TelephoneInfo" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Email" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AddressInfo" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="CustLoyalty" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Document" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="Gender">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Male"/>
+						<xs:enumeration value="Female"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Deceased">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="LockoutType" type="xs:string"/>
+			<xs:attribute name="ShareSynchInd" default="Inherit">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+						<xs:enumeration value="Inherit"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ShareMarketInd" default="Inherit">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+						<xs:enumeration value="Inherit"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="BirthDate" type="xs:string"/>
+			<xs:attribute name="Currency" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DocHolderName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Name of person given on the document.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DocIssueAuthority" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Government authority issuing document. If a national document, use ISO 3166 code to indicate the code of the country issuing the document.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DocIssueLocation" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>City, state/province in which the document was issued.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DocLimitations" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Limitations on documents, such as corrective lenses for driver's license.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Document">
+		<xs:annotation>
+			<xs:documentation>Information on a Government-issued document associated with the rental of a vehicle.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DocHolderName" minOccurs="0"/>
+				<xs:element ref="DocIssueAuthority" minOccurs="0"/>
+				<xs:element ref="DocIssueLocation" minOccurs="0"/>
+				<xs:element ref="DocLimitations" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="ShareSynchInd" default="Inherit">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+						<xs:enumeration value="Inherit"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ShareMarketInd" default="Inherit">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+						<xs:enumeration value="Inherit"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="DocId" type="xs:string"/>
+			<xs:attribute name="DocType" type="xs:string"/>
+			<xs:attribute name="Gender">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Male"/>
+						<xs:enumeration value="Female"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="BirthDate" type="xs:string"/>
+			<xs:attribute name="EffectiveDate" type="xs:string"/>
+			<xs:attribute name="ExpireDate" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Driver">
+		<xs:annotation>
+			<xs:documentation>Information on the number of intended drivers and respective ages.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="AgeQualifyingCode" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>A code representing a business rule that determines the charges for a driver based upon an age range.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Count" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>A positive valued integer to indicate the number of drivers based on the age range indicated..
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Adult" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>A positive valued integer to indicate the number of people on or above 25 years of age that will be driving the vehicle.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="YoungDriver" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>A positive valued integer to indicate the number of people 21 to 24  years of age that will be driving the vehicle..
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="YoungerDriver" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>A positive valued integer to indicate the number of people between 18 and 20 years of age that will be driving the vehicle.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Email">
+		<xs:annotation>
+			<xs:documentation>Electronic email addresses, in IETF specified format.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="DefaultInd">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Yes"/>
+								<xs:enumeration value="No"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="ShareSynchInd" default="Inherit">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Yes"/>
+								<xs:enumeration value="No"/>
+								<xs:enumeration value="Inherit"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="ShareMarketInd" default="Inherit">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Yes"/>
+								<xs:enumeration value="No"/>
+								<xs:enumeration value="Inherit"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="EmailType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FlightArrivalDetails">
+		<xs:annotation>
+			<xs:documentation> Details of the customer's arrival flight.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="ArrivalLocation" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Arrival location, a valid IATA Airport Code
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="MarketingAirline" type="xs:string">
+						<xs:annotation>
+							<xs:documentation> Identifies the Airline Company which is marketing the flight
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="FlightNumber" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Number of the flight by which the customer will arrive.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="ArrivalDateTime" type="xs:string">
+						<xs:annotation>
+							<xs:documentation> Flight arrival date and time information.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GivenName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Given name of the personrenting the vehicle, first name or names.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ImmediateConf">
+		<xs:annotation>
+			<xs:documentation> Indicates if the booking should be completed only if an immediate confirmation can be given.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Required" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LuggageCount" type="xs:string">
+		<xs:annotation>
+			<xs:documentation> A positive valued integer to indicate anticipated number of pieces of luggage that the customer will be carrying in the vehicle.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MiddleName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Middle name or names of the person renting the vehicle.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NamePrefix" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Salutation of honorific, (e.g., Mr. Mrs., Ms., Miss, Dr., etc.).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NameSuffix" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Suffix (e.g., Jr., Sr., III, Ret., Esq., etc.).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NameTitle" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Degree or honors (e.g., Ph.D., M.D., etc.).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="OnlineNews">
+		<xs:annotation>
+			<xs:documentation>Indicates whether the customer would prefer online news offered by the vendor.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="OnlineNewsInd">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Yes"/>
+								<xs:enumeration value="No"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PassengerCount" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Number of passengers (excluding driver) that the rental will be used for.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PersonName">
+		<xs:annotation>
+			<xs:documentation>Names of the person renting the vehicle, includes former, nicknames, and alternate names.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="NamePrefix" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="GivenName" minOccurs="0"/>
+				<xs:element ref="MiddleName" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Surname"/>
+				<xs:element ref="NameSuffix" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="NameTitle" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="DefaultInd">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ShareSynchInd" default="Inherit">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+						<xs:enumeration value="Inherit"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ShareMarketInd" default="Inherit">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+						<xs:enumeration value="Inherit"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="NameType" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PickupInfo">
+		<xs:annotation>
+			<xs:documentation>Identifies the location from where the customer will rent the vehicle and the pickup date and time when the customer would collect the vehicle. Time is specified using the following format specified by ISO 8601:YYY-MM-DDThh: mm: ssZ with time values using the 24-hour(military) clock. For example: March-31-2001, 4:10:00 pm becomes 2001-03-31T16:10:00Z.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="LocationCode" type="xs:string" use="required">
+						<xs:annotation>
+							<xs:documentation>Uniquely identifies a single rental location. The location code is decided between the trading partners.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="DateTime" type="xs:string" use="required"/>
+					<xs:attribute name="LocationType" use="optional">
+						<xs:annotation>
+							<xs:documentation>Information about the type of location</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Airport"/>
+								<xs:enumeration value="NonAirport"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProfileRef">
+		<xs:annotation>
+			<xs:documentation>A reference to a profile containing information on the person renting the vehicle.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UniqueId"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PromoDesc" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Provides a description on a promotion that may apply to the reservation of a rental vehicle.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RateMileage">
+		<xs:annotation>
+			<xs:documentation>Information on the mileage associate with a rate.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Unlimited" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Quantity" type="xs:string"/>
+			<xs:attribute name="VehRateUnitName">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="RentalPeriod"/>
+						<xs:enumeration value="Year"/>
+						<xs:enumeration value="Month"/>
+						<xs:enumeration value="Week"/>
+						<xs:enumeration value="Day"/>
+						<xs:enumeration value="Hour"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RateQualifier">
+		<xs:annotation>
+			<xs:documentation> Indicates the type of rates being requested.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PromoDesc" minOccurs="0"/>
+				<xs:element ref="RateMileage" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="TravelType">
+				<xs:annotation>
+					<xs:documentation>Indicates purpose of travel for which the customer will rent the vehicle</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Business"/>
+						<xs:enumeration value="Personal"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ShopRateType">
+				<xs:annotation>
+					<xs:documentation>Indicates the type of rates the customer is shopping for.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Business"/>
+						<xs:enumeration value="Leisure"/>
+						<xs:enumeration value="All"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="CorpDiscountNmbr" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Corporate Discount Number</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PromoCoupon" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Promotion/Coupon number honored by the vendor.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RateCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Vendor specific rate code to be used for the reservation..</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RateType">
+				<xs:annotation>
+					<xs:documentation>Information on the type of rate. </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Daily"/>
+						<xs:enumeration value="Weekly"/>
+						<xs:enumeration value="Monthly"/>
+						<xs:enumeration value="Weekend"/>
+						<xs:enumeration value="Unknown"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RentalPayment">
+		<xs:annotation>
+			<xs:documentation>Provides information on the form of payment that will be used to complete the reservation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="PaymentType" use="required">
+				<xs:annotation>
+					<xs:documentation>Type of payment that will be used at the time of booking the reservation. </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="CreditCard"/>
+						<xs:enumeration value="DebitCard"/>
+						<xs:enumeration value="BusinessAccount"/>
+						<xs:enumeration value="DirectBill"/>
+						<xs:enumeration value="CentralBill"/>
+						<xs:enumeration value="Voucher"/>
+						<xs:enumeration value="Check"/>
+						<xs:enumeration value="Cash"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="RefNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Reference number to be used by the supplier for billing purposes. Example: Purchase Order Number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Billing_Id" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Card number/Account number associated with the payment type.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CreditCardCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the payment type is in a card form. Example: Visa, Master Card, American Express.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ExpirationDate" type="xs:string"/>
+			<xs:attribute name="CardHolder" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ReturnInfo">
+		<xs:annotation>
+			<xs:documentation>Identifies the location where the customer will return the vehicle and the return date and time. Time is specified using the following format specified by ISO 8601:YYY-MM-DDThh: mm: ssZ with time values using the 24-hour(military) clock. For example: March-31-2001, 4:10:00 pm becomes 2001-03-31T16:10:00Z.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="LocationCode" type="xs:string" use="required">
+						<xs:annotation>
+							<xs:documentation>Uniquely identifies a single rental location. The location code is decided between the trading partners.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="DateTime" type="xs:string" use="required"/>
+					<xs:attribute name="LocationType" use="optional">
+						<xs:annotation>
+							<xs:documentation>Information about the type of location</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Airport"/>
+								<xs:enumeration value="NonAirport"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpecialEquipment">
+		<xs:annotation>
+			<xs:documentation>Indicates requirements for special equipment to be associated with the reservation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Quantity" type="xs:string"/>
+			<xs:attribute name="EquipType" use="required">
+				<xs:annotation>
+					<xs:documentation>Indicates the type of equipment that is preferred to be a part of this reservation </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="CellularPhone"/>
+						<xs:enumeration value="BikeRack"/>
+						<xs:enumeration value="LuggageRack"/>
+						<xs:enumeration value="SkiRack"/>
+						<xs:enumeration value="TrailerHitch"/>
+						<xs:enumeration value="AutomaticLocks"/>
+						<xs:enumeration value="InfantChildSeat"/>
+						<xs:enumeration value="ChildToddlerSeat"/>
+						<xs:enumeration value="BoosterSeat"/>
+						<xs:enumeration value="SnowChains"/>
+						<xs:enumeration value="HandControlRight"/>
+						<xs:enumeration value="HandControlLeft"/>
+						<xs:enumeration value="NavigationalSystem"/>
+						<xs:enumeration value="SnowTires"/>
+						<xs:enumeration value="BabyStroller"/>
+						<xs:enumeration value="DVDPlayer"/>
+						<xs:enumeration value="VideoMonitor"/>
+						<xs:enumeration value="SpinnerKnob"/>
+						<xs:enumeration value="FurniturePads"/>
+						<xs:enumeration value="CarDolly"/>
+						<xs:enumeration value="AutoTransport"/>
+						<xs:enumeration value="HandTruck"/>
+						<xs:enumeration value="CargoBarrierFront"/>
+						<xs:enumeration value="CargoBarrierRear"/>
+						<xs:enumeration value="LuggageTrailer"/>
+						<xs:enumeration value="CampingEquipment"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpecialReq" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Used to identify special needs or requirements that may be requested by the customer.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="StateProv">
+		<xs:annotation>
+			<xs:documentation>Provides information on the state or province that is part of an address.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="StateCode" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="StreetNmbr">
+		<xs:annotation>
+			<xs:documentation>The street number that is used as part of an address.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PO_Box" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Surname" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Family name, last name. Required for identification of the individual renting the vehicle.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Telephone">
+		<xs:annotation>
+			<xs:documentation>Full details of a telephone number, including area code and extensions, if applicable.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="PhoneTechType" type="xs:string"/>
+			<xs:attribute name="CountryAccessCode" type="xs:string"/>
+			<xs:attribute name="AreaCityCode" type="xs:string" use="optional"/>
+			<xs:attribute name="PhoneNumber" type="xs:string" use="required"/>
+			<xs:attribute name="Extension" type="xs:string"/>
+			<xs:attribute name="PIN" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TelephoneInfo">
+		<xs:annotation>
+			<xs:documentation>Information about a telephone number, including the actual telephone number and its usage.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Telephone"/>
+			</xs:sequence>
+			<xs:attribute name="DefaultInd">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ShareSynchInd" default="Inherit">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+						<xs:enumeration value="Inherit"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ShareMarketInd" default="Inherit">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+						<xs:enumeration value="Inherit"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PhoneUseType" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TransmissionPref">
+		<xs:annotation>
+			<xs:documentation>Indicates the customer's preference for Vehicle Transmission, automatic or manual.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="PreferLevel" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Only"/>
+						<xs:enumeration value="Unacceptable"/>
+						<xs:enumeration value="Preferred"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Type" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Automatic"/>
+						<xs:enumeration value="Manual"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VehRentalPref">
+		<xs:annotation>
+			<xs:documentation>Various preferences requested for the reservation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VendorPref" minOccurs="0"/>
+				<xs:element ref="RentalPayment" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Coverage" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="SpecialReq" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="VehiclePref" maxOccurs="unbounded"/>
+				<xs:element ref="SpecialEquipment" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="OnlineNews" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="SmokingInd">
+				<xs:annotation>
+					<xs:documentation>Indicates the customer's preference for smoking.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="GasPrePayInd">
+				<xs:annotation>
+					<xs:documentation> Indicates customer's preference of option to pre-pay for gasoline with rental.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VehRequest">
+		<xs:annotation>
+			<xs:documentation>Contains elements and attributes that form a Vehicle request.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CountryOfResidence" minOccurs="0"/>
+				<xs:element ref="PickupInfo"/>
+				<xs:element ref="ReturnInfo"/>
+				<xs:element ref="ImmediateConf"/>
+				<xs:element ref="RateQualifier" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Driver" minOccurs="0"/>
+				<xs:element ref="LuggageCount" minOccurs="0"/>
+				<xs:element ref="PassengerCount" minOccurs="0"/>
+				<xs:element ref="FlightArrivalDetails" minOccurs="0"/>
+				<xs:element ref="VehRentalPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Customer" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="QuoteType">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the response should include a single rate or multiple rates. Single rate may be subjective and may vary from vendor to vendor. </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Single"/>
+						<xs:enumeration value="Multiple"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VehiclePref">
+		<xs:annotation>
+			<xs:documentation>Indicates the preferred characteristics of the rental vehicle.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VehicleTypePref"/>
+				<xs:element ref="VehicleClassPref"/>
+				<xs:element ref="VehicleMakeModelCodePref" minOccurs="0"/>
+				<xs:element ref="AirConditionPref" minOccurs="0"/>
+				<xs:element ref="TransmissionPref" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="AirConditionInd">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="TransmissionType">
+				<xs:annotation>
+					<xs:documentation>Indicates the type of transmission. </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Automatic"/>
+						<xs:enumeration value="Manual"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VehicleClassPref">
+		<xs:annotation>
+			<xs:documentation>Indicates the preferred class of vehicle.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Only"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="VehicleClass">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Mini"/>
+								<xs:enumeration value="Subcompact"/>
+								<xs:enumeration value="Economy"/>
+								<xs:enumeration value="Compact"/>
+								<xs:enumeration value="Midsize"/>
+								<xs:enumeration value="Intermediate"/>
+								<xs:enumeration value="Standard"/>
+								<xs:enumeration value="Fullsize"/>
+								<xs:enumeration value="Luxury"/>
+								<xs:enumeration value="Premium"/>
+								<xs:enumeration value="Minivan"/>
+								<xs:enumeration value="12_Passenger_Van"/>
+								<xs:enumeration value="Moving_Van"/>
+								<xs:enumeration value="15_Passenger_Van"/>
+								<xs:enumeration value="Cargo_Van"/>
+								<xs:enumeration value="12_Foot_Truck"/>
+								<xs:enumeration value="20_Foot_Truck"/>
+								<xs:enumeration value="24_Foot_Truck"/>
+								<xs:enumeration value="26_Foot_Truck"/>
+								<xs:enumeration value="Moped"/>
+								<xs:enumeration value="Stretch"/>
+								<xs:enumeration value="Regular"/>
+								<xs:enumeration value="Unique"/>
+								<xs:enumeration value="Exotic"/>
+								<xs:enumeration value="Other"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VehicleMakeModelCodePref">
+		<xs:annotation>
+			<xs:documentation>A code for a specific make and model of vehicle, if supported. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Preferred"/>
+								<xs:enumeration value="Only"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VehicleTypePref">
+		<xs:annotation>
+			<xs:documentation>Indicates the preferred type of vehicle.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Only"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="VehicleType">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Car"/>
+								<xs:enumeration value="Van"/>
+								<xs:enumeration value="SUV"/>
+								<xs:enumeration value="Convertible"/>
+								<xs:enumeration value="Truck"/>
+								<xs:enumeration value="Motorcycle"/>
+								<xs:enumeration value="Limo"/>
+								<xs:enumeration value="StationWagon"/>
+								<xs:enumeration value="Pickup"/>
+								<xs:enumeration value="MotorHome"/>
+								<xs:enumeration value="Other"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="VehicleDoorCount" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VendorPref">
+		<xs:annotation>
+			<xs:documentation>Indicates the preferred vendor company for the vehicle reservation. If a company name is supplied, the rates will be supplied for the specific vendor company. The company name is unique amongst the vendors.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CompanyName"/>
+			</xs:sequence>
+			<xs:attribute name="PreferLevel" default="Preferred">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Only"/>
+						<xs:enumeration value="Unacceptable"/>
+						<xs:enumeration value="Preferred"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

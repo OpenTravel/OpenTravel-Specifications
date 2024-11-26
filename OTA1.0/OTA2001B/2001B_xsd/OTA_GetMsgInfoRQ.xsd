@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:element name="OTA_GetMsgInfoRQ">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MessageType"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MessageType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">If StartSeqNmbr and EndSeqNmbr are not sent, the request will be assumed to be for the last sequence number.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="StartSeqNmbr" type="xs:string" use="optional"/>
+			<xs:attribute name="EndSeqNmbr" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

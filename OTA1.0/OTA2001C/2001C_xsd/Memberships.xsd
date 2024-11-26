@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:complexType name="Memberships">
+		<xs:annotation>
+			<xs:documentation>Memberships are associated with one or more of the golfers for whom the specific request for availability is being made.  Some memberships may permit booking rules that do not apply to other golfers.  For example, a reciprocal membership may allow booking farther in advance that the standard golfer is permitted. NOTE:  a definition of Memberships will be reflected in the OTA_Profile schema.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="Membership" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Membership">
+		<xs:annotation>
+			<xs:documentation>An individual membership</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Type" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>The type of membership, using a code to represent the specific entity.  Examples would be PGA, NGCOA, USGA, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ID" type="xs:int" use="optional">
+				<xs:annotation>
+					<xs:documentation>The Identification of the party within the stated membership.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

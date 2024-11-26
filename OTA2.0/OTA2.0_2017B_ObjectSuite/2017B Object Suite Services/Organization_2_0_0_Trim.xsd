@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/organization/v2"
+    version="2.0.0"
+    xmlns:org-0200="http://www.opentravel.org/OTM/organization/v2"
+    xmlns:orggf-0200="http://www.opentravel.org/OTM/organization/golf/v2"
+    xmlns:orghs-0200="http://www.opentravel.org/OTM/organization/hospitality/v2"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0200="http://www.opentravel.org/OTM/Common/v2"
+    xmlns:ota2-0201="http://www.opentravel.org/OTM/Common/v2_1"
+    xmlns:ota2-0300="http://www.opentravel.org/OTM/Common/v3"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:ProjectName>Groundv3.otp</otm:ProjectName>
+                <otm:LibraryName>Organization</otm:LibraryName>
+                <otm:LibraryVersion>2.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                <otm:SourceFile>/Organization_2_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2017-05-24T10:17:02.997-04:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v2_1" schemaLocation="CodeList_2_1_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/golf/v2" schemaLocation="OrganizationGolf_2_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v2" schemaLocation="CodeList_2_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v3" schemaLocation="Common_3_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/hospitality/v2" schemaLocation="OrganizationHospitality_2_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element abstract="true" name="FacilitySubGrp" type="org-0200:Facility_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Facility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="FacilityID"
+        substitutionGroup="org-0200:FacilitySubGrp" type="org-0200:Facility_ID"/>
+    <xsd:element name="FacilityIdentifier" type="org-0200:Facility_ID"/>
+    <xsd:element name="Facility"
+        substitutionGroup="org-0200:FacilitySubGrp" type="org-0200:Facility"/>
+    <xsd:element name="FacilitySummary" type="org-0200:Facility"/>
+    <xsd:element name="FacilityGolf"
+        substitutionGroup="org-0200:FacilitySubGrp" type="org-0200:Facility_Golf"/>
+    <xsd:element name="FacilityHotel"
+        substitutionGroup="org-0200:FacilitySubGrp" type="org-0200:Facility_Hotel"/>
+    <xsd:element name="FacilityMeeting"
+        substitutionGroup="org-0200:FacilitySubGrp" type="org-0200:Facility_Meeting"/>
+    
+    <xsd:complexType name="Facility_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Facility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0300:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="FacilityRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the obj ID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Facility">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Facility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="org-0200:Facility_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2-0300:Location">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Location information for the facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="30" minOccurs="0" ref="ota2-0300:OperationSchedule">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Collection of operation schedules.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0300:MultimediaCollection">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Images, descriptions and movies that describe the facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="Rating" type="ota2-0300:Rating">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The actual award or rating received by the facility.  May also be used for user generated ratings.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="5" minOccurs="0" ref="ota2-0300:TelephoneSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Telephone number for the facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0300:Email">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Email address for the facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="10" minOccurs="0"
+                        name="Description" type="ota2-0300:Text">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Facility description.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="org-0200:PropertySubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">An identiefier for the property that this facility is associated with.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SiteURL" type="ota2-0300:URL">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The URL for the facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0300:RelativePosition">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The RelativePosition object contains information about the direction, distance and travel t</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="org-0200:AccessibilityFeaturesSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Accessibility features offered by the facility.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="ota2-0300:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Name of the facility.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="directions"
+                    type="ota2-0300:StringLong" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Directions to the facility.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Facility_Golf">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Facility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="org-0200:Facility">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="orggf-0200:GolfFacilitySubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Golf facility information.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Facility_Hotel">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Facility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="org-0200:Facility">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="orghs-0200:HotelFacilitySubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Hotel facility information.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Facility_Meeting">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Facility</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="org-0200:Facility">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="MeetingCenter" type="org-0200:MeetingCenter">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Meeting center details.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="PropertySubGrp" type="org-0200:Property_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A property may contain one or more facilities of the same or differing types.  Example:  The property Disney Orlando has many hotels and golf courses on it.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Property</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="PropertyID"
+        substitutionGroup="org-0200:PropertySubGrp" type="org-0200:Property_ID"/>
+    <xsd:element name="PropertyIdentifier" type="org-0200:Property_ID"/>
+    <xsd:element name="Property"
+        substitutionGroup="org-0200:PropertySubGrp" type="org-0200:Property"/>
+    <xsd:element name="PropertySummary" type="org-0200:Property"/>
+    <xsd:element name="PropertyDetail"
+        substitutionGroup="org-0200:PropertySubGrp" type="org-0200:Property_Detail"/>
+    
+    <xsd:complexType name="Property_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A property may contain one or more facilities of the same or differing types.  Example:  The property Disney Orlando has many hotels and golf courses on it.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Property</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0300:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="PropertyRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the obj ID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Property">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A property may contain one or more facilities of the same or differing types.  Example:  The property Disney Orlando has many hotels and golf courses on it.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Property</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="org-0200:Property_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2-0300:AddressSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The physical address of the property.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="URL" type="xsd:anyURI">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The URL for the property.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="5" minOccurs="0" ref="ota2-0300:TelephoneSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The phone number for this property.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0300:Email">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The email for this property.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0300:MultimediaCollection">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Multimedia information for the property.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="5" minOccurs="0"
+                        name="Rating" type="ota2-0300:Rating">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The rating for the property.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="ota2-0300:StringShort" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The name of the property.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="companyName"
+                    type="ota2-0300:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The name of the company that owns this property.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Property_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A property may contain one or more facilities of the same or differing types.  Example:  The property Disney Orlando has many hotels and golf courses on it.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Property</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="org-0200:Property">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1000" minOccurs="1" ref="org-0200:FacilitySubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">One or more facilities on this property.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="MeetingCenter">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Meeting center details for a facility.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">MeetingCenter</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="meetingRoomCount"
+                    type="ota2-0300:NonNegativeInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The total number of unique meeting rooms provided at the hotel facility. For example, if the hotel has a grand ballroom that breaks into Salon A, B, and C -the total number of unique meeting rooms is three.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Changed type from {http://www.w3.org/2001/XMLSchema}nonNegativeInteger.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="org">15</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="largestSeatingCapacity"
+                    type="xsd:positiveInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The largest seating capacity available in the largest meeting room - generally this is for theatre-style room setup.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Changed type from {http://www.w3.org/2001/XMLSchema}nonNegativeInteger.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="org">200</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="largestRoomSpace" type="xsd:string" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The amount of room space for the largest unique meeting room at the facility.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Changed type from {http://www.w3.org/2001/XMLSchema}nonNegativeInteger.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="org">2000 sq ft</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="unitOfMeasureCode"
+                    type="ota2-0300:OTA_Code" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The unit of measure in a code format (e.g., inches, pixels, centimeters). Refer to OpenTravel Code List Unit of Measure Code (UOM).</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}OTA_CodeType</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="meetingRoomCode"
+                    type="ota2-0300:OTA_Code" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Used as a qualifier when searching for properties. Refer to OpenTravel Code list Meeting Room Code (MRC).</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}OTA_CodeType</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="BusinessService">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Name of the business service.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">BusinessService</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="businessServiceCode"
+                    type="ota2-0300:OTA_Code" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Used to identify a specific business service. Refer to OpenTravel Code list Business Srvc Type (BUS).</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}OTA_CodeType</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="AccessibilityFeaturesSubGrp" type="org-0200:AccessibilityFeatures">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes accessibility featrues.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">AccessibilityFeatures</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="AccessibilityFeatures"
+        substitutionGroup="org-0200:AccessibilityFeaturesSubGrp" type="org-0200:AccessibilityFeatures"/>
+    <xsd:element name="AccessibilityFeaturesSummary" type="org-0200:AccessibilityFeatures"/>
+    <xsd:element name="AccessibilityFeaturesDetail"
+        substitutionGroup="org-0200:AccessibilityFeaturesSubGrp" type="org-0200:AccessibilityFeatures_Detail"/>
+    
+    <xsd:simpleType name="AccessibilityFeatures_Simple">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A general facility description of accessiblity features.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">AccessibilityFeatures</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2-0300:StringLong"/>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="AccessibilityFeatures_Simple_List">
+        <xsd:list itemType="org-0200:AccessibilityFeatures_Simple"/>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="AccessibilityFeatures">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes accessibility featrues.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">AccessibilityFeatures</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="AccessibilityFeatures" type="ota2-0200:DisabilityFeature_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A list of accessiblity features available at the golf facility.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="AccessibilityFeatures_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes accessibility featrues.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">AccessibilityFeatures</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="org-0200:AccessibilityFeatures">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="Description" type="ota2-0300:Text">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Details about the accessibility feature.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+</xsd:schema>

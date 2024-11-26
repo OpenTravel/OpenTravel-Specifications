@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:element name="CancelPenalties">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CancelPenalty" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CancelPenalty">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The CancelPenalty class defines the cancellation policy of the hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DeadlineOffset" minOccurs="0"/>
+				<xs:element ref="Amount" minOccurs="0"/>
+				<xs:element ref="AmountPercent" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="AbsoluteDeadline" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Defines the absolute deadline.  Either this or the offset attributes may be used.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TaxInclusive" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates whether taxes are included when figuring the cancel penalties.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FeesInclusive" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates whether fees, such as those imposed by a travel agency or other booking agent, are included when figuring cancel penalties.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ConfirmClassCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Confirm Class.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PolicyCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Policy Class.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DeadlineOffset">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The amount of offset time before a deadline for a payment of cancel goes into effect.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="DeadlineOffset" type="xs:duration" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The number of units of TimeUnitType, e.g.: days, hours, etc., that apply to the DropTimeOffsetTimeUnitType.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DeadlineOffsetType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type indicating when the drop time goes into effect.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: Before Arrival, After Booking.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="BeforeArrival"/>
+						<xs:enumeration value="AfterBooking"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AmountPercent">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines the percentage basis for calculating the fee amount.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NmbrOfNights" type="xs:integer" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The number of nights of the hotel stay that are used to calculate the fee amount.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="BasisType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type indicating when the drop time goes into effect.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: Before Arrival, After Booking.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="FullStay"/>
+						<xs:enumeration value="Nights"/>
+						<xs:enumeration value="FirstLast"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Percent" type="xs:float" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">CurrencyCode, a 3-character string indicating the ISO currency code (e.g., "USD", etc.) indicating the country of origin and type of currency represented.</xs:documentation>
+					<xs:documentation xml:lang="en">The currency code is ISO standard 4217 (1995).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Amount">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The numerical value of the quantity of money expressed by the currency. The lexical representation of a decimal value consists of a string of digits separated by a period as a decimal indicator, with an optional leading sign to indicate a negative number. If the sign is omitted, "+" is assumed.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:float">
+					<xs:attribute name="CurrencyCode" type="xs:string" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">CurrencyCode, a 3-character string indicating the ISO currency code (e.g., "USD", etc.) indicating the country of origin and type of currency represented.</xs:documentation>
+							<xs:documentation xml:lang="en">The currency code is ISO standard 4217 (1995).</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

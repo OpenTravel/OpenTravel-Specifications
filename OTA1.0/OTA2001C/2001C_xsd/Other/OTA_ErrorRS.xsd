@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+OTA v2001C Specification - Session ErrorRS message definition
+Copyright (C) 2001 Open Travel Alliance. All rights reserved.
+		</xs:documentation>
+	</xs:annotation>
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:element name="ErrorRS">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="OTA_PayloadStdAttributes" />
+					<xs:attribute name="ErrorCode" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="SessionFailure-100"/>
+								<xs:enumeration value="SessionFailure-101"/>
+								<xs:enumeration value="SessionFailure-102"/>
+								<xs:enumeration value="SessionFailure-103"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="Severity" use="optional"/>
+					<xs:attribute name="ErrorMessage" use="optional">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="OTA version not supported"/>
+								<xs:enumeration value="Session has expired"/>
+								<xs:enumeration value="Session already closed"/>
+								<xs:enumeration value="Parameter not supported"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,1854 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA/2003/05" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA/2003/05" elementFormDefault="qualified" version="2.001" id="OTA2004A">
+
+
+
+
+	<!--  OTA_PkgAvailRS.xsd  -->
+<xs:annotation>
+<xs:documentation xml:lang="en">All Schema files in the OTA specification are made available according to the terms defined by the OTA License Agreement at http://www.opentravel.org/ota_downloads_form.cfm</xs:documentation>
+</xs:annotation>	
+	<xs:element name="MealPlanTypes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of MealPlan elements</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="MealPlanType" type="MealPlanType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+<xs:element name="OTA_PkgAvailRS">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The message details the availability of a requested package</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:annotation>
+					<xs:documentation xml:lang="en">May have either errors or warnings- must have one if there is no success.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="Success" type="SuccessType"/>
+					<xs:element name="Warnings" type="WarningsType" minOccurs="0"/>
+					<xs:element name="Package" type="PackageType"/>
+					<xs:element name="TravelChoices" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A collection of TravelItem elements.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="TravelItem" type="TravelItemType" maxOccurs="9"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="AccommodationChoices" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A collection of available properties.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="AvailableProperty" type="AccommodationDetailType" maxOccurs="99"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="FacilityChoices" type="FacilityChoicesType" minOccurs="0"/>
+					<xs:element name="AcceptedPaymtForms" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="AcceptedPaymtForm" type="AcceptedPaymtFormType" maxOccurs="9"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:element name="Errors" type="ErrorsType"/>
+			</xs:choice>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			<xs:attributeGroup ref="CompanyID_AttributesGroup"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TravelDetail">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides details of travel arrangements</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="OutwardTravel" type="PkgTravelSegment" maxOccurs="5"/>
+				<xs:element name="ReturnTravel" type="PkgTravelSegment" maxOccurs="5"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="AcceptedPaymtFormType">
+		<xs:simpleContent>
+			<xs:extension base="MonetaryRuleType">
+				<xs:attribute name="IssuerCode" type="StringLength1to16" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="TravelItemType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Details of a travel component e.g. a set of travel legs making up a travel component or a single item defining a round-trip journey.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="TravelDetail" minOccurs="0" maxOccurs="9"/>
+				<xs:element name="TravelJourney" type="PkgTravelJourney" minOccurs="0"/>
+			</xs:choice>
+			<xs:sequence>
+				<xs:element name="Supplements" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">A collection of Supplement elements. </xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="SupplementCharge" type="SupplementChargesType" maxOccurs="2"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="CautionInfo" type="PkgCautionType" minOccurs="0" maxOccurs="9"/>
+			</xs:sequence>
+		</xs:sequence>
+		<xs:attribute name="AccomOKFlag" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to indicate whether or not the accommodation associated with the package is available with this travel journey.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--  OTA_CommonTypes.xsd  -->
+	<xs:complexType name="CompanyNameType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a company by name.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to64">
+				<xs:attributeGroup ref="CompanyID_AttributesGroup"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="CurrencyAmountType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides a monetary amount and the code of the currency in which this amount is expressed.</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="CurrencyAmountGroup"/>
+	</xs:complexType>
+	<xs:complexType name="DateTimeSpanType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used to specify a time window range by either specifying an earliest and latest date for the start date and end date or by giving a date with a time period that can be applied before and/or after the start date.</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="DateWindowRange" type="TimeInstantType"/>
+			<xs:sequence>
+				<xs:element name="StartDateWindow" type="TimeWindowType" minOccurs="0"/>
+				<xs:element name="EndDateWindow" type="TimeWindowType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:choice>
+		<xs:attributeGroup ref="DateTimeSpanGroup"/>
+	</xs:complexType>
+	<xs:complexType name="EquipmentType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Specifies the aircraft equipment type.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to64">
+				<xs:attribute name="AirEquipType" type="StringLength3" use="required">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">This is the 3 character IATA code.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="ChangeofGauge" type="xs:boolean" use="optional" default="false">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Indicates there is an equipment change.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ErrorType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Standard way to indicate that an error occurred during the processing of an OTA message</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="FreeTextType">
+				<xs:attribute name="Type" type="OTA_CodeType" use="required">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The Error element MUST contain the Type attribute that uses a recommended set of values to indicate the error type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".  Refer to OTA Code List Error Warning Type (EWT).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attributeGroup ref="ErrorWarningAttributeGroup"/>
+				<xs:attribute name="NodeList" type="xs:string">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">An XPath expression that selects all the nodes whose data caused this error.  Further, this expression should have an 	additional contraint which contains the data of the node.  This will provide the offending data back to systems that cannot maintain the original message. </xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ErrorsType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of errors that occurred during the processing of a message.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Error" type="ErrorType" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FeeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">May be used for non tax amounts (e.g service charges).</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Taxes" type="TaxesType" minOccurs="0"/>
+			<xs:element name="Description" type="ParagraphType" minOccurs="0" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Text description of the fees  in a given language.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="TaxInclusive" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates whether taxes are included when figuring the fees.	</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="FeeTaxGroup"/>
+	</xs:complexType>
+	<xs:complexType name="FlightSegmentBaseType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Construct for holding a flight segment availability object.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="DepartureAirport" type="LocationType">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Departure point of flight segment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ArrivalAirport" type="LocationType">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Arrival point of flight segment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OperatingAirline" type="OperatingAirlineType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> The operating airline of the flight if it is a codeshare  flight.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Equipment" type="EquipmentType" minOccurs="0" maxOccurs="2">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> The type of equipment  used for the  flight..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="DepartureDateTime" type="xs:dateTime" use="required"/>
+		<xs:attribute name="ArrivalDateTime" type="xs:dateTime" use="optional"/>
+		<xs:attribute name="StopQuantity" type="xs:nonNegativeInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en"> The number of stops the flight makes</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RPH" type="RPH_Type"/>
+		<xs:attribute name="InfoSource" type="StringLength1to32" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="FormattedTextTextType">
+		<xs:annotation>
+			<xs:documentation>Provides text and indicates whether it is formatted or not.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="Formatted" type="xs:boolean" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Textual information, which may be formatted as a line of information, or unformatted, as a paragraph of text.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attributeGroup ref="LanguageGroup"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="FreeTextType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Textual information to provide descriptions and/or additional information.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attributeGroup ref="LanguageGroup"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="LocationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Code and optional string to describe a location point.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="LocationCode" type="StringLength1to8" use="required"/>
+				<xs:attribute name="CodeContext" type="StringLength1to32" default="IATA">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the context of the identifying code, such as IATA, ARC, or internal code, etc.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="MonetaryRuleType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This defines the information pertaining to rules and amounts associated with these rules.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to255">
+				<xs:attributeGroup ref="CurrencyAmountGroup"/>
+				<xs:attribute name="RuleType" type="OTA_CodeType" use="required">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">
+				Refer to OTA Code List Rule Type (RUL).
+				</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="Percent" type="Percentage" use="optional"/>
+				<xs:attribute name="DateTime" type="xs:dateTime" use="optional"/>
+				<xs:attribute name="PaymentType" type="OTA_CodeType" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">
+				Refer to OTA Code List Payment Type (PMT).
+				</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="OperatingAirlineType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This is an extension of CompanyNameType to include a FlightNumber.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="CompanyNameType">
+				<xs:attribute name="FlightNumber" type="FlightNumberType"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ParagraphType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">An indication of a new paragraph for a sub-section of a formatted text message.</xs:documentation>
+		</xs:annotation>
+		<xs:choice maxOccurs="99">
+			<xs:element name="Text" type="FormattedTextTextType"/>
+			<xs:element name="Image" type="xs:string"/>
+			<xs:element name="URL" type="xs:anyURI"/>
+			<xs:element name="ListItem">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="FormattedTextTextType">
+							<xs:attribute name="ListItem" type="xs:integer" use="optional"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="Name" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">In many cases the description repeats, this will allow you to define the information that is being sent, typically used when multiple occurrences of ParagraphType are being sent.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ParagraphNumber" type="xs:nonNegativeInteger" use="optional"/>
+		<xs:attributeGroup ref="DateTimeStampGroup"/>
+		<xs:attributeGroup ref="LanguageGroup"/>
+	</xs:complexType>
+	<xs:complexType name="SuccessType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Standard way to indicate successful processing of an OTA message. Returning an empty element of this type indicates success.</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:complexType name="TaxType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Applicable tax element.  This element allows for both percentages and flat amounts. If one field is used, the other should be zero since logically, taxes should be calculated in only one of the two ways.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TaxDescription" type="ParagraphType" minOccurs="0" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Text description of the taxes in a given language.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="FeeTaxGroup"/>
+	</xs:complexType>
+	<xs:complexType name="TaxesType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of taxes.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Tax" type="TaxType" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="CurrencyAmountGroup"/>
+	</xs:complexType>
+	<xs:complexType name="TimeInstantType">
+		<xs:simpleContent>
+			<xs:extension base="DateOrDateTimeType">
+				<xs:attribute name="WindowBefore" type="xs:duration" use="optional"/>
+				<xs:attribute name="WindowAfter" type="xs:duration" use="optional"/>
+				<xs:attribute name="CrossDateAllowedIndicator" type="xs:boolean" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">When true the requested period may extend over the previous or following day. When false, the search period is restricted to the date specified. Normally used when the window duration is in hours.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="TimeWindowType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Total time span covered by this availability request (from the earliest arrival to the latest departure)</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="EarliestDate" type="DateOrDateTimeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The earliest ending date/time for the availability requested, expressed in dateTime format as prescribed by ISO 8601.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="LatestDate" type="DateOrDateTimeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The latest ending date/time for the availability requested, expressed in dateTime format as prescribed by ISO 8601.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DOW" type="DayOfWeekType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The Day of Week of the starting date for the availability requested. Enumerated values of StartDOW are the seven days of the week: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="TravelerCountType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines information on the number of travelers of a specific type (e.g.  a driver type can be either one of a defined set, Adult, YoungDriver, YoungerDriver, or it may be a code that is acceptable to both Trading Partners).</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Age" type="Numeric0to999" use="optional">
+			<xs:annotation>
+				<xs:documentation>This is used to specify age in years.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Code" use="optional">
+			<xs:annotation>
+				<xs:documentation>Refer to OTA Code List Age Qualifying Code (AQC) or use StringLength1to8 with CodeContext to use a non-OTA code.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:union memberTypes="StringLength1to8 OTA_CodeType"/>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="CodeContext" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies the source authority for the code. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="URI" type="xs:anyURI" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies the location of the code table</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="QuantityGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Specifies the number of travelers.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+	</xs:complexType>
+	<xs:complexType name="URL_Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Web site address, in IETF specified format.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:anyURI">
+				<xs:attributeGroup ref="PrivacyGroup"/>
+				<xs:attribute name="Type" type="StringLength1to16" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Defines the purpose of the URL address, such as personal, business, public, etc.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attributeGroup ref="DefaultIndGroup"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="WarningType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Standard way to indicate successful processing of an OTA message, but one in which warnings are generated</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="FreeTextType">
+				<xs:attribute name="Type" type="OTA_CodeType" use="required">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".  Refer to OTA Code List Error Warning Type (EWT).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attributeGroup ref="ErrorWarningAttributeGroup"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="WarningsType">
+		<xs:sequence>
+			<xs:element name="Warning" type="WarningType" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+<xs:attributeGroup name="AltLangID_Group">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies the alternate language for a customer or message. The human language is identified by ISO 639 codes.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="AltLangID" type="xs:language" use="optional"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="AreaID_Group">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used in place of a property code to retrieve availability across multiple properties in a hotel reservation system defined area.  This attribute does not map to a code list, it maps to a hotel reservation system defined value.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="AreaID" type="NumericStringLength1to8" use="optional"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="CodeListGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used to specify a code and its associated attributes; meaning is derived from actual use.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Code" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Any code used to specify an item, for example, type of traveler, service code, room amenity, etc.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CodeContext" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies the source authority for the code. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="URI" type="xs:anyURI" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies the location of the code table</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="QuantityGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Specifies the number of items that are identified by the Code (e.g., 2 adults, 5 first class seats).</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="CompanyID_AttributesGroup">
+		<xs:annotation>
+			<xs:documentation>Provides meaning to a company code.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="CompanyShortName" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to provide the company common name.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TravelSector" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">
+Refer to OTA Code List Travel Sector (TVS).
+		</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Code" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies a company by the company code.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CodeContext" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies the context of the identifying code, such as DUNS, IATA or internal code, etc.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="CurrencyAmountGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides a monetary amount and the currency code to reflect the currency in which this amount is expressed.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Amount" type="Money" use="optional"/>
+		<xs:attributeGroup ref="CurrencyCodeGroup"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="CurrencyCodeGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides a currency code to reflect the currency in which an amount may be expressed.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="CurrencyCode" type="AlphaLength3" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The code specifying a monetary unit. Use ISO 4217, three alpha code.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DecimalPlaces" type="xs:nonNegativeInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates the number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit". Typically used when the amount provided includes the minor unit of currency without a decimal point (e.g., USD 8500 needs DecimalPlaces="2" to represent $85).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="DateTimeSpanGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The attributes of the  OTA DateTimeSpan data type are based on the W3C base data types of timeInstant and timeDuration. The lexical representation for timeDuration is the [ISO 8601] extended format PnYn MnDTnH nMnS, where nY represents the number of years, nM the number of months, nD the number of days, 'T' is the date/time separator, nH the number of hours, nM the number of minutes and nS the number of seconds. The number of seconds can include decimal digits to arbitrary precision. As an example, 7 months, 2 days, 2hours and 30 minutes would be expressed as P0Y7M2DT2H30M0S. Truncated representations are allowed provided they conform to ISO 8601 format. </xs:documentation>
+			<xs:documentation xml:lang="en">Time periods, i.e. specific durations of time, can be represented by supplying two items of information: a start instant and a duration or a start instant and an end instant or an end instant and a duration. The OTA standards use the XML mapping that provides for two elements to represent the specific period of time; a startInstant and a duration.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Start" type="DateOrTimeOrDateTimeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The starting value of the time span. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Duration" type="DurationType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The duration datatype represents a combination of year, month, day and time values representing a single duration of time, encoded as a single string. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="End" type="DateOrTimeOrDateTimeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The ending value of the time span. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="DateTimeStampGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Creation date time, Creator Id, last modification date time and last Modifier Id.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="CreateDateTime" type="xs:dateTime" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Time stamp of the creation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CreatorID" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">ID of creator. The creator could be a software system identifier or an identifier of an employee resposible for the creation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="LastModifyDateTime" type="xs:dateTime" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Time stamp of last modification.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="LastModifierID" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies the last software system or person to modify a record.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="DefaultIndGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates that the receiving system should assume the default value if the user specifies no overriding value or action.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="DefaultInd" type="xs:boolean" use="optional" default="false"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="ErrorWarningAttributeGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used to identify an application error by either text, code, or by an online description and also to give the status, tag, and/or identification of the record that may have caused the error.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ShortText" type="StringLength1to64" use="optional"/>
+		<xs:attribute name="Code" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">If present, this refers to a table of coded values exchanged between applications to identify errors or warnings. Refer to OTA Code List Error Codes (ERR).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DocURL" type="xs:anyURI" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">If present, this URL refers to an online description of the error that occurred.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Status" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">If present, recommended values are those enumerated in the OTA_ErrorRS, (NotProcessed | Incomplete | Complete | Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Tag" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RecordID" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="FeeTaxGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines the fees and/or taxes associated with a charge (e.g. taxes associated with a hotel rate).</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Type" type="AmountDeterminationType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">An enumerated type that defines the type of fees applied to a rate.</xs:documentation>
+				<xs:documentation xml:lang="en">Values: Inclusive, Exclusive, Cumulative.  </xs:documentation>
+				<xs:documentation xml:lang="en">Note: If FeeType= Cumulative, fees are accumulated on all previous fees in this ordered list.  For example, if this collection contains 5 different fees and the 4th fee is cumulative, the fee is based on an accumulation of the rate amount plus fees 1 through 3.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Code" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Code identifying the fee (e.g.,agency fee, municipality fee, etc.). Refer to OTA Code List Fee Tax Type (FTT).
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Percent" type="Percentage" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Fee percentage; if zero, assume use of the Amount attribute (Amount or Percent must be a zero value).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="CurrencyAmountGroup"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="HotelReferenceGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">HotelReference: The hotel reference identifies a specific hotel by using the Chain Code, the Brand Code, and the Hotel Code.  The codes used are agreed upon by trading partners.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ChainCode" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The code that identifies a hotel chain or management group. The hotel chain code is decided between vendors.  This attribute is optional if the hotel is an independent property that can be identified by the HotelCode attribute.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="BrandCode" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A code that identifies the brand or flag of a hotel, often used for independently-owned or franchised properties who are known by a specific brand.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HotelCode" type="StringLength1to16" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The code that uniquely identifies a single hotel property. The hotel code is decided between vendors.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HotelCityCode" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The IATA city code; for example DCA, ORD.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HotelName" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en"> A text field used to communicate the proper name of the hotel.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HotelCodeContext" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A text field used to communicate the context (or source of - ex Sabre, Galileo, Worldspan, Amadeus) the HotelReferenceGroup codes.
+</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ChainName" type="StringLength1to64" use="optional"/>
+		<xs:attribute name="BrandName" type="StringLength1to64" use="optional"/>
+		<xs:attributeGroup ref="AreaID_Group"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="ID_OptionalGroup">
+		<xs:annotation>
+			<xs:documentation>Used to provide an optional unique identifier.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ID" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A unique identifying value assigned by the creating system.  The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="LanguageGroup">
+		<xs:annotation>
+			<xs:documentation>Identifies language.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Language" type="xs:language" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Language identification.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="OTA_PayloadStdAttributes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_PayloadStdAttributes defines the standard attributes that appear on the root element for all OTA payloads.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="EchoToken" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A reference for additional message identification, assigned by the requesting host system. When a request message includes an echo token the corresponding response message MUST include an echo token with an identical value.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TimeStamp" type="xs:dateTime" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates the creation date and time of the message in UTC using the following format specified by ISO 8601; YYYY-MM-DDThh:mm:ssZ with time values using the 24 hour clock (e.g. 20 November 2003, 1:59:38 pm UTC becomes 2003-11-20T13:59:38Z).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Target" use="optional" default="Production">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to indicate whether the request is for the Test or Production system.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Test"/>
+					<xs:enumeration value="Production"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Version" type="xs:decimal" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">For all OTA versioned messages, the version of the message is indicated by a decimal value.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TransactionIdentifier" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A unique identifier to relate all messages within a transaction (e.g. this would be sent in all request and response messages that are part of an on-going transaction).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SequenceNmbr" type="xs:nonNegativeInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to identify the sequence number of the transaction as assigned by the sending system; allows for an application to process messages in a certain order or to request a resynchronization of messages in the event that a system has been off-line and needs to retrieve messages that were missed. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TransactionStatusCode" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">This indicates where this message falls within a sequence of messages. </xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Start">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This is the first message within a transaction.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="End">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This is the last message within a transaction.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Rollback">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This indicates that all messages within the current transaction must be ignored.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="InSeries">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This is any message that is not the first or last message within a transaction.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attributeGroup ref="PrimaryLangID_Group"/>
+		<xs:attributeGroup ref="AltLangID_Group"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="PreferLevelGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used to indicate a level of prefernce for an associated item, only, unacceptable, preferred.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional" default="Preferred">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to indicate a level of prefernce for an associated item.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="PrimaryLangID_Group">
+		<xs:annotation>
+			<xs:documentation>Identifes the primary language preference for the message.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="PrimaryLangID" type="xs:language" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifes the primary language preference for the message.  The human language is identified by ISO 639 codes.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="PrivacyGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The two Privacy attributes allow for control of the sharing of data between parties.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ShareSynchInd" use="optional">
+			<xs:simpleType>
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Inherit" Permission for sharing data for synchronization of information held by other travel service providers.							</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Yes"/>
+					<xs:enumeration value="No"/>
+					<xs:enumeration value="Inherit"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="ShareMarketInd" use="optional">
+			<xs:simpleType>
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Inherit" Permission for sharing data for marketing purposes.</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Yes"/>
+					<xs:enumeration value="No"/>
+					<xs:enumeration value="Inherit"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="PromotionCodeGroup">
+		<xs:annotation>
+			<xs:documentation>Used to provide a promotion code.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="PromotionCode" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Promotion code is the identifier used by the host to link directly with a specific named advertising campaign. By including the required code, the client is able to gain access to special offers which may have been created for a specifically targeted group via a CRM system or for a wider advertising campaign using Television or press adverts.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="QuantityGroup">
+		<xs:annotation>
+			<xs:documentation>Used to define a quantity.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Quantity" type="Numeric1to9999" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to define a quantity of an associated element or attribute.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!--  OTA_HotelCommonTypes.xsd  -->
+	<xs:complexType name="GuestCountType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of GuestCount by age group.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="GuestCount" maxOccurs="99">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A recurring element that identifies the number of guests and ages of the guests in the request that determines the rates based on business rules for occupancy at each property. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attributeGroup ref="GuestCountGroup"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="IsPerRoom" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">IsPerRoom means that the guests defined in the GuestCounts object apply to each room in the NumberOfRooms for the RoomStay.  Value of "false" means that the guests defined in the GuestCounts object apply to all rooms combined in the NumberOfRooms for the RoomStay.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="RoomStayCandidateType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used to identify available room products.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="GuestCounts" type="GuestCountType" minOccurs="0"/>
+			<xs:element name="RoomAmenity" type="RoomAmenityPrefType" minOccurs="0" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This element is used to pass room attributes. Typical attributes are smoking, non-smoking, wheelchair access,  room location (low floor, high floor, close to elevator, etc) and view (garden, pool, ocean, etc)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="RoomGroup"/>
+	</xs:complexType>
+	<xs:attributeGroup name="GuestCountGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines the number of guests.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="AgeQualifyingCode" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A code representing a business rule that determines the charges for a guest based upon age range (e.g. Adult, Child, Senior, Child With Adult, Child Without Adult). This attribute allows for an increase in rate by occupant class. Refer to OTA Code List Age Qualifying Code (AQC).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Age" type="Numeric0to999" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Defines the age of a guest.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Count" type="Numeric1to999" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The number of guests in one AgeQualifyingCode or Count.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="RoomGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used to define a room (eg. its location, configuration, view).</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="RoomType" type="StringLength1to16" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">(formerly, RoomInventoryCode) A code value that indicates the type of room for which this request is made, e.g.: double, king, etc. Values may use the Hotel Descriptive Content table or a codes specific to the property or hotel brand.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RoomTypeCode" type="StringLength1to16" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Specific system room type code, ex: A1K, A1Q etc.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RoomCategory" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates the category of the room. Typical values would be Moderate, Standard, Superior or Deluxe. Refer to OTA Code List Brand Category Code (BCC).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RoomID" type="StringLength1to16" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A string value representing the unique identification of a room if the request is looking for a specific room.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Floor" type="Numeric1to999" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Floor on which the room is located.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="InvBlockCode" type="StringLength1to16" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A code or identification number that identifies the room  stay as part of a group, package tour, or block of rooms designated in the inventory.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="PromotionCodeGroup"/>
+		<xs:attribute name="RoomLocationCode" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates the location of the room within the hotel structure. Typical values would be "Near Exit","Close to elevator", "Low Floor" or "High Floor". Refer to OTA Code List Romm Location Type (RLT).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RoomViewCode" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates the view of the room. Typical values would be "Ocean view", "Pool view" or "Garden View". Refer to OTA Code List Room View Type (RVT).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="BedTypeCode" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates the type of bed(s) found in the room. Typical values would be Double, Twin, Queen, or King. Refer to OTA Code List Bed Type Code (BED).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NonSmoking" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Non-smoking indicator.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Configuration" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Textual description of room configuration.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SizeMeasurement" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Textual description of room dimensions.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Quantity" type="Numeric1to999" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Defines the number of the item in question.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Composite" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates that the room (suite) is a composite of smaller units.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!--  OTA_HotelPreferences.xsd  -->
+	<xs:complexType name="RoomAmenityPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates preferences for hotel room amenities.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to128">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the customer's level of preference for the hotel room amenity identified.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="RoomAmenity" type="OTA_CodeType" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifes the types of room amenities offered by the property. Refer to OTA Code List Room Amenity Type (RMA).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attributeGroup ref="QuantityGroup"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!--  OTA_PkgCommonTypes.xsd  -->
+	<xs:complexType name="AccommodationClassType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Rating of an accommodation property.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Code" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Providers rating eg '4'.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Name" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Providers qualifier name e.g. 'Crowns'. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NationalCode" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Official rating e.g. '4'.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="OfficialName" type="StringLength1to16" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Official qualifier name eg 'STAR'.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="AccommodationDetailType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides accommodation location, dates and classifications</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Property" type="PropertyIdentityType"/>
+			<xs:element name="Resort" type="ResortCodeType" minOccurs="0"/>
+			<xs:element name="AccommodationClass" type="AccommodationClassType" minOccurs="0"/>
+			<xs:element name="FacilityChoices" type="FacilityChoicesType" minOccurs="0"/>
+			<xs:element name="SourceIdentification" type="SourceIdentificationType" minOccurs="0"/>
+			<xs:element name="ContentInfo" type="URL_Type" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="PackageID" type="PackageID_RefType" use="optional"/>
+		<xs:attributeGroup ref="DateTimeSpanGroup"/>
+		<xs:attribute name="MinChildAge" type="Numeric1to99" use="optional"/>
+		<xs:attribute name="MaxChildAge" type="Numeric1to99" use="optional"/>
+		<xs:attribute name="BaseMealPlan" type="MealPlanCode" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">This is the meal plan that is included in the package price.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="BedQuantity" type="Numeric0to999" use="optional"/>
+		<xs:attribute name="TravelOKFlag" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to indicate whether or not the travel associated with the package is available with this accommodation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="AccommodationSegment">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines an accommodation component of a package holiday. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Identity" type="PropertyIdentityType" minOccurs="0"/>
+			<xs:element name="DateRange" type="DateTimeSpanType"/>
+			<xs:element name="RoomProfiles" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A collection of RoomProfile elements</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="RoomProfile" type="PkgRoomProfileType" maxOccurs="9"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="MealPlans" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A collection of MealPlan elements</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="MealPlan" type="MealPlanType" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="RPH" type="RPH_Type" use="optional"/>
+		<xs:attribute name="ResortName" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Describes the resort or area containing a property.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="CostingItemType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Details of an invoice item</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="UnitPrice" type="CurrencyAmountType">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Unit cost in a given monetary unit.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ExtendedPrice" type="CurrencyAmountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Unit cost multiplied by Unit Quantity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Description" type="ShortDescriptionType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A description of an invoice item.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="QuantityGroup"/>
+	</xs:complexType>
+	<xs:complexType name="CustomerCountsType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">CustomerCounts : Categorization of all Customers in a reservation or request.  The total number of Customers will equal the sum of the Count attribute of all CustomerCount objects in this collection and assumes that the AgeQualifyingCode will be used to determine how each Customer should be billed. Each booking segment has its own CustomerCount attribute to help determine billing, headcount, etc.  The CustomerCount collection cannot be modified using a delta—it must be resent in its entirety if modified. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CustomerCount" type="TravelerCountType" maxOccurs="9"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FacilityChoicesType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides the available facilities for the enquiror's chosen property and stay.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AvailableRooms" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Room" type="PkgRoomInventoryType" maxOccurs="99">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">Describes a type of room/cabin/apartment etc</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AvailableMealPlans" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="MealPlan" type="MealPlanType" maxOccurs="9"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RoomPrices" minOccurs="0" maxOccurs="9">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A collection of price information for each available room based on an available board terms (meal plan) e.g prices for each room based on Half Board.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="RoomPrice" type="RoomPriceType" maxOccurs="99"/>
+					</xs:sequence>
+					<xs:attribute name="MealPlan" type="MealPlanCode"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="OccupancyGroup"/>
+	</xs:complexType>
+	<xs:complexType name="ItineraryItemType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Any valid item of inventory.</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="Accommodation" type="AccommodationSegment"/>
+			<xs:element name="Travel" type="PkgTravelSegment"/>
+		</xs:choice>
+		<xs:attributeGroup ref="PackageItemPositionGroup"/>
+	</xs:complexType>
+	<xs:complexType name="MealPlanType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Details of meal arrangements, booked or available according to context, with appropriate supplementary charges. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CustomerCounts" type="CustomerCountsType" minOccurs="0"/>
+			<xs:element name="SupplementCharges" type="SupplementChargesType" minOccurs="0" maxOccurs="2"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="MealPlanGroup"/>
+	</xs:complexType>
+	<xs:complexType name="PackageType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines a complete package holiday. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="URL" type="URL_Type" minOccurs="0"/>
+			<xs:element name="CompanyName" type="CompanyNameType" minOccurs="0"/>
+			<xs:element name="DateRange" minOccurs="0">
+				<xs:complexType>
+					<xs:attributeGroup ref="DateTimeSpanGroup"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ItineraryItems" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A collection of elements to allow any item of inventory to be requested for a booking.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ItineraryItem" type="ItineraryItemType" maxOccurs="99"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Cautions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A collection of items of essential information relating to components of a package itinerary.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Caution" type="PkgCautionType" maxOccurs="99"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="ID_OptionalGroup"/>
+		<xs:attribute name="Type" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">
+		Refer to OTA Code List Package Type (PKG).
+		</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TravelCode" type="PkgTravelCode" use="optional"/>
+		<xs:attribute name="TourCode" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The supplier’s code to identify the accommodation/tour arrangement for a package.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ShortDescription" type="ShortDescriptionType" use="optional"/>
+		<xs:attribute name="BoardCode" type="MealPlanCode" use="optional"/>
+		<xs:attribute name="PromotionCode" type="StringLength1to16" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="PkgAirSegmentType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides details of an air segment</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="FlightSegmentBaseType">
+				<xs:sequence>
+					<xs:element name="SupplementCharges" type="SupplementChargesType" minOccurs="0" maxOccurs="2">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A value representing a supplement for this journey (e.g. Aberdeen to Palma) over the cost of the journey on which package basic price is calculated (e.g. Gatwick to Palma).   The element repeats to allow for charges in an alternative currency to be shown. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="AvailableSeats" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A collection of seat availability by class.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="SeatAvailability" type="SeatAvailabilityType" maxOccurs="26"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="CheckInDate" type="xs:dateTime" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Provides the recommended date and time of passenger check-in.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="Type" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Indicates whether the flight is a scheduled or charter service.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="Charter"/>
+							<xs:enumeration value="Scheduled"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="DepartureDay" type="DayOfWeekType" use="optional"/>
+				<xs:attribute name="TravelCode" type="PkgTravelCode" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The supplier’s code to identify the travel arrangement for the package</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="Duration" type="xs:duration" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">A length of time.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PkgCautionType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides information regarding a package component which could affect a customer's decision to book.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="FormattedTextTextType">
+				<xs:attributeGroup ref="DateTimeSpanGroup"/>
+				<xs:attribute name="ItinerarySequence" type="Numeric1to99" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Used to relate this item of information to the inventory item.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="Type" type="StringLength1to16" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the type of information e.g. Resort, Flight, Accommodation etc..</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PkgPassengerRPHs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A container to allow one to relate individual passengers to an inventory or chargeable item.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="PassengerRPH" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:attribute name="RPH" type="RPH_Type" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PkgRoomInventoryType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Describes a type of room/cabin/apartment etc.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="RoomStayCandidateType">
+				<xs:sequence>
+					<xs:element name="SupplementCharges" type="SupplementChargesType" minOccurs="0" maxOccurs="2"/>
+				</xs:sequence>
+				<xs:attribute name="RPH" type="RPH_Type" use="optional"/>
+				<xs:attribute name="Description" type="ShortDescriptionType" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">A full description of the room/apartment etc. </xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attributeGroup ref="OccupancyGroup"/>
+				<xs:attribute name="MaxAdults" type="Numeric1to99" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Maximum number of adults allowed in a unit of accommodation. </xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="CotQuantity" type="Numeric0to4" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The number of cots/cribs available in a room/apartment etc. </xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="FreeChildFlag" type="xs:boolean" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Indicates whether a free child is permitted in a room/apartment etc. </xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PkgRoomProfileType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Describes the occupancy of a room or cabin.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="PkgRoomInventoryType">
+				<xs:sequence>
+					<xs:element name="PassengerRPHs" type="PkgPassengerRPHs" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PkgTravelJourney">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides details of a return travel journey. </xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Type" type="StringLength1to16" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The type of travel component - e.g. Air, Rail, Sea etc. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="OriginAirportID" type="StringLength3" use="required"/>
+		<xs:attribute name="DestinationAirportID" type="StringLength3" use="required"/>
+		<xs:attribute name="OutwardDateTime" type="xs:dateTime" use="required"/>
+		<xs:attribute name="ReturnDateTime" type="xs:dateTime" use="optional"/>
+		<xs:attribute name="TravelCode" type="PkgTravelCode" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The code allocated to a travel component by the supplier. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="CompanyID_AttributesGroup"/>
+	</xs:complexType>
+	<xs:complexType name="PkgTravelSegment">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A full definition of a travel segment including supplemental price and facilities.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AirSegment" type="PkgAirSegmentType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PropertyIdentityType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Full name or description plus codes for a property. </xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to128">
+				<xs:attributeGroup ref="HotelReferenceGroup"/>
+				<xs:attribute name="PropertyClassType" type="OTA_CodeType" use="required">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">
+				Refer to OTA Code List Property Class Type (PCT).
+				</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="ContentURL" type="xs:anyURI"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ResortCodeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a resort, town or city.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Code" type="StringLength1to8" use="optional"/>
+		<xs:attribute name="Name" type="StringLength1to64" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="RoomPriceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Gives a total price and prices by traveler type for a room occupancy combination e.g. 2 adults and 2 children</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="GuestCounts" type="GuestCountType" minOccurs="0" maxOccurs="5"/>
+			<xs:element name="ItemPrice" type="CostingItemType" minOccurs="0" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Price for a traveler type in the room. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ProfilePrice" type="CurrencyAmountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Total price for this room. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="RoomRPH" type="RPH_Type" use="optional"/>
+		<xs:attribute name="Code" type="StringLength1to16" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="SeatAvailabilityType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of seat availability by class.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SupplementCharges" type="SupplementChargesType" minOccurs="0" maxOccurs="2">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A value representing a supplement for this seat class over the cost of the seat class on which package basic price is calculated   The element repeats to allow for charges in an alternative currency to be shown.   The charge element repeats to allow differential charging according to, for exaample, age. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="CodeListGroup"/>
+	</xs:complexType>
+	<xs:complexType name="SourceIdentificationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Where details of the package can be found. </xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to64">
+				<xs:attribute name="Code" type="StringLength1to64" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">E.g. brochure code. </xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="Issue" type="StringLength1to64" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">e.g. brochure edition/issue reference. </xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="Page" type="Numeric1to999" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">e.g. page number in the brochure. </xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SupplementChargesType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A value representing a supplement for an item over the cost of the item on which a package basic price is calculated; may be repeated for multiple currencies e.g. GBP and Euros.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Charge" type="FeeType" maxOccurs="9">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> The charge element repeats to allow differential charging according to, for example, age. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="CurrencyCodeGroup"/>
+	</xs:complexType>
+	<xs:attributeGroup name="MealPlanGroup">
+		<xs:attribute name="Plan" type="StringLength0to32"/>
+		<xs:attribute name="Code" type="MealPlanCode" use="required"/>
+		<xs:attributeGroup ref="QuantityGroup"/>
+		<xs:attribute name="RPH" type="RPH_Type" use="optional"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="OccupancyGroup">
+		<xs:attribute name="MinOccupancy" type="Numeric1to99" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Minimum number of persons allowed in a unit of accommodation or place. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="MaxOccupancy" type="Numeric1to99" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Maximum number of persons allowed in a unit of accommodation or place. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="PackageItemPositionGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines the chronological and sequential order of an item in a package</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ItinerarySequence" type="xs:positiveInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The position of this item in the package itinerary.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ChronologicalSequence" type="xs:positiveInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The position of this item in the package in time sequence.  Note: it is possible for more than one inventory item to have the same ChronologicalSequence value e.g. Car Hire and Hotel Stay.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+<xs:simpleType name="MealPlanCode">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The code for a meal plan e.g. AB- as brochure, AI- all inclusive, BB- bed and breakfast, FB- full board, HB- Half Board, RO- room only,SC- self catering </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AB"/>
+			<xs:enumeration value="AI"/>
+			<xs:enumeration value="BB"/>
+			<xs:enumeration value="FB"/>
+			<xs:enumeration value="HB"/>
+			<xs:enumeration value="RO"/>
+			<xs:enumeration value="SC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PackageID_RefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A code identifying a complete package arrangement, replacing individual travel and accommodation codes. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="StringLength1to32"/>
+	</xs:simpleType>
+	<xs:simpleType name="PkgTravelCode">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The supplier’s code to identify the travel arrangement for the package</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="StringLength1to8"/>
+	</xs:simpleType>
+	<!--  OTA_SimpleTypes.xsd  -->
+	<xs:simpleType name="AlphaLength3">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Alphabetic Strings, length exactly 3</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z]{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AmountDeterminationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used to indicate if an amount is inclusive or exclusive of other charges, such as taxes, or is cumulative (amounts have been added to each other
+		</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Inclusive"/>
+			<xs:enumeration value="Exclusive"/>
+			<xs:enumeration value="Cumulative"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DateOrDateTimeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A construct to validate either a date or a dateTime value.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:date xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="DateOrTimeOrDateTimeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A construct to validate either a date or a time or a dateTime value.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:date xs:dateTime xs:time"/>
+	</xs:simpleType>
+	<xs:simpleType name="DayOfWeekType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A three letter abbreviation for the days of the week (e.g. may be the starting date for the availability requested, days of operation, rate effective day, etc.).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Mon"/>
+			<xs:enumeration value="Tue"/>
+			<xs:enumeration value="Wed"/>
+			<xs:enumeration value="Thu"/>
+			<xs:enumeration value="Fri"/>
+			<xs:enumeration value="Sat"/>
+			<xs:enumeration value="Sun"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DurationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Allows for the specification of a night duration.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:duration NightDurationType"/>
+	</xs:simpleType>
+	<xs:simpleType name="FlightNumberType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a flight number (1 to 4 numbers followed by optional uppercase A - Z, which specifies an operational suffix) or OPEN or ARNK.</xs:documentation>
+		</xs:annotation>
+		<xs:union>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="[0-9]{1,4}[A-Z]?"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="OPEN">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Used in lieu of a flight number when a specific flight number is unknown but service is present.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ARNK">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Used in lieu of a flight number when surface transportation is used when there is a break in the continuity of the flight itinerary.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="Money">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for amounts, max 3 decimals</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:fractionDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NightDurationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides the ability to define a duration in terms of nights rather than days.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="P[0-9]{1,3}N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Numeric0to4">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Numeric values, from 0 to 4 inclusive</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Numeric0to999">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Numeric values, from 0 to 999 inclusive</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Numeric1to99">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Numeric values, from 1 to 99 inclusive</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Numeric1to999">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Numeric values, from 1 to 999 inclusive.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Numeric1to9999">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Numeric values, from 1 to 9999 inclusive.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="9999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumericStringLength1to8">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Numeric Strings, length 1 to 8.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{1,8}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OTA_CodeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for codes in the OTA code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9A-Z]{1,3}(\.[A-Z]{3}(\.X){0,1}){0,1}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Percentage">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for percentage values</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0.01"/>
+			<xs:maxInclusive value="100.00"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PreferLevelType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+	Used to specify a preference level for something that is or will be requested (e.g. a supplier of a service, a type of service, a form of payment, etc.).
+	</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Only">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Preference level that indicates request is only for a specific criterion.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unacceptable">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Preference level that indicates request is unnacceptable for a specific criterion.
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Preferred">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Preference level that indicates request is preferred for a specific criterion.
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RPH_Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">(Reference Place Holder) - an index code to identify an instance in a collection of like items.. For example,  used to assign individual passengers or clients to particular itinerary items.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{1,8}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ShortDescriptionType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A textual description.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"/>
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringLength0to128">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 0 to 128</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"/>
+			<xs:maxLength value="128"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringLength0to255">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 0 to 255</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"/>
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringLength0to32">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 0 to 32</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"/>
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringLength0to64">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 0 to 64</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"/>
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringLength1to16">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 16</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringLength1to32">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 32</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringLength1to64">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 64</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringLength1to8">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 8</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringLength3">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Strings, length exactly 3</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="3"/>
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/Common/v2_1"
+    version="2.1.0" xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0201="http://www.opentravel.org/OTM/Common/v2_1"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:ProjectName>Groundv3.otp</otm:ProjectName>
+                <otm:LibraryName>CodeList</otm:LibraryName>
+                <otm:LibraryVersion>2.1.0</otm:LibraryVersion>
+                <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                <otm:SourceFile>/CodeList_2_1_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2017-05-24T10:17:02.790-04:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:complexType name="SegmentCategory_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes the segment type.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">SegmentCategory_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0201:SegmentCategory_Enum_Base">
+                <xsd:attribute name="extension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="SegmentCategory_Enum_Base">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Describes the segment type.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationOpen">SegmentCategory_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Budget"/>
+            <xsd:enumeration value="Deluxe"/>
+            <xsd:enumeration value="Economy"/>
+            <xsd:enumeration value="First Class"/>
+            <xsd:enumeration value="Luxury"/>
+            <xsd:enumeration value="Moderate"/>
+            <xsd:enumeration value="Tourist"/>
+            <xsd:enumeration value="Upscale"/>
+            <xsd:enumeration value="Standard"/>
+            <xsd:enumeration value="Midscale"/>
+            <xsd:enumeration value="Quality"/>
+            <xsd:enumeration value="Midscale without F&amp;B"/>
+            <xsd:enumeration value="Upper upscale"/>
+            <xsd:enumeration value="Other_"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+</xsd:schema>

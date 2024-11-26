@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:include schemaLocation="StatusApplicationControl.xsd"/>
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:element name="OTA_HotelAvailNotifRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_AvailNotifRQ is the message that sends the notification of the availability status of a hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UniqueId" minOccurs="0"/>
+				<xs:element ref="HotelReference" minOccurs="0"/>
+				<xs:element ref="StatusMessages" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This element defines standard attributes that appear on the root element for all OTA payloads.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="StatusMessages">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StatusMessage" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="StatusMessage">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="BookingLimitStatusMessages" minOccurs="0"/>
+				<xs:element ref="FullPatternStatusMessages" minOccurs="0"/>
+				<xs:element ref="MinMaxLOSStatusMessages" minOccurs="0"/>
+				<xs:element ref="RateHurdleStatusMessages" minOccurs="0"/>
+				<xs:element ref="SimplePatternStatusMessages" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="LocatorId" type="xs:positiveInteger" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Can be used to communicate back to the sender exactly which transaction may have had a problem; e.g. "Message 214 had an invalid date range".</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BookingLimitStatusMessage">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The BookingLimitStatusMessage class communicates the set of booking limit availability changes to be synchronized with another system.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StatusApplicationControl" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="BookingLimitMessageType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+An enumerated type defining the function of the booking limit message.  
+Values: RemoveLimit,  SetLimit, AdjustLimit.
+</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="RemoveLimit"/>
+						<xs:enumeration value="SetLimit"/>
+						<xs:enumeration value="AdjustLimit"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="BookingLimit" type="xs:integer" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Number of units.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BookingLimitStatusMessages">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="BookingLimitStatusMessage" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Delta">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:float">
+					<xs:fractionDigits value="3"/>
+					<xs:attribute name="CurrencyCode" type="xs:string" use="required"/>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FullPatternStatusMessage">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StatusApplicationControl" minOccurs="0"/>
+				<xs:element ref="LengthsOfStay" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="StatusCode" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Some possible values: Close,  Open,  OnRequest, CTA (closed to arrival), Soft_Close, MLOS (minimum length of stay).  A StatusType of Close is used to accommodate the hotel status of Closed To Arrivals. OnRequest indicates that an Availability Query should be performed to determine specific availability.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ArrivalsOnlyFlag" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates whether LOS applies to any stay or just to arrivals.  </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Override" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Mechanism to allow the user to override settings at the reservation system and to allow the RMS to replace this overridden values: If value = "false", the reservations system may ignore the settings passed and keep values overridden by the user. If value = "true", the reservations system must replace values overridden by the user.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FullPatternStatusMessages">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="FullPatternStatusMessage" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HurdleRate">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Hurdle rate that must be matched or surpassed by net room rate from reservation (Res rate amount minus sum of internal costs from inclusive services).</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:float">
+					<xs:fractionDigits value="3"/>
+					<xs:attribute name="CurrencyCode" type="xs:string" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">CurrencyCode, a 3-character string indicating the ISO currency code (e.g., "USD", etc.) indicating the country of origin and type of currency represented.</xs:documentation>
+							<xs:documentation xml:lang="en">The currency code is ISO standard # 4217 (1995).</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LOS" type="xs:integer">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of unsigned integers defining allowable lengths of stay (LOS).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LengthsOfStay">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="LOS" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="TimeUnitType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A time unit used to apply this status message to other inventory, and with more granularity than daily. Values:  Year, Month, Week, Day, Hour, Minute, Second.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Year"/>
+						<xs:enumeration value="Month"/>
+						<xs:enumeration value="Week"/>
+						<xs:enumeration value="Day"/>
+						<xs:enumeration value="Hour"/>
+						<xs:enumeration value="Minute"/>
+						<xs:enumeration value="Second"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MinMaxLOSStatusMessage">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The MinMaxLOSStatusMessage class communicates the set of minimum and maximum length-of-stay availability status changes to be synchronized with another system.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StatusApplicationControl" minOccurs="0"/>
+				<xs:element ref="LengthsOfStay" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="MinMaxMessageType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type used to define how the minimum and maximum LOS is applied.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: Set Minimum LOS, Remove Minimum LOS, Set Maximum LOS, Remove Maximum LOS, Set Forward Minimum Stay, Remove Forward Minimum Stay, Set Forward Maximum Stay, Remove Forward Maximum Stay.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="SetMinLOS"/>
+						<xs:enumeration value="RemoveMinLOS"/>
+						<xs:enumeration value="SetMaxLOS"/>
+						<xs:enumeration value="RemoveMaxLOS"/>
+						<xs:enumeration value="SetForwardMinStay"/>
+						<xs:enumeration value="RemoveForward MinStay"/>
+						<xs:enumeration value="SetForwardMaxStay"/>
+						<xs:enumeration value="RemoveForwardMaxStay"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ArrivalsOnlyFlag" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates whether status applies to any stay or just to arrivals.  </xs:documentation>
+					<xs:documentation xml:lang="en">Values: 0 = (No) Any stay, 1 = (Yes) Arrivals only.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MinMaxLOSStatusMessages">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MinMaxLOSStatusMessage" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RateHurdleStatusMessage">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The RateHurdleStatusMessage class defines the setting for rate hurdle controls to be synchronized with the central reservation system.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StatusApplicationControl" minOccurs="0"/>
+				<xs:element ref="HurdleRate" minOccurs="0"/>
+				<xs:element ref="Delta" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="Ceiling" type="xs:integer" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Upper limit on the number of Deltas that should be added to the Rate Hurdle for each transient reservation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MaxSold" type="xs:integer" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Upper limit on the number of transient reservations that should be accepted.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RateHurdleStatusMessages">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RateHurdleStatusMessage" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SimplePatternStatusMessage">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StatusApplicationControl"/>
+			</xs:sequence>
+			<xs:attribute name="StatusType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Values: Close,  Open, or OnRequest. A StatusType of Close is used to accommodate the hotel status of Closed To Arrivals. OnRequest indicates that an Availability Query should be performed to determine specific availability.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Close"/>
+						<xs:enumeration value="Open"/>
+						<xs:enumeration value="OnRequest"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ArrivalsOnlyFlag" type="xs:boolean" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SimplePatternStatusMessages">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The set of simple pattern availability status changes to be made on the server.  The server must successfully update all messages. The failure of any single status message will result in the failure of all messages.  Simple open or close status changes are to be made on the server.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="SimplePatternStatusMessage" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

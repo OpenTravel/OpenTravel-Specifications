@@ -1,0 +1,3642 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA/2003/05" targetNamespace="http://www.opentravel.org/OTA/2003/05" elementFormDefault="qualified" version="1.002" id="OTA2007B">
+	
+	<xs:element name="OTA_HotelEventRS">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This message is used to confirm receipt of a hotel event request.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="Success" type="SuccessType"/>
+					<xs:element name="Warnings" type="WarningsType" minOccurs="0"/>
+					<xs:element name="Events" type="EventType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Collection of events which may be used to echo back data from the request message.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:element name="Errors" type="ErrorsType"/>
+			</xs:choice>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The standard attributes that appear on the root element for all OTA payloads. </xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+		</xs:complexType>
+	</xs:element>
+<!-- OTA_HotelPreferences.xsd --><xs:complexType name="RoomAmenityPrefType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates preferences for hotel room amenities.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to128">
+				<xs:attributeGroup ref="PreferLevelGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies the customer's level of preference for the hotel room amenity identified.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="RoomAmenity" type="OTA_CodeType" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifes the types of room amenities offered by the property. Refer to OTA Code List Room Amenity Type (RMA).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="ExistsCode" type="OTA_CodeType" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">This attribute is used to explicitly define whether an amenity or service is offered. Refer to OTA Code list Option Type Code (OTC). This is used in conjunction with RoomAmenity.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attributeGroup ref="QuantityGroup"/>
+				<xs:attribute name="QualityLevel" type="StringLength1to16" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Used to designate the quality level of the RoomAmenity e.g., premium, deluxe, standard, economy.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><!-- OTA_HotelEvent.xsd --><xs:complexType name="EventType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Information details for an event.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Event" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Information for an event. Typically, this would be used to send information regarding related events (e.g., the same training class being taken by different organizations).</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Contacts" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">A collection of contacts associated with the event.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Contact" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation xml:lang="en">A contact associated with the event.</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="ContactPersonType">
+													<xs:sequence>
+														<xs:element name="Comments" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">A collection of comments pertaining to the contact.</xs:documentation>
+															</xs:annotation>
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+																		<xs:annotation>
+																			<xs:documentation xml:lang="en">Used to provide additional information about the contact or the contact organization.</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+													<xs:attribute name="OnSiteIndicator" type="xs:boolean" use="optional">
+														<xs:annotation>
+															<xs:documentation xml:lang="en">When true, indicates that the contact is on site.</xs:documentation>
+														</xs:annotation>
+													</xs:attribute>
+												</xs:extension>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="AttendeeInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">The number of   attendees to the event.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Comments" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation xml:lang="en">A collection of comments pertaining to the attendees.</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">Comments about the attendees as a group (e.g., accessibility or special needs or demographic profile comments). </xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+								<xs:attributeGroup ref="AttendanceGroup"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="EventInfos" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">A collection of event infos.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="EventInfo" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation xml:lang="en">Details regarding a particular occurence of an event.</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="AdditionalDates" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">A collection of additional dates.</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="AdditionalDate" maxOccurs="unbounded">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">Additional date/time information (e.g., dates and times associated with pre- and post-convention meetings, major arrival and departure dates for event attendees, group arrivals and departure dates).   </xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:attributeGroup ref="DateTimeSpanGroup">
+																		<xs:annotation>
+																			<xs:documentation xml:lang="en">The start and end dates associated with the Type.</xs:documentation>
+																		</xs:annotation>
+																	</xs:attributeGroup>
+																	<xs:attribute name="Type" use="optional">
+																		<xs:annotation>
+																			<xs:documentation xml:lang="en">The type of dates being defined. (e.g., pre-convention meeting, post-convention meeting, major arrivals, major departures).</xs:documentation>
+																		</xs:annotation>
+																		<xs:simpleType>
+																			<xs:restriction base="xs:NMTOKEN">
+																				<xs:enumeration value="PreConMeeting">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">Indicates a pre-convention meeting.</xs:documentation>
+																					</xs:annotation>
+																				</xs:enumeration>
+																				<xs:enumeration value="PostConMeeting">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">Indicates a post-convention meeting, typically between the event planner and the facility.</xs:documentation>
+																					</xs:annotation>
+																				</xs:enumeration>
+																				<xs:enumeration value="MajorArrival">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">The major arrival date(s) for the group.</xs:documentation>
+																					</xs:annotation>
+																				</xs:enumeration>
+																				<xs:enumeration value="MajorDeparture">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">The major departure date(s) for the group.</xs:documentation>
+																					</xs:annotation>
+																				</xs:enumeration>
+																				<xs:enumeration value="Published">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">The published event date(s) for the group.</xs:documentation>
+																					</xs:annotation>
+																				</xs:enumeration>
+																				<xs:enumeration value="GroupArrival">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">The date associated with the arrival of the first contingent of the group.</xs:documentation>
+																					</xs:annotation>
+																				</xs:enumeration>
+																				<xs:enumeration value="GroupDeparture">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">The date associated with the departure of the last contingent of the group.</xs:documentation>
+																					</xs:annotation>
+																				</xs:enumeration>
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute name="Name" type="StringLength1to64" use="optional">
+																		<xs:annotation>
+																			<xs:documentation xml:lang="en">The name of a group or meeting to which the dates apply.</xs:documentation>
+																		</xs:annotation>
+																	</xs:attribute>
+																	<xs:attribute name="LocationName" type="StringLength1to64" use="optional">
+																		<xs:annotation>
+																			<xs:documentation xml:lang="en">The location of the meeting to which the dates apply.</xs:documentation>
+																		</xs:annotation>
+																	</xs:attribute>
+																	<xs:attribute name="AttendeeQuantity" type="xs:nonNegativeInteger" use="optional">
+																		<xs:annotation>
+																			<xs:documentation xml:lang="en">The number of people to whom the dates apply.</xs:documentation>
+																		</xs:annotation>
+																	</xs:attribute>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Contacts" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">A collection of contacts that pertain to this occurence of the event.  </xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Contact" maxOccurs="99">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">A contact that pertains to this occurence of the event. </xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:complexContent>
+																		<xs:extension base="ContactPersonType">
+																			<xs:sequence>
+																				<xs:element name="Amenities" minOccurs="0">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">A collection of amenities.</xs:documentation>
+																					</xs:annotation>
+																					<xs:complexType>
+																						<xs:sequence>
+																							<xs:element name="Amenity" type="RoomAmenityPrefType" maxOccurs="99">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">An amenity for the contact.</xs:documentation>
+																								</xs:annotation>
+																							</xs:element>
+																						</xs:sequence>
+																					</xs:complexType>
+																				</xs:element>
+																				<xs:element name="Comments" minOccurs="0">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">A collection of comments.</xs:documentation>
+																					</xs:annotation>
+																					<xs:complexType>
+																						<xs:sequence>
+																							<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">Used to provide additional information about the contact or the contact organization.</xs:documentation>
+																								</xs:annotation>
+																							</xs:element>
+																						</xs:sequence>
+																					</xs:complexType>
+																				</xs:element>
+																			</xs:sequence>
+																			<xs:attribute name="VIP_Indicator" type="xs:boolean" use="optional">
+																				<xs:annotation>
+																					<xs:documentation xml:lang="en">When true, the contact is a very important person.</xs:documentation>
+																				</xs:annotation>
+																			</xs:attribute>
+																			<xs:attribute name="ArrivalDate" type="DateOrTimeOrDateTimeType" use="optional">
+																				<xs:annotation>
+																					<xs:documentation xml:lang="en">The arrival date of this contact.</xs:documentation>
+																				</xs:annotation>
+																			</xs:attribute>
+																			<xs:attribute name="DepartureDate" type="DateOrTimeOrDateTimeType" use="optional">
+																				<xs:annotation>
+																					<xs:documentation xml:lang="en">The departure date of this contact.</xs:documentation>
+																				</xs:annotation>
+																			</xs:attribute>
+																		</xs:extension>
+																	</xs:complexContent>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Exhibition" minOccurs="0" maxOccurs="5">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">Describes an event at which products and services are displayed.</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="ExhibitDetails" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">A collection of exhibit details.</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="ExhibitDetail" maxOccurs="unbounded">
+																			<xs:annotation>
+																				<xs:documentation xml:lang="en">Describes a single exhibit within an exhibitiion.</xs:documentation>
+																			</xs:annotation>
+																			<xs:complexType>
+																				<xs:sequence>
+																					<xs:element name="Contacts" minOccurs="0">
+																						<xs:annotation>
+																							<xs:documentation xml:lang="en">A collection of contacts for an exhibit.</xs:documentation>
+																						</xs:annotation>
+																						<xs:complexType>
+																							<xs:sequence>
+																								<xs:element name="Contact" type="ContactPersonType" maxOccurs="99">
+																									<xs:annotation>
+																										<xs:documentation xml:lang="en">Contact information pertaining to an exhibit.</xs:documentation>
+																									</xs:annotation>
+																								</xs:element>
+																							</xs:sequence>
+																						</xs:complexType>
+																					</xs:element>
+																					<xs:element name="TaxExemptInfo" minOccurs="0" maxOccurs="3">
+																						<xs:annotation>
+																							<xs:documentation xml:lang="en">Used to provide tax exemption information for the exhibiting company of the booth.</xs:documentation>
+																						</xs:annotation>
+																						<xs:complexType>
+																							<xs:sequence>
+																								<xs:element name="Comments" minOccurs="0">
+																									<xs:annotation>
+																										<xs:documentation xml:lang="en">A collection of comments pertaining to the tax exemption information.</xs:documentation>
+																									</xs:annotation>
+																									<xs:complexType>
+																										<xs:sequence>
+																											<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+																												<xs:annotation>
+																													<xs:documentation xml:lang="en">A comment about the tax exemption information. </xs:documentation>
+																												</xs:annotation>
+																											</xs:element>
+																										</xs:sequence>
+																									</xs:complexType>
+																								</xs:element>
+																							</xs:sequence>
+																							<xs:attributeGroup ref="TaxExemptGroup">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">Tax exempt information for the exhibiting company of the booth.</xs:documentation>
+																								</xs:annotation>
+																							</xs:attributeGroup>
+																						</xs:complexType>
+																					</xs:element>
+																				</xs:sequence>
+																				<xs:attribute name="ExhibitTypeCode" type="OTA_CodeType" use="optional">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">Type of booths for the entire exhibition. Refer to OTA Code Table Exhibit Type (EXH).</xs:documentation>
+																					</xs:annotation>
+																				</xs:attribute>
+																				<xs:attribute name="BoothNumber" type="StringLength1to32" use="optional">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">The exhibit booth number.</xs:documentation>
+																					</xs:annotation>
+																				</xs:attribute>
+																				<xs:attributeGroup ref="DimensionGroup">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">The dimensions of the booth. </xs:documentation>
+																					</xs:annotation>
+																				</xs:attributeGroup>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="ExhibitorInfo" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">Exhibitor (i.e., the people working the booths) information for the event.</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="Comments" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation xml:lang="en">A collection of comments pertaining to the exhibitors.</xs:documentation>
+																			</xs:annotation>
+																			<xs:complexType>
+																				<xs:sequence>
+																					<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+																						<xs:annotation>
+																							<xs:documentation xml:lang="en">A comment about the exhibitors as a group (e.g., accessibility or special needs or demographic profile comments). </xs:documentation>
+																						</xs:annotation>
+																					</xs:element>
+																				</xs:sequence>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																	<xs:attributeGroup ref="AttendanceGroup">
+																		<xs:annotation>
+																			<xs:documentation xml:lang="en">Attendance information for the exhibitors.</xs:documentation>
+																		</xs:annotation>
+																	</xs:attributeGroup>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="AdditionalDates" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">A collection of additional dates.</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="AdditionalDate" maxOccurs="unbounded">
+																			<xs:annotation>
+																				<xs:documentation xml:lang="en">Date information petaining to the exhibition.</xs:documentation>
+																			</xs:annotation>
+																			<xs:complexType>
+																				<xs:attributeGroup ref="DateTimeSpanGroup">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">The start and end dates associated with the Type.</xs:documentation>
+																					</xs:annotation>
+																				</xs:attributeGroup>
+																				<xs:attribute name="Type" use="optional">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">Defines the type of dates (e.g., contacted, exhibitor move in, exhibitor move out).</xs:documentation>
+																					</xs:annotation>
+																					<xs:simpleType>
+																						<xs:restriction base="xs:NMTOKEN">
+																							<xs:enumeration value="Contracted">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">The contracted dates for the exhibition.</xs:documentation>
+																								</xs:annotation>
+																							</xs:enumeration>
+																							<xs:enumeration value="ContractorMoveIn">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">The contractor move-in date for the exhibition.</xs:documentation>
+																								</xs:annotation>
+																							</xs:enumeration>
+																							<xs:enumeration value="ContractorMoveOut">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">The contractor move-out date for the exhibition.</xs:documentation>
+																								</xs:annotation>
+																							</xs:enumeration>
+																							<xs:enumeration value="ExhibitorMoveIn">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">The exhibitor move-in date for the exhibition.</xs:documentation>
+																								</xs:annotation>
+																							</xs:enumeration>
+																							<xs:enumeration value="ExhibitorMoveOut">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">The exhibitor move-out date for the exhibition.</xs:documentation>
+																								</xs:annotation>
+																							</xs:enumeration>
+																						</xs:restriction>
+																					</xs:simpleType>
+																				</xs:attribute>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="Comments" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">A collection of comments pertaining to the exhibition.</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+																			<xs:annotation>
+																				<xs:documentation xml:lang="en">A comment pertaining to the exhibition.</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+														<xs:attribute name="Type" use="optional">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">Used to designate the exhibition as public, private or public/private.</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:NMTOKEN">
+																	<xs:enumeration value="Public">
+																		<xs:annotation>
+																			<xs:documentation xml:lang="en">Indicates the exhibition is open to the public.</xs:documentation>
+																		</xs:annotation>
+																	</xs:enumeration>
+																	<xs:enumeration value="Private">
+																		<xs:annotation>
+																			<xs:documentation xml:lang="en">Indicates the exhibition is private.</xs:documentation>
+																		</xs:annotation>
+																	</xs:enumeration>
+																	<xs:enumeration value="PublicPrivate">
+																		<xs:annotation>
+																			<xs:documentation xml:lang="en">Portions of the exhibition are open to the public and portions of the exhibition are private.</xs:documentation>
+																		</xs:annotation>
+																	</xs:enumeration>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:attribute>
+														<xs:attribute name="KitDistributionCode" type="OTA_CodeType" use="optional">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">Describes how an exhibitor kit will be distributed (e.g. e-mail, fax). Refer to OTA Code table Distribution Type (DTB).</xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+														<xs:attribute name="KitFormatCode" type="OTA_CodeType" use="optional">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">Describes the format of the exhibitor kit (e.g. hardcopy, CDROM). Refer to OTA Code table Format (FMT)</xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+														<xs:attribute name="GeneralServiceContractorInd" type="xs:boolean" use="optional">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">When true, a general service contractor (GSC) has been selected. If false, no GSC has been selected.</xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+														<xs:attribute name="GrossExhibitionSpace" type="xs:nonNegativeInteger" use="optional">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">The gross exhibition space required for the event.</xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+														<xs:attribute name="NetExhibitionSpace" type="xs:nonNegativeInteger" use="optional">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">The net exhibition space required for the event.</xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+														<xs:attribute name="UnitOfMeasureCode" type="OTA_CodeType" use="optional">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">The unit of measure (e.g., square feet, square meters) in a code format . Refer to OTA Code List Unit of Measure Code (UOM).</xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+														<xs:attribute name="ExhibitQuantity" type="xs:nonNegativeInteger" use="optional">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">The number of exhibits expected.</xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+														<xs:attribute name="CompanyQuantity" type="xs:nonNegativeInteger" use="optional">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">The number of exhibiting companies expected.</xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+														<xs:attribute name="SecuredAreaIndicator" type="xs:boolean" use="optional">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">When true, indicates the area needs to be secured. When false, the area does not need to be secured.</xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Transportations" type="TransportationType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">A collection of transportation elements.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="TaxExemptInfo" minOccurs="0" maxOccurs="3">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">Used to provide tax exemption information for the event.</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Comments" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">A collection of comments pertaining to the tax exemption information.</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="Comment" type="ParagraphType" maxOccurs="unbounded">
+																			<xs:annotation>
+																				<xs:documentation xml:lang="en">Used for comments about the billing information. </xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+														<xs:attributeGroup ref="TaxExemptGroup">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">Tax exemption information for the event.</xs:documentation>
+															</xs:annotation>
+														</xs:attributeGroup>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Comments" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">A collection of comments that pertain to this occurrence of the event.  </xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Comment" type="ParagraphType" minOccurs="0" maxOccurs="unbounded">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">A comment that pertains to this occurrence of the event.  </xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+											<xs:attributeGroup ref="DateTimeSpanGroup">
+												<xs:annotation>
+													<xs:documentation xml:lang="en">The start of the earliest function and the end of the latest function (excludes pre-convention and post-convention meetings).</xs:documentation>
+												</xs:annotation>
+											</xs:attributeGroup>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Sites" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">A collection of sites.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Site" maxOccurs="99">
+										<xs:annotation>
+											<xs:documentation xml:lang="en">Identifies the site where functions for the event will be held.</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Contacts" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">A collection of contacts associated with a specific site.</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Contact" type="ContactPersonType" maxOccurs="99">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">Contact information as well as site address information.</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="RoomBlock" minOccurs="0" maxOccurs="99">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">Information pertaining to room requirements for this event.</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="ReservationMethod" minOccurs="0" maxOccurs="5">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">Information regarding the reservation method.</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:attribute name="Code" type="OTA_CodeType" use="optional">
+																		<xs:annotation>
+																			<xs:documentation xml:lang="en">The type of reservation method to be used. Refer to OTA Code list Reservation Method Code (RMC).</xs:documentation>
+																		</xs:annotation>
+																	</xs:attribute>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="StayDays" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">A collection of stay days.</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="StayDay" maxOccurs="unbounded">
+																			<xs:annotation>
+																				<xs:documentation xml:lang="en">A particular stay day.</xs:documentation>
+																			</xs:annotation>
+																			<xs:complexType>
+																				<xs:attribute name="DayNumber" type="xs:positiveInteger" use="required">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">The number which indicates the day of the room requirements (e.g. 1, 2, 3). This is relative to the Start attribute in the EventInfo element.</xs:documentation>
+																					</xs:annotation>
+																				</xs:attribute>
+																				<xs:attribute name="GuestQuantity" type="xs:nonNegativeInteger" use="optional">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">Total number of guests for this day.</xs:documentation>
+																					</xs:annotation>
+																				</xs:attribute>
+																				<xs:attribute name="TotalNumberOfUnits" type="xs:nonNegativeInteger" use="optional">
+																					<xs:annotation>
+																						<xs:documentation xml:lang="en">Total number of rooms needed for this day.</xs:documentation>
+																					</xs:annotation>
+																				</xs:attribute>
+																			</xs:complexType>
+																		</xs:element>
+																		<xs:element name="Comments" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation xml:lang="en">A collection of comments pertaining to the stay. </xs:documentation>
+																			</xs:annotation>
+																			<xs:complexType>
+																				<xs:sequence>
+																					<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+																						<xs:annotation>
+																							<xs:documentation xml:lang="en">A comment pertaining to the stay. </xs:documentation>
+																						</xs:annotation>
+																					</xs:element>
+																				</xs:sequence>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																	<xs:attribute name="FirstStayDayOfWeek" type="DayOfWeekType" use="optional">
+																		<xs:annotation>
+																			<xs:documentation xml:lang="en">Identifies the first day of the week of the room block.</xs:documentation>
+																		</xs:annotation>
+																	</xs:attribute>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+														<xs:attribute name="TotalRoomNightQuantity" type="xs:nonNegativeInteger" use="optional">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">Total number of room nights needed. </xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+														<xs:attribute name="PeakRoomNightQuantity" type="xs:nonNegativeInteger" use="optional">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">Total number of rooms needed on the peak night. </xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+														<xs:attribute name="ConcessionsIndicator" type="xs:boolean" use="optional">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">When true, indicates that a rebate, assessment or commission exists. When false, rebates, assessments or commissions do not exist. </xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+														<xs:attribute name="HousingProviderName" type="StringLength1to255" use="optional">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">A third party housing providor name.</xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="EventDays" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">A collection of event days.</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="EventDay" maxOccurs="unbounded">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">Defines the functions for a specific day of the event.</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="EventDayFunctions" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation xml:lang="en">A collection of multiple EventDayFunctions.</xs:documentation>
+																			</xs:annotation>
+																			<xs:complexType>
+																				<xs:sequence>
+																					<xs:element name="EventDayFunction" maxOccurs="unbounded">
+																						<xs:annotation>
+																							<xs:documentation xml:lang="en">A container for the events requirements data.</xs:documentation>
+																						</xs:annotation>
+																						<xs:complexType>
+																							<xs:sequence minOccurs="0">
+																								<xs:element name="Contacts" minOccurs="0">
+																									<xs:annotation>
+																										<xs:documentation xml:lang="en">A collection of contacts associated with a function</xs:documentation>
+																									</xs:annotation>
+																									<xs:complexType>
+																										<xs:sequence>
+																											<xs:element name="Contact" maxOccurs="unbounded">
+																												<xs:annotation>
+																													<xs:documentation xml:lang="en">A contact associated with a function.</xs:documentation>
+																												</xs:annotation>
+																												<xs:complexType>
+																													<xs:complexContent>
+																														<xs:extension base="ContactPersonType">
+																															<xs:sequence>
+																																<xs:element name="Comments" minOccurs="0">
+																																	<xs:annotation>
+																																		<xs:documentation xml:lang="en">A collection of comments.</xs:documentation>
+																																	</xs:annotation>
+																																	<xs:complexType>
+																																		<xs:sequence>
+																																			<xs:element name="Comment" type="ParagraphType" maxOccurs="unbounded">
+																																				<xs:annotation>
+																																					<xs:documentation xml:lang="en">A comment associated to the contact.</xs:documentation>
+																																				</xs:annotation>
+																																			</xs:element>
+																																		</xs:sequence>
+																																	</xs:complexType>
+																																</xs:element>
+																															</xs:sequence>
+																														</xs:extension>
+																													</xs:complexContent>
+																												</xs:complexType>
+																											</xs:element>
+																										</xs:sequence>
+																									</xs:complexType>
+																								</xs:element>
+																								<xs:element name="AudioVisuals" minOccurs="0">
+																									<xs:annotation>
+																										<xs:documentation xml:lang="en">A collection of audio visual needs for a function. </xs:documentation>
+																									</xs:annotation>
+																									<xs:complexType>
+																										<xs:sequence>
+																											<xs:element name="AudioVisual" maxOccurs="unbounded">
+																												<xs:annotation>
+																													<xs:documentation xml:lang="en">Defines a specific audio visual need for a function.</xs:documentation>
+																												</xs:annotation>
+																												<xs:complexType>
+																													<xs:sequence>
+																														<xs:element name="Comments" minOccurs="0">
+																															<xs:annotation>
+																																<xs:documentation xml:lang="en">A collection of comments associated with the audio visual item.</xs:documentation>
+																															</xs:annotation>
+																															<xs:complexType>
+																																<xs:sequence>
+																																	<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+																																		<xs:annotation>
+																																			<xs:documentation xml:lang="en">A comment associated with the audio visual item.</xs:documentation>
+																																		</xs:annotation>
+																																	</xs:element>
+																																</xs:sequence>
+																															</xs:complexType>
+																														</xs:element>
+																													</xs:sequence>
+																													<xs:attribute name="Code" type="OTA_CodeType" use="optional">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">The specific audio visual requirement being defined.  Refer to OTA Code Table Meeting Room code (MRC).</xs:documentation>
+																														</xs:annotation>
+																													</xs:attribute>
+																													<xs:attribute name="AudioVisualPref" type="PreferLevelType" use="optional">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">Defines the preference for the audio visual item (e.g., preferred, required).</xs:documentation>
+																														</xs:annotation>
+																													</xs:attribute>
+																													<xs:attributeGroup ref="QuantityGroup">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">The number of this audio visual item.</xs:documentation>
+																														</xs:annotation>
+																													</xs:attributeGroup>
+																													<xs:attributeGroup ref="CurrencyAmountGroup">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">The amount charged for each audio visual item.</xs:documentation>
+																														</xs:annotation>
+																													</xs:attributeGroup>
+																												</xs:complexType>
+																											</xs:element>
+																										</xs:sequence>
+																										<xs:attributeGroup ref="ProviderGroup">
+																											<xs:annotation>
+																												<xs:documentation xml:lang="en">Identifies the audio visual provider.</xs:documentation>
+																											</xs:annotation>
+																										</xs:attributeGroup>
+																									</xs:complexType>
+																								</xs:element>
+																								<xs:element name="RoomSetup" minOccurs="0">
+																									<xs:annotation>
+																										<xs:documentation xml:lang="en">The room setup requirements for the function.</xs:documentation>
+																									</xs:annotation>
+																									<xs:complexType>
+																										<xs:sequence>
+																											<xs:element name="SetupDetails" minOccurs="0">
+																												<xs:annotation>
+																													<xs:documentation xml:lang="en">A collection of setup requirements for the function.</xs:documentation>
+																												</xs:annotation>
+																												<xs:complexType>
+																													<xs:sequence>
+																														<xs:element name="SetupDetail" maxOccurs="unbounded">
+																															<xs:annotation>
+																																<xs:documentation xml:lang="en">A setup requirement for the function.</xs:documentation>
+																															</xs:annotation>
+																															<xs:complexType>
+																																<xs:sequence>
+																																	<xs:element name="Comments" minOccurs="0">
+																																		<xs:annotation>
+																																			<xs:documentation xml:lang="en">A collection of comments associated with the function setup.</xs:documentation>
+																																		</xs:annotation>
+																																		<xs:complexType>
+																																			<xs:sequence>
+																																				<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+																																					<xs:annotation>
+																																						<xs:documentation xml:lang="en">A comment associated with the function setup.</xs:documentation>
+																																					</xs:annotation>
+																																				</xs:element>
+																																			</xs:sequence>
+																																		</xs:complexType>
+																																	</xs:element>
+																																</xs:sequence>
+																																<xs:attributeGroup ref="DimensionGroup">
+																																	<xs:annotation>
+																																		<xs:documentation xml:lang="en">The dimensions of the item in this setup detail.</xs:documentation>
+																																	</xs:annotation>
+																																</xs:attributeGroup>
+																																<xs:attribute name="Code" type="OTA_CodeType" use="optional">
+																																	<xs:annotation>
+																																		<xs:documentation xml:lang="en">Indicates additional details of the function setup  (e.g. risers, perimeter seating). Refer to OTA Code List Meeting Room Code (MRC).</xs:documentation>
+																																	</xs:annotation>
+																																</xs:attribute>
+																																<xs:attributeGroup ref="QuantityGroup">
+																																	<xs:annotation>
+																																		<xs:documentation xml:lang="en">The number of this item needed. </xs:documentation>
+																																	</xs:annotation>
+																																</xs:attributeGroup>
+																															</xs:complexType>
+																														</xs:element>
+																													</xs:sequence>
+																												</xs:complexType>
+																											</xs:element>
+																											<xs:element name="Diagram" type="ParagraphType" minOccurs="0">
+																												<xs:annotation>
+																													<xs:documentation xml:lang="en">A diagram of the room setup.</xs:documentation>
+																												</xs:annotation>
+																											</xs:element>
+																										</xs:sequence>
+																										<xs:attribute name="RoomSetupCode" type="OTA_CodeType" use="optional">
+																											<xs:annotation>
+																												<xs:documentation xml:lang="en">Indicates the arrangement of the function space (e.g. conference or banquet style). Refer to OTA Code List Meeting Room Format Code (MRF).</xs:documentation>
+																											</xs:annotation>
+																										</xs:attribute>
+																										<xs:attribute name="SetForQuantity" type="xs:nonNegativeInteger" use="optional">
+																											<xs:annotation>
+																												<xs:documentation xml:lang="en">The number of people for whom the room should be set.</xs:documentation>
+																											</xs:annotation>
+																										</xs:attribute>
+																										<xs:attribute name="SetByTime" type="DateOrTimeOrDateTimeType" use="optional">
+																											<xs:annotation>
+																												<xs:documentation xml:lang="en">The time or date and time by which the function space must be set up.</xs:documentation>
+																											</xs:annotation>
+																										</xs:attribute>
+																										<xs:attribute name="DismantleByTime" type="DateOrTimeOrDateTimeType" use="optional">
+																											<xs:annotation>
+																												<xs:documentation xml:lang="en">The time or date and time by which the function space must be broken down.</xs:documentation>
+																											</xs:annotation>
+																										</xs:attribute>
+																									</xs:complexType>
+																								</xs:element>
+																								<xs:element name="SessionTimes" minOccurs="0" maxOccurs="5">
+																									<xs:annotation>
+																										<xs:documentation xml:lang="en">The start and end times for a session or show within a function.</xs:documentation>
+																									</xs:annotation>
+																									<xs:complexType>
+																										<xs:attribute name="StartTime" type="xs:time" use="optional">
+																											<xs:annotation>
+																												<xs:documentation xml:lang="en">The time a session is scheduled to begin.</xs:documentation>
+																											</xs:annotation>
+																										</xs:attribute>
+																										<xs:attribute name="EndTime" type="xs:time" use="optional">
+																											<xs:annotation>
+																												<xs:documentation xml:lang="en">The time a session is scheduled to finish.</xs:documentation>
+																											</xs:annotation>
+																										</xs:attribute>
+																									</xs:complexType>
+																								</xs:element>
+																								<xs:element name="FoodAndBeverages" minOccurs="0">
+																									<xs:annotation>
+																										<xs:documentation xml:lang="en">A collection of food and beverage details for a function.</xs:documentation>
+																									</xs:annotation>
+																									<xs:complexType>
+																										<xs:sequence>
+																											<xs:element name="FoodAndBeverage" maxOccurs="unbounded">
+																												<xs:annotation>
+																													<xs:documentation xml:lang="en">Food and beverage details for a function.</xs:documentation>
+																												</xs:annotation>
+																												<xs:complexType>
+																													<xs:sequence>
+																														<xs:element name="Comments" minOccurs="0">
+																															<xs:annotation>
+																																<xs:documentation xml:lang="en">A collection of comments associated with the food and beverage requirement.</xs:documentation>
+																															</xs:annotation>
+																															<xs:complexType>
+																																<xs:sequence>
+																																	<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+																																		<xs:annotation>
+																																			<xs:documentation xml:lang="en">A comment associated with the food and beverage requirement.</xs:documentation>
+																																		</xs:annotation>
+																																	</xs:element>
+																																</xs:sequence>
+																															</xs:complexType>
+																														</xs:element>
+																														<xs:element name="Menus" minOccurs="0">
+																															<xs:annotation>
+																																<xs:documentation xml:lang="en">A collection of menus.</xs:documentation>
+																															</xs:annotation>
+																															<xs:complexType>
+																																<xs:sequence>
+																																	<xs:element name="Menu" maxOccurs="99">
+																																		<xs:annotation>
+																																			<xs:documentation xml:lang="en">Menu details.</xs:documentation>
+																																		</xs:annotation>
+																																		<xs:complexType>
+																																			<xs:sequence>
+																																				<xs:element name="Comments" minOccurs="0">
+																																					<xs:annotation>
+																																						<xs:documentation xml:lang="en">A collection of comments associated with the menu requirement.</xs:documentation>
+																																					</xs:annotation>
+																																					<xs:complexType>
+																																						<xs:sequence>
+																																							<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+																																								<xs:annotation>
+																																									<xs:documentation xml:lang="en">A comment associated with the menu requirement.</xs:documentation>
+																																								</xs:annotation>
+																																							</xs:element>
+																																						</xs:sequence>
+																																					</xs:complexType>
+																																				</xs:element>
+																																			</xs:sequence>
+																																			<xs:attribute name="Name" type="StringLength1to128" use="optional">
+																																				<xs:annotation>
+																																					<xs:documentation xml:lang="en">The name of a set menu or menu item.</xs:documentation>
+																																				</xs:annotation>
+																																			</xs:attribute>
+																																			<xs:attributeGroup ref="CurrencyAmountGroup">
+																																				<xs:annotation>
+																																					<xs:documentation xml:lang="en">The charge for this menu or menu item.</xs:documentation>
+																																				</xs:annotation>
+																																			</xs:attributeGroup>
+																																			<xs:attribute name="ChargeUnit" type="OTA_CodeType" use="optional">
+																																				<xs:annotation>
+																																					<xs:documentation xml:lang="en">Defines how the charge is applied (e.g. per person, per gallon, per tray). Use OTA Code list Charge Type (CHG).</xs:documentation>
+																																				</xs:annotation>
+																																			</xs:attribute>
+																																			<xs:attribute name="Quantity" type="xs:decimal" use="optional">
+																																				<xs:annotation>
+																																					<xs:documentation xml:lang="en">The requested quantity for this menu or menu item.</xs:documentation>
+																																				</xs:annotation>
+																																			</xs:attribute>
+																																		</xs:complexType>
+																																	</xs:element>
+																																</xs:sequence>
+																															</xs:complexType>
+																														</xs:element>
+																													</xs:sequence>
+																													<xs:attribute name="SetForQuantity" type="xs:nonNegativeInteger" use="optional">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">The number of settings required.</xs:documentation>
+																														</xs:annotation>
+																													</xs:attribute>
+																													<xs:attribute name="ServiceTime" type="DateOrTimeOrDateTimeType" use="optional">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">The time or date and time when food and beverage will be served.</xs:documentation>
+																														</xs:annotation>
+																													</xs:attribute>
+																													<xs:attribute name="AttendeeQuantity" type="xs:nonNegativeInteger" use="optional">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">The anticipated number of people to be served.</xs:documentation>
+																														</xs:annotation>
+																													</xs:attribute>
+																													<xs:attribute name="GuaranteeQuantity" type="xs:nonNegativeInteger" use="optional">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">The number of people guaranteed.</xs:documentation>
+																														</xs:annotation>
+																													</xs:attribute>
+																													<xs:attribute name="MealTypeCode" type="OTA_CodeType" use="optional">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">The type of meal being served. Refer to OTA Code list Available Meal Category (AMC).</xs:documentation>
+																														</xs:annotation>
+																													</xs:attribute>
+																													<xs:attribute name="ServiceTypeCode" type="OTA_CodeType" use="optional">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">The type of food and beverage service being provided (e.g., buffet, plated). Refer to OTA Code list Event Charge (EVT).</xs:documentation>
+																														</xs:annotation>
+																													</xs:attribute>
+																												</xs:complexType>
+																											</xs:element>
+																										</xs:sequence>
+																										<xs:attributeGroup ref="ProviderGroup">
+																											<xs:annotation>
+																												<xs:documentation xml:lang="en">Identifies who will be providing the food and beverage for the function.</xs:documentation>
+																											</xs:annotation>
+																										</xs:attributeGroup>
+																									</xs:complexType>
+																								</xs:element>
+																								<xs:element name="Services" minOccurs="0">
+																									<xs:annotation>
+																										<xs:documentation xml:lang="en">A collection of services.</xs:documentation>
+																									</xs:annotation>
+																									<xs:complexType>
+																										<xs:sequence>
+																											<xs:element name="Service" maxOccurs="unbounded">
+																												<xs:annotation>
+																													<xs:documentation xml:lang="en">Details regarding an additional services(e.g., security, first aid).</xs:documentation>
+																												</xs:annotation>
+																												<xs:complexType>
+																													<xs:sequence>
+																														<xs:element name="Utilities" minOccurs="0">
+																															<xs:annotation>
+																																<xs:documentation xml:lang="en">A collection of utilities.</xs:documentation>
+																															</xs:annotation>
+																															<xs:complexType>
+																																<xs:sequence>
+																																	<xs:element name="Utility" maxOccurs="99">
+																																		<xs:annotation>
+																																			<xs:documentation xml:lang="en">A utility requirement for this function.</xs:documentation>
+																																		</xs:annotation>
+																																		<xs:complexType>
+																																			<xs:sequence>
+																																				<xs:element name="Comments" minOccurs="0">
+																																					<xs:annotation>
+																																						<xs:documentation xml:lang="en">A collection of comments.</xs:documentation>
+																																					</xs:annotation>
+																																					<xs:complexType>
+																																						<xs:sequence>
+																																							<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+																																								<xs:annotation>
+																																									<xs:documentation xml:lang="en">A comment associated to the service.</xs:documentation>
+																																								</xs:annotation>
+																																							</xs:element>
+																																						</xs:sequence>
+																																					</xs:complexType>
+																																				</xs:element>
+																																			</xs:sequence>
+																																			<xs:attribute name="Code" type="OTA_CodeType" use="optional">
+																																				<xs:annotation>
+																																					<xs:documentation xml:lang="en">The type of this utility (e.g., air, drain, natural gas). Refer to OTA Code list Utility Service Code (USC).</xs:documentation>
+																																				</xs:annotation>
+																																			</xs:attribute>
+																																			<xs:attributeGroup ref="QuantityGroup">
+																																				<xs:annotation>
+																																					<xs:documentation xml:lang="en">The requested number of this utility item.</xs:documentation>
+																																				</xs:annotation>
+																																			</xs:attributeGroup>
+																																			<xs:attributeGroup ref="CurrencyAmountGroup">
+																																				<xs:annotation>
+																																					<xs:documentation xml:lang="en">The amount charged for the utility item.</xs:documentation>
+																																				</xs:annotation>
+																																			</xs:attributeGroup>
+																																			<xs:attribute name="Name" type="StringLength0to128" use="optional">
+																																				<xs:annotation>
+																																					<xs:documentation xml:lang="en">The name of the utility.</xs:documentation>
+																																				</xs:annotation>
+																																			</xs:attribute>
+																																			<xs:attribute name="TelecommunicationCode" type="OTA_CodeType" use="optional">
+																																				<xs:annotation>
+																																					<xs:documentation xml:lang="en">A telecommunication service (e.g., analog phone line, ethernet connection). Refer to OTA Code list Business Srvc Type (BUS).</xs:documentation>
+																																				</xs:annotation>
+																																			</xs:attribute>
+																																			<xs:attribute name="Description" type="StringLength1to64" use="optional">
+																																				<xs:annotation>
+																																					<xs:documentation xml:lang="en">A description of the utility.</xs:documentation>
+																																				</xs:annotation>
+																																			</xs:attribute>
+																																		</xs:complexType>
+																																	</xs:element>
+																																</xs:sequence>
+																															</xs:complexType>
+																														</xs:element>
+																														<xs:element name="Comments" minOccurs="0">
+																															<xs:annotation>
+																																<xs:documentation xml:lang="en">A collection of comments.</xs:documentation>
+																															</xs:annotation>
+																															<xs:complexType>
+																																<xs:sequence>
+																																	<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+																																		<xs:annotation>
+																																			<xs:documentation xml:lang="en">A comment associated to the service.</xs:documentation>
+																																		</xs:annotation>
+																																	</xs:element>
+																																</xs:sequence>
+																															</xs:complexType>
+																														</xs:element>
+																													</xs:sequence>
+																													<xs:attributeGroup ref="ProviderGroup">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">Used to define who will provide the service.</xs:documentation>
+																														</xs:annotation>
+																													</xs:attributeGroup>
+																													<xs:attribute name="LocationName" type="StringLength1to64" use="optional">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">Identifies a location (e.g. individual hotel room, hotel lobby, exterior, pool).</xs:documentation>
+																														</xs:annotation>
+																													</xs:attribute>
+																													<xs:attribute name="StartTime" type="xs:time" use="optional">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">The time the service is scheduled to begin.</xs:documentation>
+																														</xs:annotation>
+																													</xs:attribute>
+																													<xs:attribute name="EndTime" type="xs:time" use="optional">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">The time the service is scheduled to finish.</xs:documentation>
+																														</xs:annotation>
+																													</xs:attribute>
+																													<xs:attribute name="Code" type="OTA_CodeType" use="optional">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">Identifies a type of service (e.g. security, first aid, decor). Refer to OTA Codelist Meeting Room Code (MRC).</xs:documentation>
+																														</xs:annotation>
+																													</xs:attribute>
+																													<xs:attribute name="CodeDetail" type="StringLength1to64" use="optional">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">May be used to give further detail on the code. </xs:documentation>
+																														</xs:annotation>
+																													</xs:attribute>
+																												</xs:complexType>
+																											</xs:element>
+																										</xs:sequence>
+																									</xs:complexType>
+																								</xs:element>
+																								<xs:element name="Comments" minOccurs="0">
+																									<xs:annotation>
+																										<xs:documentation xml:lang="en">A collection of comments associated to the function.</xs:documentation>
+																									</xs:annotation>
+																									<xs:complexType>
+																										<xs:sequence>
+																											<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+																												<xs:annotation>
+																													<xs:documentation xml:lang="en">A comment associated to the function.</xs:documentation>
+																												</xs:annotation>
+																											</xs:element>
+																										</xs:sequence>
+																									</xs:complexType>
+																								</xs:element>
+																							</xs:sequence>
+																							<xs:attribute name="FunctionName" type="StringLength1to64" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">The name of the function.</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																							<xs:attribute name="FunctionType" type="OTA_CodeType" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">The type of function being requested (e.g. breakfast meeting or reception). Refer to OTA Code table Event Charge (EVT).</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																							<xs:attribute name="LocationName" type="StringLength1to64" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">Identifies a location (e.g. individual hotel room, hotel lobby, exterior, pool) for the function.</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																							<xs:attribute name="LocationID" type="StringLength1to32" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">The ID of the room where the function is taking place.</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																							<xs:attribute name="TwentyFourHourHold" type="xs:boolean" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">When true, a location is held on a 24-hour basis (e.g., ensures a set-up is not disturbed).</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																							<xs:attribute name="StartTime" type="xs:time" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">The time the function is scheduled to begin.</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																							<xs:attribute name="EndTime" type="xs:time" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">The time the function is scheduled to finish.</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																							<xs:attribute name="AttendeeQuantity" type="xs:nonNegativeInteger" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">The number of people attending this function.</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																							<xs:attribute name="RequiredKeyQuantity" type="xs:nonNegativeInteger" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">The number of keys required for this function space.</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																							<xs:attribute name="ReKeyIndicator" type="xs:boolean" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">When true, indicates the room lock needs rekeyed.</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																							<xs:attribute name="PostIndicator" type="xs:boolean" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">When true, indicates the function should be posted (e.g., on a reader board).</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																							<xs:attribute name="ID" type="StringLength1to32" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">An identifier for this function.</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																							<xs:attribute name="ExhibitionIndicator" type="xs:boolean" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">When true, indicates that this function is an exhibition.</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																						</xs:complexType>
+																					</xs:element>
+																				</xs:sequence>
+																			</xs:complexType>
+																		</xs:element>
+																		<xs:element name="Services" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation xml:lang="en">A collection of services.</xs:documentation>
+																			</xs:annotation>
+																			<xs:complexType>
+																				<xs:sequence>
+																					<xs:element name="Service" maxOccurs="99">
+																						<xs:annotation>
+																							<xs:documentation xml:lang="en">Details regarding additional services (e.g., security, first aid).</xs:documentation>
+																						</xs:annotation>
+																						<xs:complexType>
+																							<xs:attributeGroup ref="ProviderGroup">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">Identifies the provider of the service.</xs:documentation>
+																								</xs:annotation>
+																							</xs:attributeGroup>
+																							<xs:attribute name="LocationName" type="StringLength1to64" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">Identifies a location (e.g. individual hotel room, hotel lobby, exterior, pool).</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																							<xs:attribute name="StartTime" type="xs:time" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">The time the service is scheduled to begin.</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																							<xs:attribute name="EndTime" type="xs:time" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">The time the service is scheduled to finish.</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																							<xs:attribute name="Code" type="OTA_CodeType" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">Identifies a meeting or business service (e.g. security, first aid). Refer to OTA Codelist Meeting Room Code (MRC).</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																						</xs:complexType>
+																					</xs:element>
+																				</xs:sequence>
+																			</xs:complexType>
+																		</xs:element>
+																		<xs:element name="OffSiteTransportations" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation xml:lang="en">A collection of off-site transportation data.</xs:documentation>
+																			</xs:annotation>
+																			<xs:complexType>
+																				<xs:sequence>
+																					<xs:element name="OffSiteTransportation" maxOccurs="99">
+																						<xs:annotation>
+																							<xs:documentation xml:lang="en">Transportation information for an off-site function.</xs:documentation>
+																						</xs:annotation>
+																						<xs:complexType>
+																							<xs:sequence>
+																								<xs:element name="Location" minOccurs="0" maxOccurs="9">
+																									<xs:annotation>
+																										<xs:documentation xml:lang="en">Location information for a departure, drop-off, or return.</xs:documentation>
+																									</xs:annotation>
+																									<xs:complexType>
+																										<xs:attribute name="Name" type="StringLength1to64" use="optional">
+																											<xs:annotation>
+																												<xs:documentation xml:lang="en">The name of the location.</xs:documentation>
+																											</xs:annotation>
+																										</xs:attribute>
+																										<xs:attribute name="Time" type="xs:time" use="optional">
+																											<xs:annotation>
+																												<xs:documentation xml:lang="en">The time for this transportation activity (e.g., .return, drop-off, departure).</xs:documentation>
+																											</xs:annotation>
+																										</xs:attribute>
+																										<xs:attribute name="Type" use="optional">
+																											<xs:annotation>
+																												<xs:documentation xml:lang="en">The type of location (e.g., return, drop-off, departure).</xs:documentation>
+																											</xs:annotation>
+																											<xs:simpleType>
+																												<xs:restriction base="xs:NMTOKEN">
+																													<xs:enumeration value="Departure">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">Identifies that this location is the departure location.</xs:documentation>
+																														</xs:annotation>
+																													</xs:enumeration>
+																													<xs:enumeration value="DropOff">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">Identifies that this location is the drop-off location.</xs:documentation>
+																														</xs:annotation>
+																													</xs:enumeration>
+																													<xs:enumeration value="Return">
+																														<xs:annotation>
+																															<xs:documentation xml:lang="en">Identifies that this location is the return location.</xs:documentation>
+																														</xs:annotation>
+																													</xs:enumeration>
+																												</xs:restriction>
+																											</xs:simpleType>
+																										</xs:attribute>
+																									</xs:complexType>
+																								</xs:element>
+																								<xs:element name="Comments" minOccurs="0">
+																									<xs:annotation>
+																										<xs:documentation xml:lang="en">A collection of comments associated with the transportation.</xs:documentation>
+																									</xs:annotation>
+																									<xs:complexType>
+																										<xs:sequence>
+																											<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+																												<xs:annotation>
+																													<xs:documentation xml:lang="en">A comment associated with the transportation.</xs:documentation>
+																												</xs:annotation>
+																											</xs:element>
+																										</xs:sequence>
+																									</xs:complexType>
+																								</xs:element>
+																							</xs:sequence>
+																							<xs:attributeGroup ref="ProviderGroup">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">Identifies the company providing the transportation.</xs:documentation>
+																								</xs:annotation>
+																							</xs:attributeGroup>
+																							<xs:attribute name="FunctionName" type="StringLength1to64" use="optional">
+																								<xs:annotation>
+																									<xs:documentation xml:lang="en">The name of the off-site function.</xs:documentation>
+																								</xs:annotation>
+																							</xs:attribute>
+																						</xs:complexType>
+																					</xs:element>
+																				</xs:sequence>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																	<xs:attribute name="DayNumber" type="xs:positiveInteger" use="required">
+																		<xs:annotation>
+																			<xs:documentation xml:lang="en">The number which indicates the day of the event (e.g. 1, 2, 3). This is relative to the Start attribute in the EventInfo element.</xs:documentation>
+																		</xs:annotation>
+																	</xs:attribute>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+														<xs:attribute name="FirstEventDayOfWeek" type="DayOfWeekType" use="optional">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">This is used to identify the first day of the week for the event.</xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="ShippingReceivingDetails" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">A collection of shipping and receiving details.</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="ShippingReceivingDetail" maxOccurs="unbounded">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">The shipping and receiving details for a specific shipment.</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="Contact" type="ContactPersonType" minOccurs="0" maxOccurs="3">
+																			<xs:annotation>
+																				<xs:documentation xml:lang="en">Contact information for the sender, receiver and shipping company.</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																	</xs:sequence>
+																	<xs:attribute name="TrackingNumber" type="StringLength1to64" use="optional">
+																		<xs:annotation>
+																			<xs:documentation xml:lang="en">The tracking number for the shipment.</xs:documentation>
+																		</xs:annotation>
+																	</xs:attribute>
+																	<xs:attributeGroup ref="QuantityGroup">
+																		<xs:annotation>
+																			<xs:documentation xml:lang="en">The number of items being shipped.</xs:documentation>
+																		</xs:annotation>
+																	</xs:attributeGroup>
+																	<xs:attribute name="ExpectedDeliveryDate" type="DateOrDateTimeType" use="optional">
+																		<xs:annotation>
+																			<xs:documentation xml:lang="en">The date the shipment is expected to be delivered.</xs:documentation>
+																		</xs:annotation>
+																	</xs:attribute>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="Comments" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">A collection of comments pertaining to a shipment. </xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+																			<xs:annotation>
+																				<xs:documentation xml:lang="en">A comment pertaining to a shipment. </xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+														<xs:attribute name="PrivateVehicleDeliveryQuantity" type="xs:nonNegativeInteger" use="optional">
+															<xs:annotation>
+																<xs:documentation xml:lang="en">The number of privately owned vehicle (POV) deliveries.</xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Comments" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">A collection of comments pertaining to a specific site. </xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">A comment pertaining to a specific site. </xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+											<xs:attribute name="PrimaryFacilityIndicator" type="xs:boolean" use="optional">
+												<xs:annotation>
+													<xs:documentation xml:lang="en">When true, indicates the site is the primary facility for the event.</xs:documentation>
+												</xs:annotation>
+											</xs:attribute>
+											<xs:attribute name="HeadquarterHotelIndicator" type="xs:boolean" use="optional">
+												<xs:annotation>
+													<xs:documentation xml:lang="en">When true, indicates the site is the primary hotel for the event. </xs:documentation>
+												</xs:annotation>
+											</xs:attribute>
+											<xs:attributeGroup ref="HotelReferenceGroup">
+												<xs:annotation>
+													<xs:documentation xml:lang="en">Identifies a particular site where functions for the event will be held.</xs:documentation>
+												</xs:annotation>
+											</xs:attributeGroup>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Comments" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">A collection of comments pertaining to the event.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Comment" type="ParagraphType" maxOccurs="99">
+										<xs:annotation>
+											<xs:documentation xml:lang="en">A comment pertaining to the event.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="Name" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Identifies the name of the event.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Acronym" type="StringLength1to32" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Identifies an acronym for the event.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="URL" type="xs:anyURI" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Identifies a web site associated with the event.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Type" type="OTA_CodeType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Identifies the type of event (e.g., Board Meeting, Trade Show).  Refer to OTA Code List Event Type (ETT).</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Frequency" type="FrequencyType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Used to indicate the frequency of this event.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="MandatoryIndicator" type="xs:boolean" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">When true, the attendees are required to attend this event.  When false, attendance at the event is optional.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="SpouseInvitedIndicator" type="xs:boolean" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">When true, the attendees spouses are invited to the event.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="ChildrenInvitedIndicator" type="xs:boolean" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">When true, the attendees children are invited to the event.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Scope" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Defines the size of the event by identifying if one or multiple venues are needed for the event.  </xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="CityWide">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">The event occupies facilities throughout the city.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="SingleVenue">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">The event occupies a single facility.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="MultipleVenue">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">The event occupies several facilities in the city.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="PreEventSetUpIndicator" type="xs:boolean" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">When true, indicates the event requires a move-in or set-up prior to the actual start of the event..</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="PreEventSetUpContractor" type="StringLength1to128" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Identifies the contractor responsible for the pre-event setup.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Status" type="StringLength1to32" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The status of the event (e.g., definite, tentative, cancelled).</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType><xs:attributeGroup name="AttendanceGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines attendee information for an event.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ExpectedTotalQuantity" type="xs:nonNegativeInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The expected number of total attendees at the event.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DomesticQuantity" type="xs:nonNegativeInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The expected number of domestic attendees for the event.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="InternationalQuantity" type="xs:nonNegativeInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The expected number of international attendess for the event.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PreRegisteredQuantity" type="xs:nonNegativeInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The number of preregistered attendees for the event.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="ProviderGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies the provider of an item or service which with it is associated.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ProvidedBy" type="ProviderType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies who will provide the item or service (e.g., group, venue).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ProviderName" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifes the name of the provider of the item or service.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="TaxExemptGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides tax exempt information for an organization.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="TaxExemptIndicator" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">When true, indicates the exhibiting company is tax exempt.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TaxExemptID" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Exhibiting company's tax exempt identifier.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TaxExemptType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to indicate whether the exhibiting company's tax ID number is state or federal issued.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="State">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Indicates the tax exempt status is from the state government.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Federal">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Indicates the tax exempt status is from the federal government.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="City">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Indicates the tax exempt status is from the city government.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup><xs:simpleType name="ProviderType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies who is providing an item or service.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="NotRequired">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates no requirement.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Group">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates the group will provide.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Venue">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates the venue will provide.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OutsideVendor">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates an outside vendor will provide.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType><!-- OTA_HotelCommonTypes.xsd --><xs:attributeGroup name="DimensionGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides dimension details for an object with which it is associated (e.g., a dance floor, riser, meeting room).</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Area" type="xs:decimal" use="optional"/>
+		<xs:attribute name="Height" type="xs:decimal" use="optional"/>
+		<xs:attribute name="Length" type="xs:decimal" use="optional"/>
+		<xs:attribute name="Width" type="xs:decimal" use="optional"/>
+		<xs:attribute name="Units" type="StringLength1to16" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">This defines the unit in which the dimensions are expressed (e.g. it could be generic such as metric or imperial or specific such as inches, feet, yards, miles, millimeters, centimeters, meters, kilometers- according to usage).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="UnitOfMeasureCode" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The unit of measure in a code format. Refer to OTA Code List Unit of Measure Code (UOM).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><!-- OTA_HotelRFP.xsd --><xs:simpleType name="FrequencyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies the frequency of an occurrence.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="OneTimeOnly"/>
+			<xs:enumeration value="Biennial"/>
+			<xs:enumeration value="Annual"/>
+			<xs:enumeration value="Semi-annual"/>
+			<xs:enumeration value="Quarterly"/>
+			<xs:enumeration value="Monthly"/>
+		</xs:restriction>
+	</xs:simpleType><!-- OTA_SimpleTypes.xsd --><xs:simpleType name="AlphaLength3">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Alphabetic Strings, length exactly 3</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z]{3}"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="DateOrDateTimeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A construct to validate either a date or a dateTime value.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:date xs:dateTime"/>
+	</xs:simpleType><xs:simpleType name="DateOrMonthDay">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A construct to validate either a date or a month and day value.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:date xs:gMonthDay"/>
+	</xs:simpleType><xs:simpleType name="DateOrTimeOrDateTimeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A construct to validate either a date or a time or a dateTime value.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:date xs:dateTime xs:time"/>
+	</xs:simpleType><xs:simpleType name="DayOfWeekType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A three letter abbreviation for the days of the week (e.g. may be the starting date for the availability requested, days of operation, rate effective day, etc.).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Mon"/>
+			<xs:enumeration value="Tue"/>
+			<xs:enumeration value="Wed"/>
+			<xs:enumeration value="Thu"/>
+			<xs:enumeration value="Fri"/>
+			<xs:enumeration value="Sat"/>
+			<xs:enumeration value="Sun"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="DurationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Allows for the specification of a night duration.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:duration NightDurationType"/>
+	</xs:simpleType><xs:simpleType name="ISO3166">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">2 character country code as defined in ISO3166.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z]{2}"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="Money">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for amounts, max 3 decimals</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:fractionDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="NightDurationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides the ability to define a duration in terms of nights rather than days.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="P[0-9]{1,3}N"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="NumericStringLength1to3">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Numeric Strings, minimum length 1, maximum length 3.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{1,3}"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="NumericStringLength1to5">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Numeric Strings, length 1 to 5</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{1,5}"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="NumericStringLength1to8">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Numeric Strings, length 1 to 8.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{1,8}"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="OTA_CodeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for codes in the OTA code tables. Possible values of this pattern are 1, 101, 101.EQP, or 101.EQP.X.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9A-Z]{1,3}(\.[A-Z]{3}(\.X){0,1}){0,1}"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="PreferLevelType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used to specify a preference level for something that is or will be requested (e.g. a supplier of a service, a type of service, a form of payment, etc.).
+	</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Only">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Preference level that indicates request is only for a specific criterion.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unacceptable">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Preference level that indicates request is unnacceptable for a specific criterion.
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Preferred">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Preference level that indicates request is preferred for a specific criterion.
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Preference level that indicates request is required for a specific criterion.
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoPreference">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Preference level that indicates there is no preference.
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="RPH_Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">(Reference Place Holder) - an index code to identify an instance in a collection of like items.. For example,  used to assign individual passengers or clients to particular itinerary items.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{1,8}"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="StateProvCodeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The standard code or abbreviation for the state, province, or region</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="StringLength1to8">
+			<xs:minLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="StringLength0to128">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 0 to 128</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"/>
+			<xs:maxLength value="128"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="StringLength0to64">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 0 to 64</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"/>
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="StringLength1to128">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 128</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="128"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="StringLength1to16">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 16</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="StringLength1to255">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 255</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="StringLength1to32">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 32</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="StringLength1to64">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 64</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType><xs:simpleType name="StringLength1to8">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used for Character Strings, length 1 to 8</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType><!-- OTA_CommonTypes.xsd --><xs:complexType name="AddressInfoType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Information about an address that identifies a location for a specific purposes.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AddressType">
+				<xs:attributeGroup ref="DefaultIndGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Indicates whether or not this is the default address.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="UseType" type="OTA_CodeType" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Describes the use of the address (e.g. mailing, delivery, billing, etc.). Refer to OTA Code List Address Use Type (AUT).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="RPH" type="RPH_Type" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Used elsewhere in the message to reference this specific address.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType><xs:complexType name="AddressType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides address information.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="StreetNmbr" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">May contain the street number and optionally the street name.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="StreetNmbrType">
+							<xs:attribute name="StreetNmbrSuffix" type="StringLength1to8" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Usually a letter right after the street number (A in 66-A, B in 123-B etc).</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="StreetDirection" type="StringLength1to8" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Street direction of an address (e.g., N, E, S, NW, SW). 
+
+</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="RuralRouteNmbr" type="NumericStringLength1to5" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Numerical equivalent of a rural township as defined within a given area (e.g., 12, 99).</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="BldgRoom" minOccurs="0" maxOccurs="2">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Building name, room, apartment, or suite number.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="StringLength0to64">
+							<xs:attribute name="BldgNameIndicator" type="xs:boolean" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">When true, the information is a building name.</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AddressLine" type="StringLength1to255" minOccurs="0" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">When the address is unformatted (FormattedInd="false") these lines will contain free form address details. When the address is formatted and street number and street name must be sent independently, the street number will be sent using StreetNmbr, and the street name will be sent in the first AddressLine occurrence.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CityName" type="StringLength1to64" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">City (e.g., Dublin), town, or postal station (i.e., a postal service territory, often used in a military address).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PostalCode" type="StringLength1to16" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Post Office Code number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="County" type="StringLength1to32" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">County or Region Name (e.g., Fairfax).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StateProv" type="StateProvType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">State or Province name (e.g., Texas).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountryName" type="CountryNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Country name (e.g., Ireland).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="FormattedInd">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Specifies if the associated data is formatted or not.  When true, then it is formatted; when false, then not formatted.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attributeGroup ref="PrivacyGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Allows for control of the sharing of address information between parties.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attribute name="Type" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Defines the type of address (e.g. home, business, other). Refer to OTA Code List Communication Location Type (CLT).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType><xs:complexType name="CompanyNameType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies a company by name.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to128">
+				<xs:attributeGroup ref="CompanyID_AttributesGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Provides detailed information on a company.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="Division" type="StringLength1to32" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The division name or ID with which the contact is associated.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="Department" type="StringLength1to32" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The department name or ID with which the contact is associated.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="ContactPersonType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of an individual and appropriate contact information.  May be contact information for the customer or someone affiliated with the customer.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="PersonName" type="PersonNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This provides name information for a person.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Telephone" minOccurs="0" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Information about a telephone number, including the actual number and its usage</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attributeGroup ref="TelephoneInfoGroup">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Information about a contact's telephone number, including the actual number and its usage.</xs:documentation>
+						</xs:annotation>
+					</xs:attributeGroup>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Address" type="AddressInfoType" minOccurs="0" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Information about an address that identifies a location for a specific purposes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Email" type="EmailType" minOccurs="0" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Electronic email addresses, in IETF specified format.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URL" type="URL_Type" minOccurs="0" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Web site address, in IETF specified format.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CompanyName" type="CompanyNameType" minOccurs="0" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identifies a company by name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EmployeeInfo" type="EmployeeInfoType" minOccurs="0" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Employment identification; using an employee ID number, title, level within the company, and an indication of their status, i.e.: active, retired, on leave, or terminated from employment.  Additional information about an employee can be entered into the element, including the name of the employee, if it differs from the person name identified as a customer or contact.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="PrivacyGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Allows for control of the sharing of data between parties.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attributeGroup ref="DefaultIndGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates that the receiving system should assume the default value if the user specifies no overriding value or action.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attribute name="ContactType" type="StringLength1to32">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Type of contact in the context of use for the travel experience; such as permanent, temporary, affiliation,
+ travel arranger, etc.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Relation" type="StringLength1to32">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates the type of relationship with the person or company in the profile, such as Spouse, Child, Family, Business Associate, Interest Group, Medical, Security,Other, etc.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EmergencyFlag" type="xs:boolean" use="optional" default="false">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates if this contact should be used in the case of an emergency.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RPH" type="RPH_Type">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Provides a unique reference to this contact person.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CommunicationMethodCode" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Provides the preferred method of communication.  Refer to OTA code list Distribution Type (DTB).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DocumentDistribMethodCode" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates the method of distribution for the booking documentation.  Refer to OTA code list Distribution Type (DTB).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType><xs:complexType name="CountryNameType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The name or code of a country (e.g. as used in an address or to specify citizenship of a traveller).</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to64">
+				<xs:attribute name="Code" type="ISO3166" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">ISO 3166 code for a country.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="EmailType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Electronic email addresses, in IETF specified format.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength1to128">
+				<xs:attributeGroup ref="PrivacyGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Allows for control of the sharing of email information between parties.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attributeGroup ref="DefaultIndGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifies whether or not this is the default email address.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="EmailType" type="OTA_CodeType" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Defines the purpose of the e-mail address (e.g. personal, business, listserve). Refer to OTA Code List Email Address Type (EAT).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="RPH" type="RPH_Type" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Used elsewhere in the message to reference this specific email address.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="EmployeeInfoType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Employment identification; using an employee ID number, title, level within the company, and an indication of their status (e.g., active, retired, on leave, or terminated from employment).  Additional information about an employee can be entered into the element, including the name of the employee, if it differs from the person name identified as a customer or contact.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to64">
+				<xs:attribute name="EmployeeId" type="StringLength1to16">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Identifier assigned to the employee.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="EmployeeLevel" type="StringLength1to16">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Level in employer organization (e.g. seniority) that coveys privileges.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="EmployeeTitle" type="StringLength1to64">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Title of employee in the employer company that conveys rank or privileges.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="EmployeeStatus" type="OTA_CodeType" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Status of employment. Refer to OTA Code List Employee Status (EMP).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="ErrorType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Standard way to indicate that an error occurred during the processing of an OTA message</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="FreeTextType">
+				<xs:attribute name="Type" type="OTA_CodeType" use="required">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The Error element MUST contain the Type attribute that uses a recommended set of values to indicate the error type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".  Refer to OTA Code List Error Warning Type (EWT).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attributeGroup ref="ErrorWarningAttributeGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Details of the error.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="NodeList" type="xs:string">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">An XPath expression that selects all the nodes whose data caused this error.  Further, this expression should have an 	additional contraint which contains the data of the node.  This will provide the offending data back to systems that cannot maintain the original message. </xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="ErrorsType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of errors that occurred during the processing of a message.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Error" type="ErrorType" maxOccurs="99">
+				<xs:annotation>
+					<xs:documentation>An error that occurred during the processing of a message.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType><xs:complexType name="FormattedTextTextType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides text and indicates whether it is formatted or not.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="Formatted" type="xs:boolean" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Textual information, which may be formatted as a line of information, or unformatted, as a paragraph of text.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attributeGroup ref="LanguageGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The language in which the text is provided.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="FreeTextType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Textual information to provide descriptions and/or additional information.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attributeGroup ref="LanguageGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Language of the text.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="ImageDescriptionType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Describes an image item.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ImageFormat" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A set of images for a given category which may be provided in multiple formats.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="ImageItemType">
+							<xs:attributeGroup ref="MultimediaDescriptionGroup">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Detailed information about an image.</xs:documentation>
+								</xs:annotation>
+							</xs:attributeGroup>
+							<xs:attribute name="Language" type="xs:language" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">The language in which the image text is provided.</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="Format" type="OTA_CodeType" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">code list to create to identof the different format of an Image </xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="FileName" type="StringLength1to64" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">The name of the image file.</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="FileSize" type="xs:positiveInteger" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">The size of the image file.</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="DimensionCategory" type="StringLength1to16" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Associates the image size to a given category (e.g., 70x70, 100x100, 480x480). For example, if an image with a dimension of 72x73 is sent, it may be categorized as a 70x70 image.</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="IsOriginalIndicator" type="xs:boolean" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">When true, the image is the original file and format. When false, the image is not the original file and format.</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Description" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The description associated with the image in a specific language.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="FormattedTextTextType">
+							<xs:attribute name="Caption" type="StringLength1to128" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">The caption associated to a specific image category which can be provided in different languages.</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Category" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Specifies the image category. Refer to OTA code list Picture Category Code (PIC). </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType><xs:complexType name="ImageItemType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Details for an image of a given category. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="URL" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">URL of the multimedia item for a specific format. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="UnitOfMeasureCode" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The unit of measure for the image item. Refer to OTA code list Unit of Measure (UOM).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Width" type="xs:positiveInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The width of the image item (unit specified by unit of measure).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Height" type="xs:positiveInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The height of the image item (unit specified by unit of measure).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType><xs:complexType name="ImageItemsType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Collection of image items.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ImageItem" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Image of a given category.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="ImageDescriptionType">
+							<xs:attributeGroup ref="DateTimeStampGroup">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Creation and modification information for this image item.</xs:documentation>
+								</xs:annotation>
+							</xs:attributeGroup>
+							<xs:attributeGroup ref="RemovalGroup">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">If true, this item is obsolete and should be removed from the receiving system.</xs:documentation>
+								</xs:annotation>
+							</xs:attributeGroup>
+							<xs:attribute name="Version" type="xs:string" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">The version of the image item.</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attributeGroup ref="ID_OptionalGroup">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">A unique identifying value assigned by the creating system.  The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.</xs:documentation>
+								</xs:annotation>
+							</xs:attributeGroup>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType><xs:complexType name="MultimediaDescriptionType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Describes multimedia item(s).</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs="0">
+			<xs:element name="VideoItems" type="VideoItemsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A collection of video items. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ImageItems" type="ImageItemsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A collection of image items.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TextItems" type="TextItemsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A collection of text items. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="InfoCode" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to designate a particular type of description such as marketing. Refer to OTA Code List Information Type (INF).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="AdditionalDetailCode" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to designate a particular type of additional information. Refer to OTA Code List Additional Detail Type (ADT).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="ID_OptionalGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A unique identifying value assigned by the creating system.  The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+	</xs:complexType><xs:complexType name="MultimediaDescriptionsType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Contains multimedia item(s).</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MultimediaDescription" type="MultimediaDescriptionType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A multimedia item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="LastUpdated" type="xs:dateTime" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The date and time when the multimedia information was last updated. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType><xs:complexType name="OperationScheduleType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Details of an operating schedule (e.g. a golf tee time may be more expensive during peak hours v. off peak hours).</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="OperationTimes" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A collection of OperationTimes.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="OperationTime" maxOccurs="999">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">Provides operating times of a facility.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:attributeGroup ref="DOW_PatternGroup">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">The day(s) of week to which the operation time applies.</xs:documentation>
+									</xs:annotation>
+								</xs:attributeGroup>
+								<xs:attributeGroup ref="DateTimeSpanGroup">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">The date span applicable to the operation.</xs:documentation>
+									</xs:annotation>
+								</xs:attributeGroup>
+								<xs:attribute name="AdditionalOperationInfoCode" type="OTA_CodeType" use="optional">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Used to provide additional information regarding operation times (e.g., after hours operations, restricted times). Refer to OTA Codelist Additional Operation Info (OPR).</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+								<xs:attribute name="Frequency" type="StringLength1to64" use="optional">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">The frequency with which this operation occurs (e.g., 'on the hour', 'on the half hour').</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+								<xs:attribute name="Text" type="StringLength0to64" use="optional">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Textual information for this period of operation.</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="DateTimeSpanGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The date span applicable to the operation schedule.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+	</xs:complexType><xs:complexType name="OperationSchedulesType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Collection of operation schedules.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="OperationSchedule" type="OperationScheduleType" maxOccurs="999">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The OperationSchedule class defines the dates and hours of operation. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="DateTimeSpanGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The date range for which the operation schedule information is valid.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+	</xs:complexType><xs:complexType name="ParagraphType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">An indication of a new paragraph for a sub-section of a formatted text message.</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="Text" type="FormattedTextTextType">
+				<xs:annotation>
+					<xs:documentation>Formatted text content.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Image" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>An image for this paragraph.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URL" type="xs:anyURI">
+				<xs:annotation>
+					<xs:documentation>A URL for this paragraph.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ListItem">
+				<xs:annotation>
+					<xs:documentation>Formatted text content and an associated item or sequence number.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="FormattedTextTextType">
+							<xs:attribute name="ListItem" type="xs:integer" use="optional"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="Name" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">In many cases the description repeats, this will allow you to define the information that is being sent, typically used when multiple occurrences of ParagraphType are being sent.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ParagraphNumber" type="xs:nonNegativeInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The sequence number for the paragraph.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="DateTimeStampGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Creation date time, Creator ID, last modification date time and last modifier ID for the paragraph.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attributeGroup ref="LanguageGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The language for this paragraph.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+	</xs:complexType><xs:complexType name="PersonNameType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This provides name information for a person.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="NamePrefix" type="StringLength1to16" minOccurs="0" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Salutation of honorific. (e.g., Mr. Mrs., Ms., Miss, Dr.) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GivenName" type="StringLength1to64" minOccurs="0" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Given name, first name or names</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MiddleName" type="StringLength1to64" minOccurs="0" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The middle name of the person name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SurnamePrefix" type="StringLength1to16" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">e.g "van der", "von", "de" </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Surname" type="StringLength1to64">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Family name, last name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NameSuffix" type="StringLength1to16" minOccurs="0" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Hold various name suffixes and letters (e.g. Jr., Sr., III, Ret., Esq.).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NameTitle" type="StringLength1to16" minOccurs="0" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Degree or honors (e.g., Ph.D., M.D.)   </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="PrivacyGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Allows for control of the sharing of person name data between parties.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attribute name="NameType" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Type of name of the individual, such as former, nickname, alternate or alias name. Refer to OTA Code List Name Type (NAM).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType><xs:complexType name="StateProvType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">State, province, or region name or code needed to identify location.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to64">
+				<xs:attribute name="StateCode" type="StateProvCodeType">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The standard code or abbreviation for the state, province, or region.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="StreetNmbrType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Street name; number on street.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="StringLength0to64">
+				<xs:attribute name="PO_Box" type="StringLength1to16">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Defines a Post Office Box number.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="SuccessType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Standard way to indicate successful processing of an OTA message. Returning an empty element of this type indicates success.</xs:documentation>
+		</xs:annotation>
+	</xs:complexType><xs:complexType name="TextDescriptionType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Describes a text item.</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="URL" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The URL for a specific text item.. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The text in a specific language.  </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="FormattedTextTextType">
+							<xs:attribute name="ListItem" type="xs:integer" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Sequence number associated with this description.</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="Category" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Specifies the text category. Refer to OTA code list Picture Category Code (PIC). </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="MultimediaDescriptionGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Generic information about the text multimedia item.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attribute name="Language" type="xs:language" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The language of the text item.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType><xs:complexType name="TextItemsType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Collection of text items. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TextItem" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Text description of a given category.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="TextDescriptionType">
+							<xs:attributeGroup ref="DateTimeStampGroup">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Creation and modification information for this text item.</xs:documentation>
+								</xs:annotation>
+							</xs:attributeGroup>
+							<xs:attributeGroup ref="RemovalGroup">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">If true, this item is obsolete and should be removed from the receiving system.</xs:documentation>
+								</xs:annotation>
+							</xs:attributeGroup>
+							<xs:attribute name="Version" type="xs:string" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">The version of the text item.</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType><xs:complexType name="TransportationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines the type of transportation offered.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Transportation" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Contains the directions to/from a specific location for a mode of travel.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="MultimediaDescriptions" type="MultimediaDescriptionsType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">Multimedia information about the transportation.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="OperationSchedules" type="OperationSchedulesType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">Collection of operation schedules for the transportation.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="DescriptiveText" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">Descriptive text that describes the transportation.</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="[A-Za-z0-9]{1,500}"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="NotificationRequired" type="StringLength1to64" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This would be used for information such as a shuttle needs to be requested or a reservation is required.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="TransportationCode" type="OTA_CodeType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The mode of transportation. Refer to OTA Code List Transportation Code (TRP).</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="ChargeUnit" type="OTA_CodeType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Refer to OTA Codelist Charge Type (CHG).</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Included" type="xs:boolean" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">When true there is no additional charge for transportation.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attributeGroup ref="CodeInfoGroup">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">May be used to give further detail on the code (e.g. if a trolley is chosen, the trolley name could be added here) or to remove an obsolete item.								</xs:documentation>
+						</xs:annotation>
+					</xs:attributeGroup>
+					<xs:attribute name="Description" type="StringLength0to64" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Descriptive information about the mode of transportation.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="TypicalTravelTime" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The normal (average) travel time required to get to or from the location, measured in minutes. </xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attributeGroup ref="CurrencyAmountGroup">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The currency amount of the tranportation charge.</xs:documentation>
+						</xs:annotation>
+					</xs:attributeGroup>
+					<xs:attribute name="ExistsCode" type="OTA_CodeType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This attribute is used to explicitly define whether the type of transportation applies. Refer to OTA Code list Option Type Code (OTC). This is used in conjunction with TransportationCode.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attributeGroup ref="ID_OptionalGroup">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A unique identifying value assigned by the creating system.  The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.</xs:documentation>
+						</xs:annotation>
+					</xs:attributeGroup>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType><xs:complexType name="URL_Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Web site address, in IETF specified format.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:anyURI">
+				<xs:attributeGroup ref="PrivacyGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Allows for control of the sharing of URL data between parties.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="Type" type="StringLength1to16" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Defines the purpose of the URL address, such as personal, business, public, etc.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attributeGroup ref="DefaultIndGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Indicates whether or not this is the default URL.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="VideoDescriptionType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Describes a video item.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="VideoFormat" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A set of video of a given category can be provided in different Format , each format will be described in this element  </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="VideoItemType">
+							<xs:attributeGroup ref="MultimediaDescriptionGroup">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Multimedia information for the video file.</xs:documentation>
+								</xs:annotation>
+							</xs:attributeGroup>
+							<xs:attributeGroup ref="ID_OptionalGroup">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">A unique identifying value assigned by the creating system.  The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.</xs:documentation>
+								</xs:annotation>
+							</xs:attributeGroup>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Category" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Specifies the video category. Refer to OTA code list Picture Category Code (PIC). </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType><xs:complexType name="VideoItemType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Details for a video of a given category. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="URL" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">URL of the multimedia item for a specific format. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="UnitOfMeasureCode" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The unit of measure associated with all the dimensions of the multimedia item. Refer to OTA code list Unit of Measure (UOM).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Width" type="xs:positiveInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The width of the video item (unit specified by unit of measure).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Height" type="xs:positiveInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The height of the video item (unit specified by unit of measure).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="BitRate" type="xs:positiveInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The bit rate of the video item.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Length" type="xs:positiveInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The length of the video item (unit specified by unit of measure).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="MultimediaItemGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Multimedia information for the video item.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+	</xs:complexType><xs:complexType name="VideoItemsType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Collection of video items.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="VideoItem" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Each video item represents a specific category.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="VideoDescriptionType">
+							<xs:attribute name="Language" type="xs:language" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">The language associated with the caption for the video.</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="Caption" type="StringLength1to128" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">The caption associated to a specific video category which can be provided in different languages.</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attributeGroup ref="RemovalGroup">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">If true, this item is obsolete and should be removed from the receiving system.</xs:documentation>
+								</xs:annotation>
+							</xs:attributeGroup>
+							<xs:attribute name="Version" type="xs:string" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">The version of the video item.</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attributeGroup ref="DateTimeStampGroup">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Creation and modification information for this video item.</xs:documentation>
+								</xs:annotation>
+							</xs:attributeGroup>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType><xs:complexType name="WarningType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Standard way to indicate successful processing of an OTA message, but one in which warnings are generated</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="FreeTextType">
+				<xs:attribute name="Type" type="OTA_CodeType" use="required">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating XSD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown".  Refer to OTA Code List Error Warning Type (EWT).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attributeGroup ref="ErrorWarningAttributeGroup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Details of the warning.</xs:documentation>
+					</xs:annotation>
+				</xs:attributeGroup>
+				<xs:attribute name="RPH" type="RPH_Type" use="optional">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Reference Place Holder used as an index for this warning.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType><xs:complexType name="WarningsType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Collection of warnings.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Warning" type="WarningType" maxOccurs="999">
+				<xs:annotation>
+					<xs:documentation>Used in conjunction with the Success element to define a business error. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType><xs:attributeGroup name="AltLangID_Group">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies the alternate language for a customer or message. The human language is identified by ISO 639 codes.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="AltLangID" type="xs:language" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies the alternate language for a customer or message. The human language is identified by ISO 639 codes.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="AreaID_Group">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">An identifier of a geographical area.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="AreaID" type="NumericStringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">An identifier of an area as defined by a hotel reservation system.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="CodeInfoGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This is intended to be used in conjunction with an attribute that uses an OTA code list. It is used  to provide additional information about the code being referenced. </xs:documentation>
+			<xs:documentation xml:lang="en">May be used to give further detail on the code or to remove an obsolete item.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="CodeDetail" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">May be used to give further detail on the code. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="RemovalGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">This is used to indicate that an item is obsolete.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+	</xs:attributeGroup><xs:attributeGroup name="CompanyID_AttributesGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides detailed information on a company.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="CompanyShortName" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to provide the company common name.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TravelSector" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">
+Refer to OTA Code List Travel Sector (TVS).
+		</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Code" type="StringLength1to16" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies a company by the company code.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CodeContext" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies the context of the identifying code, such as DUNS, IATA or internal code, etc.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="CurrencyAmountGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides a monetary amount and the currency code to reflect the currency in which this amount is expressed.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Amount" type="Money" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A monetary amount.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="CurrencyCodeGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Provides a currency code to reflect the currency in which an amount may be expressed as well as the number of decimal places of that currency.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+	</xs:attributeGroup><xs:attributeGroup name="CurrencyCodeGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides a currency code to reflect the currency in which an amount may be expressed.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="CurrencyCode" type="AlphaLength3" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The code specifying a monetary unit. Use ISO 4217, three alpha code.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DecimalPlaces" type="xs:nonNegativeInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates the number of decimal places for a particular currency. This is equivalent to the ISO 4217 standard "minor unit". Typically used when the amount provided includes the minor unit of currency without a decimal point (e.g., USD 8500 needs DecimalPlaces="2" to represent $85).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="DOW_PatternGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">If a day(s) of the week is set to true then the associated item is available on that day of the week  (e.g. if Mon="T" then a flight operates on Mondays or a certain rate is available on Mondays).</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Mon" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">When true, apply to Monday.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Tue" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">When true, apply to Tuesday.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Weds" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">When true, apply to Wednesday.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Thur" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">When true, apply to Thursday.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Fri" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">When true, apply to Friday.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Sat" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">When true, apply to Saturday.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Sun" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">When true, apply to Sunday.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="DateTimeSpanGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The attributes of the  OTA DateTimeSpan data type are based on the W3C base data types of timeInstant and timeDuration. The lexical representation for timeDuration is the [ISO 8601] extended format PnYn MnDTnH nMnS, where nY represents the number of years, nM the number of months, nD the number of days, 'T' is the date/time separator, nH the number of hours, nM the number of minutes and nS the number of seconds. The number of seconds can include decimal digits to arbitrary precision. As an example, 7 months, 2 days, 2hours and 30 minutes would be expressed as P0Y7M2DT2H30M0S. Truncated representations are allowed provided they conform to ISO 8601 format. Time periods, i.e. specific durations of time, can be represented by supplying two items of information: a start instant and a duration or a start instant and an end instant or an end instant and a duration. The OTA standards use the XML mapping that provides for two elements to represent the specific period of time; a startInstant and a duration.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Start" type="DateOrTimeOrDateTimeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The starting value of the time span. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Duration" type="DurationType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The duration datatype represents a combination of year, month, day and time values representing a single duration of time, encoded as a single string. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="End" type="DateOrTimeOrDateTimeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The ending value of the time span. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="DateTimeStampGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Creation date time, Creator Id, last modification date time and last Modifier Id.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="CreateDateTime" type="xs:dateTime" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Time stamp of the creation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CreatorID" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">ID of creator. The creator could be a software system identifier or an identifier of an employee resposible for the creation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="LastModifyDateTime" type="xs:dateTime" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Time stamp of last modification.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="LastModifierID" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies the last software system or person to modify a record.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PurgeDate" type="xs:date" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Date an item will be purged from a database (e.g., from a live database to an archive).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="DefaultIndGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Indicates that the receiving system should assume the default value if the user specifies no overriding value or action.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="DefaultInd" type="xs:boolean" use="optional" default="false">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">When true, indicates a default value should be used.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="ErrorWarningAttributeGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used to identify an application error by either text, code, or by an online description and also to give the status, tag, and/or identification of the record that may have caused the error.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ShortText" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">An abbreviated version of the error in textual format.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Code" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">If present, this refers to a table of coded values exchanged between applications to identify errors or warnings. Refer to OTA Code List Error Codes (ERR).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DocURL" type="xs:anyURI" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">If present, this URL refers to an online description of the error that occurred.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Status" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">If present, recommended values are those enumerated in the OTA_ErrorRS, (NotProcessed | Incomplete | Complete | Unknown) however, the data type is designated as string data, recognizing that trading partners may identify additional status conditions not included in the enumeration.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Tag" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RecordID" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records. This value may contain a concatenation of a unique failed transaction ID with specific record(s) associated with that transaction.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="FormattedInd">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies if the associated data is formatted into its individual pieces, or exists as a single entity.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="FormattedInd" type="xs:boolean" use="optional" default="false">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Specifies if the associated data is formatted or not.  When true, then it is formatted; when false, then not formatted.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="HotelReferenceGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">HotelReference: The hotel reference identifies a specific hotel by using the Chain Code, the Brand Code, and the Hotel Code.  The codes used are agreed upon by trading partners.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ChainCode" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The code that identifies a hotel chain or management group. The hotel chain code is decided between vendors.  This attribute is optional if the hotel is an independent property that can be identified by the HotelCode attribute.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="BrandCode" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A code that identifies the brand or flag of a hotel, often used for independently-owned or franchised properties who are known by a specific brand.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HotelCode" type="StringLength1to16" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The code that uniquely identifies a single hotel property. The hotel code is decided between vendors.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HotelCityCode" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The IATA city code; for example DCA, ORD.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HotelName" type="StringLength1to128" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en"> A text field used to communicate the proper name of the hotel.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HotelCodeContext" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A text field used to communicate the context (or source of - ex Sabre, Galileo, Worldspan, Amadeus) the HotelReferenceGroup codes.
+</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ChainName" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The name of the hotel chain (e.g., Hilton, Marriott, Hyatt).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="BrandName" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The name of a brand of hotels (e.g., Courtyard, Hampton Inn).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="AreaID_Group">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">An identifier of an area as defined by a hotel reservation system.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+	</xs:attributeGroup><xs:attributeGroup name="ID_OptionalGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used to provide an optional unique identifier.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ID" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A unique identifying value assigned by the creating system.  The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="LanguageGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifies language.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Language" type="xs:language" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Language identification.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="MultimediaDescriptionGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Generic information about a multimedia item.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ContentID" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The content ID of a file attachment with the prefix 'cid:'. The value of this can be used to retrieve the corresponding attachment by the receiving system.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Title" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The title of the multimedia object.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Author" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The author of the multimedia object.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CopyrightNotice" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A copyright notice for the multimedia object.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CopyrightOwner" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Owner of the copyright for the multimedia content.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CopyrightStart" type="DateOrDateTimeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The start date for which the multimedia content rights are claimed.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CopyrightEnd" type="DateOrDateTimeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The end date for which the multimedia content rights are claimed.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EffectiveStart" type="DateOrDateTimeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The start date for which the content is considered valid.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EffectiveEnd" type="DateOrDateTimeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The end date for which the content is considered valid.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ApplicableStart" type="DateOrMonthDay" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Start month and day or date for which the multimedia content is relevent (e.g. the start of a season or the start of an event). When a year is not used (i.e. only the month and day) it signifies a recurring event.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ApplicableEnd" type="DateOrMonthDay" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">End month and day or date for which the multimedia content is relevent (e.g. the end of a season or the start of an event). When a year is not used (i.e. only the month and day) it signifies a recurring event.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RecordID" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Uniquely identifies this file in the message.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SourceID" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Unique identifier for the source of the multimedia object (e.g., the original image file).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="MultimediaItemGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Specific information about a multimedia item.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Language" type="xs:language" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies the language of the multimedia item.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Format" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The code associated with the format of the multimedia item.
+ Refer to OTA code list Content Format Code (CFC)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="FileSize" type="xs:positiveInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The size of the multimedia file in bytes.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="FileName" type="StringLength1to64" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">The name of the multimedia  file.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="OTA_PayloadStdAttributes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_PayloadStdAttributes defines the standard attributes that appear on the root element for all OTA payloads.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="EchoToken" type="StringLength1to128" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A reference for additional message identification, assigned by the requesting host system. When a request message includes an echo token the corresponding response message MUST include an echo token with an identical value.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TimeStamp" type="xs:dateTime" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates the creation date and time of the message in UTC using the following format specified by ISO 8601; YYYY-MM-DDThh:mm:ssZ with time values using the 24 hour clock (e.g. 20 November 2003, 1:59:38 pm UTC becomes 2003-11-20T13:59:38Z).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Target" use="optional" default="Production">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to indicate whether the request is for the Test or Production system.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Test"/>
+					<xs:enumeration value="Production"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Version" type="xs:decimal" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">For all OTA versioned messages, the version of the message is indicated by a decimal value.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TransactionIdentifier" type="StringLength1to32" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A unique identifier to relate all messages within a transaction (e.g. this would be sent in all request and response messages that are part of an on-going transaction).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SequenceNmbr" type="xs:nonNegativeInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to identify the sequence number of the transaction as assigned by the sending system; allows for an application to process messages in a certain order or to request a resynchronization of messages in the event that a system has been off-line and needs to retrieve messages that were missed. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TransactionStatusCode" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">This indicates where this message falls within a sequence of messages. </xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Start">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This is the first message within a transaction.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="End">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This is the last message within a transaction.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Rollback">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This indicates that all messages within the current transaction must be ignored.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="InSeries">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This is any message that is not the first or last message within a transaction.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Continuation">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Specifies that this is a followup request asking for more of what was requested in the previous request.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Subsequent">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">This request message is a subsequent request based on the previous message sent in this transaction.
+</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attributeGroup ref="PrimaryLangID_Group">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifes the primary language for the message.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attributeGroup ref="AltLangID_Group">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifes the alternate language for the message.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attribute name="RetransmissionIndicator" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">When true, indicates the message is being re-sent after a failure. It is recommended that this attribute is used (i.e., set to TRUE) only when a message is retransmitted.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="PreferLevelGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used to indicate a level of preference for an associated item (i.e., only, unacceptable, preferred).</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional" default="Preferred">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to indicate a level of preference for an associated item.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="PrimaryLangID_Group">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifes the primary language preference for the message.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="PrimaryLangID" type="xs:language" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifes the primary language preference for the message.  The human language is identified by ISO 639 codes.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="PrivacyGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Allows for control of the sharing of data between parties.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ShareSynchInd" use="optional">
+			<xs:simpleType>
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Inherit" Permission for sharing data for synchronization of information held by other travel service providers.							</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Yes"/>
+					<xs:enumeration value="No"/>
+					<xs:enumeration value="Inherit"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="ShareMarketInd" use="optional">
+			<xs:simpleType>
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Inherit" Permission for sharing data for marketing purposes.</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Yes"/>
+					<xs:enumeration value="No"/>
+					<xs:enumeration value="Inherit"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="QuantityGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Used to define a quantity.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Quantity" type="xs:nonNegativeInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used to define the quantity for an associated element or attribute.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="RemovalGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This is used to indicate that an item is obsolete.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Removal" type="xs:boolean" use="optional" default="false">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">If true, this item is obsolete and should be removed from the receiving system.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="TelephoneAttributesGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Provides telephone information details.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="PhoneLocationType" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Refer to OTA Code List Phone Location Type (PLT).
+		</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PhoneTechType" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates type of technology associated with this telephone number, such as Voice, Data, Fax, Pager, Mobile, TTY, etc. Refer to OTA Code List Phone Technology Type (PTT).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PhoneUseType" type="OTA_CodeType" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Describes the type of telephone number, in the context of its general use (e.g. Home, Business, Emergency Contact, Travel Arranger, Day, Evening). Refer to OTA Code List Phone Use Type (PUT).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CountryAccessCode" type="NumericStringLength1to3" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Code assigned by telecommunications authorities for international country access identifier.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="AreaCityCode" type="NumericStringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Code assigned for telephones in a specific region, city, or area.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PhoneNumber" type="StringLength1to32" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Telephone number assigned to a single location.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Extension" type="NumericStringLength1to5" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Extension to reach a specific party at the phone number.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PIN" type="StringLength1to8" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Additional codes used for pager or telephone access rights.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Remark" type="StringLength1to128" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A remark associated with the telephone number.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup><xs:attributeGroup name="TelephoneGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Detailed telephone information.</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="PrivacyGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Allows for control of the sharing of telephone information between parties.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attributeGroup ref="TelephoneAttributesGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Provides telephone information details.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attributeGroup ref="FormattedInd">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies if the associated data is formatted into its individual pieces, or exists as a single entity.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+	</xs:attributeGroup><xs:attributeGroup name="TelephoneInfoGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Information about a telephone number, including the actual number and its usage</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="TelephoneGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Detailed telephone information.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attributeGroup ref="DefaultIndGroup">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates that the receiving system should assume the default value if the user specifies no overriding value or action.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attribute name="RPH" type="RPH_Type" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Used elsewhere in the message to reference a specific telephone number (including faxes).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup></xs:schema>

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="StatusApplicationControl.xsd"/>
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:element name="AdditionalAdultAmount">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Amounts that are added to the base rate for additional adults in the room.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Amount" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="MaxAdults" type="xs:integer" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Increase the base rate by the Amount element for each additional adult up to this maximum number of adults.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AdditionalAdultAmounts">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Collection of incremental charges for additional adults.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AdditionalAdultAmount" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AdditionalChildAmount">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Collection of incremental charges per age qualifying code for children in the room</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AmountWithAdult" minOccurs="0"/>
+				<xs:element ref="AmountWithOutAdult" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="AgeQualifyingCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A code representing a business rule that determines the charges for a guest based upon age range. For example, Adult, Child, Senior, Child With Adult, Child Without Adult, etc. This attribute allows for an increase in rate by occupant class.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MaxChild" type="xs:byte" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Increase the base rate by the appropriate amount for each additional child up to this maximum number of children.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AdditionalChildAmounts">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Collection of incremental charges for children in the room.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AdditionalChildAmount" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AmountWithAdult">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Incremental amount when accompanied by an adult.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:float">
+					<xs:attribute name="CurrencyCode" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">CurrencyCode, a 3-character string indicating the ISO currency code (e.g., "USD", etc.) indicating the country of origin and type of currency represented.</xs:documentation>
+							<xs:documentation xml:lang="en">The currency code is ISO standard # 4217 (1995).</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AmountWithOutAdult">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Incremental amount when not accompanied by an adult.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:float">
+					<xs:attribute name="CurrencyCode" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">CurrencyCode, a 3-character string indicating the ISO currency code (e.g., "USD", etc.) indicating the country of origin and type of currency represented.</xs:documentation>
+							<xs:documentation xml:lang="en">The currency code is ISO standard # 4217 (1995).</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RateAmount">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Individual rate amount changes to be synchronized with the reservation system.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Amount" minOccurs="0"/>
+				<xs:element ref="DOWPattern" minOccurs="0"/>
+				<xs:element ref="AdditionalAdultAmounts" minOccurs="0"/>
+				<xs:element ref="AdditionalChildAmounts" minOccurs="0"/>
+				<xs:element ref="TaxAmounts" minOccurs="0"/>
+				<xs:element ref="FeeAmounts" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="RateAmountUnitType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Enumeration of time units upon which the RateAmount is base.  e.g.: daily, weekly, single rate for full stay, etc.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Year"/>
+						<xs:enumeration value="Month"/>
+						<xs:enumeration value="Week"/>
+						<xs:enumeration value="Day"/>
+						<xs:enumeration value="Hour"/>
+						<xs:enumeration value="Second"/>
+						<xs:enumeration value="FullDuration"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="NmbrOfUnits" type="xs:integer" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The number of units of the RateAmountUnitType that the rate Amount is based upon.  e.g.: flat rate for 3 days, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MinAdults" type="xs:byte" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Increase the base rate by the Amount element for each additional adult from this minimum number of adults.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MaxAdults" type="xs:byte" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Increase the base rate by this object's Amount attribute for each additional adult up to this maximum number of adults.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AgeQualifyingCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A code representing a business rule that determines the charges for a guest based upon age range. For example, Adult, Child, Senior, Child With Adult, Child Without Adult, etc. This attribute allows for an increase in rate by occupant class.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Amount">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Amount: The numerical value of the quantity of money expressed by the currency. The lexical representation of a decimal value consists of a string of digits separated by a period as a decimal indicator, with an optional leading sign to indicate a negative number. If the sign is omitted, "+" is assumed.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:float">
+					<xs:attribute name="CurrencyCode" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">CurrencyCode, a 3-character string indicating the ISO currency code (e.g., "USD", etc.) indicating the country of origin and type of currency represented. The currency code is ISO standard # 4217 (1995).</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RateAmountMessage">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The RateAmountMessage class defines the rate changes to be made.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StatusApplicationControl" minOccurs="0"/>
+				<xs:element ref="RateAmounts" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="LocatorId" type="xs:positiveInteger" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Can be used to communicate back to the sender exactly which transaction may have had a problem; e.g. "Message 214 had an invalid date range".</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RateAmountMessages">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of RateAmountMessages that define the rate changes to be made.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RateAmountMessage" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OTA_HotelRateAmountNotifRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_HotelRateAmountNotifRQ is used to provide a notification of a new rate plan created for a hotel, and to synchronize the rate plan between systems for booking.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UniqueId" minOccurs="0"/>
+				<xs:element ref="HotelReference" minOccurs="0"/>
+				<xs:element ref="RateAmountMessages" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This element defines standard attributes that appear on the root element for all OTA payloads.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RateAmounts">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of rate amount changes to be synchronized with the reservation system.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RateAmount" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TaxAmount">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Tax charges that are applied to the rate.  Note that this element allows for both percentages and flat amounts. If one field is used, the other should be zero since logically, taxes should be calculated in only one of the two ways.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Amount" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="TaxType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type that defines the type of tax calculations applied to a rate. Values: Inclusive, Exclusive, Cumulative. Note: If TaxType = Cumulative, taxes are accumulated on all previous taxes in this ordered list.  For example, if this collection contains 5 different taxes and the 4th tax is cumulative, the tax is based on an accumulation of the rate amount plus taxes 1 through 3.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Inclusive"/>
+						<xs:enumeration value="Exclusive"/>
+						<xs:enumeration value="Cumulative"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="TaxCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Code identifying the tax (e.g., occupancy tax, city tax, etc.).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TaxPercent" type="xs:decimal" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Tax percentage; if zero, value should be in the Amount element (Amount or TaxPercent must be a zero value).  </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TaxAmounts">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of Tax Amounts to be applied to a RateAmount or a FeeAmount</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TaxAmount" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FeeAmounts">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of Fee Amounts that are applied to the rate.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="FeeAmount" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FeeAmount">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Fee Amount that is applied to the rate.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Amount" minOccurs="0"/>
+				<xs:element ref="TaxAmounts" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="FeeType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type that defines the type of fees applied to a rate.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: Inclusive, Exclusive, Cumulative.  </xs:documentation>
+					<xs:documentation xml:lang="en">Note: If FeeType= Cumulative, fees are accumulated on all previous fees in this ordered list.  For example, if this collection contains 5 different fees and the 4th fee is cumulative, the fee is based on an accumulation of the rate amount plus fees 1 through 3.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Inclusive"/>
+						<xs:enumeration value="Exclusive"/>
+						<xs:enumeration value="Cumulative"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="FeeCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Code identifying the fee (e.g.,agency fee, municipality fee, etc.).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FeePercent" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Fee percentage; if zero, assume use of the Amount attribute (Amount or Percent must be a zero value).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Description" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Description of the type of fee applied to the rate amount.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

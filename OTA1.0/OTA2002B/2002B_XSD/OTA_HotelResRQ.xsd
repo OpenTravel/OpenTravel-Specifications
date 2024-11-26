@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA/2002/11" xmlns="http://www.opentravel.org/OTA/2002/11" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="2002B">
+	<xs:include schemaLocation="OTA_HotelCommonTypes.xsd"/>
+	<xs:include schemaLocation="OTA_HotelReservation.xsd"/>
+	<xs:element name="OTA_HotelResRQ">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="POS" type="POS_Type" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Point of sale object. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:sequence>
+					<xs:element name="UniqueId" type="UniqueIdType" minOccurs="0" maxOccurs="2"/>
+					<xs:element name="HotelReservations" type="HotelReservationsType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			<xs:attribute name="ResStatus" type="TransactionActionType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates the status of the reservation represented by the message.  This is an enumeration with possible values of Initiate, Ignore, Modify, Commit.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+

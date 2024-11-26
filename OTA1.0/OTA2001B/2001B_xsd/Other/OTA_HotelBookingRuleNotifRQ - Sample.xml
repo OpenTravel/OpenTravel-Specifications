@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OTA_HotelBookingRuleNotifRQ xmlns="http://www.opentravel.org/OTA" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opentravel.org/OTA OTA_HotelBookingRuleNotifRQ.xsd" EchoToken="12345" TimeStamp="1999-05-31T13:20:00-05:00" Target="Production" Version="1" SequenceNmbr="123456">
+	<HotelReference HotelCode="1234STL" ChainCode="HI234" BrandCode="1235XTL"/>
+	<RuleMessages>
+		<RuleMessage>
+			<StatusApplicationControl InvBlockCodeType="DoesNotApply" RatePlanCodeType="RatePlanCode" RatePlanCode="RT2FK" InvCodeType="InvCode" 		InvCode="BWTV82K" InvBlockCode="0" Override="false">
+				<!--Needs to be a reused fragment. -->
+				<DestinationSystemCodes>
+					<DestinationSystemCode>375689</DestinationSystemCode>
+					<DestinationSystemCode>417350</DestinationSystemCode>
+				</DestinationSystemCodes>
+				<DateTimeSpan StartInstant="1999-06-03T13:00:00" Duration="P1Y2M15DT12H30M"/>
+				<DOWPattern Mon="true" Tues="true" Wed="true" Thurs="true" Fri="false" Sat="false" Sun="false"/>
+			</StatusApplicationControl>
+			<BookingRules>
+				<BookingRule MaxAdvancedBookingOffset="P1Y2M15DT12H30M" MinAdvancedBookingOffset="P1Y2M15DT12H30M" MinTotalOccupancy="1" 		MaxTotalOccupancy="4" AbsoluteDropTime="1999-06-30T24:20:00">
+					<DropTimeOffset DropTimeOffset="P1Y2M15DT12H30M" DropTimeOffsetType="BeforeArrival"/>
+					<BookingRuleCodes>
+						<BookingRuleCode>IsCancellable</BookingRuleCode>
+						<BookingRuleCode>IsModifiable</BookingRuleCode>
+					</BookingRuleCodes>
+					<EffectiveBookingDateRange>
+						<DateTimeSpan StartInstant="1999-06-03T13:00:00" Duration="P1Y2M15DT12H30M"/>
+					</EffectiveBookingDateRange>
+					<GuaranteesAccepted>
+						<GuaranteeAccepted GuaranteePolicyType="NoGuaranteesAccepted"/>
+						<GuaranteeAccepted GuaranteePolicyType="GuaranteesRequired">
+								<AcceptedPayments>
+										<AcceptedPayment PaymentType="CreditCard" CurrencyCode="USD">67.50</AcceptedPayment>
+								</AcceptedPayments>		
+						</GuaranteeAccepted>
+					</GuaranteesAccepted>
+					<AcceptedCards>
+						<AcceptedCard>MC</AcceptedCard>
+						<AcceptedCard>VISA</AcceptedCard>
+					</AcceptedCards>
+					<ProfileTypes>
+						<ProfileType ProfileType="Wholesaler">
+						</ProfileType>
+					</ProfileTypes>
+					<Profiles>
+						<Profile ProfileType="Customer"/>
+						<!--Profile to be inserted as external entity-->
+						<Profile ProfileType="Customer"/>
+						<!--Profile to be inserted as external entity-->
+					</Profiles>
+					<CancelPenalties>
+						<CancelPenalty AbsoluteDeadline="1999-06-03T13:00:00" TaxInclusive="true" FeesInclusive="false">
+							<DeadlineOffset DeadlineOffset="P1Y2M15DT12H30M" DeadlineOffsetType="BeforeArrival"/>
+							<Amount CurrencyCode="USD">67.50</Amount>
+							<AmountPercent NmbrOfNights="2" BasisType="FullStay" Percent="1.5"/>
+						</CancelPenalty>
+					</CancelPenalties>
+					<RequiredPaymts>
+						<RequiredPaymt RetributionType="ResNotGuaranteed" AbsoluteDeadline="1999-06-03T13:00:00" TaxInclusive="true" FeesInclusive="false">
+							<DeadlineOffset DeadlineOffset="P1Y2M15DT12H30M" DeadlineOffsetType="BeforeArrival"/>
+							<Amount CurrencyCode="USD">67.50</Amount>
+							<AmountPercent NmbrOfNights="2" BasisType="Nights" Percent="0.5"/>
+							<AcceptedPayments>
+								<AcceptedPayment PaymentType="PersonalCheck" CurrencyCode="USD">67.50</AcceptedPayment>
+							</AcceptedPayments>
+						</RequiredPaymt>
+					</RequiredPaymts>
+					<Description>"A guarantee payment must be received 24 hours prior to arrival in the amount of the first night's stay is required or your reservation will 	be 	cancelled. Cancellation less that 24 hours before arrival, will result in forfeit of 50% of the guarantee amount. If you do not arrive at the hotel by midnight of the 	first 	day of your stay, the full amount of your guarantee is not refundable."</Description>
+				</BookingRule>
+			</BookingRules>	
+		</RuleMessage>
+	</RuleMessages>
+</OTA_HotelBookingRuleNotifRQ>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">This is an XML Schema representing an Air Booking Request. </xs:documentation>
+	</xs:annotation>
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="OTA_Pos.xsd"/>
+	<xs:include schemaLocation="AirItinerary.xsd"/>
+	<xs:include schemaLocation="TravelerInfo.xsd"/>
+	<xs:include schemaLocation="Ticketing.xsd"/>
+	<xs:include schemaLocation="Profile.xsd"/>
+	<xs:element name="OTA_AirBookRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">An airline booking message is sent to request a reservation on an airline for a flight itinerary.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="POS">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Point of sale object. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="AirItinerary"/>
+				<xs:element ref="TravelerInfo"/>
+				<xs:element ref="Ticketing" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

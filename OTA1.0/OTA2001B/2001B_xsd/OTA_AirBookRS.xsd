@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="AirItinerary.xsd"/>
+	<xs:include schemaLocation="TravelerInfo.xsd"/>
+	<xs:include schemaLocation="Ticketing.xsd"/>
+	<xs:element name="OTA_AirBookRS">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Returns the airline reservation along with the Record Locator number and an indication of the status of the booking.
+			Attributes:
+			RecordLocator - The identification number of the booking record. 
+			Cancel - Indicate whether this message includes a cancellation of a reservation. The data type is boolean, enumerated as (Yes | No), with the default of "No".
+			 </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element ref="Success"/>
+					<xs:element ref="Warnings" minOccurs="0"/>
+					<xs:element ref="AirItinerary"/>
+					<xs:element ref="TravelerInfo"/>
+					<xs:element ref="Ticketing" minOccurs="0"/>
+				</xs:sequence>
+				<xs:element ref="Errors"/>
+			</xs:choice>
+			<xs:attribute name="RecordLocator" type="xs:string"/>
+			<xs:attribute name="Cancel" default="No">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

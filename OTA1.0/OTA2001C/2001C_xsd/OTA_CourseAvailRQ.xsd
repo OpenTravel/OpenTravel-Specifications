@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="GolfCourseTeeTimes.xsd"/>
+	<xs:element name="OTA_CourseAvailRQ">
+		<xs:annotation>
+			<xs:documentation>The OTA_CourseAvailRQ message is used to request availability at a known single course for one or more potential tee times.  The specific information about the golfer or golfers is necessary in order to validate booking rules and set rates.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="GolfCourseTeeTime" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			<xs:attribute name="GolfCourseID" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>A unique identifier assigned to the golf course.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

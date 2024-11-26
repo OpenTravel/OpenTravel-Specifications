@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="CommonAirSchema.xsd"/>
+	<xs:include schemaLocation="Profile.xsd"/>
+	<xs:include schemaLocation="CompanyName.xsd"/>
+	<xs:element name="AirItinerary">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Specifies the origin and destination of the traveler.
+			Attributes:
+			DirectionInd - A directional indicator that identifies a type of air booking, either one-way, round-trip, or open-jaw with the enumeration of (OneWay | RT | OpenJaw) respectively. 
+			ActionCode - Indicates the status of the booking, such as OK or Wait-List. 
+			NumberInParty - Indicates the traveler count.
+			 </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="FlightSegment" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="DirectionInd" type="xs:string" use="optional"/>
+			<xs:attribute name="ActionCode" type="xs:string" use="optional"/>
+			<xs:attribute name="NumberInParty" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FlightSegment">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Specifies flight information.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="MarketingAirline" type="CompanyName">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The marketing airline.</xs:documentation>
+					</xs:annotation>
+					<!--xs:complexType>
+						<xs:sequence>
+							<xs:element ref="CompanyName"/>
+						</xs:sequence>
+					</xs:complexType-->
+				</xs:element>
+				<xs:element name="OperatingAirline" type="CompanyName" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation xml:lang="en"> The operating airline of the flight if it is a codeshare  flight.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="DepartureAirport" type="LocationType">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Departure point of flight segment.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ArrivalAirport" type="LocationType">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Arrival point of flight segment.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="DepartureDateTime" type="xs:dateTime">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The departure time and date of the flight segment</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ArrivalDateTime" type="xs:dateTime" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The arrival time and date of the flight segment.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="MarriageGrp" type="MarriageGrpType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Supplies the number assigned to segment connections.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Equipment" type="EquipmentType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation xml:lang="en"> The type of equipment  used for the  flight.. (response only)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="FlightNumber" type="FlightNumberType" use="required"/>
+			<xs:attribute name="SequenceNumber" type="xs:integer" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> The sequence number of the flight segment - used when  referencing the flight segment within the 										booking message and SSRs/OSI's need to be associated with it.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ResBookDesigCode" type="ResBookDesigCodeType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Specific Booking Class for this segment</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NumberStops" type="xs:positiveInteger" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Number of stops (response only)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="MarriageGrpType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Supplies the number assigned to segment connections.  </xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="MarriageSeq" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>

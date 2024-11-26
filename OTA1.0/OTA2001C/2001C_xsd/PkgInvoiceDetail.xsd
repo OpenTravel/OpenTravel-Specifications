@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.0 (http://www.xmlspy.com) by Derek Williams (Travel Technology Initiative Ltd) -->
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="PkgStdTypes.xsd"/>
+	<xs:complexType name="PkgInvoiceDetail">
+		<xs:annotation>
+			<xs:documentation>A list of all the items making up a costed booking</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CostingItems">
+				<xs:annotation>
+					<xs:documentation>A collection of invoice item lines.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CostingItem" type="CostingItemType" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GrossAmount" type="AmountType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Total amount in the declared unit of currency; may be repeated for multiple currencies e.g. GBP and Euros.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DepositAmount" type="AmountType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Defines the amount payable at the time of booking to secure the booking; may be repeated for multiple currencies e.g. GBP and Euros.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DiscountCommission" type="DiscountCommissionType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Defines the fee earned by the agent for the booking or an amount of discount given on a direct booking.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NetAmount" type="AmountType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The amount payable by the agent, i.e. GrossAmount less Discount/Commission; may be repeated for multiple currencies e.g. GBP and Euros.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TaxItems" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A collection of tax item lines.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="TaxItem" type="TaxItemType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Defines a tax item on an invoice</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="BalanceDueAmount" type="AmountType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The amount remaining to be paid by the customer i.e. GrossAmount less DepositAmount; may be repeated for multiple currencies e.g. GBP and Euros.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="BalanceDueDate" type="xs:date">
+			<xs:annotation>
+				<xs:documentation>Date on which payment must be received</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Currency" type="CurrencyCode"/>
+	</xs:complexType>
+	<!-- ==================================================================================================================================== -->
+	<xs:complexType name="CostingItemType">
+		<xs:annotation>
+			<xs:documentation>Details of an invoice item</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="UnitPrice" type="AmountType">
+				<xs:annotation>
+					<xs:documentation>Unit cost in a given monetary unit.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ExtendedPrice" type="AmountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Unit cost multiplied by Unit Quantity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Description" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>A description of cost item.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Qty" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>The unit quantity of a cost item.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="DiscountCommissionType">
+		<xs:annotation>
+			<xs:documentation>Defines the fee earned by the agent for the booking or an amount of discount given on a direct booking.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="DiscountAmount" type="AmountType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Value of commission in a given monetary unit or of a discount; may be repeated for multiple currencies e.g. GBP and Euros.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Description" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>A description of a discount or commission.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DiscountRate" type="xs:decimal">
+			<xs:annotation>
+				<xs:documentation>Value of commission as a percentage -  present when Rate Code indicates a percentage.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RateCode">
+			<xs:annotation>
+				<xs:documentation>Indicates whether the Rate is a percentage (P) or a value (V).</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="P"/>
+					<xs:enumeration value="V"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="TaxItemType">
+		<xs:annotation>
+			<xs:documentation>Defines a tax item on an invoice</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TaxAmount" type="AmountType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>An amount of tax payable; may be repeated for multiple currencies e.g. GBP and Euros..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Description" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>A description of a tax item.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Code">
+			<xs:annotation>
+				<xs:documentation>A code identifying the taxable status of an item e.g. E (Exempt), S (Standard) etc..</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="E"/>
+					<xs:enumeration value="S"/>
+					<xs:enumeration value="Z"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Rate" type="xs:decimal">
+			<xs:annotation>
+				<xs:documentation>A percentage rate of tax.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

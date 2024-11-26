@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:attributeGroup name="Privacy">
+		<xsd:annotation>
+			<xsd:documentation>The two Privacy attributes allow for control of the sharing of data between parties.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="ShareSynchInd" default="Inherit">
+			<xsd:simpleType>
+				<xsd:annotation>
+					<xsd:documentation>Permission for sharing data for synchronization of information held by other travel service providers.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="Yes"/>
+					<xsd:enumeration value="No"/>
+					<xsd:enumeration value="Inherit"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="ShareMarketInd" default="Inherit">
+			<xsd:simpleType>
+				<xsd:annotation>
+					<xsd:documentation>Permission for sharing data for marketing purposes.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="Yes"/>
+					<xsd:enumeration value="No"/>
+					<xsd:enumeration value="Inherit"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+</xsd:schema>

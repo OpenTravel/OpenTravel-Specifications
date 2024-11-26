@@ -1,0 +1,264 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Order",
+  "x-otm-library": {
+    "LibraryName": "Order",
+    "LibraryVersion": "4.0.0",
+    "LibraryStatus": "DRAFT",
+    "SourceFile": "/Order_4_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2019-10-30T13:33:14.998-0400"
+  },
+  "definitions": {
+    "GuaranteesAccepted": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GuaranteesAccepted"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "array",
+          "items": {
+            "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/PaymentType_Enum"
+          },
+          "maxItems": 50
+        },
+        "PaymentCardCode": {
+          "type": "array",
+          "items": {
+            "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/PaymentCardCode_Enum"
+          },
+          "maxItems": 30
+        },
+        "noCardHolderInfoReqInd": {
+          "description": "If true, no credit card holder information is required. If false, it is not required.",
+          "type": "boolean"
+        },
+        "nameReqInd": {
+          "description": "If true, the credit card holder name is required. If false, it is not required.",
+          "type": "boolean"
+        },
+        "addressReqInd": {
+          "description": "If true, credit card holder address is required. If false, it is not required.",
+          "type": "boolean"
+        },
+        "phoneReqInd": {
+          "description": "If true, credit card holder phone number is required. If false, it is not required.",
+          "type": "boolean"
+        },
+        "interbankNbrReqInd": {
+          "description": "If true, the credit card interbank number is required. If false, it is not required.",
+          "type": "boolean"
+        },
+        "bookingSourceAllowedInd": {
+          "description": "When true, the booking source may be used to guarantee the booking.",
+          "type": "boolean"
+        },
+        "corpDiscountNbrAllowedInd": {
+          "description": "When true, the corporate discount number may be used to guarantee the booking.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "PaymentsAccepted": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GuaranteesAccepted"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "array",
+          "items": {
+            "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/PaymentType_Enum"
+          },
+          "maxItems": 50
+        },
+        "PaymentCardCode": {
+          "type": "array",
+          "items": {
+            "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/PaymentCardCode_Enum"
+          },
+          "maxItems": 30
+        },
+        "noCardHolderInfoReqInd": {
+          "description": "If true, no credit card holder information is required. If false, it is not required.",
+          "type": "boolean"
+        },
+        "nameReqInd": {
+          "description": "If true, the credit card holder name is required. If false, it is not required.",
+          "type": "boolean"
+        },
+        "addressReqInd": {
+          "description": "If true, credit card holder address is required. If false, it is not required.",
+          "type": "boolean"
+        },
+        "phoneReqInd": {
+          "description": "If true, credit card holder phone number is required. If false, it is not required.",
+          "type": "boolean"
+        },
+        "interbankNbrReqInd": {
+          "description": "If true, the credit card interbank number is required. If false, it is not required.",
+          "type": "boolean"
+        },
+        "bookingSourceAllowedInd": {
+          "description": "When true, the booking source may be used to guarantee the booking.",
+          "type": "boolean"
+        },
+        "corpDiscountNbrAllowedInd": {
+          "description": "When true, the corporate discount number may be used to guarantee the booking.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Deadline": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Deadline"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "deadlineType": {
+          "description": "An enumerated list of deadline types e.g.Before Arrival.",
+          "$ref": "Ground_3_0_0_Trim.schema.json#/definitions/DeadlineDropTime_Enum"
+        },
+        "ExtensionPoint_Shared": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Shared"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "DeadlineTimePeriod": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Deadline"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Deadline"
+        },
+        {
+          "properties": {
+            "minPeriod": {
+              "description": "The minimum time period.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxPeriod": {
+              "description": "The maximum time period",
+              "type": "integer",
+              "format": "int32"
+            },
+            "timePeriod": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "DeadlineAbsoluteDate": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Deadline"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Deadline"
+        },
+        {
+          "properties": {
+            "absoluteDateTime": {
+              "description": "Assigned Type: ota2-0500:DateTime",
+              "type": "string",
+              "format": "date-time"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "GuaranteesAccepted": {
+          "$ref": "#/definitions/GuaranteesAccepted"
+        }
+      },
+      "required": [
+        "GuaranteesAccepted"
+      ]
+    },
+    {
+      "properties": {
+        "PaymentsAccepted": {
+          "$ref": "#/definitions/GuaranteesAccepted"
+        }
+      },
+      "required": [
+        "PaymentsAccepted"
+      ]
+    },
+    {
+      "properties": {
+        "DeadlineShared": {
+          "$ref": "#/definitions/Deadline"
+        }
+      },
+      "required": [
+        "DeadlineShared"
+      ]
+    },
+    {
+      "properties": {
+        "DeadlineTimePeriod": {
+          "$ref": "#/definitions/DeadlineTimePeriod"
+        }
+      },
+      "required": [
+        "DeadlineTimePeriod"
+      ]
+    },
+    {
+      "properties": {
+        "DeadlineAbsoluteDate": {
+          "$ref": "#/definitions/DeadlineAbsoluteDate"
+        }
+      },
+      "required": [
+        "DeadlineAbsoluteDate"
+      ]
+    }
+  ]
+}

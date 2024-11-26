@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="Order"
+    targetNamespace="http://www.opentravel.org/OTM/order/v1"
+    xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:order-0100="http://www.opentravel.org/OTM/order/v1"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2msg="http://opentravel.org/common/message/v02"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.opentravel.org/OTM/order/v1">
+            <xsd:annotation>
+                <xsd:appinfo>
+                    <otm:Library>
+                        <otm:ProjectName>GolfProjectOTM022417_Publication2.otp</otm:ProjectName>
+                        <otm:ServiceName>Order</otm:ServiceName>
+                        <otm:LibraryName>Order</otm:LibraryName>
+                        <otm:LibraryVersion>1.0.0</otm:LibraryVersion>
+                        <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                        <otm:SourceFile>/Order_1_0_0.otm</otm:SourceFile>
+                        <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                        <otm:CompileDate>2017-02-24T17:20:53.780-05:00</otm:CompileDate>
+                    </otm:Library>
+                </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:include schemaLocation="Order_1_0_0_Trim.xsd"/>
+            <xsd:import
+                namespace="http://schemas.xmlsoap.org/soap/envelope/" schemaLocation="built-ins/SOAP_envelope.xsd"/>
+            <xsd:import
+                namespace="http://opentravel.org/common/message/v02" schemaLocation="built-ins/OTA2_Message_v2.0.0.xsd"/>
+            <xsd:import
+                namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="CreateOrderRQ">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="order-0100:CreateOrderRQ" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="CreateOrderRS">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="order-0100:CreateOrderRS" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="CreateOrderNotif">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="order-0100:CreateOrderNotif" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="CreateOrderFault">
+        <wsdl:part element="env:Fault" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="DeleteOrderRQ">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="order-0100:DeleteOrderRQ" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="DeleteOrderRS">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="order-0100:DeleteOrderRS" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="DeleteOrderNotif">
+        <wsdl:part element="ota2msg:MessageHeader" name="header"/>
+        <wsdl:part element="order-0100:DeleteOrderNotif" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:message name="DeleteOrderFault">
+        <wsdl:part element="env:Fault" name="body"/>
+    </wsdl:message>
+    
+    <wsdl:portType name="OrderPortType">
+        <wsdl:operation name="CreateOrder">
+            <wsdl:input message="order-0100:CreateOrderRQ"/>
+            <wsdl:output message="order-0100:CreateOrderRS"/>
+            <wsdl:fault message="order-0100:CreateOrderFault" name="CreateOrderFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="DeleteOrder">
+            <wsdl:documentation>The order id of the order that was deleted (canceled).</wsdl:documentation>
+            <wsdl:input message="order-0100:DeleteOrderRQ"/>
+            <wsdl:output message="order-0100:DeleteOrderRS"/>
+            <wsdl:fault message="order-0100:DeleteOrderFault" name="DeleteOrderFault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    
+</wsdl:definitions>

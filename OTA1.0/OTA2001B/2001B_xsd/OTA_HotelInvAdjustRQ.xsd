@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:include schemaLocation="DateTimeSpan.xsd"/>
+	<xs:element name="OTA_HotelInvAdjustRQ">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UniqueId"/>
+				<xs:element ref="HotelReference"/>
+				<xs:element ref="Adjustments"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Adjustments">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Adjustment"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Adjustment">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DateTimeSpan"/>
+			</xs:sequence>
+			<xs:attribute name="ReservationOriginatorCode" type="xs:string" use="required"/>
+			<xs:attribute name="ConfirmationID" type="xs:string" use="optional"/>
+			<xs:attribute name="ReservationID" type="xs:string" use="optional"/>
+			<xs:attribute name="RoomInventoryCode" type="xs:string" use="optional"/>
+			<xs:attribute name="PromotionCode" type="xs:string" use="optional"/>
+			<xs:attribute name="AdjustReason" type="xs:string" use="optional"/>
+			<xs:attribute name="InvValue" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="-1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

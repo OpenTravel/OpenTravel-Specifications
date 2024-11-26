@@ -1,0 +1,2798 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "OrganizationHospitality",
+  "x-otm-library": {
+    "LibraryName": "OrganizationHospitality",
+    "LibraryVersion": "4.0.0",
+    "LibraryStatus": "DRAFT",
+    "SourceFile": "/OrganizationHospitality_4_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2019-10-30T13:33:15.014-0400"
+  },
+  "definitions": {
+    "Recreation": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "Recreation"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "name": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "type": "string",
+          "maxLength": 128
+        },
+        "sort": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "yearReplaced": {
+          "description": "The year when recreation associated equipment was last replaced.",
+          "type": "string",
+          "format": "date"
+        },
+        "language": {
+          "description": "Identifies the language in which the attraction information is sent.",
+          "type": "string"
+        },
+        "Proximity": {
+          "description": "Assigned Type: ota2-0400:Proximity_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/Proximity_Enum"
+        },
+        "ID": {
+          "description": "Assigned Type: ota2-0500:Identifier",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Identifier"
+        },
+        "RecreationService": {
+          "description": "Assigned Type: ota2-0400:RecreationService_Enum",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/chameleon.anonymous\\/ns}OTA_CodeType"
+              ]
+            }
+          },
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/RecreationService_Enum"
+        },
+        "ContactInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_5_0_0_Trim.schema.json#/definitions/ContactInformation"
+          },
+          "maxItems": 10
+        },
+        "OperationSchedule": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_5_0_0_Trim.schema.json#/definitions/OperationSchedule"
+          },
+          "maxItems": 100
+        },
+        "ReferencePoint": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_5_0_0_Trim.schema.json#/definitions/ReferencePoint"
+          },
+          "maxItems": 100
+        },
+        "MultimediaCollection": {
+          "description": "Assigned Type: ota2-0500:MultimediaCollection",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/MultimediaCollection"
+        },
+        "RecreationFeature": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecreationFeature"
+          },
+          "maxItems": 100
+        },
+        "Description": {
+          "description": "Assigned Type: ota2-0500:Description",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Description"
+        },
+        "includedInd": {
+          "description": "When true, this recreation is included with basic room rates.",
+          "type": "boolean"
+        },
+        "featuredInd": {
+          "description": "If true, this is a featured recreation for the property.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "HotelDescriptiveContentID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "HotelDescriptiveContent"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "DescriptiveContentRef": {
+          "description": "Refers to the obj ID on an object defined elsewhere in the current document.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0500:Identifier",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Identifier"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "HotelDescriptiveContent": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "HotelDescriptiveContent"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/HotelDescriptiveContentID"
+        },
+        {
+          "properties": {
+            "language": {
+              "description": "Assigned Type: ota2-0500:LanguageCode",
+              "type": "string"
+            },
+            "CurrencyCode": {
+              "description": "Assigned Type: ota2-0500:CurrencyCode",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/CurrencyCode"
+            },
+            "DistanceUnitOfMeasure": {
+              "description": "Assigned Type: ota2-0400:UnitOfMeasure_Enum",
+              "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/UnitOfMeasure_Enum"
+            },
+            "AreaUnitOfMeasure": {
+              "description": "Assigned Type: ota2-0400:UnitOfMeasure_Enum",
+              "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/UnitOfMeasure_Enum"
+            },
+            "WeightUnitOfMeasure": {
+              "description": "Assigned Type: ota2-0400:UnitOfMeasure_Enum",
+              "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/UnitOfMeasure_Enum"
+            },
+            "TimeZone": {
+              "description": "Describes the local time zone in which the hotel is located. This could include additional information regarding time zones (e.g., Daylight Saving Time observed), a proprietary code, the difference between the local time and GMT.",
+              "type": "string",
+              "maxLength": 128
+            },
+            "DateTimeSpanWindows": {
+              "description": "Assigned Type: ota2-0500:DateTimeSpanWindows",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/DateTimeSpanWindows"
+            },
+            "DestinationSystemCode": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 32
+              },
+              "maxItems": 100
+            },
+            "WeatherInfo": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_5_0_0_Trim.schema.json#/definitions/WeatherInfo"
+              },
+              "maxItems": 100
+            },
+            "BasicPropertyInfo": {
+              "description": "Assigned Type: ph-0200:BasicPropertyInfo",
+              "$ref": "Hospitality_2_0_0_Trim.schema.json#/definitions/BasicPropertyInfo"
+            },
+            "HotelPropertyInfo": {
+              "description": "Assigned Type: orghs-0400:HotelPropertyInfo",
+              "$ref": "#/definitions/HotelPropertyInfo"
+            },
+            "FacilityInfo": {
+              "description": "Assigned Type: orghs-0400:FacilityInfo",
+              "$ref": "#/definitions/FacilityInfo"
+            },
+            "HotelPolicies": {
+              "description": "Assigned Type: orghs-0400:HotelPolicies",
+              "$ref": "#/definitions/HotelPolicies"
+            },
+            "AreaInformation": {
+              "description": "Assigned Type: org-0400:AreaInformation",
+              "$ref": "Organization_4_0_0_Trim.schema.json#/definitions/AreaInformation"
+            },
+            "AffiliationInfo": {
+              "description": "Assigned Type: org-0400:AffiliationInfo",
+              "$ref": "Organization_4_0_0_Trim.schema.json#/definitions/AffiliationInfo"
+            },
+            "MultimediaCollection": {
+              "description": "Assigned Type: ota2-0500:MultimediaCollection",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/MultimediaCollection"
+            },
+            "ContactInformation": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_5_0_0_Trim.schema.json#/definitions/ContactInformation"
+              },
+              "maxItems": 100
+            },
+            "GDS_Information": {
+              "description": "Assigned Type: orghs-0400:GDS_Information",
+              "$ref": "#/definitions/GDS_Information"
+            },
+            "EffectivePeriod": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EffectivePeriod"
+              },
+              "maxItems": 100
+            },
+            "RoomBlockInformation": {
+              "description": "Assigned Type: orghs-0400:RoomBlockInformation",
+              "$ref": "#/definitions/RoomBlockInformation"
+            },
+            "EnvironmentalImpact": {
+              "description": "Assigned Type: ota2-0500:EnvironmentalImpact",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/EnvironmentalImpact"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "HotelDescriptiveContentQueryHotels": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "HotelDescriptiveContent"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "maxRepsonses": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "BasicPropertyInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "Hospitality_2_0_0_Trim.schema.json#/definitions/BasicPropertyInfo"
+          }
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "CategoryCodes": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "CategoryCodes"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "LocationCategory": {
+          "description": "Assigned Type: ota2-0400:LocationCategory_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/LocationCategory_Enum"
+        },
+        "SegmentCategory": {
+          "description": "Assigned Type: ota2-0400:SegmentCategory_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/SegmentCategory_Enum"
+        },
+        "HotelCategory": {
+          "type": "array",
+          "items": {
+            "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/PropertyClassType_Enum"
+          },
+          "maxItems": 5
+        },
+        "ArchitecturalStyle": {
+          "type": "array",
+          "items": {
+            "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/ArchitecturalStyle_Enum"
+          },
+          "maxItems": 5
+        },
+        "GuestRoomInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GuestRoomInfo"
+          },
+          "maxItems": 99
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "GuestRoomInfo": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GuestRoomInfo"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "GuestRoomInfo_Enum": {
+          "description": "Assigned Type: ota2-0400:GuestRoomInfo_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/GuestRoomInfo_Enum"
+        },
+        "Quantity": {
+          "description": "The quanity of rooms that the hotel has of this type.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "RateRangeInfo": {
+          "description": "Assigned Type: ota2-0500:RateRangeInfo",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/RateRangeInfo"
+        },
+        "MultimediaCollection": {
+          "description": "Assigned Type: ota2-0500:MultimediaCollection",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/MultimediaCollection"
+        },
+        "TextParagraph": {
+          "description": "Assigned Type: ota2-0500:TextParagraph",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/TextParagraph"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Service": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Service"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "inventoryCode": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "type": "string",
+          "maxLength": 128
+        },
+        "quantity": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "sort": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "codeDetail": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "type": "string",
+          "maxLength": 128
+        },
+        "Proximity": {
+          "description": "Assigned Type: ota2-0400:Proximity_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/Proximity_Enum"
+        },
+        "ContactInformation": {
+          "description": "Assigned Type: ota2-0500:ContactInformation",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/ContactInformation"
+        },
+        "RelativePosition": {
+          "description": "Assigned Type: ota2-0500:RelativePosition",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/RelativePosition"
+        },
+        "OperationSchedule": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_5_0_0_Trim.schema.json#/definitions/OperationSchedule"
+          },
+          "maxItems": 99
+        },
+        "MultimediaCollection": {
+          "description": "Assigned Type: ota2-0500:MultimediaCollection",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/MultimediaCollection"
+        },
+        "Description": {
+          "description": "Assigned Type: ota2-0500:Description",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Description"
+        },
+        "includedInd": {
+          "description": "When true, this service is included in the room rate.",
+          "type": "boolean"
+        },
+        "availableToAnyGuestInd": {
+          "description": "When tre the service is available to all guests at the facility.",
+          "type": "boolean"
+        },
+        "featuredInd": {
+          "description": "When true, this is a featured service for the property.",
+          "type": "boolean"
+        },
+        "ExtensionPoint_Shared": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Shared"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "ServiceBusiness": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Service"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Service"
+        },
+        {
+          "properties": {
+            "BusinessService": {
+              "type": "array",
+              "items": {
+                "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/BusinessService_Enum"
+              },
+              "maxItems": 100
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "ServiceHotelAmenity": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Service"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Service"
+        },
+        {
+          "properties": {
+            "HotelAmenity": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Code"
+              },
+              "maxItems": 500
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "ServiceMealPlan": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Service"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Service"
+        },
+        {
+          "properties": {
+            "MealPlan": {
+              "type": "array",
+              "items": {
+                "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/MealPlan_Enum"
+              },
+              "maxItems": 30
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "ServiceMeetingRoom": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "Service"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Service"
+        },
+        {
+          "properties": {
+            "MeetingRoomCode_Enum": {
+              "description": "Assigned Type: ota2-0400:MeetingRoomCode_Enum",
+              "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/MeetingRoomCode_Enum"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "DescriptiveContentFeatureSecurity": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "DescriptiveContentFeature"
+      },
+      "allOf": [
+        {
+          "$ref": "Organization_4_0_0_Trim.schema.json#/definitions/DescriptiveContentFeature"
+        },
+        {
+          "properties": {
+            "SecurityFeature_Enum": {
+              "description": "Assigned Type: ota2-0400:SecurityFeature_Enum",
+              "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/SecurityFeature_Enum"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "DescriptiveContentFeatureAccessibility": {
+      "x-otm-entity": {
+        "EntityType": "ChoiceObject",
+        "EntityName": "DescriptiveContentFeature"
+      },
+      "allOf": [
+        {
+          "$ref": "Organization_4_0_0_Trim.schema.json#/definitions/DescriptiveContentFeature"
+        },
+        {
+          "properties": {
+            "AccessibilityCode": {
+              "description": "Assigned Type: ota2-0400:DisabilityFeature_Enum",
+              "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/DisabilityFeature_Enum"
+            },
+            "UnitOfMeasure_Enum": {
+              "description": "Assigned Type: ota2-0400:UnitOfMeasure_Enum",
+              "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/UnitOfMeasure_Enum"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "FacilityInfo": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "FacilityInfo"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "MeetingRooms": {
+          "description": "Assigned Type: org-0400:MeetingRooms",
+          "$ref": "Organization_4_0_0_Trim.schema.json#/definitions/MeetingRooms"
+        },
+        "GuestRooms": {
+          "description": "Assigned Type: orghs-0400:GuestRooms",
+          "$ref": "#/definitions/GuestRooms"
+        },
+        "Restaurants": {
+          "description": "Assigned Type: org-0400:Restaurants",
+          "$ref": "Organization_4_0_0_Trim.schema.json#/definitions/Restaurants"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "GuestRooms": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GuestRooms"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "maxOccupancy": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "GuestRoom": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GuestRoom"
+          },
+          "maxItems": 1000
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "GuestRoom": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GuestRoom"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "iD": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "language": {
+          "description": "Assigned Type: ota2-0500:LanguageCode",
+          "type": "string"
+        },
+        "sort": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "roomTypeName": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "nonSmokingQuantity": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "maxOccupancy": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "minOccupancy": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "maxAdultOccupancy": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "maxChildOccupancy": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "Proximity": {
+          "description": "Assigned Type: ota2-0400:Proximity_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/Proximity_Enum"
+        },
+        "RoomTypeCode": {
+          "description": "Assigned Type: ota2-0500:Code",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Code"
+        },
+        "TypeRoom": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TypeRoom"
+          },
+          "maxItems": 5
+        },
+        "DescriptiveContentAmenity": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DescriptiveContentAmenity"
+          },
+          "maxItems": 1000
+        },
+        "DescriptiveContentFeatureAccessibility": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DescriptiveContentFeatureAccessibility"
+          },
+          "maxItems": 1000
+        },
+        "DescriptiveContentFeatureSecurity": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DescriptiveContentFeatureSecurity"
+          },
+          "maxItems": 1000
+        },
+        "MultimediaCollection": {
+          "description": "Assigned Type: ota2-0500:MultimediaCollection",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/MultimediaCollection"
+        },
+        "Description": {
+          "description": "Assigned Type: ota2-0500:Description",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Description"
+        },
+        "compositeInd": {
+          "description": "Indicates that the room type contains multiple rooms sold as a single unit.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "TypeRoom": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "TypeRoom"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "standardBedQuantity": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "standardOccupancy": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "maxRollaways": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "size": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "count": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "name": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "roomTypeCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "gDSRoomTypeCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "roomID": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "floor": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "inventoryBlockCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "configuration": {
+          "description": "Assigned Type: ota2-0500:String",
+          "type": "string",
+          "maxLength": 512
+        },
+        "sizeMeasurement": {
+          "description": "Assigned Type: ota2-0500:String",
+          "type": "string",
+          "maxLength": 512
+        },
+        "quantity": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "roomGender": {
+          "description": "Used to request or specify a gender assignment for a room. Note: Typically used by Hosteliers.",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/RoomGender_Enum"
+        },
+        "maxCribs": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "RoomCategory": {
+          "description": "Assigned Type: ota2-0400:SegmentCategory_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/SegmentCategory_Enum"
+        },
+        "RoomLocationCode": {
+          "description": "Assigned Type: ota2-0400:RoomLocation_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/RoomLocation_Enum"
+        },
+        "RoomView": {
+          "description": "Assigned Type: ota2-0400:RoomViewType_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/RoomViewType_Enum"
+        },
+        "BedType": {
+          "type": "array",
+          "items": {
+            "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/BedType_Enum"
+          },
+          "maxItems": 5
+        },
+        "RoomClassification": {
+          "description": "Assigned Type: ota2-0400:GuestRoomInfo_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/GuestRoomInfo_Enum"
+        },
+        "RoomArchitecture": {
+          "description": "Assigned Type: ota2-0400:ArchitecturalStyle_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/ArchitecturalStyle_Enum"
+        },
+        "nonsmokingInd": {
+          "description": "When true, this room type is non-smoking.",
+          "type": "boolean"
+        },
+        "compositeInd": {
+          "description": "When true, the room (suite) is a composite of smaller units.",
+          "type": "boolean"
+        },
+        "shareRoomInd": {
+          "description": "When true, the room requires or has sharing available. Note: Typically used by Hosteliers.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "DescriptiveContentAmenity": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "DescriptiveContentAmenity"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "quantity": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "amenityID": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "RoomAmenity": {
+          "description": "Assigned Type: ota2-0500:Code",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Code"
+        },
+        "OperationSchedule": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_5_0_0_Trim.schema.json#/definitions/OperationSchedule"
+          },
+          "maxItems": 100
+        },
+        "ContactInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_5_0_0_Trim.schema.json#/definitions/ContactInformation"
+          },
+          "maxItems": 10
+        },
+        "MultimediaCollection": {
+          "description": "Assigned Type: ota2-0500:MultimediaCollection",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/MultimediaCollection"
+        },
+        "Description": {
+          "description": "Assigned Type: ota2-0500:Description",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Description"
+        },
+        "includedInRateInd": {
+          "description": "When true, this indicates that the amenity or service is included in the room rate (i.e., this service or amenity has no additional charge).",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "HotelPolicies": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "HotelPolicies"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "HotelPolicy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HotelPolicy"
+          },
+          "maxItems": 100
+        },
+        "guaranteeRoomTypeViaGDSInd": {
+          "description": "When true, indicates that room types can be guaranteed on reservations booked through GDS channels.",
+          "type": "boolean"
+        },
+        "guaranteeRoomTypeViaCRCInd": {
+          "description": "When true, indicates that room types can be guaranteed on reservations booked by central reservation centers.",
+          "type": "boolean"
+        },
+        "guaranteeRoomTypeViaPropertyInd": {
+          "description": "When true, indicates that room types can be guaranteed on reservations booked by the property.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "HotelPolicy": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "HotelPolicy"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "defaultValidBookingMinOffset": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "DateTimeSpanWindows": {
+          "description": "Assigned Type: ota2-0500:DateTimeSpanWindows",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/DateTimeSpanWindows"
+        },
+        "DaysOfWeek": {
+          "type": "array",
+          "items": {
+            "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/DayOfWeek_Enum"
+          },
+          "maxItems": 7
+        },
+        "HotelCancelPolicy": {
+          "description": "Assigned Type: orghs-0400:HotelCancelPolicy",
+          "$ref": "#/definitions/HotelCancelPolicy"
+        },
+        "GuaranteesAccepted": {
+          "description": "Assigned Type: order-0400:GuaranteesAccepted",
+          "$ref": "Order_4_0_0_Trim.schema.json#/definitions/GuaranteesAccepted"
+        },
+        "PaymentsAccepted": {
+          "description": "Assigned Type: order-0400:PaymentsAccepted",
+          "$ref": "Order_4_0_0_Trim.schema.json#/definitions/PaymentsAccepted"
+        },
+        "HotelPolicyInformation": {
+          "description": "Assigned Type: orghs-0400:HotelPolicyInformation",
+          "$ref": "#/definitions/HotelPolicyInformation"
+        },
+        "TaxPolicies": {
+          "description": "Assigned Type: orghs-0400:TaxPolicies",
+          "$ref": "#/definitions/TaxPolicies"
+        },
+        "PetPolicies": {
+          "description": "Assigned Type: orghs-0400:PetPolicies",
+          "$ref": "#/definitions/PetPolicies"
+        },
+        "FeePolicies": {
+          "description": "Assigned Type: orghs-0400:FeePolicies",
+          "$ref": "#/definitions/FeePolicies"
+        },
+        "RatePolicies": {
+          "description": "Assigned Type: orghs-0400:RatePolicies",
+          "$ref": "#/definitions/RatePolicies"
+        },
+        "GroupPolicies": {
+          "description": "Assigned Type: orghs-0400:GroupPolicies",
+          "$ref": "#/definitions/GroupPolicies"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "HotelCancelPolicy": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "HotelCancelPolicy"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "CancelPenalty": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_5_0_0_Trim.schema.json#/definitions/CancelPenalty"
+          },
+          "maxItems": 100
+        },
+        "cancelPolicyInd": {
+          "description": "When true, indicates a cancel policy exits. When false, no cancel policy exists. Typically this indicator is used when details are not being sent.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "HotelPolicyInformation": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "HotelPolicyInformation"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "checkInTime": {
+          "description": "The usual check-in time for a facility.",
+          "type": "string"
+        },
+        "checkOutTime": {
+          "description": "The usual check-out time for the facility.",
+          "type": "string"
+        },
+        "minGuestAge": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "usualStayFreeCutoffAge": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "usualStayFreeChildPerAdult": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "totalGuestCount": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "MaxChildAge": {
+          "description": "The maximum age for a child price.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "Description": {
+          "description": "Assigned Type: ota2-0500:Description",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Description"
+        },
+        "defaultTaxServiceIncludedInd": {
+          "description": "When true, taxes and service charges are included, by default, with this facility\u0027s rates.",
+          "type": "boolean"
+        },
+        "kidsStayFreeInd": {
+          "description": "When true, there is no charge for children.",
+          "type": "boolean"
+        },
+        "adultsOnlyInd": {
+          "description": "When true, this property only accepts adult guests, children not permitted.",
+          "type": "boolean"
+        },
+        "couplesOnlyInd": {
+          "description": "When true, this property only accepts couples.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "TaxPolicies": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "TaxPolicies"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "TaxPolicy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TaxPolicy"
+          },
+          "maxItems": 100
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "TaxPolicy": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "TaxPolicy"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "sequenceNbr": {
+          "description": "Assigned Type: ota2-0500:String",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Changed type from {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}nonNegativeInteger.",
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            }
+          },
+          "type": "string",
+          "maxLength": 512
+        },
+        "nightsForTaxExemptionQuantity": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "taxableNightsQuantity": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "Amount": {
+          "description": "Assigned Type: ota2-0500:Amount",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Amount"
+        },
+        "EffectiveExpire": {
+          "description": "Assigned Type: ota2-0500:DateEffectiveExpire",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "AttributeGroup: EffectiveExpireOptionalDateGroup"
+              ]
+            }
+          },
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/DateEffectiveExpire"
+        },
+        "TaxType_Enum": {
+          "description": "Assigned Type: ota2-0400:TaxType_Enum",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "Common",
+                "value": ""
+              }
+            ]
+          },
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/TaxType_Enum"
+        },
+        "DateTimeSpanWindows": {
+          "description": "Assigned Type: ota2-0500:DateTimeSpanWindows",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/DateTimeSpanWindows"
+        },
+        "Description": {
+          "description": "Assigned Type: ota2-0500:Description",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Description"
+        },
+        "taxExcludedInd": {
+          "description": "When present and true, this tax is excluded.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "PetPolicy": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "PetPolicy"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "maxPetQuantity": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "PetPolicy_Enum": {
+          "type": "array",
+          "items": {
+            "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/PetPolicy_Enum"
+          },
+          "maxItems": 20
+        },
+        "UnitOfMeasure": {
+          "description": "Assigned Type: ota2-0500:UnitOfMeasure",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/UnitOfMeasure"
+        },
+        "NonRefundableFee": {
+          "description": "Assigned Type: ota2-0500:CurrencyAmount",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/CurrencyAmount"
+        },
+        "ChargeFrequency": {
+          "description": "Assigned Type: ota2-0400:ChargeUnit_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/ChargeUnit_Enum"
+        },
+        "Description": {
+          "description": "Assigned Type: ota2-0500:Description",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Description"
+        },
+        "refundableDepositInd": {
+          "description": "When true, the pet deposit is refundable.",
+          "type": "boolean"
+        },
+        "restrictionInd": {
+          "description": "When true, there is a restriction associated with this pet policy.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "PetPolicies": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "PetPolicies"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "PetsAllowed_Enum": {
+          "description": "Assigned Type: ota2-0400:PetsAllowed_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/PetsAllowed_Enum"
+        },
+        "PetPolicy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PetPolicy"
+          },
+          "maxItems": 100
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "FeePolicy": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "FeePolicy"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "type": {
+          "description": "Used to indicate if the amount is inclusive or exclusive of other charges, such as taxes, or is cumulative (amounts have been added to each other).",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/AmountDetermination_Enum"
+        },
+        "Price": {
+          "description": "Assigned Type: ota2-0500:Price",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Price"
+        },
+        "FeeType": {
+          "description": "Assigned Type: ota2-0400:FeeType_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/FeeType_Enum"
+        },
+        "Description": {
+          "description": "Assigned Type: ota2-0500:Description",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Description"
+        },
+        "FeeDetail": {
+          "description": "Assigned Type: ota2-0500:FeeDetail",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/FeeDetail"
+        },
+        "DateTimeSpanWindows": {
+          "description": "Assigned Type: ota2-0500:DateTimeSpanWindows",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/DateTimeSpanWindows"
+        },
+        "taxExcludedInd": {
+          "description": "When true, tax is excluded from the price.",
+          "type": "boolean"
+        },
+        "mandatoryInd": {
+          "description": "When true, indicates the fee is mandatory. When false, the fee is not mandatory.",
+          "type": "boolean"
+        },
+        "taxableInd": {
+          "description": "When true, this fee is subject to tax.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "FeePolicies": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "FeePolicies"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "FeePolicy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeePolicy"
+          },
+          "maxItems": 100
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "RatePolicy": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "RatePolicy"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "minRoomNightCommittment": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "RatePlanType": {
+          "description": "Assigned Type: ota2-0400:RatePlanType_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/RatePlanType_Enum"
+        },
+        "GuestType": {
+          "description": "Assigned Type: ota2-0400:GuestType_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/GuestType_Enum"
+        },
+        "RateOfferType": {
+          "description": "Assigned Type: ota2-0400:RatePlanType_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/RatePlanType_Enum"
+        },
+        "Description": {
+          "description": "Assigned Type: ota2-0500:Description",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Description"
+        },
+        "subjectToChangeInd": {
+          "description": "When true, this rate type is subject to change without notice.",
+          "type": "boolean"
+        },
+        "IdRequiredInd": {
+          "description": "When true, ID is required at check-in.",
+          "type": "boolean"
+        },
+        "corporateIdInd": {
+          "description": "When true, a corporate ID is required to book a corporate rate.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "RatePolicies": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "RatePolicies"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "RatePolicy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RatePolicy"
+          },
+          "maxItems": 100
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "GroupPolicies": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GroupPolicies"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "maxNumberOfRooms": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "LocalDMCRole": {
+          "description": "Assigned Type: orghs-0400:Role_Enum",
+          "$ref": "#/definitions/Role_Enum"
+        },
+        "GroupPolicy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupPolicy"
+          },
+          "maxItems": 100
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Role_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "Role_Enum"
+      },
+      "type": "string",
+      "enum": [
+        "Required",
+        "Suggested"
+      ]
+    },
+    "GroupPolicy": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GroupPolicy"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "contractLanguage": {
+          "description": "The language that the contract is available in.",
+          "type": "string"
+        },
+        "contractCurrency": {
+          "description": "Assigned Type: ota2-0500:CurrencyCode_ISO4217",
+          "type": "string",
+          "pattern": "[a-zA-Z]{3}"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "RecreationFeature": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "RecreationFeature"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "RecreationFeature": {
+          "description": "Assigned Type: ota2-0400:RecreationFeatures_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/RecreationFeatures_Enum"
+        },
+        "FeatureValue": {
+          "description": "Value associated with the RecreationFeature enumeration.",
+          "type": "string",
+          "maxLength": 128
+        },
+        "Description": {
+          "description": "Assigned Type: ota2-0500:Description",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Description"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "OtherHotel": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "OtherHotel"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "SegmentCategory": {
+          "description": "Assigned Type: ota2-0400:SegmentCategory_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/SegmentCategory_Enum"
+        },
+        "BasicPropertyInfo": {
+          "description": "Assigned Type: ph-0200:BasicPropertyInfo",
+          "$ref": "Hospitality_2_0_0_Trim.schema.json#/definitions/BasicPropertyInfo"
+        },
+        "ContactInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_5_0_0_Trim.schema.json#/definitions/ContactInformation"
+          },
+          "maxItems": 100
+        },
+        "ReferencePoint": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_5_0_0_Trim.schema.json#/definitions/ReferencePoint"
+          },
+          "maxItems": 100
+        },
+        "competitorInd": {
+          "description": "When true, indicates this hotel is a competitor.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "DistributionSystem": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "DistributionSystem"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "BasicPropertyInfo": {
+          "description": "Assigned Type: ph-0200:BasicPropertyInfo",
+          "$ref": "Hospitality_2_0_0_Trim.schema.json#/definitions/BasicPropertyInfo"
+        },
+        "CompanyName": {
+          "description": "Assigned Type: ota2-0500:CompanyName",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/CompanyName"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Brand": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "Brand"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "URL": {
+          "description": "Assigned Type: ota2-0500:URL",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/URL"
+        },
+        "BasicPropertyInfo": {
+          "description": "Assigned Type: ph-0200:BasicPropertyInfo",
+          "$ref": "Hospitality_2_0_0_Trim.schema.json#/definitions/BasicPropertyInfo"
+        },
+        "Marketing": {
+          "description": "Name of brand, marketing chain, representation company or other affiliation(s).",
+          "type": "string",
+          "maxLength": 512
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "PartnerInfo": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "PartnerInfo"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "ContactInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_5_0_0_Trim.schema.json#/definitions/ContactInformation"
+          },
+          "maxItems": 10
+        },
+        "Description": {
+          "description": "Assigned Type: ota2-0500:Description",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Description"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "GDS_Information": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GDS_Information"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "masterChainCode": {
+          "description": "Assigned Type: ota2-0500:StringLength2",
+          "type": "string",
+          "maxLength": 2,
+          "minLength": 2
+        },
+        "GDS_Codes": {
+          "description": "Assigned Type: orghs-0400:GDS_Codes",
+          "$ref": "#/definitions/GDS_Codes"
+        },
+        "GDS_Status": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GDS_Status"
+          },
+          "maxItems": 100
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "GDS_Codes": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GDS_Codes"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "GDS_Code": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GDS_Code"
+          },
+          "maxItems": 100
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "GDS_CodesDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GDS_Codes"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GDS_Codes"
+        },
+        {
+          "properties": {
+            "loadGDSInd": {
+              "description": "When true, this indicates rates will be loaded to specified GDSs. This attribute is also under GDS_Code to associate the rate load for an individual GDS. (This may also be used to idicate the willingness to upload rates to GDSs even if not specified in the request message.)",
+              "type": "boolean"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "GDS_Code": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GDS_Code"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "gDS_PropertyCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "gDS_Name": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "chainCode": {
+          "description": "Assigned Type: ota2-0500:StringLength2",
+          "type": "string",
+          "maxLength": 2,
+          "minLength": 2
+        },
+        "ExtensionPoint_Summary": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Summary"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "GDS_CodeDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GDS_Code"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GDS_Code"
+        },
+        {
+          "properties": {
+            "gDS_RoomTypeCode": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "gDS_PropertyShortName": {
+              "description": "Assigned Type: ota2-0500:StringTiny",
+              "type": "string",
+              "maxLength": 32
+            },
+            "gDS_PropertyLongName": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "GDS_CodeInfo": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GDS_CodeInfo"
+              },
+              "maxItems": 100
+            },
+            "loadGDSInd": {
+              "description": "This attribute is used in conjunction with the GDS_Name. When true, this indicates rates will be loaded to the GDS specified by the GDS_Name.",
+              "type": "boolean"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "GDS_CodeInfo": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GDS_CodeInfo"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "pseudoCityCode": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "agencyName": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "type": "string",
+          "maxLength": 128
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "GDS_Status": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GDS_Status"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "code": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "name": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "HotelStatus": {
+          "description": "Assigned Type: ota2-0400:HotelStatus_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/HotelStatus_Enum"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "EffectivePeriod": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "EffectivePeriod"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "DateEffectiveExpire": {
+          "description": "Assigned Type: ota2-0500:DateEffectiveExpire",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/DateEffectiveExpire"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "RoomBlockInformation": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "RoomBlockInformation"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "totalRoomQuantity": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "cancelPeriodDays": {
+          "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "BlackoutDates": {
+          "type": "array",
+          "items": {
+            "$ref": "Organization_4_0_0_Trim.schema.json#/definitions/BlackoutDates"
+          },
+          "maxItems": 100
+        },
+        "availableInd": {
+          "description": "When true, room blocks are accepted.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "HotelPropertyInfo": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "HotelPropertyInfo"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "pMSSystem": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "type": "string",
+          "maxLength": 128
+        },
+        "CategoryCodes": {
+          "description": "Assigned Type: orghs-0400:CategoryCodes",
+          "$ref": "#/definitions/CategoryCodes"
+        },
+        "ServiceBusiness": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceBusiness"
+          },
+          "maxItems": 100
+        },
+        "ServiceHotelAmenity": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceHotelAmenity"
+          },
+          "maxItems": 1000
+        },
+        "ServiceMealPlan": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceMealPlan"
+          },
+          "maxItems": 100
+        },
+        "ServiceMeetingRoom": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceMeetingRoom"
+          },
+          "maxItems": 100
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "HotelDescriptiveRequestInfo": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "HotelDescriptiveRequestInfo"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "languageRequested": {
+          "description": "The language in which the hotel property information should be returned.",
+          "type": "string"
+        },
+        "BasicPropertyInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "Hospitality_2_0_0_Trim.schema.json#/definitions/BasicPropertyInfo"
+          }
+        },
+        "HotelRequestInfo": {
+          "description": "Assigned Type: orghs-0400:HotelRequestInfo",
+          "$ref": "#/definitions/HotelRequestInfo"
+        },
+        "FacilityRequestInfo": {
+          "description": "Assigned Type: orghs-0400:FacilityRequestInfo",
+          "$ref": "#/definitions/FacilityRequestInfo"
+        },
+        "PolicyRequestInfo": {
+          "description": "Assigned Type: orghs-0400:PolicyInfo",
+          "$ref": "#/definitions/PolicyInfo"
+        },
+        "AreaRequestInfo": {
+          "description": "Assigned Type: orghs-0400:AreaInfo",
+          "$ref": "#/definitions/AreaInfo"
+        },
+        "AffiliationRequestInfo": {
+          "description": "Assigned Type: orghs-0400:AffiliationInfoRequest",
+          "$ref": "#/definitions/AffiliationInfoRequest"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "HotelRequestInfo": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "HotelRequestInfo"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "hotelStatus": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "type": "string",
+          "maxLength": 128
+        },
+        "HotelStatusCode": {
+          "description": "Assigned Type: ota2-0400:PropertyStatus_Enum",
+          "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/PropertyStatus_Enum"
+        },
+        "sendDataInd": {
+          "description": "When true, send hotel property info data.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "PolicyInfo": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "PolicyInfo"
+      },
+      "description": "Used to indicate if policy information is being requested.",
+      "properties": {
+        "sendPoliciesInd": {
+          "description": "When true, policy information is being requested.",
+          "type": "boolean"
+        }
+      }
+    },
+    "FacilityRequestInfo": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "FacilityRequestInfo"
+      },
+      "properties": {
+        "sendMeetingRoomsInd": {
+          "description": "When true, send meeting room information.",
+          "type": "boolean"
+        },
+        "sendGuestRoomsInd": {
+          "description": "When true, send guest room information.",
+          "type": "boolean"
+        },
+        "sendRestaurantsInd": {
+          "description": "When true, send restaurant information.",
+          "type": "boolean"
+        }
+      }
+    },
+    "AreaInfo": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "AreaInfo"
+      },
+      "description": "Used to specifiy if area information is being requested.",
+      "properties": {
+        "sendRefPointsInd": {
+          "description": "When true, reference point information is being requested.",
+          "type": "boolean"
+        },
+        "sendAttractionsInd": {
+          "description": "When true, attraction information is being requested.",
+          "type": "boolean"
+        },
+        "sendRecreationsInd": {
+          "description": "When true, recreation information is being requested.",
+          "type": "boolean"
+        }
+      }
+    },
+    "AffiliationInfoRequest": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "AffiliationInfoRequest"
+      },
+      "description": "Used to indicated if affiliation information is being requested.",
+      "properties": {
+        "sendDistribSystemsInd": {
+          "description": "When true, distribution system information is being requested.",
+          "type": "boolean"
+        },
+        "sendBrandInd": {
+          "description": "When true Brand information is being rquested.",
+          "type": "boolean"
+        },
+        "sendLoyalProgramsInd": {
+          "description": "When true, loyalty program information is being requested.",
+          "type": "boolean"
+        },
+        "sendAwardsInd": {
+          "description": "When true, award information is being requested.",
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "Recreation": {
+          "$ref": "#/definitions/Recreation"
+        }
+      },
+      "required": [
+        "Recreation"
+      ]
+    },
+    {
+      "properties": {
+        "HotelDescriptiveContentIdentifier": {
+          "$ref": "#/definitions/HotelDescriptiveContentID"
+        }
+      },
+      "required": [
+        "HotelDescriptiveContentIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "HotelDescriptiveContentSummary": {
+          "$ref": "#/definitions/HotelDescriptiveContent"
+        }
+      },
+      "required": [
+        "HotelDescriptiveContentSummary"
+      ]
+    },
+    {
+      "properties": {
+        "HotelDescriptiveContentQueryHotels": {
+          "$ref": "#/definitions/HotelDescriptiveContentQueryHotels"
+        }
+      },
+      "required": [
+        "HotelDescriptiveContentQueryHotels"
+      ]
+    },
+    {
+      "properties": {
+        "CategoryCodes": {
+          "$ref": "#/definitions/CategoryCodes"
+        }
+      },
+      "required": [
+        "CategoryCodes"
+      ]
+    },
+    {
+      "properties": {
+        "GuestRoomInfo": {
+          "$ref": "#/definitions/GuestRoomInfo"
+        }
+      },
+      "required": [
+        "GuestRoomInfo"
+      ]
+    },
+    {
+      "properties": {
+        "ServiceShared": {
+          "$ref": "#/definitions/Service"
+        }
+      },
+      "required": [
+        "ServiceShared"
+      ]
+    },
+    {
+      "properties": {
+        "ServiceBusiness": {
+          "$ref": "#/definitions/ServiceBusiness"
+        }
+      },
+      "required": [
+        "ServiceBusiness"
+      ]
+    },
+    {
+      "properties": {
+        "ServiceHotelAmenity": {
+          "$ref": "#/definitions/ServiceHotelAmenity"
+        }
+      },
+      "required": [
+        "ServiceHotelAmenity"
+      ]
+    },
+    {
+      "properties": {
+        "ServiceMealPlan": {
+          "$ref": "#/definitions/ServiceMealPlan"
+        }
+      },
+      "required": [
+        "ServiceMealPlan"
+      ]
+    },
+    {
+      "properties": {
+        "ServiceMeetingRoom": {
+          "$ref": "#/definitions/ServiceMeetingRoom"
+        }
+      },
+      "required": [
+        "ServiceMeetingRoom"
+      ]
+    },
+    {
+      "properties": {
+        "DescriptiveContentFeatureSecurity": {
+          "$ref": "#/definitions/DescriptiveContentFeatureSecurity"
+        }
+      },
+      "required": [
+        "DescriptiveContentFeatureSecurity"
+      ]
+    },
+    {
+      "properties": {
+        "DescriptiveContentFeatureAccessibility": {
+          "$ref": "#/definitions/DescriptiveContentFeatureAccessibility"
+        }
+      },
+      "required": [
+        "DescriptiveContentFeatureAccessibility"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityInfo": {
+          "$ref": "#/definitions/FacilityInfo"
+        }
+      },
+      "required": [
+        "FacilityInfo"
+      ]
+    },
+    {
+      "properties": {
+        "GuestRooms": {
+          "$ref": "#/definitions/GuestRooms"
+        }
+      },
+      "required": [
+        "GuestRooms"
+      ]
+    },
+    {
+      "properties": {
+        "GuestRoom": {
+          "$ref": "#/definitions/GuestRoom"
+        }
+      },
+      "required": [
+        "GuestRoom"
+      ]
+    },
+    {
+      "properties": {
+        "TypeRoom": {
+          "$ref": "#/definitions/TypeRoom"
+        }
+      },
+      "required": [
+        "TypeRoom"
+      ]
+    },
+    {
+      "properties": {
+        "DescriptiveContentAmenity": {
+          "$ref": "#/definitions/DescriptiveContentAmenity"
+        }
+      },
+      "required": [
+        "DescriptiveContentAmenity"
+      ]
+    },
+    {
+      "properties": {
+        "HotelPolicies": {
+          "$ref": "#/definitions/HotelPolicies"
+        }
+      },
+      "required": [
+        "HotelPolicies"
+      ]
+    },
+    {
+      "properties": {
+        "HotelPolicy": {
+          "$ref": "#/definitions/HotelPolicy"
+        }
+      },
+      "required": [
+        "HotelPolicy"
+      ]
+    },
+    {
+      "properties": {
+        "HotelCancelPolicy": {
+          "$ref": "#/definitions/HotelCancelPolicy"
+        }
+      },
+      "required": [
+        "HotelCancelPolicy"
+      ]
+    },
+    {
+      "properties": {
+        "HotelPolicyInformation": {
+          "$ref": "#/definitions/HotelPolicyInformation"
+        }
+      },
+      "required": [
+        "HotelPolicyInformation"
+      ]
+    },
+    {
+      "properties": {
+        "TaxPolicies": {
+          "$ref": "#/definitions/TaxPolicies"
+        }
+      },
+      "required": [
+        "TaxPolicies"
+      ]
+    },
+    {
+      "properties": {
+        "TaxPolicy": {
+          "$ref": "#/definitions/TaxPolicy"
+        }
+      },
+      "required": [
+        "TaxPolicy"
+      ]
+    },
+    {
+      "properties": {
+        "PetPolicy": {
+          "$ref": "#/definitions/PetPolicy"
+        }
+      },
+      "required": [
+        "PetPolicy"
+      ]
+    },
+    {
+      "properties": {
+        "PetPolicies": {
+          "$ref": "#/definitions/PetPolicies"
+        }
+      },
+      "required": [
+        "PetPolicies"
+      ]
+    },
+    {
+      "properties": {
+        "FeePolicy": {
+          "$ref": "#/definitions/FeePolicy"
+        }
+      },
+      "required": [
+        "FeePolicy"
+      ]
+    },
+    {
+      "properties": {
+        "FeePolicies": {
+          "$ref": "#/definitions/FeePolicies"
+        }
+      },
+      "required": [
+        "FeePolicies"
+      ]
+    },
+    {
+      "properties": {
+        "RatePolicy": {
+          "$ref": "#/definitions/RatePolicy"
+        }
+      },
+      "required": [
+        "RatePolicy"
+      ]
+    },
+    {
+      "properties": {
+        "RatePolicies": {
+          "$ref": "#/definitions/RatePolicies"
+        }
+      },
+      "required": [
+        "RatePolicies"
+      ]
+    },
+    {
+      "properties": {
+        "GroupPolicies": {
+          "$ref": "#/definitions/GroupPolicies"
+        }
+      },
+      "required": [
+        "GroupPolicies"
+      ]
+    },
+    {
+      "properties": {
+        "GroupPolicy": {
+          "$ref": "#/definitions/GroupPolicy"
+        }
+      },
+      "required": [
+        "GroupPolicy"
+      ]
+    },
+    {
+      "properties": {
+        "RecreationFeature": {
+          "$ref": "#/definitions/RecreationFeature"
+        }
+      },
+      "required": [
+        "RecreationFeature"
+      ]
+    },
+    {
+      "properties": {
+        "OtherHotel": {
+          "$ref": "#/definitions/OtherHotel"
+        }
+      },
+      "required": [
+        "OtherHotel"
+      ]
+    },
+    {
+      "properties": {
+        "DistributionSystem": {
+          "$ref": "#/definitions/DistributionSystem"
+        }
+      },
+      "required": [
+        "DistributionSystem"
+      ]
+    },
+    {
+      "properties": {
+        "Brand": {
+          "$ref": "#/definitions/Brand"
+        }
+      },
+      "required": [
+        "Brand"
+      ]
+    },
+    {
+      "properties": {
+        "PartnerInfo": {
+          "$ref": "#/definitions/PartnerInfo"
+        }
+      },
+      "required": [
+        "PartnerInfo"
+      ]
+    },
+    {
+      "properties": {
+        "GDS_Information": {
+          "$ref": "#/definitions/GDS_Information"
+        }
+      },
+      "required": [
+        "GDS_Information"
+      ]
+    },
+    {
+      "properties": {
+        "GDS_CodesSummary": {
+          "$ref": "#/definitions/GDS_Codes"
+        }
+      },
+      "required": [
+        "GDS_CodesSummary"
+      ]
+    },
+    {
+      "properties": {
+        "GDS_CodesDetail": {
+          "$ref": "#/definitions/GDS_CodesDetail"
+        }
+      },
+      "required": [
+        "GDS_CodesDetail"
+      ]
+    },
+    {
+      "properties": {
+        "GDS_CodeSummary": {
+          "$ref": "#/definitions/GDS_Code"
+        }
+      },
+      "required": [
+        "GDS_CodeSummary"
+      ]
+    },
+    {
+      "properties": {
+        "GDS_CodeDetail": {
+          "$ref": "#/definitions/GDS_CodeDetail"
+        }
+      },
+      "required": [
+        "GDS_CodeDetail"
+      ]
+    },
+    {
+      "properties": {
+        "GDS_CodeInfo": {
+          "$ref": "#/definitions/GDS_CodeInfo"
+        }
+      },
+      "required": [
+        "GDS_CodeInfo"
+      ]
+    },
+    {
+      "properties": {
+        "GDS_Status": {
+          "$ref": "#/definitions/GDS_Status"
+        }
+      },
+      "required": [
+        "GDS_Status"
+      ]
+    },
+    {
+      "properties": {
+        "EffectivePeriod": {
+          "$ref": "#/definitions/EffectivePeriod"
+        }
+      },
+      "required": [
+        "EffectivePeriod"
+      ]
+    },
+    {
+      "properties": {
+        "RoomBlockInformation": {
+          "$ref": "#/definitions/RoomBlockInformation"
+        }
+      },
+      "required": [
+        "RoomBlockInformation"
+      ]
+    },
+    {
+      "properties": {
+        "HotelPropertyInfo": {
+          "$ref": "#/definitions/HotelPropertyInfo"
+        }
+      },
+      "required": [
+        "HotelPropertyInfo"
+      ]
+    },
+    {
+      "properties": {
+        "HotelDescriptiveRequestInfo": {
+          "$ref": "#/definitions/HotelDescriptiveRequestInfo"
+        }
+      },
+      "required": [
+        "HotelDescriptiveRequestInfo"
+      ]
+    },
+    {
+      "properties": {
+        "HotelRequestInfo": {
+          "$ref": "#/definitions/HotelRequestInfo"
+        }
+      },
+      "required": [
+        "HotelRequestInfo"
+      ]
+    }
+  ]
+}

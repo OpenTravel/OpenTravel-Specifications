@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.1 (http://www.xmlspy.com) by Marcel Jemio (OTA) -->
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="UniqueId.xsd"/>
+	<xs:attributeGroup name="OTA_PayloadStdAttributes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_PayloadStdAttributes defines the standard attributes that appear on the root element for all OTA payloads.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="EchoToken" type="xs:string"/>
+		<xs:attribute name="TimeStamp" type="xs:dateTime"/>
+		<xs:attribute name="Target" default="Production">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Test"/>
+					<xs:enumeration value="Production"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Version" type="xs:string"/>
+		<xs:attribute name="SequenceNmbr" type="xs:integer"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="ReqRespVersion">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The ReqRespVersion attribute is used to request the version of the payload message desired for the response.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ReqRespVersion" type="xs:string"/>
+	</xs:attributeGroup>
+	<xs:element name="OTA_SucceedDef">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">This entity represents success in processing.</xs:documentation>
+			</xs:annotation>
+			<xs:choice>
+				<xs:element ref="Success"/>
+				<xs:element ref="Warnings"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OTA_FailureDef">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>This entity represents failure in processing.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="Errors"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Success">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Standard way to indicate success processing an OTA message</xs:documentation>
+			</xs:annotation>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Warnings">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates successful processing, but warnings occured.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="Warning" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Errors">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">A Warning and an Error element have the same structure.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="Error" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Warning">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="Type" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The Warning element MUST contain the Type attribute that uses a recommended set of values to indicate the warning type. The validating DTD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown”.  </xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Unknown">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Indicates an unknown error. It is recommended that additional information be provided within the PCDATA of the Error or Warning element, whenever possible.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="NoImplementation">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Indicates that the target business system has no implementation for the intended request.  Additional information may be provided within the PCDATA.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="BizRule">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Indicates that the XML message has passed a low-level validation check, but that the business rules for the request message were not met. It is up to each implementation to determine when or if to use this error type or a more specific upper level content error. Additional information may be provided within the PCDATA.
+</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="Authentication">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Indicates the message lacks adequate security credentials. Additional information may be provided within the PCDATA.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="AuthenticationTimeout">
+									<xs:annotation>
+										<xs:documentation xml:lang="en"> Indicates that the security credentials in the message have expired.  Additional information may be provided within the PCDATA.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="Authorization">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Indicates the message lacks adequate security credentials. Additional information may be provided within the PCDATA.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="ProtocolViolation">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Indicates that a request was sent within a message exchange that does not align to the message protocols.  Additional information may be provided within the PCDATA.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="TransactionModel">
+									<xs:annotation>
+										<xs:documentation xml:lang="en"> Indicates that the target business system does not support the intended transaction-oriented operation.  Additional information may be found within the PCDATA.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="AuthenticationModel">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Indicates the type of authentication requested is not recognized. Additional information may be provided within the PCDATA.
+</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="ReqFieldMissing">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Indicates that an element of attribute that is required by the DTD or Schema (or required by agreement between trading partners) is missing from the message.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="Code" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="DocURL" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">If present, this URL refers to an online description of the error that occurred.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Status" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">If present, recommended values are those enumerated in the non-versioned Standard Error message, (NotProcessed | Incomplete | Complete | Unknown) however, the data type is designated as CDATA for versioned messages responses, recognizing that trading partners may identify additional status conditions not included in the enumeration.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Tag" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="RecordId" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Error">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="Type" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The Error element MUST contain the Type attribute that uses a recommended set of values to indicate the error type. The validating DTD can expect to accept values that it has NOT been explicitly coded for and process them by using Type ="Unknown”.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Unknown">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Indicates an unknown error. It is recommended that additional information be provided within the PCDATA of the Error or Warning element, whenever possible.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="NoImplementation">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Indicates that the target business system has no implementation for the intended request.  Additional information may be provided within the PCDATA.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="BizRule">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Indicates that the XML message has passed a low-level validation check, but that the business rules for the request message were not met. It is up to each implementation to determine when or if to use this error type or a more specific upper level content error. Additional information may be provided within the PCDATA.
+</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="Authentication">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Indicates the message lacks adequate security credentials. Additional information may be provided within the PCDATA.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="AuthenticationTimeout">
+									<xs:annotation>
+										<xs:documentation xml:lang="en"> Indicates that the security credentials in the message have expired.  Additional information may be provided within the PCDATA.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="Authorization">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Indicates the message lacks adequate security credentials. Additional information may be provided within the PCDATA.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="ProtocolViolation">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Indicates that a request was sent within a message exchange that does not align to the message protocols.  Additional information may be provided within the PCDATA.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="TransactionModel">
+									<xs:annotation>
+										<xs:documentation xml:lang="en"> Indicates that the target business system does not support the intended transaction-oriented operation.  Additional information may be found within the PCDATA.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="AuthenticationModel">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Indicates the type of authentication requested is not recognized. Additional information may be provided within the PCDATA.
+</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="ReqFieldMissing">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Indicates that an element of attribute that is required by the DTD or Schema (or required by agreement between trading partners) is missing from the message.</xs:documentation>
+									</xs:annotation>
+								</xs:enumeration>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="Code" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">If present, this refers to a table of coded values exchanged between applications to identify errors or warnings.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="DocURL" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">If present, this URL refers to an online description of the error that occurred.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Status" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">If present, recommended values are those enumerated in the non-versioned Standard Error message, (NotProcessed | Incomplete | Complete | Unknown) however, the data type is designated as CDATA for versioned messages responses, recognizing that trading partners may identify additional status conditions not included in the enumeration.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Tag" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">If present, this attribute may identify an unknown or misspelled tag that caused an error in processing. It is recommended that the Tag attribute use XPath notation to identify the location of a tag in the event that more than one tag of the same name is present in the document. Alternatively, the tag name alone can be used to identify missing data [Type=ReqFieldMissing].</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="RecordId" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">If present, this attribute allows for batch processing and the identification of the record that failed amongst a group of records.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

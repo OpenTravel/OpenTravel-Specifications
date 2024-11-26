@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA/2002/11" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA/2002/11" elementFormDefault="qualified" version="2002B">
+	<xs:include schemaLocation="OTA_AirCommonTypes.xsd"/>
+	<xs:element name="OTA_AirDetailsRQ">
+		<xs:annotation>
+			<xs:documentation>Holds flight details request object.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="POS" type="POS_Type">
+					<xs:annotation>
+						<xs:documentation>Point of sale object. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Airline" type="CompanyNameType">
+					<xs:annotation>
+						<xs:documentation>Specify airline to request availability for.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="FlightNumber" type="xs:positiveInteger">
+					<xs:annotation>
+						<xs:documentation>Specific flight number to request details for. Requires that Airline is also supplied.							</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="DepartureAirport" type="LocationType">
+					<xs:annotation>
+						<xs:documentation>Availability Search Origin - IATA 3 letter code.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ArrivalAirport" type="LocationType">
+					<xs:annotation>
+						<xs:documentation>Availability Search Destination - IATA 3 letter code.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="DepartureDate" type="xs:date"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+

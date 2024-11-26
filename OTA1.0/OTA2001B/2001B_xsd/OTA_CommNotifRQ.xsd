@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:include schemaLocation="Profile.xsd"/>
+	<xs:element name="OTA_CommNotifRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">CommissionEventUpdateRequest
+CommissionsEvents are prepared by the PMS as a result of a guest stay, or by systems such as an activity vendor's system as a result of a completed activity.  The report is then sent to the entity responsible for making payments to those parties that are to receive commissions for the transactions.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CommissionEvents"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Comment" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Comment : String
+A text field that allows for additional explanation for the reason; e.g.: a percent deducted from the commission, guest paid with a coupon, etc.
+</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Commission">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Commission
+The Commission element contains the data required for determining the commission amount to be paid to an agent.  The Commission Amount is calculated by applying a Percent to the CommissionableAmount and adding any flat amount that may apply.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelReference"/>
+				<xs:element ref="UniqueId" minOccurs="0"/>
+				<xs:element ref="CommissionableAmount"/>
+				<xs:element ref="PrepaidAmount" minOccurs="0"/>
+				<xs:element ref="FlatCommission" minOccurs="0"/>
+				<xs:element ref="CommissionPayableAmount"/>
+				<xs:element ref="Comment" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="StatusType" use="optional">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Full"/>
+						<xs:enumeration value="Partial"/>
+						<xs:enumeration value="Non-paying"/>
+						<xs:enumeration value="No-show"/>
+						<xs:enumeration value="Adjustment."/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Percent" type="xs:decimal" use="optional"/>
+			<xs:attribute name="ReasonCode" type="xs:string" use="optional"/>
+			<xs:attribute name="BillToID" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CommissionEvent">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The CommissionEvent element is used to identify the commission to be paid to a central server. The Commission Event is initiated on the schedule that the hotel typically pays commissions (e.g.: following night audit), and a CommissionEvent occurs for every check out.
+</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UniqueId"/>
+				<xs:element ref="StayDateRange"/>
+				<xs:element ref="GuestNames"/>
+				<xs:element ref="ProfileCertification" minOccurs="0"/>
+				<xs:element ref="ProfileReference"/>
+				<xs:element ref="Payee" minOccurs="0"/>
+				<xs:element ref="PayeeAddress" minOccurs="0"/>
+				<xs:element ref="Commissions"/>
+			</xs:sequence>
+			<xs:attribute name="ConfirmationID" type="xs:string" use="optional"/>
+			<xs:attribute name="ConfirmationOriginatorCode" type="xs:string" use="optional"/>
+			<xs:attribute name="CommissionOriginatorCode" type="xs:string" use="optional"/>
+			<xs:attribute name="ReservationID" type="xs:string" use="optional"/>
+			<xs:attribute name="OriginalBookingDate" type="xs:date" use="optional"/>
+			<xs:attribute name="PreferedPaymentCurrency" type="xs:string" use="optional"/>
+			<xs:attribute name="MarketCode" type="xs:string" use="optional"/>
+			<xs:attribute name="BookingSource" type="xs:string" use="optional"/>
+			<xs:attribute name="NumberOfRooms" type="xs:int" use="optional"/>
+			<xs:attribute name="RoomInventoryCode" type="xs:string" use="optional"/>
+			<xs:attribute name="PromotionCode" type="xs:string" use="optional"/>
+			<xs:attribute name="InitialRate" type="xs:decimal" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CommissionEvents">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Events : CommissionEvent
+A collection of CommissionsEvent elements that result from a guest stay to be sent to the system responsible for processing agent commission payments.
+</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CommissionEvent" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CommissionPayableAmount">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">CommissionPayableAmount : Currency
+This amount overrides all other calculation of commissions.  If this value is included, it will be the amount to be paid on this transaction.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:decimal">
+					<xs:attribute name="CurrencyCode" type="xs:string" use="required"/>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CommissionableAmount">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">CommissionableAmount : Currency
+Basis amount used to determine the commission amount to be paid to the agent.  This is a mandatory attribute. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:decimal">
+					<xs:attribute name="CurrencyCode" type="xs:string" use="required"/>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Commissions">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Commissions : Commission
+A collection of multiple Commission elements.
+</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Commission" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FlatCommission">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">FlatCommission : Currency
+Flat rate amount to be paid to agent if applicable. Clients may set this attribute and/or the CommissionPercent attribute.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:decimal">
+					<xs:attribute name="CurrencyCode" type="xs:string" use="required"/>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GuestNames">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">GuestNames : NameInfo
+A collection of NameInfo elements associated with the commissionable event.  NameInfo elements are consistent with the name stored in the reservation or guest stay information and can be used to reconcile records with the original reservation. If systems do not need all guest name components, they can be concatenated or combined in the NameOrdered attribute of this element. The NameInfo element is defined in the CRS </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PersonName" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PrepaidAmount">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">PrepaidAmount : Currency
+Amount pre-deducted by the agent. This amount would be calculated and subtracted from the amount paid to the agent. This field would also be used where the hotel has already paid a commission, but is notifying the central system of that payment.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:decimal">
+					<xs:attribute name="CurrencyCode" type="xs:string" use="required"/>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProfileCertification">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ProfileCertification : ProfileCertification
+The ProfileCertification element identifies the travel agency to be paid by providing the IATA number or ARC certifying number.  (Implementation note: This attribute is optional, but if it is not set, the Profile attribute must be set.)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="CertificationType" type="xs:string" use="required"/>
+			<xs:attribute name="CertificationID" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="StayDateRange">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">StayDateRange : DateTimeSpan
+Total time span covered by this reservation (earliest arrival to latest departure). The DateTimeSpan element is defined in the HITIS Correlation and Interface Standard.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="StartInstant" type="xs:dateTime" use="required"/>
+			<xs:attribute name="Duration" type="xs:duration" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CommissionPercent">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The percentage to be applied to the commissionable amount</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Payee">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of Payee for commission.  Optional where profiles are used.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PayeeAddress">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Payee Address for commission.  This is optional where profile is used</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ProfileReference">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ProfileReference : Profile
+A reference to the travel agent's Profile.  (Implementation note: This attribute is optional, but if it is not set, the ProfileCertification attribute must be set.)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Profile" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

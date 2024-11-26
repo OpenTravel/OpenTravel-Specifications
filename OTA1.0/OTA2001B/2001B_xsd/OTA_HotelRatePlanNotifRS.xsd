@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:element name="OTA_HotelRatePlanNotifRS">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_HotelRatePlanNotifRS message returns an integer to indicate the status of processing the OTA_HotelRatePlanNotifRQ message.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element ref="Success"/>
+					<xs:element ref="Warnings" minOccurs="0"/>
+					<xs:element ref="InventoryCrossRef" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:element ref="Errors"/>
+			</xs:choice>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This element defines standard attributes that appear on the root element for all OTA payloads.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InventoryCrossRef">
+		<xs:complexType>
+			<xs:attribute name="RequestRatePlanCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification of the inventory. The Inventory Code assigned by the sending system for the inventory item upon creation of a new inventory item.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RequestRatePlanGroupingCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification of the inventory group. The InventoryGrouping  Code assigned by the sending system for the inventory item upon creation of a new inventory grouping.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ResponseRatePlanCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification of the inventory. The Inventory Code assigned by the receiving system for the inventory item in response to a notification of a new inventory item</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ResponseRatePlanGroupingCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification of the inventory group. The InventoryGrouping  Code assigned by the receiving system  in response to a notification of a new inventory grouping.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

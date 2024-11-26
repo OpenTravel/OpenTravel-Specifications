@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:include schemaLocation="DateTimeSpan.xsd"/>
+	<xs:element name="OTA_HotelInvSyncRQ">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UniqueId"/>
+				<xs:element ref="HotelReference"/>
+				<xs:element ref="Adjustments"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Adjustments">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Adjustment" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="RequestID" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Adjustment">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DateTimeSpan"/>
+			</xs:sequence>
+			<xs:attribute name="RoomInventoryCode" type="xs:string" use="required"/>
+			<xs:attribute name="PromotionCode" type="xs:string" use="required"/>
+			<xs:attribute name="Sequence" type="xs:positiveInteger" use="required"/>
+			<xs:attribute name="InvValue" type="xs:positiveInteger" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

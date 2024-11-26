@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="GolfCourseTeeTimes.xsd"/>
+	<xs:element name="OTA_CourseAvailRS">
+		<xs:annotation>
+			<xs:documentation>The OTA_CourseAvailRS is the response message associated with the OTA_CourseAvailRQ message.  It includes any errors and warnings, or an element indicating success.  Where the response is successful, the tee times and fees will be included.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:annotation>
+					<xs:documentation>May have either errors or warnings or both, but must have one if there is no success	</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element ref="Success"/>
+					<xs:element ref="Warnings" minOccurs="0"/>
+					<xs:element ref="GolfCourseTeeTime" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:element ref="Errors"/>
+			</xs:choice>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			<xs:attribute name="GolfCourseID" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>An identification assigned to this golf course.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

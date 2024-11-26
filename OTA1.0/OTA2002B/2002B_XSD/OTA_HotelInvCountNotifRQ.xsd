@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA/2002/11" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA/2002/11" elementFormDefault="qualified" version="2002B">
+	<xs:include schemaLocation="OTA_HotelCommonTypes.xsd"/>
+	<xs:element name="OTA_HotelInvCountNotifRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_InvCountNotifRQ is the message that sends a notification to reservation systems that synchronizes the inventory available for sale at the hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="POS" type="POS_Type" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>POS provides a mechanisim to indicate the source of the message.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="UniqueId" type="UniqueIdType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The unique identifier element allows the trading partners to  uniquely identify each InvCountNotifRQ, (i.e.  the entire message) for transaction tracability.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="InvCounts">
+					<xs:annotation>
+						<xs:documentation>Container for the individual Inventory Count Message(s). An OTA_HoteInvCountNotifRQ contains the booking rules for a single hotel. Hotel identification information are the attributes of this element.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="StatusApplicationControl" type="StatusApplicationControlType" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Information on what the  InvCountNotif Message applies to (i.e. the combination of inventory and/or rate codes) and the period of application.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Inventory" type="BaseInvCountType" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Remove attributes of Inventory. These are now part of StatusApplicationControl</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="UniqueID" type="UniqueIdType" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>The unique identifier element allows the trading partners to  uniquely identify each Inventory Count Message, for transaction tracability. </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attributeGroup ref="HotelReferenceGroup"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This element defines standard attributes that appear on the root element for all OTA payloads.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="BaseInvCountType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The set of changes in the number of units of base inventory for one inventory type (code) to be made on the server. The server must 	successfully update all messages. Failure to update any single status message will result in the failure of all messages. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="InvCount" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A collection of inventory counts (ex. Physical, Available, Sold, OOO, NAFS etc)</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="CountType" use="optional">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Physical"/>
+								<xs:enumeration value="DefinitiveAvail"/>
+								<xs:enumeration value="TentativeAvail"/>
+								<xs:enumeration value="DefiniteSold"/>
+								<xs:enumeration value="TentativeSold"/>
+								<xs:enumeration value="OutOfOrder"/>
+								<xs:enumeration value="NotAvailForSale"/>
+								<xs:enumeration value="OutOfInv"/>
+								<xs:enumeration value="OffMarket"/>
+								<xs:enumeration value="UnderRenovation"/>
+								<xs:enumeration value="UnderConstruction"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="Count" type="xs:nonNegativeInteger" use="optional"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OffSell" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Communicates additional information about inventory that is not available for sale.</xs:documentation>
+					<xs:documentation xml:lang="en">Communicates information about inventory that is not available for sale.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="OffSellValueType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">An enumerated type that defines whether to replace or adjust current values. This value could be negative, as an adjustment could 	reduce 	the 	inventory items that are on offsell, or be used to offer an oversell. Values : Total (should replace any existing offsell value); Adjustment (should be added to any existing offsell value).			</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="Total"/>
+								<xs:enumeration value="Adjustment"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="OffSellValue" type="Money" use="optional"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AddlInvControls" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Stuff that was there before...</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="RatePlanClass" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The overall class of rate plan, such as PROMO or RACK. </xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="RatePlanCode" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Which rate plan does this inventory effect. </xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="ReservationOriginatorCode" type="xs:string" use="optional">
+						<xs:annotation>
+							<xs:documentation>It is the code representing the system that created this reservation.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="ConfirmationID" type="StringLength32" use="optional"/>
+					<xs:attribute name="ReservationID" type="StringLength32" use="optional"/>
+					<xs:attribute name="AdjustReason" type="StringLength32" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Additional information as to the nature of the inventory adjustment; eg. GUEST EXTENDED STAY, or ROOM CHANGE, etc 	</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="ActionType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">An enumerated type.  'Adjustment' is the offset up or down to the inventoried item (day to day business); 'Used' means the Inv value is 	how much of this inventoried item has been used/sold at this point in time;  'Remaining' means that the Inv value shows what is left for the inventoried item at this point in time; 'Allocation' means this is how much of the inventoried item is going to be allocated to the receiver for them to pull from inventory.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="Adjustment"/>
+								<xs:enumeration value="Used"/>
+								<xs:enumeration value="Remaining"/>
+								<xs:enumeration value="Allocation"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="LocatorId" type="xs:positiveInteger" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Can be used to communicate back to the sender exactly which transaction may have had a problem; e.g. "Message 214 had an invalid 	date 		range".</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
+

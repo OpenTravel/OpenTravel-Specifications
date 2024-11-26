@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation>This is an XML Schema representing an Air Availability Request. </xs:documentation>
+	</xs:annotation>
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="OTA_Pos.xsd"/>
+	<xs:include schemaLocation="CommonAirSchema.xsd"/>
+	<xs:include schemaLocation="CompanyName.xsd"/>
+	<xs:element name="OTA_AirAvailRQ">
+		<xs:annotation>
+			<xs:documentation>Air availability request message schema.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="POS">
+					<xs:annotation>
+						<xs:documentation>Point of sale object. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="OriginDestinationInformation"/>
+				<xs:element ref="SpecificRequestInformation" minOccurs="0"/>
+				<xs:element ref="TravelPreferences" minOccurs="0"/>
+				<xs:element ref="TravelerInformation" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="DesiredOptionQuantity" type="xs:positiveInteger" use="optional" default="10">
+				<xs:annotation>
+					<xs:documentation> Maximum number of reponses desired in the reponse message. This defaults to 10.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DirectFlightsOnly" type="xs:boolean" use="optional" default="false">
+				<xs:annotation>
+					<xs:documentation> Request direct flights on between the given locations.This defaults to false.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OriginDestinationInformation">
+		<xs:annotation>
+			<xs:documentation>Origin and Destination location, and time information for the request. Also includes the ability to specify a connection location for the search.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="OriginLocation" type="LocationType">
+					<xs:annotation>
+						<xs:documentation>Availability Search Origin - IATA 3 letter code.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="DestinationLocation" type="LocationType">
+					<xs:annotation>
+						<xs:documentation>Availability Search Destination - IATA 3 letter code.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="TravelDateTime" type="TravelDateTime">
+					<xs:annotation>
+						<xs:documentation>Date and time of trip - can be departure time or destination time.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Connection" type="ConnectionType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Optional connection location - IATA 3 letter code.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpecificRequestInformation">
+		<xs:annotation>
+			<xs:documentation>Specify specific airlines, flight numbers and booking classes</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FlightNumber" type="xs:positiveInteger" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Specific flight number to request availability for. Requires that Airline is also supplied.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Airline" type="CompanyName" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Specify airline to request availability for.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="BookingClassPref" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Specify specific booking classes to include and exclude in the response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TravelPreferences">
+		<xs:annotation>
+			<xs:documentation>Air Availability Request preference information.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VendorPref" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Specify specific vendors to include and exclude from the response.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="FlightTypePref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AirFareRestrictPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AirEquipPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AirCabinPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AirSrvcClassPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="TicketDistribPref" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="SmokingInd" type="SmokingIndType" use="optional" default="No">
+				<xs:annotation>
+					<xs:documentation> Request smoking flights in response. Defaults to false - no desire for smoking flights.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OnTimeRate" type="OnTimeRateType" use="optional">
+				<xs:annotation>
+					<xs:documentation> Request for flights in response that meet the given Department of Transport on-time rate. This is a number between 1 and 90.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MaxStopsQuantity" type="xs:nonNegativeInteger" use="optional">
+				<xs:annotation>
+					<xs:documentation> Request flights that have no more than the requested number of stops. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TravelerInformation">
+		<xs:annotation>
+			<xs:documentation>Specify passenger numbers and types</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="PassengerTypeQuantity" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Specify number of passengers using Passenger Type Codes</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:annotation>
+							<xs:documentation>Specifies a PTC and the associated number of PTC's - for use in specifying passenger lists</xs:documentation>
+						</xs:annotation>
+						<xs:attribute name="PassengerTypeCode" type="ThreeLetterCodeType" use="required"/>
+						<xs:attribute name="Quantity" type="xs:positiveInteger" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="TravelDateTime">
+		<xs:annotation>
+			<xs:documentation>Date and time of trip, that allows specifying a time window before and after the given date.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="TravelDate" type="xs:dateTime">
+			<xs:annotation>
+				<xs:documentation> Date and time of flights.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TravelTimeIndicator">
+			<xs:simpleType>
+				<xs:annotation>
+					<xs:documentation> Specifies if the given time is a departure time or a destination time. </xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="DepartureTime"/>
+					<xs:enumeration value="ArrivalTime"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="TimeWindowBefore" type="xs:duration" use="optional">
+			<xs:annotation>
+				<xs:documentation>Time duration before the given date which is acceptable for flights.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TimeWindowAfter" type="xs:duration" use="optional">
+			<xs:annotation>
+				<xs:documentation>Time duration after the given date which is acceptable for flights.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

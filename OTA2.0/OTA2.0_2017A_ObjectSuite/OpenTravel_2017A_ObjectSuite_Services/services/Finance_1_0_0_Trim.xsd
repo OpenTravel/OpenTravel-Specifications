@@ -1,0 +1,1816 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/finance/v1"
+    version="1.0.0"
+    xmlns:fin-0100="http://www.opentravel.org/OTM/finance/v1"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0200="http://www.opentravel.org/OTM/Common/v2"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:ProjectName>GolfProjectOTM022417_Publication2.otp</otm:ProjectName>
+                <otm:LibraryName>Finance</otm:LibraryName>
+                <otm:LibraryVersion>1.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                <otm:SourceFile>/Finance_1_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2017-02-24T17:20:55.952-05:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v2" schemaLocation="ota2-0200_imports.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v2" schemaLocation="ota2-0200_imports.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:complexType name="BankAccountType">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">BankAccountType</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="listBankAccountType"
+                    type="ota2-0200:BankAccountType_Enum_Base" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies a type of bank account (checking, savings, etc.)</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="listBankAccountTypeExtension" type="ota2:String_EnumExtension"/>
+                <xsd:attribute name="accountCode"
+                    type="ota2-0200:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Code extension definition without dimension information.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="description" type="xsd:string" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Description of who manages this set of codes.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="Common">Description</otm:Equivalent>
+                            <otm:Example context="Common">Visa</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="name" type="xsd:string" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">This may be a source authority/ owner name, ID or code.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="Common">SourceName</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="uRL" type="xsd:anyURI" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Implementer: This is A URL to the code source authority/ owner.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}anyURI</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="Common">SourceURL</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="id" type="xsd:ID" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Implementer: This is used for a database or key ID for the code item (if it is different from the @CodeExtension) in relationship to the obsolete code indicator.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="Common">UniqueID</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:element name="BankAcct" type="fin-0100:BankAcct"/>
+    
+    <xsd:complexType name="BankAcct">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Customer bank account definition.</xsd:documentation>
+            <xsd:documentation source="Description">Customer bank account definition.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">BankAcct</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="PrivacyGroup" type="ota2-0200:Privacy">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Data use and sharing permissions.</xsd:documentation>
+                    <xsd:documentation source="Implementer">AttributeGroup: PrivacyGroup</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" name="BankAcctName" type="ota2-0200:StringShort">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Name as found on a bank account.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to64</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">BankAcctName</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" ref="fin-0100:BankAcctNumber">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Account number.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to64</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">BankAcctName</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="1" ref="fin-0100:BankID">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Bank ID or routing number.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Type" type="fin-0100:BankAccountType">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies a type of bank account (Savings, Checking, etc.)</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}List_BankAccountType</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">Type</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="checkNumber" type="ota2-0200:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The check number.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to32</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">CheckNumber</otm:Equivalent>
+                    <otm:Example context="fin">999</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="checksAcceptedInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Implementer: If true, checks are accepted.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="EncryptionToken" type="fin-0100:EncryptionToken"/>
+    <xsd:element name="BankAcctNumber" type="fin-0100:EncryptionToken"/>
+    <xsd:element name="BankID" type="fin-0100:EncryptionToken"/>
+    <xsd:element name="CardNumber" type="fin-0100:EncryptionToken"/>
+    <xsd:element name="SeriesCode" type="fin-0100:EncryptionToken"/>
+    <xsd:element name="MagneticStripe" type="fin-0100:EncryptionToken"/>
+    <xsd:element name="AuthenticationVerification" type="fin-0100:EncryptionToken"/>
+    <xsd:element name="TransactionPassword" type="fin-0100:EncryptionToken"/>
+    
+    <xsd:complexType name="EncryptionToken">
+        <xsd:annotation>
+            <xsd:documentation source="Description">OpenTravel Best Practice: Use of Encrypted, Masked or Tokenized Information: Certain OpenTravel schema may have combinations payment and/or account information with other personally identifying information, such as customer name and date of birth. For enhanced customer privacy and security, it is RECOMMENDED that the payment and account information be protected, using tokenization or some other encryption method and displayed in a masked format.</xsd:documentation>
+            <xsd:documentation source="Description">OpenTravel Best Practice: Use of Encrypted, Masked or Tokenized Information: Certain OpenTravel schema may have combinations payment and/or account information with other personally identifying information, such as customer name and date of birth. For enhanced customer privacy and security, it is RECOMMENDED that the payment and account information be protected, using tokenization or some other encryption method and displayed in a masked format.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">EncryptionToken</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" name="PlainText" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Non-secure (plain text) value.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Warning" type="ota2-0200:ErrorWarning">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies an error that occurred in the processing of the payment card.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}WarningType</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="encryptionKey" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Note: This contains a key required to retrieve the full payment instrument details compliant with PCI DSS standards.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="encryptionKeyMethod" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Developer: This contains a reference to the key generation method being used - this is NOT the key value.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="encryptionMethod" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">OpenTravel Best Practice: Encryption Method: When using the OpenTravel Encryption element, it is RECOMMENDED that all trading partners be informed of all encryption methods being used in advance of implementation to ensure message processing compatibility.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="encryptedValue" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Example: 5dfc52b51bd35553df8592078de921bc</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="mask"
+            type="ota2-0200:EncryptionTokenTypeMask" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Example: xxxxxxxxxxxx9922</xsd:documentation>
+                <xsd:documentation source="Implementer">LocalAnonymousType: EncryptionTokenType_Mask</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="fin">000000000000000</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="token"
+            type="fin-0100:EncryptionTokenType_Token" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Example: AEGHV234AUD54367</xsd:documentation>
+                <xsd:documentation source="Implementer">LocalAnonymousType: EncryptionTokenType_Token</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="fin">000000000000000</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="tokenProviderID" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Developer: This contains a provider ID if multiple providers are used for secure information exchange.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="authenticationMethod"
+            type="fin-0100:AuthenticationMethod_Enum" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Specifies the method that was used to authenticate the card.</xsd:documentation>
+                <xsd:documentation source="Implementer">LocalAnonymousType: EncryptionTokenType_AuthenticationMethod</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="DirectBill" type="fin-0100:DirectBill"/>
+    
+    <xsd:complexType name="DirectBill">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Company name and location for sending invoice for remittances for travel services.</xsd:documentation>
+            <xsd:documentation source="Description">Company name and location for sending invoice for remittances for travel services.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">DirectBill</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Privacy" type="ota2-0200:Privacy">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Allows for control of the sharing of direct bill data between parties.</xsd:documentation>
+                    <xsd:documentation source="Implementer">AttributeGroup: PrivacyGroup</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0200:CompanySubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Company to which remittance should be sent.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="directBill_ID" type="ota2-0200:String" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Identifier for the organization to be billed directly for travel services.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to32</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">DirectBill_ID</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="billingAccount"
+            type="ota2-0200:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The account assigned by the subscriber for billing reconciliation of a corporate account.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength0to64</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">BillingNumber</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="FormOfPaymentSubGrp" type="fin-0100:FormOfPayment_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the form of payment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">FormOfPayment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="FormOfPaymentID"
+        substitutionGroup="fin-0100:FormOfPaymentSubGrp" type="fin-0100:FormOfPayment_ID"/>
+    <xsd:element name="FormOfPaymentIdentifier" type="fin-0100:FormOfPayment_ID"/>
+    <xsd:element name="FormOfPayment"
+        substitutionGroup="fin-0100:FormOfPaymentSubGrp" type="fin-0100:FormOfPayment"/>
+    <xsd:element name="FormOfPaymentSummary" type="fin-0100:FormOfPayment"/>
+    <xsd:element name="FormOfPaymentCash"
+        substitutionGroup="fin-0100:FormOfPaymentSubGrp" type="fin-0100:FormOfPayment_Cash"/>
+    <xsd:element name="FormOfPaymentPaymentCard"
+        substitutionGroup="fin-0100:FormOfPaymentSubGrp" type="fin-0100:FormOfPayment_PaymentCard"/>
+    <xsd:element name="FormOfPaymentBankAccount"
+        substitutionGroup="fin-0100:FormOfPaymentSubGrp" type="fin-0100:FormOfPayment_BankAccount"/>
+    <xsd:element name="FormOfPaymentLoyaltyRedemption"
+        substitutionGroup="fin-0100:FormOfPaymentSubGrp" type="fin-0100:FormOfPayment_LoyaltyRedemption"/>
+    <xsd:element name="FormOfPaymentDirectBill"
+        substitutionGroup="fin-0100:FormOfPaymentSubGrp" type="fin-0100:FormOfPayment_DirectBill"/>
+    <xsd:element name="FormOfPaymentVoucher"
+        substitutionGroup="fin-0100:FormOfPaymentSubGrp" type="fin-0100:FormOfPayment_Voucher"/>
+    <xsd:element name="FormOfPaymentMiscChargeOrder"
+        substitutionGroup="fin-0100:FormOfPaymentSubGrp" type="fin-0100:FormOfPayment_MiscChargeOrder"/>
+    <xsd:element name="FormOfPaymentTicket"
+        substitutionGroup="fin-0100:FormOfPaymentSubGrp" type="fin-0100:FormOfPayment_Ticket"/>
+    
+    <xsd:complexType name="FormOfPayment_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the form of payment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">FormOfPayment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0200:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="FormOfPaymentRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the obj ID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FormOfPayment">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the form of payment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">FormOfPayment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="fin-0100:FormOfPayment_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="Privacy" type="ota2-0200:Privacy">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Data use and sharing permissions.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="GuaranteeTypeCode" type="ota2-0200:PaymentType_Enum">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Used to specify the method of guarantee. Refer to OpenTravel Code List Payment Type (PMT).</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}OTA_CodeType</xsd:documentation>
+                            <xsd:appinfo>
+                                <otm:Equivalent context="fin">GuaranteeTypeCode</otm:Equivalent>
+                            </xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+                </xsd:sequence>
+                <xsd:attribute name="costCenterID"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A reference to identify the billing department for allocating cost of travel to company account.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to32</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">CostCenterID</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="paymentTransactionTypeCode"
+                    type="fin-0100:PaymentTransactionType_Enum" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">This is used to indicate either a charge, reserve (deposit) or refund.</xsd:documentation>
+                        <xsd:documentation source="Implementer">LocalAnonymousType: PaymentFormType_PaymentTransactionTypeCode</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">PaymentTransactionTypeCode</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="guaranteeID"
+                    type="ota2-0200:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Provides the identifier as specified by the GuaranteeTypeCode (e.g., Corporate ID or IATA number).</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to64</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">GuaranteeID</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="remark"
+                    type="ota2-0200:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A remark associated with the payment form.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to128</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">Remark</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="guaranteeIndicatorInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, indicates this represents a guarantee rather than a payment form.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FormOfPayment_Cash">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the form of payment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">FormOfPayment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="fin-0100:FormOfPayment">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+                <xsd:attribute name="cashInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Indicates that cash is being used as the form of payment.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FormOfPayment_PaymentCard">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the form of payment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">FormOfPayment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="fin-0100:FormOfPayment">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="fin-0100:PaymentCardSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Specifies the payment card information.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FormOfPayment_BankAccount">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the form of payment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">FormOfPayment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="fin-0100:FormOfPayment">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="fin-0100:BankAcct">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Customer bank account definition.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FormOfPayment_LoyaltyRedemption">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the form of payment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">FormOfPayment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="fin-0100:FormOfPayment">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="PromotionCode" type="ota2-0200:Code">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Used to provide a promotion code of the loyalty redemption and the list of vendors supporting the promotion (in CodeContext).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="9" minOccurs="0"
+                        name="LoyaltyCertificate" type="fin-0100:LoyaltyCertificate">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A certificate may be needed in order to redeem miles or points. Certificates may be used in combination with each other as part of a reservation.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+                <xsd:attribute name="redemptionQuantity"
+                    type="xsd:positiveInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The quantity of loyalty units being redeemed.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FormOfPayment_DirectBill">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the form of payment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">FormOfPayment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="fin-0100:FormOfPayment">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="fin-0100:DirectBill">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Company name and location for sending invoice for remittances for travel services.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FormOfPayment_Voucher">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the form of payment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">FormOfPayment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="fin-0100:FormOfPayment">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="Voucher" type="fin-0100:Voucher">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A form of payment using a voucher or coupon.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="BillingAccountName" type="ota2-0200:CompanyName">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The name of the Billing Account for which the voucher has been issued.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0200:AddressSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The address of the Billing Account for which the voucher has been issued.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FormOfPayment_MiscChargeOrder">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the form of payment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">FormOfPayment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="fin-0100:FormOfPayment">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="OriginalIssue" type="fin-0100:OriginalIssueAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Provides information about the original document on which the reissue is based.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+                <xsd:attribute name="ticketNumber"
+                    type="ota2-0200:TicketNumber" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The ticket number of the miscellaneous charge order (MCO).</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="paperMCO_ExistInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Indicates if a paper or electronic MCO exists.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FormOfPayment_Ticket">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the form of payment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">FormOfPayment</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="fin-0100:FormOfPayment">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="OriginalIssueAttributes" type="fin-0100:OriginalIssueAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Provides information about the original document on which the reissue is based.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="Rerouting" type="fin-0100:Rerouting">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">If present, indicates if the rerouting, which made the exchange necessary was voluntary or involuntary.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="16" minOccurs="0"
+                        name="ConjunctionTicketNbr" type="fin-0100:ConjunctionTicketNbr">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Conjunction ticket number in case a conjunction ticket is exchanged.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Custom"/>
+                </xsd:sequence>
+                <xsd:attribute name="ticketNumber"
+                    type="ota2-0200:TicketNumber" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The ticket number which is exchanged.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="reasonForReroute"
+                    type="ota2-0200:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Gives more information about the rerouting.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="LoyaltyCertificate">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Identifies the Loyalty Program, membership, form factor used by the certificate and its current status.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">LoyaltyCertificate</otm:OTA2Entity>
+                <otm:Equivalent context="fin">LoyaltyCertificateGroup</otm:Equivalent>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="iD" type="xsd:ID" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A unique identifying value assigned by the creating system. The ID attribute may be used to reference a primary-key value within a database or in a particular implementation.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to32</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">ID</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="iD_Context"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Identifies the source of the code that identifies program or promotion within a loyalty scheme.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to32</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">ID_Context</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="certificateNumber"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The loyalty redemption certificate identifier.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to32</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">CertificateNumber</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="memberNumber"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Unique identifier of the member in the program.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to32</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">MemberNumber</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="programName"
+                    type="ota2-0200:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">This identifies the loyalty program.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to64</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">ProgramName</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="EffectiveDate" type="xsd:date" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Indicates the starting date.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}date</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">EffectiveDate</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="ExpireDate" type="xsd:date" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Indicates the ending date.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}date</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">ExpireDate</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="numberOfNights"
+                    type="xsd:positiveInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The number of accommodation nights that are covered by this certificate.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Changed type from {http://www.w3.org/2001/XMLSchema}nonNegativeInteger.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">NmbrOfNights</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="format"
+                    type="fin-0100:LoyaltyCertificateFormat_Enum" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Indicates what form the certificate is in e.g. Paper or Electronic.</xsd:documentation>
+                        <xsd:documentation source="Implementer">LocalAnonymousType: LoyaltyCertificateGroup_Format</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">Format</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="status" type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Used to define the status of the certificate e.g. Available, Voided, Cancelled, Reserved, Used.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to16</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">Status</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="expireDateExclusiveInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, indicates that the ExpireDate is the first day after the applicable period (e.g. when expire date is Oct 15  the last date of the period is Oct 14).</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="OriginalIssueAttributes">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Provides information about the original document on which the reissue is based.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">OriginalIssueAttributes</otm:OTA2Entity>
+                <otm:Equivalent context="fin">OriginalIssueAttributes</otm:Equivalent>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="ticketNumber"
+                    type="ota2-0200:TicketNumber" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The original ticket number in a series if reissuances.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to32</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">OriginalTicketNumber</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="issuePlace"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Place where the original ticket was issued.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to8</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">OriginalIssuePlace</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="issueDate" type="xsd:date" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Date when the original ticket was issued.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}date</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">OriginalIssueDate</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="issueIATA"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">IATA office number, which issued original ticket.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to8</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">OriginalIssueIATA</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="paymentForm"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Payment type for the original ticket.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to64</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">OriginalPaymentForm</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="checkInhibitor"
+                    type="fin-0100:CheckInhibitor_Enum" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When present, indicates that the check digit of the ticket number or the interline agreement do not need to be checked.</xsd:documentation>
+                        <xsd:documentation source="Implementer">LocalAnonymousType: OriginalIssueAttributes_CheckInhibitorType</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">CheckInhibitorType</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="coupons" type="fin-0100:Coupons" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Gives a list of references to coupon numbers of the ticket which will be taken for payment.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}ListOfRPH</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">CouponRPHs</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="PaymentCardSubGrp" type="fin-0100:PaymentCard">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of the debit or credit card.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">PaymentCard</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="PaymentCard"
+        substitutionGroup="fin-0100:PaymentCardSubGrp" type="fin-0100:PaymentCard"/>
+    <xsd:element name="PaymentCardSummary" type="fin-0100:PaymentCard"/>
+    <xsd:element name="PaymentCardDetail"
+        substitutionGroup="fin-0100:PaymentCardSubGrp" type="fin-0100:PaymentCard_Detail"/>
+    
+    <xsd:simpleType name="PaymentCard_Simple">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The masked payment card number.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">PaymentCard</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2-0200:EncryptionTokenTypeMask"/>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="PaymentCard_Simple_List">
+        <xsd:list itemType="fin-0100:PaymentCard_Simple"/>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="PaymentCard">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of the debit or credit card.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">PaymentCard</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Privacy" type="ota2-0200:Privacy">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Data use and sharing permissions.</xsd:documentation>
+                    <xsd:documentation source="Implementer">AttributeGroup: PrivacyGroup</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="CardCode" type="fin-0100:CardAssociationCode">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Card code association such as VI for Visa, MC for Mastercard or AX for American Express, etc.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}PaymentCardCodeType</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">CardCode</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" name="CardType" type="fin-0100:PaymentCardType_Issuer">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Example: BritishAirwaysVisaSignatureCard</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}Issuer</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">Issuer</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Issuer" type="ota2-0200:CodeExternal">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Example: Mastercard</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}List_PaymentCardIssuer</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">CardType</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0"
+                name="CardHolderName" type="ota2-0200:StringShort">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Card holder name.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to64</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">CardHolderName</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" ref="fin-0100:CardNumber">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Credit card number embossed on the card.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}EncryptionTokenType</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">CardNumber</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" ref="fin-0100:AuthenticationVerification">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Verification digits.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}EncryptionTokenType</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">SeriesCode</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="3" minOccurs="0" ref="fin-0100:MagneticStripe">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Magnetic stripe.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}EncryptionTokenType</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">MagneticStripe</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">XML ID only for use within the document.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}RPH_Type</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">RPH</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="effectiveDate" type="ota2-0200:DateMMYY" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Start month and year.</xsd:documentation>
+                <xsd:documentation source="Implementer">AttributeGroup: PaymentCardDateGroup</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="fin">0116</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="expireDate" type="ota2-0200:DateMMYY" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">End month and year.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="fin">0117</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="secureInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">If true, all or a portion of this data is secure, via tokenization, encryption and/or masking.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="PaymentCard_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of the debit or credit card.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">PaymentCard</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="fin-0100:PaymentCard">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="CardHolderId" type="ota2-0200:Identifier">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Card holder reference ID</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}RPH_Type</xsd:documentation>
+                            <xsd:appinfo>
+                                <otm:Equivalent context="fin">CardHolderRPH</otm:Equivalent>
+                            </xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="1" minOccurs="0" ref="ota2-0200:PersonNameSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Description: The details of the Card Holder's Name.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}PersonNameType</xsd:documentation>
+                            <xsd:appinfo>
+                                <otm:Equivalent context="fin">CardHolderNameDetails</otm:Equivalent>
+                            </xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="1" minOccurs="0" ref="ota2-0200:AddressSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Card holder address.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}AddressType</xsd:documentation>
+                            <xsd:appinfo>
+                                <otm:Equivalent context="fin">Address</otm:Equivalent>
+                            </xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" ref="ota2-0200:TelephoneSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Card holder telephone number.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}Telephone</xsd:documentation>
+                            <xsd:appinfo>
+                                <otm:Equivalent context="fin">Telephone</otm:Equivalent>
+                            </xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" ref="ota2-0200:Email">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Card holder email.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}EmailType</xsd:documentation>
+                            <xsd:appinfo>
+                                <otm:Equivalent context="fin">Email</otm:Equivalent>
+                            </xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" ref="fin-0100:CustomerLoyalty">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Card holder loyalty program.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}CustLoyalty</xsd:documentation>
+                            <xsd:appinfo>
+                                <otm:Equivalent context="fin">CustLoyalty</otm:Equivalent>
+                            </xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="1" minOccurs="0" ref="fin-0100:SignatureOnFile">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Note: This indicates if the signature is authorized as a form of guarantee. In some countries, the customer can sign the payment card slip as a form of guarantee.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}SignatureOnFile</xsd:documentation>
+                            <xsd:appinfo>
+                                <otm:Equivalent context="fin">SignatureOnFile</otm:Equivalent>
+                            </xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="1" minOccurs="0" ref="fin-0100:ThreeDomainSecurity">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Note: This contains 3-D Secure protocol information for online credit and debit card transactions for programs such as Verified by Visa, MasterCard SecureCode, J/Secure and SafeKey.</xsd:documentation>
+                            <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}ThreeDomainSecurity</xsd:documentation>
+                            <xsd:appinfo>
+                                <otm:Equivalent context="fin">ThreeDomainSecurity</otm:Equivalent>
+                            </xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="countryOfIssue"
+                    type="ota2-0200:CountryCode_ISO3166" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Example: US</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}ISO3166</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">CountryOfIssue</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="companyCardReference"
+                    type="ota2-0200:StringAlphaNumeric" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Note: This is a reference for a company sponsor for the card.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}AlphaNumericStringLength1to19</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">CompanyCardReference</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="remark"
+                    type="ota2-0200:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Example: Travel rewards card.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to128</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">Remark</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="extendedPaymentInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Implementer: If true, the credit card company is requested to delay the date on which the amount of this transaction is applied to the customer's account.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="PaymentCardType_Issuer">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Code of the payment card issuer.</xsd:documentation>
+            <xsd:documentation source="Implementer">Extension: List_PaymentCardIssuer</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">PaymentCardType_Issuer</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0200:StringShort">
+                <xsd:attribute name="issuerCode"
+                    type="ota2-0200:PaymentCardIssuer_Enum_Base" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Code Extension fields to exchange a value that is not in the list and is known to your trading partners.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="issuerCodeExtension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:element name="SignatureOnFile" type="fin-0100:SignatureOnFile"/>
+    
+    <xsd:complexType name="SignatureOnFile">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Signature on file.</xsd:documentation>
+            <xsd:documentation source="Description">Signature on file.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">SignatureOnFile</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Date_EffectiveExpire" type="ota2-0200:DateEffectiveExpire">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Used to identify the effective date and/or expiration date.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="signatureOnFileInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, indicates a signature has been obtained.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="ThreeDomainSecurity_Gateway" type="fin-0100:ThreeDomainSecurity_Gateway"/>
+    
+    <xsd:complexType name="ThreeDomainSecurity_Gateway">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">ThreeDomainSecurity_Gateway</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" ref="fin-0100:AuthenticationVerification">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Cardholder authentication value information.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}AuthenticationVerificationValue</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">AuthenticationVerificationValue</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" ref="fin-0100:TransactionPassword">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Merchant transaction password information.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}TransactionPassword</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">TransactionPassword</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="eCI" type="ota2-0200:StringCharacterOne" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Note: The ECI indicates the security level associated with an Internet purchase transaction.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}AlphaNumericStringLength1</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">ECI</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="merchantID" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Example: mycart</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">MerchantID</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="processorID" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Example: 201</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">ProcessorID</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="uRL" type="xsd:anyURI" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Transaction URL.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}anyURI</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">URL</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element name="ThreeDomainSecurity" type="fin-0100:ThreeDomainSecurity"/>
+    
+    <xsd:complexType name="ThreeDomainSecurity">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">ThreeDomainSecurity</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="1" ref="fin-0100:ThreeDomainSecurity_Gateway">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Merchant gateway information.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="1" ref="fin-0100:ThreeDomainSecurity_Results">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Transaction results.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="ThreeDomainSecurity_Results" type="fin-0100:ThreeDomainSecurity_Results"/>
+    
+    <xsd:complexType name="ThreeDomainSecurity_Results">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">ThreeDomainSecurity_Results</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="cAVV" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Example: AAABAFaQRwAAAAAAEZBHAAAAAAA=ECI05</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">CAVV</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="pAResStatus"
+            type="ota2-0200:StringCharacterOne" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Example: Y</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}AlphaNumericStringLength1</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">PAResStatus</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="signatureVerfication" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Example: Y</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">SignatureVerfication</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="transactionID" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Example: 9D920E9-6FCF-4A74-A4E0-D6A591D1108F</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">TransactionID</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="xID" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Example: 2bxUs1emK0SCevbivcApzAcAAQk=</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">XID</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Voucher">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A form of payment using a voucher or coupon.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">Voucher</otm:OTA2Entity>
+                <otm:Equivalent context="fin">VoucherGroup</otm:Equivalent>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="seriesCode"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Identification of a series of coupons or vouchers identified by serial number(s).</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to32</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">SeriesCode</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="EffectiveDate" type="xsd:date" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Indicates the starting date.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}date</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">EffectiveDate</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="ExpireDate" type="xsd:date" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Indicates the ending date.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}date</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">ExpireDate</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="billingNumber"
+                    type="ota2-0200:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Reference of the billing account which handles the payment transaction.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to64</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">BillingNumber</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="supplierIdentifier"
+                    type="ota2-0200:GUID" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Unique identifier of the electronic voucher, created by the supplier.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to64</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">SupplierIdentifier</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="identifier" type="xsd:ID" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Unique identifier of the electronic voucher.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to64</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">Identifier</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="valueType"
+                    type="ota2-0200:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Defines the type of voucher (e.g., full credit or partial credit).</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to32</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="fin">ValueType</otm:Equivalent>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="url" type="xsd:anyURI" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Uri of the creating system. The URI should be an URL and be globally unique. Should only be omitted when the context is clearly implied for the containing document.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Identifier provides the ability to create a globally unique identifier. For the identifier to be globally unique it must have a system provided identifier and the system must be identified using a global naming authority. System identification uses the domain naming system (DNS) to assure they are globally unique and should be an URL. The system provided ID will typically be a primary or surrogate key in a database.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="system"
+                    type="ota2-0200:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Name or identifier for the creating system.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="Common">sysABC3344</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="organization"
+                    type="ota2-0200:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Name of the company that manages the reference system.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="Common">Acme</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="groupDaysApplyInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, specifies the Group Days Apply Value can be used for this Voucher Billing Account.  This indicator is used to allow the usage of a car rental days voucher when part of an inclusive tour.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="electronicIndicatorInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, indicates the voucher is electronic. An E-voucher is a value document issued by the Travel Agent for the customer. The e-voucher can be used as a proof of reservation, but more normally, as a full-payment or partial payment.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="expireDateExclusiveInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, indicates that the ExpireDate is the first day after the applicable period (e.g. when expire date is Oct 15  the last date of the period is Oct 14).</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="Coupon">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Gives the coupon number of the ticket, which will be taken for payment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Simple">Coupon</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9]{1,8}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="Coupons">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Gives the coupon numbers of the ticket, which will be taken for payment.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Simple">Coupons</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:list itemType="fin-0100:Coupon"/>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="AuthenticationMethod_Enum">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">AuthenticationMethod_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="SecurityCode">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">This confirms that the security code was used as the type of authentication.  The security code includes items such as CVV, CVV2, CVC, etc.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="MagneticStripe">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">This confirms that the magnetic stripe was used as the type of authentication.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="EncryptionTokenType_Token">
+        <xsd:annotation>
+            <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Simple">EncryptionTokenType_Token</otm:OTA2Entity>
+                <otm:Equivalent context="fin">EncryptionTokenType_Token</otm:Equivalent>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9a-zA-Z]{1,32}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="LoyaltyCertificateFormat_Enum">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">LoyaltyCertificateFormat_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Paper"/>
+            <xsd:enumeration value="Electronic"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="CheckInhibitor_Enum">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">CheckInhibitor_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="CheckDigit">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The CheckDigit of the TicketNumber does not need to be verified.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="InterlineAgreement">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">No automatic interline agreement check needs to be performed on the ticket to be reissued.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Both">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Neither the ticket number check digit nor the interline agreement needs to be checked.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="PaymentTransactionType_Enum">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">PaymentTransactionType_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="charge">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">This indicates that an actual payment has been made.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="reserve">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">This indicates that a hold for the indicated amount has been placed on a credit card or that a cash amount has been taken from the customer to guarantee final payment.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="refund">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">This indicates that the payment amount of this PaymentDetail element is for a refund.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="Rerouting_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Indicates if the rerouting, which made the exchange necessary was voluntary or involuntary.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">Rerouting_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="voluntary"/>
+            <xsd:enumeration value="involuntary"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="SingleVendor_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Indicates if program is affiliated with a group of related offers accumulating credits.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">SingleVendor_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="SingleVndr">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicates the program is not part of an alliance.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Alliance">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicates the program is part of an alliance.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="ConjunctionTicketNbr">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Conjunction ticket number in case a conjunction ticket is exchanged.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">ConjunctionTicketNbr</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="coupons" type="fin-0100:Coupons" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Gives the coupon numbers of the ticket, which will be taken for payment.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Rerouting">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Indicates if the rerouting, which made the exchange necessary was voluntary or involuntary.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">Rerouting</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="fin-0100:Rerouting_Enum">
+                <xsd:attribute name="reason"
+                    type="ota2-0200:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Gives more information about the rerouting.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="CardAssociationCode">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A tiny string  
+Minimum length of 0 and a maximum length of 32</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Simple">CardAssociationCode</otm:OTA2Entity>
+                <otm:Example context="fin">AX</otm:Example>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2-0200:StringTiny">
+            <xsd:pattern value="([a-zA-Z]{2})?"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:element name="CustomerLoyalty" type="fin-0100:CustomerLoyalty"/>
+    
+    <xsd:complexType name="CustomerLoyalty">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Program rewarding frequent use by accumulating credits for services provided by vendors.</xsd:documentation>
+            <xsd:documentation source="Description">Program rewarding frequent use by accumulating credits for services provided by vendors.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">CustomerLoyalty</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="TravelSector" type="ota2-0200:TravelSector_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies the travel sector. Refer to OpenTravel Code List Travel Sector (TVS).</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}OTA_CodeType</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">TravelSector</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="Privacy" type="ota2-0200:Privacy">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Permission for sharing data for synchronization of information held by other travel service providers.</xsd:documentation>
+                    <xsd:documentation source="Implementer">LocalAnonymousType: CustomerLoyaltyGroup_ShareSynchInd</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">ShareSynchInd</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="VendorCode" type="ota2-0200:Code">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Indicate the partner(s)/vendor(s) for which the customer loyalty number is valid.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}ListOfStringLength1to8</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">VendorCode</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A reference placeholder for this loyalty membership.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}RPH_Type</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">RPH</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="programID" type="ota2-0200:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Identifier to indicate the company owner of the loyalty program.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to16</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">ProgramID</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="membershipID" type="ota2-0200:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Unique identifier of the member in the program (membership number, account number, etc.).</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to32</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">MembershipID</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="allianceLoyaltyLevelName"
+            type="ota2-0200:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Name of the alliance loyalty level (e.g.,OneWorld  uses Emerald, Ruby, etc and SkyTeam uses Elite, etc.)</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to128</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">AllianceLoyaltyLevelName</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="customerType" type="ota2-0200:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Original assessment of the customer by the travel agent.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to8</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">CustomerType</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="customerValue" type="ota2-0200:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The supplier's ranking of the customer (e.g., VIP, numerical ranking).</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to8</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">CustomerValue</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="password" type="ota2-0200:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The password for the member in the program.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to32</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">Password</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="loyalLevel" type="ota2-0200:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Indicates special privileges in program assigned to individual.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}StringLength1to16</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">LoyalLevel</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="loyalLevelCode" type="xsd:positiveInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Provides a numeric code assigned to a particular loyalty level.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}Numeric1to3</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">LoyalLevelCode</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="singleVendorInd"
+            type="fin-0100:SingleVendor_Enum" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Indicates if program is affiliated with a group of related offers accumulating credits.</xsd:documentation>
+                <xsd:documentation source="Implementer">LocalAnonymousType: CustomerLoyaltyGroup_SingleVendorInd</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">SingleVendorInd</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="signupDate" type="xsd:date" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Indicates when the member signed up for the loyalty program.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}date</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">SignupDate</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="effectiveDate" type="xsd:date" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Indicates the starting date.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}date</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">EffectiveDate</otm:Equivalent>
+                    <otm:Example context="fin">0116</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="expireDate" type="xsd:date" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Indicates the ending date.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}date</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">ExpireDate</otm:Equivalent>
+                    <otm:Example context="fin">0117</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="expireDateExclusiveIndicatorInd"
+            type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, indicates that the ExpireDate is the first day after the applicable period (e.g. when expire date is Oct 15  the last date of the period is Oct 14).</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="primaryLoyaltyIndicatorInd"
+            type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When true, indicates this is the primary customer loyalty program and when false, indicates this is not the primary customer loyalty program.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}boolean</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+</xsd:schema>

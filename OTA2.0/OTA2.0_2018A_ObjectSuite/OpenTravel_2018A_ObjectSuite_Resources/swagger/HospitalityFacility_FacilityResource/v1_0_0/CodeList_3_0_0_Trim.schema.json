@@ -1,0 +1,1486 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "CodeList",
+  "x-otm-library": {
+    "LibraryName": "CodeList",
+    "LibraryVersion": "3.0.0",
+    "LibraryStatus": "FINAL",
+    "SourceFile": "/CodeList_3_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2018-04-05T08:59:58.178-0400"
+  },
+  "definitions": {
+    "DocumentType_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "DocumentType_Enum"
+      },
+      "description": "Defines the specific type of identification or certification document.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/DocumentType_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "DocumentType_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "DocumentType_Enum"
+      },
+      "description": "Defines the specific type of identification or certification document.",
+      "type": "string",
+      "enum": [
+        "NaturalizationCertificate",
+        "PassportCard",
+        "CrewMemberCertificate",
+        "AirNexusCard",
+        "MerchantMariner",
+        "Non-standard",
+        "KnownTravelerNumber",
+        "RedressNumber",
+        "PermanentResidentCard",
+        "PilotsLicense",
+        "RefugeeTravelDocument",
+        "BorderCrossingCard",
+        "VerhicleRegistrationNumber",
+        "TaxexEmptionNumber",
+        "InsurancePolicyNumber",
+        "AlienRegistrationNumber",
+        "VaccinationCertificate",
+        "NationalIdentityDocument",
+        "DriversLicense",
+        "MilitaryIdentification",
+        "Passport",
+        "Visa",
+        "Other_"
+      ]
+    },
+    "DurationUnit_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "DurationUnit_Enum"
+      },
+      "description": "Defines the \u0027Units\u0027 that can be applied to Stay restrictions.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/DurationUnit_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "DurationUnit_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "DurationUnit_Enum"
+      },
+      "description": "Defines the \u0027Units\u0027 that can be applied to Stay restrictions.",
+      "type": "string",
+      "enum": [
+        "SUN",
+        "SAT",
+        "FRI",
+        "THU",
+        "WED",
+        "TUES",
+        "MON",
+        "Months",
+        "Days",
+        "Hours",
+        "Minutes",
+        "Other_"
+      ]
+    },
+    "BedType_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "BedType_Enum"
+      },
+      "description": "The type(s) of sleeping option(s) in a guest accommodation.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/BedType_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "BedType_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "BedType_Enum"
+      },
+      "description": "The type(s) of sleeping option(s) in a guest accommodation.",
+      "type": "string",
+      "enum": [
+        "Dorm bed",
+        "Double/full",
+        "Futon",
+        "King",
+        "Murphy bed",
+        "Queen",
+        "Run of the house",
+        "Sofa bed",
+        "Tatami mats",
+        "Twin/single",
+        "Water bed",
+        "Other_"
+      ]
+    },
+    "DisabilityFeature_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "DisabilityFeature_Enum"
+      },
+      "description": "Specifies information about a facility, amenity or service that is relevant to people with a disability.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/DisabilityFeature_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "DisabilityFeature_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "DisabilityFeature_Enum"
+      },
+      "description": "Specifies information about a facility, amenity or service that is relevant to people with a disability.",
+      "type": "string",
+      "enum": [
+        "Accessibility to goods and services",
+        "Accessible baths",
+        "Accessible entrance",
+        "Accessible parking",
+        "Accessible platform lifts available",
+        "Accessible rooms",
+        "Accessible self parking available",
+        "Accessible van parking",
+        "Accommodations have bath in bedroom",
+        "Adapted room doors",
+        "Adjustable height hand-held shower wand",
+        "Americans with Disabilities Act (ADA) compliance",
+        "Assistive listening devices for meetings upon request",
+        "Audible emergency alarm for sight impaired guest",
+        "Bathroom doors in inches",
+        "Bathroom doors open outwards",
+        "Bathroom vanity in guest rooms for wheelchair user\u0027s height",
+        "Bathtub grab bars",
+        "Bathtub seat",
+        "Bed types of wheelchair accessible rooms",
+        "Bedroom wheelchair access",
+        "Benches in locker rooms.",
+        "Braille signage provided",
+        "Braille/large print literature",
+        "Business center  is wheelchair accessible",
+        "Closed caption TV",
+        "Closet rods in guest rooms for disabled person height",
+        "Complementary accessible transportation with advanced notice",
+        "Complies with Local/State/Federal laws for disabled",
+        "Concierge desk is wheelchair accessible",
+        "Describe in detail how your kitchen is accessible.",
+        "Does hotel have accessible parking?",
+        "Door width in inches",
+        "Drinking fountains accessible",
+        "Elevator access to all levels",
+        "Elevator near accessible rooms",
+        "Elevators equipped for accessibility",
+        "Elevators have Braille Instructions",
+        "Emergency cord/button system in bathroom",
+        "Emergency cord/button system in bedroom",
+        "Emergency exit signs in Braille",
+        "Emergency info in Braille",
+        "Emergency instructions in pictorial form",
+        "Emergeny procedures for people with disabilites",
+        "Exercise facility is wheelchair accessible",
+        "Facilities for people with hearing impairment only",
+        "Facilities for people with vision impairment only",
+        "Feather free bedding/pillows available",
+        "Flashing door knocker available",
+        "Flat terrain between parking and entrance",
+        "Food service lines accessible",
+        "Grab bars in bathroom",
+        "Guest rooms and access routes are accessible",
+        "Hearing impaired services",
+        "Hearing induction loop system installed",
+        "Height from ground of deadbolt in guest room",
+        "Height from ground of elevator external buttons",
+        "Height from ground of elevator internal buttons",
+        "Height from ground of elevator internal handrails",
+        "Height from ground of guest bed including mattress",
+        "Height from ground of thermostat in guest room",
+        "Height from ground to light switches in bathroom",
+        "Height from ground to light switches in guest room",
+        "Height from ground to peephole in guest room door",
+        "Height of bathroom basin",
+        "Height of bathroom toilet seat",
+        "Height of controls at highest operable part for bath",
+        "Height of controls at highest operable part for roll-in shower",
+        "Height of deadbolt in guest room (in feet)",
+        "Height of deadbolt in guest room (in Inches)",
+        "Height of light switches in guest rooms (feet)",
+        "Height of light switches in guest rooms (inches)",
+        "Height of non-slip handrails adjacent to bath",
+        "Height of non-slip handrails adjacent to bathroom toilet",
+        "Height of non-slip handrails in shower area",
+        "Height of peephole in guest room (in feet)",
+        "Height of peephole in guest room (in inches)",
+        "Height of thermostat in guest room (in feet)",
+        "Height of thermostat in guest room (in inches)",
+        "Hotel entrance is accessible",
+        "Hotel restaurant is wheelchair accessible",
+        "Impairment aids available",
+        "Length/depth of clear floor space in front of bath",
+        "Length/depth of clear floor space in front of guest bathroom toilet",
+        "Lever handles on guest room doors",
+        "Light switches in guest rooms for wheelchair user\u0027s height",
+        "List available room types for disabled persons- 8 fields",
+        "Locker rooms accessible",
+        "Lower level seating required",
+        "Lowered electrical outlets",
+        "Lowered night guards on guest room doors",
+        "Number of accessible meeting rooms",
+        "Number of accessible rooms with standard tub",
+        "Number of each room type equipped for disabled persons- 8 fields",
+        "Number of roll-in showers available",
+        "Number of rooms with Braille",
+        "Number of rooms with wheelchair accessible showers",
+        "Number of wheelchair accessible rooms",
+        "Other services for persons with disabilities",
+        "Passenger has meet and assist requirement",
+        "Passenger has oxygen equipment",
+        "Pool is wheelchair accessible",
+        "Portable bathtub seats",
+        "Public areas wheelchair accessible",
+        "Public telephones accessible",
+        "Raised toilet seat with grab bars",
+        "Ramp access",
+        "Registration desk is wheelchair accessible",
+        "Restaurant/bar menus available in 14pt print",
+        "Restaurant/bar menus available in Braille",
+        "Restroom facilities accessible",
+        "Roll-in shower area with bathroom seat",
+        "Roll-in shower available",
+        "Route from accessible public entrance to business center is accessible",
+        "Route from accessible public entrance to exercise facility is accessible",
+        "Route from accessible public entrance to meeting rooms is accessible",
+        "Route from accessible public entrance to pool is accessible",
+        "Route from accessible public entrance to registration area is accessible",
+        "Route from accessible public entrance to restaurant is accessible",
+        "Route from accessible public entrance to spa is accessible",
+        "Safety bars in shower",
+        "Sales and service counters accessible",
+        "Service animals allowed on property for people with disabilities",
+        "Service dogs allowed",
+        "Special needs menus",
+        "Staff proficient in sign language",
+        "Staff trained in service to disabled guests",
+        "Steps/staircases have color markings",
+        "Steps/staircases have handrails",
+        "Subtitles/closed captions available on TV",
+        "Tactile/14pt print signage throughout hotel",
+        "Telephone for hearing impaired",
+        "Television amplifier",
+        "Toilet seat in guest rooms for disabled person",
+        "TTY/TTD compatible",
+        "Van accessible parking in self parking",
+        "Viabrating alarm available",
+        "Vibrating pillows available",
+        "Visual emergency alarm for hearing impaired guest",
+        "Walk-in shower",
+        "What room types have wheel-in showers? (free form stringbox)",
+        "Wheelchair accessible elevators",
+        "Wheelchair lift required",
+        "Wheelchair, passenger has own chair, buses",
+        "Wheelchair, passenger has own chair, trains",
+        "Wheelchair, passenger requires station wheelchair",
+        "Wheelchairs available",
+        "Which floors have accessible rooms",
+        "Wide corridors",
+        "Wide entrance",
+        "Wide restaurant entrance",
+        "Width/diameter of clear floor space at main hotel entrance",
+        "Width/diameter of clear floor space at main restaurant entrance",
+        "Width/diameter of clear floor space in front of bath",
+        "Width/diameter of clear floor space in front of guest bathroom toilet",
+        "Width/diameter of clear opening space at bathroom door",
+        "Width/diameter of clear opening space at bedroom door",
+        "Width/diameter of elevator clear door opening space",
+        "Width/diameter of main corridors",
+        "Width/diameter of wheelchair turning space in bathroom",
+        "Width/diameter of wheelchair turning space in bedroom",
+        "Width/diameter of wheelchair turning space in lobby/reception area",
+        "Other_"
+      ]
+    },
+    "RecreationService_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "RecreationService_Enum"
+      },
+      "description": "Describes the recreational activities available to a guest which may or may not be operated by or located at the hotel.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/RecreationService_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "RecreationService_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "RecreationService_Enum"
+      },
+      "description": "Describes the recreational activities available to a guest which may or may not be operated by or located at the hotel.",
+      "type": "string",
+      "enum": [
+        "Animal watching",
+        "Antique shopping",
+        "Archery",
+        "Badminton court",
+        "Baseball diamond",
+        "Basketball court",
+        "Beach",
+        "Bike rental",
+        "Bike trail",
+        "Billiards",
+        "Bird watching",
+        "Boat tours",
+        "Boating",
+        "Bocce court",
+        "Bowling alley",
+        "Boxing",
+        "Camping",
+        "Canoeing",
+        "Children\u0027s pool",
+        "Children\u0027s program",
+        "Children\u0027s program, onsite",
+        "Cricket pitch",
+        "Cross country skiing",
+        "Dancing",
+        "Dart board",
+        "Direct access to a beach",
+        "Diving",
+        "Dog racing",
+        "Downhill skiing",
+        "Driving range",
+        "Extensive health club",
+        "Fishing",
+        "Fitness center",
+        "Fly fishing",
+        "Football field",
+        "Gambling",
+        "Garden",
+        "Golf",
+        "Golf location (onsite/nearby)",
+        "Health club",
+        "Helicopter/airplane sightseeing",
+        "Hiking trail",
+        "Horse racing",
+        "Horseback riding",
+        "Hot tub",
+        "Hunting",
+        "Ice skating",
+        "Indoor pool",
+        "Indoor tennis courts",
+        "Indoor/outdoor connecting pool",
+        "Jet-ski",
+        "Jogging trail",
+        "Karaoke",
+        "Kayaking",
+        "Kids beach club",
+        "Kids equestrian club",
+        "Kids golf academy",
+        "Lake",
+        "Limited health club",
+        "Massage services",
+        "Miniature golf",
+        "Mountain biking trail",
+        "Mountain climbing",
+        "Museum/gallery",
+        "Nature preserve trail",
+        "Nightclub",
+        "Ocean",
+        "Outdoor pool",
+        "Outdoor tennis courts",
+        "Outlet shopping",
+        "Paddle court",
+        "Parasailing",
+        "Playground",
+        "Polo",
+        "Pool",
+        "Putt putt golf",
+        "Racquetball court",
+        "River",
+        "River rafting",
+        "Rock climbing",
+        "Safari",
+        "Sailing",
+        "Sauna",
+        "Scuba diving",
+        "Shopping",
+        "Sightseeing tours",
+        "Skating rink",
+        "Skeet shooting",
+        "Ski in/out facilities",
+        "Skydiving",
+        "Snorkeling",
+        "Snow boarding",
+        "Snow mobiling",
+        "Snow skiing",
+        "Soccer field",
+        "Solarium",
+        "Spa facility",
+        "Sports court",
+        "Sports events",
+        "Squash court",
+        "Steam bath",
+        "Sun tanning bed",
+        "Sunbathing",
+        "Surfing",
+        "Table tennis",
+        "Teen programs",
+        "Tennis court",
+        "Tennis professional",
+        "Theatre",
+        "Tubing",
+        "Upscale shopping",
+        "Velodrome",
+        "Volleyball",
+        "Walking track",
+        "Water activities",
+        "Water-skiing",
+        "Weightlifting",
+        "Whirlpool",
+        "Windsurfing",
+        "Wine tasting",
+        "Winter sports",
+        "Wrestling",
+        "Other_"
+      ]
+    },
+    "SecurityFeature_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "SecurityFeature_Enum"
+      },
+      "description": "Identifies security features of the services, meeting rooms, guest rooms, and restaurants of a property.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/SecurityFeature_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "SecurityFeature_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "SecurityFeature_Enum"
+      },
+      "description": "Identifies security features of the services, meeting rooms, guest rooms, and restaurants of a property.",
+      "type": "string",
+      "enum": [
+        "2nd lock on guest doors",
+        "Audible alarm smoke detectors in guest rooms",
+        "Audible alarms in hallways",
+        "Audible alarms in public areas",
+        "Auto link to fire station",
+        "Automated External Defibrillator (AED) on-site",
+        "Building meets all current local, state and country building codes",
+        "Carbon monoxide detector",
+        "Complies with Local/State/Federal fire laws",
+        "Connecting doors have deadbolts",
+        "Dead bolts on guest room doors",
+        "Electronic room key",
+        "Elevator auto recall",
+        "Emergency back-up generators",
+        "Emergency evacuation plan",
+        "Emergency exits on each floor",
+        "Emergency info in room",
+        "Emergency lighting",
+        "Evacuation drills",
+        "Exterior doors (except lobby entrance) require key access at night",
+        "FEMA approved",
+        "Fire extinguishers",
+        "Fire extinguishers in hallways",
+        "Fire extinguishers in public areas",
+        "First aid available",
+        "Guest room doors self-closing",
+        "Hard wired smoke detectors",
+        "Health club facilities (pool/gym) require key access for entrance",
+        "Hours security",
+        "If no 24 hour security, what are the hours?",
+        "Lighted parking area",
+        "Multiple exits on each floor",
+        "Patrolled parking area",
+        "Private security available",
+        "Property has elevators",
+        "Public address system",
+        "Room access through exterior corridor",
+        "Room access through interior corridor",
+        "Room accessible through balcony sliding glass doors",
+        "Room windows open",
+        "Safety chains on guest doors",
+        "Secondary locks on room windows",
+        "Secondary locks on sliding glass doors",
+        "Secured floors",
+        "Security",
+        "Security 24 hours/day",
+        "Security escorts available on request",
+        "Smoke detector in guest rooms",
+        "Smoke detector in hallways",
+        "Smoke detector in public areas",
+        "Sprinklers in guest rooms",
+        "Sprinklers in hallways",
+        "Sprinklers in public areas",
+        "Staff Red Cross certified in CPR",
+        "Staff trained in Automated External Defibrillator (AED) usage",
+        "Staff trained in CPR",
+        "Staff trained in duplicate key issue",
+        "Staff trained in first aid",
+        "Swingbolt lock",
+        "Ventilated stair wells",
+        "Video cameras at entrance",
+        "Video cameras in public areas",
+        "Video surveillance monitored 24 hrs a day",
+        "Video surveillance of parking",
+        "Video surveillance recorded 24 hrs a day",
+        "Viewports in guest room doors",
+        "VIP Security",
+        "Visual alarm in guest rooms",
+        "Visual alarms in hallways",
+        "Visual alarms in public areas",
+        "Other_"
+      ]
+    },
+    "Status_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "Status_Enum"
+      },
+      "description": "The status condition.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/Status_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "Status_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "Status_Enum"
+      },
+      "description": "The status condition.",
+      "type": "string",
+      "enum": [
+        "Complete",
+        "Incomplete",
+        "Not processed",
+        "Unknown",
+        "Other_"
+      ]
+    },
+    "ErrorWarningType_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "ErrorWarningType_Enum"
+      },
+      "description": "Tthe category of error or warning.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ErrorWarningType_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "ErrorWarningType_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "ErrorWarningType_Enum"
+      },
+      "description": "Tthe category of error or warning.",
+      "type": "string",
+      "enum": [
+        "Advisory",
+        "Application error",
+        "Authentication",
+        "Authentication timeout",
+        "Authorization",
+        "Business rule",
+        "No implementation",
+        "Processing exception",
+        "Protocol violation",
+        "Required field missing",
+        "Unknown",
+        "Other_"
+      ]
+    },
+    "PhoneLocation_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "PhoneLocation_Enum"
+      },
+      "description": "Where the phone is located.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/PhoneLocation_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "PhoneLocation_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "PhoneLocation_Enum"
+      },
+      "description": "Where the phone is located.",
+      "type": "string",
+      "enum": [
+        "Brand reservations office",
+        "Central reservations office",
+        "Home",
+        "Managing company",
+        "Mobile",
+        "Office",
+        "Property direct",
+        "Property reservation Office",
+        "Sales office",
+        "Other_"
+      ]
+    },
+    "PhoneUseType_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "PhoneUseType_Enum"
+      },
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/PhoneUseType_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "PhoneUseType_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "PhoneUseType_Enum"
+      },
+      "type": "string",
+      "enum": [
+        "Contact",
+        "Daytime contact",
+        "Emergency contact",
+        "Evening contact",
+        "Guest use",
+        "Mobile",
+        "Pickup contact",
+        "Toll free number",
+        "Travel arranger",
+        "Other_"
+      ]
+    },
+    "PhoneTechType_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "PhoneTechType_Enum"
+      },
+      "description": "Defines the technology associated with this phone number.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/PhoneTechType_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "PhoneTechType_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "PhoneTechType_Enum"
+      },
+      "description": "Defines the technology associated with this phone number.",
+      "type": "string",
+      "enum": [
+        "Voice",
+        "Fax",
+        "Pager",
+        "TTY",
+        "Other_"
+      ]
+    },
+    "TimeUnit_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "TimeUnit_Enum"
+      },
+      "type": "string",
+      "enum": [
+        "Day",
+        "Full duration",
+        "Hour",
+        "Minute",
+        "Month",
+        "Second",
+        "Week",
+        "Year"
+      ]
+    },
+    "CommunicationLocation_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "CommunicationLocation_Enum"
+      },
+      "description": "Specifies a location for communication.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/CommunicationLocation_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "CommunicationLocation_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "CommunicationLocation_Enum"
+      },
+      "description": "Specifies a location for communication.",
+      "type": "string",
+      "enum": [
+        "Business",
+        "Destination",
+        "Home",
+        "Other_"
+      ]
+    },
+    "AddressUse_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "AddressUse_Enum"
+      },
+      "description": "Describes how an address is to be used.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/AddressUse_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "AddressUse_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "AddressUse_Enum"
+      },
+      "description": "Describes how an address is to be used.",
+      "type": "string",
+      "enum": [
+        "Billing",
+        "Chain",
+        "Contact",
+        "Credit card",
+        "Delivery",
+        "Deposit",
+        "Mailing",
+        "Physical",
+        "Pre-opening office",
+        "Other_"
+      ]
+    },
+    "BookingChannel_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "BookingChannel_Enum"
+      },
+      "description": "Specifies a type of booking channel.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/BookingChannel_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "BookingChannel_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "BookingChannel_Enum"
+      },
+      "description": "Specifies a type of booking channel.",
+      "type": "string",
+      "enum": [
+        "Agent",
+        "Alternative distribution system (ADS)",
+        "Central reservation system (CRS)",
+        "Global distribution system (GDS)",
+        "Internet",
+        "Kiosk",
+        "Property management system (PMS)",
+        "Sales and catering system (SCS)",
+        "Tour operator system (TOS)",
+        "Other_"
+      ]
+    },
+    "UnitOfMeasure_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "UnitOfMeasure_Enum"
+      },
+      "description": "The unit of measure in a code format. Refer to OpenTravel Code List Unit of Measure Code (UOM).",
+      "type": "string",
+      "enum": [
+        "Miles",
+        "Kilometers",
+        "Meters",
+        "Millimeters",
+        "Centimeters",
+        "Yards",
+        "Feet",
+        "Inches",
+        "Pixels",
+        "Block",
+        "Megabytes",
+        "Gigabytes",
+        "Square feet",
+        "Square meters",
+        "Pounds",
+        "Kilograms",
+        "Square inch",
+        "Square yard",
+        "Acre",
+        "Square millimeter",
+        "Square centimeter",
+        "Hectare",
+        "Ounce",
+        "Gram",
+        "Gallons",
+        "Liters",
+        "Kilowatts",
+        "Cubic meters"
+      ]
+    },
+    "EmailAddressType_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "EmailAddressType_Enum"
+      },
+      "description": "Specifies a type of email address.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/EmailAddressType_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "EmailAddressType_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "EmailAddressType_Enum"
+      },
+      "description": "Specifies a type of email address.",
+      "type": "string",
+      "enum": [
+        "Business",
+        "Listserve",
+        "Managing company",
+        "Personal",
+        "Property",
+        "Reservation office",
+        "Sales office",
+        "Other_"
+      ]
+    },
+    "PositionAccuracy_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "PositionAccuracy_Enum"
+      },
+      "description": "Specifies the level of accuracy for the positon.",
+      "type": "string",
+      "enum": [
+        "Zip9Code",
+        "Zip7Code",
+        "Zip5Code",
+        "Street",
+        "State",
+        "Property",
+        "Intersection",
+        "Exact",
+        "County",
+        "Country",
+        "City",
+        "Block"
+      ]
+    },
+    "DayOfWeek_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "DayOfWeek_Enum"
+      },
+      "description": "Day of the Week types.",
+      "type": "string",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ]
+    },
+    "Transportation_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "Transportation_Enum"
+      },
+      "description": "Type of tranportation: Air, Rail, Bus, Boat, Private Auto, Other.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/Transportation_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "Transportation_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "Transportation_Enum"
+      },
+      "description": "Type of tranportation: Air, Rail, Bus, Boat, Private Auto, Other.",
+      "type": "string",
+      "enum": [
+        "Bicycle",
+        "Boat",
+        "Bus",
+        "Cable car",
+        "Car",
+        "Carriage",
+        "Courtesy car",
+        "Helicopter",
+        "Limousine",
+        "Metro",
+        "Monorail",
+        "Motorbike",
+        "Pack animal",
+        "Plane",
+        "Rental car",
+        "Rickshaw",
+        "Shuttle",
+        "Subway",
+        "Sedan chair",
+        "Taxi",
+        "Train",
+        "Trolley",
+        "Tube",
+        "Walk",
+        "Water taxi",
+        "Express train",
+        "Public",
+        "Ferry",
+        "Other_"
+      ]
+    },
+    "ToFrom_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "ToFrom_Enum"
+      },
+      "description": "Used to indicate whether the context is to a facility or from a facility.",
+      "type": "string",
+      "enum": [
+        "ToFacility",
+        "FromFacility"
+      ]
+    },
+    "ChargeUnit_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "ChargeUnit_Enum"
+      },
+      "description": "Source: Charge Type (CHG) OpenTravel codelist.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ChargeUnit_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "ChargeUnit_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "ChargeUnit_Enum"
+      },
+      "description": "Source: Charge Type (CHG) OpenTravel codelist.",
+      "type": "string",
+      "enum": [
+        "Per unit",
+        "Per order",
+        "Per tray",
+        "Per dozen",
+        "Per gallon",
+        "Round trip",
+        "Per room",
+        "Per item",
+        "Per rental",
+        "Per person per night",
+        "Per person per stay",
+        "Per room per night",
+        "Per room per stay",
+        "Weekly",
+        "Per occurance",
+        "Half day",
+        "Hourly",
+        "Daily",
+        "Per function",
+        "Per minute",
+        "First use",
+        "Per person",
+        "Unit",
+        "Tray",
+        "Stay",
+        "Room",
+        "Reservation/Booking",
+        "Rental",
+        "OverMinuteCharge",
+        "Order",
+        "OneWay",
+        "OneTimeUse",
+        "MinimumCharge",
+        "MaximumCharge",
+        "Item",
+        "Gallon",
+        "Complimentary",
+        "AdditionsPerStay",
+        "Other_"
+      ]
+    },
+    "SegmentCategory_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "SegmentCategory_Enum"
+      },
+      "description": "Describes the segment type.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/SegmentCategory_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "SegmentCategory_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "SegmentCategory_Enum"
+      },
+      "description": "Describes the segment type.",
+      "type": "string",
+      "enum": [
+        "Budget",
+        "Deluxe",
+        "Economy",
+        "First Class",
+        "Luxury",
+        "Moderate",
+        "Tourist",
+        "Upscale",
+        "Standard",
+        "Midscale",
+        "Quality",
+        "Midscale without F\u0026B",
+        "Upper upscale",
+        "Other_"
+      ]
+    },
+    "ReferencePoint_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "ReferencePoint_Enum"
+      },
+      "description": "Specifies a point of reference.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ReferencePoint_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "ReferencePoint_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "ReferencePoint_Enum"
+      },
+      "description": "Specifies a point of reference.",
+      "type": "string",
+      "enum": [
+        "Airport",
+        "Amusement park",
+        "Arena",
+        "Bar",
+        "Bay",
+        "Beach",
+        "Bus station",
+        "City center",
+        "Church",
+        "Corporation",
+        "Educational Institution",
+        "Ferry station",
+        "Financial district",
+        "Financial institution",
+        "Lake",
+        "Landmark",
+        "Library",
+        "Marina",
+        "Market",
+        "Medical facility",
+        "Metro/subway station",
+        "Monument",
+        "Museum",
+        "Park",
+        "Racetrack",
+        "Restaurant",
+        "River",
+        "Shopping center",
+        "Sports facility",
+        "Synagogue",
+        "Train station",
+        "Zoo",
+        "Other_"
+      ]
+    },
+    "AdditionalDetailType_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "AdditionalDetailType_Enum"
+      },
+      "description": "Identifies the type of detail being sent.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/AdditionalDetailType_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "AdditionalDetailType_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "AdditionalDetailType_Enum"
+      },
+      "description": "Identifies the type of detail being sent.",
+      "type": "string",
+      "enum": [
+        "Advanced booking information",
+        "Amenity information",
+        "Areas served",
+        "Booking guidelines",
+        "Cancellation information",
+        "Catering description",
+        "Check in check out information",
+        "Check-in policy",
+        "Check-out policy",
+        "Children information",
+        "Commission information",
+        "Contract/negotiated booking information",
+        "Corporate booking information",
+        "Cuisine description",
+        "Customs information for material",
+        "Deposit information",
+        "Deposit policy for master account",
+        "Deposit policy for reservations",
+        "Driving directions",
+        "Driving directions from the east",
+        "Driving directions from the north",
+        "Driving directions from the south",
+        "Driving directions from the west",
+        "Early checkout description",
+        "Express check-in policy",
+        "Express check-out policy",
+        "Extended stay information",
+        "Extra charge information",
+        "Extra person information",
+        "Facility restrictions",
+        "Family plan description",
+        "Food and beverage minimums for groups",
+        "General meeting planning information",
+        "Government booking policy",
+        "Group booking information",
+        "Group meeting planning information",
+        "Guarantee information",
+        "Inclusion information",
+        "Last room availability description",
+        "Late arrival information",
+        "Late departure information",
+        "Maximum stay information",
+        "Meal plan description",
+        "Meeting room description",
+        "Minimum stay information",
+        "Miscellaneous information",
+        "Offsite facilities information",
+        "Offsite recreational activities information",
+        "Offsite services information",
+        "Onsite facilities information",
+        "Onsite recreational activities information",
+        "Onsite services information",
+        "Oversold policy description",
+        "Package information",
+        "Pet policy description",
+        "Promotional information",
+        "Property description",
+        "Property location",
+        "Rate description",
+        "Rate disclaimer information",
+        "Restaurant services",
+        "Room decor description",
+        "Room information",
+        "Room type upgrade description",
+        "Seasons",
+        "Security information",
+        "Service charge information",
+        "Special events",
+        "Special offers description",
+        "Surcharge information",
+        "Tax information",
+        "Travel industry booking information",
+        "Visa/travel requirement information",
+        "Other_"
+      ]
+    },
+    "InformationType_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "InformationType_Enum"
+      },
+      "description": "Identifies the type of information being sent.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/InformationType_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "InformationType_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "InformationType_Enum"
+      },
+      "description": "Identifies the type of information being sent.",
+      "type": "string",
+      "enum": [
+        "Address",
+        "Advisory",
+        "Alias name",
+        "Amenities",
+        "Attractions",
+        "Awards",
+        "Contact",
+        "Corporate locations",
+        "Description",
+        "Descriptive content",
+        "Dining",
+        "Driving directions",
+        "Facilities",
+        "Geocodes",
+        "Location",
+        "Long name",
+        "Marketing",
+        "Pictures",
+        "Policy",
+        "Recreation",
+        "Safety",
+        "Services",
+        "Short description",
+        "Special instructions",
+        "Transportation",
+        "Other_"
+      ]
+    },
+    "PictureCategory_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "PictureCategory_Enum"
+      },
+      "description": "Specifies the category of the mulitmedia item.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/PictureCategory_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "PictureCategory_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "PictureCategory_Enum"
+      },
+      "description": "Specifies the category of the mulitmedia item.",
+      "type": "string",
+      "enum": [
+        "Ballroom",
+        "Bar/Lounge",
+        "Basics",
+        "Beach",
+        "Business center",
+        "Exterior view",
+        "Golf course",
+        "Guest room",
+        "Guest room amenity",
+        "Health club",
+        "Hot news",
+        "Lobby view",
+        "Logo",
+        "Map",
+        "Meeting room",
+        "Miscellaneous",
+        "Pool view",
+        "Promotional",
+        "Property amenity",
+        "Recreational facility",
+        "Restaurant",
+        "Spa",
+        "Suite",
+        "Other_"
+      ]
+    },
+    "RatePlanType_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "RatePlanType_Enum"
+      },
+      "description": "Note: Typically used for rate plans that may be published, e.g. have no qualifying criteria, or may be restricted or negotiated, e.g. has qualifying criteria for eligibility and\\/or has been negotiated between parties.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/RatePlanType_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "RatePlanType_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "RatePlanType_Enum"
+      },
+      "description": "Note: Typically used for rate plans that may be published, e.g. have no qualifying criteria, or may be restricted or negotiated, e.g. has qualifying criteria for eligibility and\\/or has been negotiated between parties.",
+      "type": "string",
+      "enum": [
+        "Other_",
+        "Weekly",
+        "Weekend",
+        "TravelIndustry",
+        "TourWholesale",
+        "SeniorCitizen",
+        "RegularRack",
+        "Published",
+        "PromotionalPackageTour",
+        "Promotional",
+        "Package",
+        "NonLastRoomAvailable",
+        "Net",
+        "Negotiated",
+        "Multi-DayPackage",
+        "Monthly",
+        "Military",
+        "LastRoomAvailable",
+        "Group",
+        "Government",
+        "FamilyPlan",
+        "DistressedInventory",
+        "DayRate",
+        "Corporate",
+        "Convention",
+        "Contract",
+        "Consortia",
+        "ClubConcierge",
+        "Association",
+        "Other_"
+      ]
+    }
+  }
+}

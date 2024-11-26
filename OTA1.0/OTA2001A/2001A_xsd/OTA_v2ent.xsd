@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by worldspan (worldspan) -->
+<!--Copyright (C) 2001 OpenTravelAlliance-->
+<!-- OTA v2001A Specification -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:attributeGroup name="OTA_PayloadStdAttributes">
+		<xsd:annotation>
+			<xsd:documentation>The OTA_PayloadStdAttributes defines the standard attributes that appear on the root element for all OTA payloads.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="EchoToken" type="xsd:string"/>
+		<xsd:attribute name="TimeStamp" type="xsd:string"/>
+		<xsd:attribute name="Target" default="Production">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="Test"/>
+					<xsd:enumeration value="Production"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="SequenceNmbr" type="xsd:integer"/>
+	</xsd:attributeGroup>
+	<xsd:attributeGroup name="ReqRespVersion">
+		<xsd:annotation>
+			<xsd:documentation>The ReqRespVersion attribute is used to request the version of the payload message desired for the response.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="ReqRespVersion" type="xsd:string"/>
+	</xsd:attributeGroup>
+	<xsd:element name="OTA_SucceedDef">
+		<xsd:complexType>
+			<xsd:annotation>
+				<xsd:documentation>This entity represents success in processing.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:choice>
+				<xsd:element ref="Success"/>
+				<xsd:element ref="Warnings"/>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="OTA_FailureDef">
+		<xsd:complexType>
+			<xsd:annotation>
+				<xsd:documentation>This entity represents failure in processing.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:sequence>
+				<xsd:element ref="Errors"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Success">
+		<xsd:complexType>
+			<xsd:annotation>
+				<xsd:documentation>Standard way to indicate success processing an OTA message</xsd:documentation>
+			</xsd:annotation>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Warnings">
+		<xsd:complexType>
+			<xsd:annotation>
+				<xsd:documentation>Indicates successful processing, but warnings occured.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:sequence>
+				<xsd:element ref="Warning" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Errors">
+		<xsd:complexType>
+			<xsd:annotation>
+				<xsd:documentation>A Warning and an Error element have the same structure.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:sequence>
+				<xsd:element ref="Error" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Warning">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:restriction>
+					<xsd:attribute name="Type" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:NMTOKEN">
+								<xsd:enumeration value="Unknown"/>
+								<xsd:enumeration value="NoImplementation"/>
+								<xsd:enumeration value="BizRule"/>
+								<xsd:enumeration value="Authentication"/>
+								<xsd:enumeration value="AuthenticationTimeout"/>
+								<xsd:enumeration value="Authorization"/>
+								<xsd:enumeration value="ProtocolViolation"/>
+								<xsd:enumeration value="TransactionModel"/>
+								<xsd:enumeration value="AuthenticationModel"/>
+								<xsd:enumeration value="ReqFieldMissing"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+					<xsd:attribute name="Code" type="xsd:string"/>
+					<xsd:attribute name="DocURL" type="xsd:string"/>
+					<xsd:attribute name="Status" type="xsd:string"/>
+					<xsd:attribute name="Tag" type="xsd:string"/>
+					<xsd:attribute name="RecordId" type="xsd:string"/>
+				</xsd:restriction>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Error">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:restriction>
+					<xsd:attribute name="Type" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:NMTOKEN">
+								<xsd:enumeration value="Unknown"/>
+								<xsd:enumeration value="NoImplementation"/>
+								<xsd:enumeration value="BizRule"/>
+								<xsd:enumeration value="Authentication"/>
+								<xsd:enumeration value="AuthenticationTimeout"/>
+								<xsd:enumeration value="Authorization"/>
+								<xsd:enumeration value="ProtocolViolation"/>
+								<xsd:enumeration value="TransactionModel"/>
+								<xsd:enumeration value="AuthenticationModel"/>
+								<xsd:enumeration value="ReqFieldMissing"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+					<xsd:attribute name="Code" type="xsd:string"/>
+					<xsd:attribute name="DocURL" type="xsd:string"/>
+					<xsd:attribute name="Status" type="xsd:string"/>
+					<xsd:attribute name="Tag" type="xsd:string"/>
+					<xsd:attribute name="RecordId" type="xsd:string"/>
+				</xsd:restriction>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="UniqueId">
+		<xsd:complexType>
+			<xsd:annotation>
+				<xsd:documentation>Unique identifier assigned to an individual customer profile.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:attribute name="URL" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>URL that identifies the location associated with the record identified by the UniqueId. The URL references should be public ORL used for an OTA discovery message between trading partners.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="Type" type="xsd:string" use="required">
+				<xsd:annotation>
+					<xsd:documentation>A reference to the type of object defined by the UniqueId element. By convention, the Type attribute value is the same as the element tag name for the reference object, for example, "Profile."</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="Id" type="xsd:ID" use="required">
+				<xsd:annotation>
+					<xsd:documentation>A unique identifying value assigned by the creating system, using the XML data type ID.  The Id attribute may be used to reference a primary-key value within a database or in a particular implementation.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="Instance" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>A snapshot of a record as it exists at a point in time. An instance is used in update messages where the sender must assure the server that the update sent refers to the most recent modification level of the object being updated.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

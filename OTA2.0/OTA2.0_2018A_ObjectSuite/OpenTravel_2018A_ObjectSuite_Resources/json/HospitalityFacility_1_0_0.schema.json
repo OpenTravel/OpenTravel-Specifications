@@ -1,0 +1,215 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "HospitalityFacility",
+  "x-otm-library": {
+    "ProjectName": "HospitalityProject_030918.otp",
+    "LibraryName": "HospitalityFacility",
+    "LibraryVersion": "1.0.0",
+    "LibraryStatus": "FINAL",
+    "SourceFile": "/HospitalityFacility_1_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2018-04-05T08:59:18.813-0400"
+  },
+  "description": "Creation of resources library for Hospitality.",
+  "definitions": {
+    "HospitalityFacilities": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BaseResponse"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "FacilityHotel": {
+          "type": "array",
+          "items": {
+            "$ref": "OrganizationHospitality_3_0_0.schema.json#/definitions/FacilityHotel"
+          },
+          "maxItems": 1000
+        },
+        "PayloadStdAttributes": {
+          "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+          "$ref": "#/definitions/PayloadStdAttributes"
+        },
+        "Result": {
+          "description": "Assigned Type: ota2-0400:Result",
+          "$ref": "#/definitions/Result"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "HospitalityRetrieveFacilityAvailability": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BaseResponse"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "Facility": {
+          "type": "array",
+          "items": {
+            "$ref": "Organization_3_0_0.schema.json#/definitions/FacilityID"
+          },
+          "maxItems": 100
+        },
+        "PayloadStdAttributes": {
+          "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+          "$ref": "#/definitions/PayloadStdAttributes"
+        },
+        "Result": {
+          "description": "Assigned Type: ota2-0400:Result",
+          "$ref": "#/definitions/Result"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "FacilityQueryFacilitySearch": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "description": "Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "BasePayload": {
+          "description": "Assigned Type: ota2-0400:BasePayload",
+          "$ref": "Common_4_0_0.schema.json#/definitions/BasePayload"
+        },
+        "FacilityQueryHotel": {
+          "description": "Assigned Type: orghs-0300:Facility_Query_Hotel",
+          "$ref": "OrganizationHospitality_3_0_0.schema.json#/definitions/FacilityQueryHotel"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "FacilityQueryRetrieveHospitalityAvailability": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "description": "Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "BasePayload": {
+          "description": "Assigned Type: ota2-0400:BasePayload",
+          "$ref": "Common_4_0_0.schema.json#/definitions/BasePayload"
+        },
+        "FacilityQueryHotelAvailRetrieve": {
+          "description": "Assigned Type: orghs-0300:Facility_Query_HotelAvailRetrieve",
+          "$ref": "OrganizationHospitality_3_0_0.schema.json#/definitions/FacilityQueryHotelAvailRetrieve"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "FacilityQueryFindHospitalityAvailability": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "description": "Describes a facility (e.g. Hotel Facility,Conference Facility, Golf Facility).  A facility must have a single address and a single geolocation.",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "BasePayload": {
+          "description": "Assigned Type: ota2-0400:BasePayload",
+          "$ref": "Common_4_0_0.schema.json#/definitions/BasePayload"
+        },
+        "FacilityQueryHotelAvail": {
+          "description": "Assigned Type: orghs-0300:Facility_Query_HotelAvail",
+          "$ref": "OrganizationHospitality_3_0_0.schema.json#/definitions/FacilityQueryHotelAvail"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "BaseResponse": {
+          "$ref": "#/definitions/BaseResponse"
+        }
+      },
+      "required": [
+        "BaseResponse"
+      ]
+    },
+    {
+      "properties": {
+        "BaseResponse": {
+          "$ref": "#/definitions/BaseResponse"
+        }
+      },
+      "required": [
+        "BaseResponse"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityQueryFacilitySearch": {
+          "$ref": "#/definitions/FacilityQueryFacilitySearch"
+        }
+      },
+      "required": [
+        "FacilityQueryFacilitySearch"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityQueryRetrieveHospitalityAvailability": {
+          "$ref": "#/definitions/FacilityQueryRetrieveHospitalityAvailability"
+        }
+      },
+      "required": [
+        "FacilityQueryRetrieveHospitalityAvailability"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityQueryFindHospitalityAvailability": {
+          "$ref": "#/definitions/FacilityQueryFindHospitalityAvailability"
+        }
+      },
+      "required": [
+        "FacilityQueryFindHospitalityAvailability"
+      ]
+    }
+  ]
+}

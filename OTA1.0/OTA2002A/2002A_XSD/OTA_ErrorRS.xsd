@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema targetNamespace="http://www.opentravel.org/OTA/2002/08" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA/2002/08" elementFormDefault="qualified" version="2002A">	<xs:include schemaLocation="OTA_CommonTypes.xsd"/>
+	<xs:element name="ErrorRS">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="StringLength64">
+					<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+					<xs:attribute name="ErrorCode" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="SessionFailure-100"/>
+								<xs:enumeration value="SessionFailure-101"/>
+								<xs:enumeration value="SessionFailure-102"/>
+								<xs:enumeration value="SessionFailure-103"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="Severity" type="StringLength64" use="optional"/>
+					<xs:attribute name="ErrorMessage" use="optional">
+						<xs:simpleType>
+							<xs:restriction base="StringLength64">
+								<xs:enumeration value="OTA version not supported"/>
+								<xs:enumeration value="Session has expired"/>
+								<xs:enumeration value="Session already closed"/>
+								<xs:enumeration value="Parameter not supported"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

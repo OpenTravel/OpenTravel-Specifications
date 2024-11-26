@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:element name="OTA_GetMsgRS">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UniqueId" minOccurs="0"/>
+				<xs:choice>
+					<xs:sequence>
+						<xs:element ref="Success"/>
+						<xs:element ref="Warnings" minOccurs="0"/>
+						<xs:element ref="Message" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+					<xs:element ref="Errors"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Message">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="OriginalPayloadStdAttributes" minOccurs="0"/>
+				<xs:element ref="MessageContent" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="MessageType" type="xs:string" use="optional"/>
+			<xs:attribute name="ResponseValue" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OriginalPayloadStdAttributes">
+		<xs:complexType>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MessageContent"/>
+</xs:schema>

@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Hospitality",
+  "x-otm-library": {
+    "LibraryName": "Hospitality",
+    "LibraryVersion": "1.0.0",
+    "LibraryStatus": "FINAL",
+    "SourceFile": "/Hospitality_1_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2018-04-05T08:59:58.213-0400"
+  },
+  "definitions": {
+    "RatePlanCode": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "RatePlanCode"
+      },
+      "description": "A string value may be used to request a particular code or an ID if the guest qualifies for a specific rate, such as AARP, AAA, a corporate rate, etc., or to specify a negotiated code as a result of a negotiated rate.",
+      "x-otm-annotations": {
+        "documentation": {
+          "implementers": [
+            "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}StringLength1to64"
+          ]
+        }
+      },
+      "properties": {
+        "value": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "ratePlanType": {
+          "$ref": "CodeList_3_0_0_Trim.schema.json#/definitions/RatePlanType_Enum_Base"
+        },
+        "ratePlanTypeExtension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "ratePlanID": {
+          "description": "Assigned Type: ota2-0400:StringShort",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}StringLength1to64"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "RatePlanID"
+              }
+            ],
+            "examples": [
+              {
+                "context": "ph",
+                "value": "12345678"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "ratePlanCategory": {
+          "description": "Assigned Type: ota2-0400:StringShort",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}StringLength1to64"
+              ]
+            },
+            "equivalents": [
+              {
+                "context": "ph",
+                "value": "RatePlanCategory"
+              }
+            ],
+            "examples": [
+              {
+                "context": "ph",
+                "value": "POD"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 128
+        },
+        "promotionCode": {
+          "description": "Assigned Type: ota2-0400:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "L9Z"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "promotionVendorCode": {
+          "description": "Assigned Type: ota2-0400:ListOfTinyStrings",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "ph",
+                "value": "WT1"
+              }
+            ]
+          },
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 32
+          }
+        },
+        "ratePlanQualifierInd": {
+          "description": "The Rate Plan Qualifier is used to control the sort order of RatePlans. Those Rate Plans that are not qualified will appear first, those that are qualified will appear last.",
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

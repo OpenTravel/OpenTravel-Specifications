@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="CommonAirSchema.xsd"/>
+	<xs:include schemaLocation="ProfileRef.xsd"/>
+	<xs:include schemaLocation="Privacy.xsd"/>
+	<xs:include schemaLocation="Profile.xsd"/>	
+	<xs:element name="AirTraveler">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Information on the person travelling
+				Gender - the gender of the customer, if needed
+				BirthDate - Date of Birth
+				Currency - the preferred currency in which monetary amounts should be returned.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ProfileRef" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PersonName"/>
+				<xs:element ref="Telephone" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Email" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Address" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="CustLoyalty" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Document" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="Gender">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Male"/>
+						<xs:enumeration value="Female"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attributeGroup ref="Privacy"/>
+			<xs:attribute name="BirthDate" type="xs:string"/>
+			<xs:attribute name="Currency" type="xs:string"/>
+			<xs:attribute name="PassengerTypeCode" type="ThreeLetterCodeType" use="required"/>
+			<xs:attribute name="TravellerReferenceNumber" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Direct reference of traveller assigned by requesting system.  Used as a cross reference between data segments.				</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AccompaniedByInfantIndicator" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates if an infant accompanying a traveller is with or without a seat.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

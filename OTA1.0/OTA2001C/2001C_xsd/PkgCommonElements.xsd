@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.1 (http://www.xmlspy.com) by Marcel M Jemio (OTA) -->
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="PkgStdTypes.xsd"/>
+	<xs:complexType name="PkgBoardTerms">
+		<xs:annotation>
+			<xs:documentation>A Board Code and optionally a quantity</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="Code" type="PkgBoardCode" use="required"/>
+				<xs:attribute name="Qty" type="xs:integer" use="optional">
+					<xs:annotation>
+						<xs:documentation>The total number of customers taking a meal plan.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="CustomerCounts">
+		<xs:annotation>
+			<xs:documentation>CustomerCounts : Categorization of all Customers in a reservation or request.  The total number of Customers will equal the sum of the Count attribute of all CustomerCount objects in this collection and assumes that the AgeQualifyingCode will be used to determine how each Customer should be billed. Each booking segment has its own CustomerCount attribute to help determine billing, headcount, etc.  The CustomerCount collection cannot be modified using a delta—it must be resent in its entirety if modified. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CustomerCount" type="CustomerCount" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CustomerCount">
+		<xs:annotation>
+			<xs:documentation>CustomerCount : indicates the number of customers attached to a specific reservation, flight, hotel, room stay, or service segment. The total number of Customers in a reservation or segment is the total of the count of customers in all AgeQualifyingCodes.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="AgeQualifyingCode" type="AgeQualifyingCode" use="required"/>
+		<xs:attribute name="Count" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Count : The number of Customers in one AgeQualifyingCode.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="PkgDateRange">
+		<xs:annotation>
+			<xs:documentation>A period of time for which a service is required</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="StartDate" type="xs:date" use="required"/>
+		<xs:attribute name="Duration" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="PkgInformation">
+		<xs:annotation>
+			<xs:documentation>Details information regarding a package component which could affect their decision to book.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="FirstDate" type="xs:date" use="optional"/>
+				<xs:attribute name="LastDate" type="xs:date" use="optional"/>
+				<xs:attribute name="Duration" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PkgMealPlanType">
+		<xs:annotation>
+			<xs:documentation>Details of available or booked meal plans.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BoardTerms" type="PkgBoardTerms"/>
+			<xs:element name="CustomerCounts" type="CustomerCounts" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Supplement" type="Supplement" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="RPH" type="RPH_Type" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="PkgPassengerRPHs">
+		<xs:annotation>
+			<xs:documentation>A container to relate individual passsengers to an inventory or chargeable item.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="PassengerRPH" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:attribute name="RPH" type="RPH_Type" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PkgPriceRange">
+		<xs:annotation>
+			<xs:documentation>Price range details</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MinPrice" type="AmountType" minOccurs="0"/>
+			<xs:element name="MaxPrice" type="AmountType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PkgPriceType">
+		<xs:simpleContent>
+			<xs:extension base="xs:decimal">
+				<xs:attribute name="AgeQualifyingCode" type="xs:string" use="required"/>
+				<xs:attribute name="Occupancy" type="xs:integer" use="optional"/>
+				<xs:attribute name="CurrencyCode" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PkgReligion">
+		<xs:annotation>
+			<xs:documentation>Religion Details</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Code" use="optional">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="TBA"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="PkgRoomInventoryType">
+		<xs:annotation>
+			<xs:documentation>Describes a type of room/cabin/apartment etc.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Supplement" type="Supplement" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="RPH" type="RPH_Type"/>
+		<xs:attribute name="Code" type="PkgAccommodationUnitCode">
+			<xs:annotation>
+				<xs:documentation>Type of accommodation unit in code form eg room type (UNICORN U394)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Description" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>A full description of the room/apartment etc.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="AvailableQty" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>The number of units available for a reservation</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="MinOccupancy" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Minimum number of persons allowed in a unit of accommodation or place (UNICORN U396)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="MaxOccupancy" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Maximum number of persons allowed in a unit of accommodation or place (UNICORN U397)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="MaxAdults" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Maximum number of adults allowed in the unit of accommodation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CotQty" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>The number of cots available in a room/apartment etc.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="FreeChildFlag" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>Indicates whether a free child is permitted in the room/apartment etc.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RoomId" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Identification of a room e.g. room number or name (UNICORN U398)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="Supplement">
+		<xs:annotation>
+			<xs:documentation>A value representing a supplement for an item over the cost of the item on which a package basic price is calculated; may be repeated for multiple currencies e.g. GBP and Euros.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="AmountType">
+				<xs:attribute name="AgeQualifyingCode" type="AgeQualifyingCode" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:element name="TPA_Extension" type="xs:anyType"/>
+	<xs:complexType name="PkgTravelLocationName">
+		<xs:annotation>
+			<xs:documentation>Identifies a travel location by type, code and/or name.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="Type" default="Airport">
+					<xs:annotation>
+						<xs:documentation>Identifies the type of location, e.g. Airport, Ferry Port, Railway Station etc.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="Airport"/>
+							<xs:enumeration value="Seaport"/>
+							<xs:enumeration value="Railway Station"/>
+							<xs:enumeration value="Bus Station"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="Code" type="xs:string" use="required"/>
+				<xs:attribute name="CodeContext" default="IATA">
+					<xs:simpleType>
+						<xs:annotation>
+							<xs:documentation>Identifies the context of the identifying code, such as IATA, ARC, or internal code, etc.</xs:documentation>
+						</xs:annotation>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="IATA"/>
+							<xs:enumeration value="Internal"/>
+							<xs:enumeration value="UN-LOCODE"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="CountryCode" type="xs:string"/>
+				<xs:attribute name="CityCode" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Price">
+		<xs:annotation>
+			<xs:documentation>The selling price of an item.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:decimal">
+				<xs:attribute name="AgeQualifyingCode" type="AgeQualifyingCode" use="required"/>
+				<xs:attribute name="Occupancy" type="xs:integer"/>
+				<xs:attribute name="CurrencyCode" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>

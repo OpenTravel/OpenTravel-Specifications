@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/product/hospitality/v2"
+    version="2.0.0" xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0400="http://www.opentravel.org/OTM/Common/v4"
+    xmlns:ota2-0500="http://www.opentravel.org/OTM/Common/v5"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:ph-0200="http://www.opentravel.org/OTM/product/hospitality/v2" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:LibraryName>Hospitality</otm:LibraryName>
+                <otm:LibraryVersion>2.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>DRAFT</otm:LibraryStatus>
+                <otm:SourceFile>/Hospitality_2_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2019-10-30T13:33:14.855-04:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v4" schemaLocation="CodeList_4_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v5" schemaLocation="Common_5_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element name="RoomOccupancy" type="ph-0200:RoomOccupancy"/>
+    
+    <xsd:complexType name="RoomOccupancy">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Occupany for the room.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">RoomOccupancy</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="20" minOccurs="0"
+                name="AgeQualifying" type="ota2-0400:AgeQualifyingCode_Enum">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Specifies the age parameters for the occupancy of this guest room type.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="minOccupancy"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Minimum number of persons allowed in a unit of accommodation or place.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="ph">1</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="maxOccupancy"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Maximum number of persons allowed in a unit of accommodation or place.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="ph">4</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="standardOccupancy"
+            type="ota2-0500:NonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Standard number of persons allowed in a unit of accommodation or place.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="BasicPropertyInfoSubGrp" type="ph-0200:BasicPropertyInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Identifies a property.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">BasicPropertyInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="BasicPropertyInfo"
+        substitutionGroup="ph-0200:BasicPropertyInfoSubGrp" type="ph-0200:BasicPropertyInfo"/>
+    <xsd:element name="BasicPropertyInfoSummary" type="ph-0200:BasicPropertyInfo"/>
+    <xsd:element name="BasicPropertyInfoDetail"
+        substitutionGroup="ph-0200:BasicPropertyInfoSubGrp" type="ph-0200:BasicPropertyInfo_Detail"/>
+    
+    <xsd:complexType name="BasicPropertyInfo">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">BasicPropertyInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="code" type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Uniquely identifies a single property for a reservation.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="ph">WASJW</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="name" type="ota2-0500:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Specifies the proper name of the property.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="ph">JW Marriott Washington DC</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="chainCode" type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Identifies the chain.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="ph">MC</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="brandCode" type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Identifies a brand with in a chain (e.g. Courtyard, Hampton Inn).  This code is optional if the hotel is an independent property that can be identified by a propert code alone.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="ph">FS</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="cityCode" type="ota2-0500:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Specifies the three character IATA city code.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="ph">WAS</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="BasicPropertyInfo_Detail">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">BasicPropertyInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ph-0200:BasicPropertyInfo">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="nameShort"
+                    type="ota2-0500:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A short name for the hotel.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="chainName"
+                    type="ota2-0500:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Specifies the proper name of the chain.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">Marriott</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="brandName"
+                    type="ota2-0500:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Identifies the proper name of the brand.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="ph">Full Service</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="areaID" type="ota2-0500:String" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">An identifier of an area as defined by a hotel reservation system to allow for seaches in areas such as suburbs or regions.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="hotelCode_TTI"
+                    type="ota2-0500:NonNegativeInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">TTI hotel reference code.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="hotelCodeContext"
+                    type="ota2-0500:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A text field used to communicate the context (or source of - ex Sabre, Galileo, Worldspan, Amadeus) the HotelReferenceGroup codes.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+</xsd:schema>

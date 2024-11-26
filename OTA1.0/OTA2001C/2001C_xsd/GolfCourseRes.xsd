@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="Memberships.xsd"/>
+	<xs:include schemaLocation="PaymentForm.xsd"/>
+	<xs:include schemaLocation="PersonName.xsd"/>
+	<xs:include schemaLocation="Address.xsd"/>
+	<xs:include schemaLocation="Telephone.xsd"/>
+	<xs:include schemaLocation="Email.xsd"/>
+	<xs:element name="Charge">
+		<xs:annotation>
+			<xs:documentation>The actual pricing and costing information about the charges being applied to the round.  One or more Charge may apply to a single round.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Id" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>A unique identifier representing the charge.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Description" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>A description of the charge</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Quantity" type="xs:byte" use="required">
+				<xs:annotation>
+					<xs:documentation>The quantity associated with this charge.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="UnitPrice" type="xs:byte" use="required">
+				<xs:annotation>
+					<xs:documentation>The unit price for this charge.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="UnitCost" type="xs:decimal" use="required">
+				<xs:annotation>
+					<xs:documentation>A unit cost associated with this charge. The cost to the booking party may be different from the charge to the golfer.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Amount" type="xs:decimal" use="required">
+				<xs:annotation>
+					<xs:documentation>Total amount extended.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="BillingType" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>A code representing the method of billing between parties</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GolfCourseRes">
+		<xs:annotation>
+			<xs:documentation>A specific reservation for a tee time for an individual or a number of golfers</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Round" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="Id" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>A unique identifier assigned to this reservation</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Status" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The status of this reservation transaction</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StatusMessage" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>A description or message associated with the status.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RequestorResId" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The unique Identifier used by the party booking the reservation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ResponderResConfId" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The unique identifier assigned by the supplier.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CancellationPolicy" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>An explanation of the cancellation policy in effect for this reservation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CancellationWindow" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation>The final time at which a cancellation may be made.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CancellationCharge" type="xs:decimal" use="required">
+				<xs:annotation>
+					<xs:documentation>The charge to be applied in the event of cancellation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Golfer">
+		<xs:annotation>
+			<xs:documentation>Information about the individual golfer for which the reservation is being requested.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Memberships" type="Memberships"/>
+				<xs:element name="PaymentForm" type="PaymentForm"/>
+				<xs:element name="PersonName" type="PersonName"/>
+				<xs:element name="Address" type="Address"/>
+				<xs:element name="Telephone" type="Telephone"/>
+				<xs:element name="Email" type="Email"/>
+			</xs:sequence>
+			<xs:attribute name="Gender" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>ZZZZZ</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DateOfBirth" type="xs:date" use="optional">
+				<xs:annotation>
+					<xs:documentation>ZZZZZ</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RateQualifier" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The RateQualifier notes the criteria that was used for setting the actual charge as applied to the round.  For example, if the requestor is a wholesaler or reseller, the RateQualifier will be a code associated with that status.  If the individual golfer is a member of an organization that typically gets a discount (such as NGCOA, PGA, USGA, etc.) then that code would be included in the rate qualifier.  Twilight, weekday, etc. will also be reflected here.
+</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Round">
+		<xs:annotation>
+			<xs:documentation>A single round of golf that may include one or more golfers.  If there is more than one round, each round will be represented separately.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Charge"/>
+				<xs:element ref="Golfer" maxOccurs="unbounded"/>
+				<xs:element ref="RateQualifier" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="RoundId" type="xs:short" use="required">
+				<xs:annotation>
+					<xs:documentation>A unique identifier applied to this round.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PlayDate" type="xs:date" use="required">
+				<xs:annotation>
+					<xs:documentation>The date for which the round is reserved.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PlayTime" type="xs:time" use="required">
+				<xs:annotation>
+					<xs:documentation>The time for which the round is reserved.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NumberOfGolfers" type="xs:integer" use="required">
+				<xs:annotation>
+					<xs:documentation>The number of golfers represented in this round.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PackageId" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>An identification of a package of which this round is a part.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StartingTee" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The tee on which the round will start.  This could be a hole number, or a course designation where there are multiple courses.  </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NumberOfCarts" type="xs:integer" use="required">
+				<xs:annotation>
+					<xs:documentation>The number of carts included within the reservation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TotalAmount" type="xs:decimal" use="required">
+				<xs:annotation>
+					<xs:documentation>The Total Amount for this round.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Currency" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The ISO currency code in which the TotalAmount is represented.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

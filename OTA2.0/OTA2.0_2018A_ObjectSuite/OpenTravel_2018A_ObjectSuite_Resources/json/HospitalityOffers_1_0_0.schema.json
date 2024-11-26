@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "HospitalityOffers",
+  "x-otm-library": {
+    "ProjectName": "HospitalityProject_030918.otp",
+    "LibraryName": "HospitalityOffers",
+    "LibraryVersion": "1.0.0",
+    "LibraryStatus": "FINAL",
+    "SourceFile": "/HospitalityOffers_1_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2018-04-05T08:59:18.819-0400"
+  },
+  "description": "Offers Resource for Hospitality.",
+  "definitions": {
+    "MultiPropertyHospitalityOffers": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BaseResponse"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "HospitalityOffers": {
+          "type": "array",
+          "items": {
+            "$ref": "Hospitality_1_0_0.schema.json#/definitions/HospitalityOffersID"
+          }
+        },
+        "PayloadStdAttributes": {
+          "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+          "$ref": "#/definitions/PayloadStdAttributes"
+        },
+        "Result": {
+          "description": "Assigned Type: ota2-0400:Result",
+          "$ref": "#/definitions/Result"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "SinglePropertyHospitalityOffers": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BaseResponse"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "HospitalityOffers": {
+          "description": "Assigned Type: ph:HospitalityOffers",
+          "$ref": "Hospitality_1_0_0.schema.json#/definitions/HospitalityOffersID"
+        },
+        "PayloadStdAttributes": {
+          "description": "Assigned Type: ota2-0400:PayloadStdAttributes",
+          "$ref": "#/definitions/PayloadStdAttributes"
+        },
+        "Result": {
+          "description": "Assigned Type: ota2-0400:Result",
+          "$ref": "#/definitions/Result"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "HospitalityOffersQueryFindHospitalityOffers": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "HospitalityOffers"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "BasePayload": {
+          "description": "Assigned Type: ota2-0400:BasePayload",
+          "$ref": "Common_4_0_0.schema.json#/definitions/BasePayload"
+        },
+        "ProductQueriesHospitality": {
+          "description": "Assigned Type: ph:ProductQueries_Hospitality",
+          "$ref": "Hospitality_1_0_0.schema.json#/definitions/ProductQueriesHospitality"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "BaseResponse": {
+          "$ref": "#/definitions/BaseResponse"
+        }
+      },
+      "required": [
+        "BaseResponse"
+      ]
+    },
+    {
+      "properties": {
+        "BaseResponse": {
+          "$ref": "#/definitions/BaseResponse"
+        }
+      },
+      "required": [
+        "BaseResponse"
+      ]
+    },
+    {
+      "properties": {
+        "HospitalityOffersQueryFindHospitalityOffers": {
+          "$ref": "#/definitions/HospitalityOffersQueryFindHospitalityOffers"
+        }
+      },
+      "required": [
+        "HospitalityOffersQueryFindHospitalityOffers"
+      ]
+    }
+  ]
+}

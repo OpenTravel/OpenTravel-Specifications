@@ -1,0 +1,2031 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="DOWPattern.xsd"/>
+	<xs:include schemaLocation="DateTimeSpan.xsd"/>
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:include schemaLocation="CancelPenalties.xsd"/>
+	<xs:element name="AbsoluteDeadline">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines the absolute deadline.  Either this or the offset attributes may be used.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="AcceptedPaymtForm">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The AcceptedPaymtForms class defines the policy regarding forms of payment accepted by the hotel. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CreditCardCodes" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="PaymtMethodType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type that defines a method of payment for a hotel stay. </xs:documentation>
+					<xs:documentation xml:lang="en">Values: 1 = Cash, 2 = Credit Card, 3= Debit Card, 4 = Voucher, 5 = Check, 6 = Other.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Cash"/>
+						<xs:enumeration value="CreditCard"/>
+						<xs:enumeration value="DebitCard"/>
+						<xs:enumeration value="Voucher"/>
+						<xs:enumeration value="Check"/>
+						<xs:enumeration value="Other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PaymtFormUseType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An enumerated type that defines a form of payment for a hotel stay. </xs:documentation>
+					<xs:documentation xml:lang="en">Values: 1 = Guarantee, 2 = Deposit, 3 = Paymt.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Guarantee"/>
+						<xs:enumeration value="Deposit"/>
+						<xs:enumeration value="Paymt"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AcceptedPaymtForms">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AcceptedPaymtForm" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AffiliationInfo">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The AffiliationInfo object is used to identify the brand or franchise affiliations of the hotel. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DistribSystems"/>
+				<xs:element ref="Brands"/>
+				<xs:element ref="LoyalPrograms"/>
+				<xs:element ref="Awards"/>
+			</xs:sequence>
+			<xs:attribute name="LastUpdated" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The date and time when the affiliation information for this hotel was last updated. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AmenityInfo">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The AmenityInfo class that describes the room amenities and services at the hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelAmenities"/>
+				<xs:element ref="RoomAmenities"/>
+				<xs:element ref="RecreationalSrvcs"/>
+				<xs:element ref="BusinessSrvcs"/>
+				<xs:element ref="PersonalSrvcs"/>
+			</xs:sequence>
+			<xs:attribute name="LastUpdated" type="xs:dateTime" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ArchitecturalStyleCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of ArchitecturalStyleCode strings used to help describe the architectural style of the hotel facility.  The list of codes is maintained by HEDNA.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ArchitecturalStyleCodes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ArchitecturalStyleCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Attraction">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of Attraction objects identifying the local interest attractions in the vicinity of this hotel facility.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ContactElectronicAddresses" minOccurs="0"/>
+				<xs:element ref="ContactName" minOccurs="0"/>
+				<xs:element ref="AttractionDates" minOccurs="0"/>
+				<xs:element ref="PropertyCourtesyPhone" minOccurs="0"/>
+				<xs:element ref="AttractionDescription"/>
+				<xs:element ref="RelatedRefPoint"/>
+				<xs:element ref="AttractionURL"/>
+			</xs:sequence>
+			<xs:attribute name="AttractionCategoryCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code for the type of attraction in the proximity of the hotel facility.  This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AttractionName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The name of the local attraction. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AttractionFee" type="xs:float" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AttractionDates">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DateTimeSpan" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AttractionDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The text description of the attraction. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AttractionURL" type="xs:anyURI">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The universal resource locator (URL) for the attraction as found on the Internet. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Attractions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Attraction" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="LastUpdated" type="xs:dateTime" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AvailableCapacities">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The collection of MeetingRoomCapacity objects that defines the number of people permitted in a meeting room. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MeetingRoomCapacity" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AvailableMealCategoryCode" type="xs:string"/>
+	<xs:element name="AvailableMealCategoryCodes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AvailableMealCategoryCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AvailableMealTimeCodes" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of strings indicating the categories or types of meals available at the hotel restaurant. This code list will be maintained by HEDNA.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Award">
+		<xs:complexType>
+			<xs:attribute name="AwardProvider" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The name of the award or ratings provider. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Rating" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The actual award or rating received by the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Awards">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The Award class defines all of the award programs used by this hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Award" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BeverageCode" type="xs:string"/>
+	<xs:element name="BeverageCodes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of strings indicating the beverage codes for this restaurant. This code list will be maintained by HEDNA.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="BeverageCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Brand">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The Brand class defines the brand affiliations of this hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="BrandURL"/>
+			</xs:sequence>
+			<xs:attribute name="BrandCategoryCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code for the type of brand affiliated with the hotel facility.  This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MarketingBrand" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Name of brand, marketing chain, representation company or other affiliation(s).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BrandURL" type="xs:anyURI">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The universal resource locator (URL) for the marketing brand as found on the Internet. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Brands">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Brand" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BriefDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A text description to explain additional descriptive information about the hotel facility. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="BusinessSrvc">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="BusinessSrvcDescription"/>
+				<xs:element ref="PositionFromHotel"/>
+				<xs:element ref="OperationSchedules"/>
+				<xs:element ref="UsualCharge"/>
+			</xs:sequence>
+			<xs:attribute name="BusinessSrvcCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code for the type of business service offered in a room at a hotel facility.  This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AvailableToAnyGuest" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This flag indicates whether the business service is available to all guests or only to certain guests at the facility. </xs:documentation>
+					<xs:documentation xml:lang="en">Values: 0 = (No) Not Available to All Guests, 1 = (Yes) Available to All Guests.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InvCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification code of the business service for inventory and booking purposes if the service is an inventoriable item.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BusinessSrvcDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The text information describing the business service. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="BusinessSrvcs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The BusinessSrvc class provides the codes and description of business services available at the hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="BusinessSrvc" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ClosedSeasons">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of date and time periods when the hotel facility is closed. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DateTimeSpan" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ContactElectronicAddresses">
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="ContactInfo">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The ContactInfo class is used to define the contacts for consumers and technical people at the hotel facility, including various telephone numbers and e-mail addresses, or any respective attribute or affiliation for the hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Contacts"/>
+				<xs:element ref="HotelAddresses"/>
+				<xs:element ref="HotelElectronicAddresses"/>
+				<xs:element ref="HotelPhoneNmbrs"/>
+			</xs:sequence>
+			<xs:attribute name="ContactProfileID" type="xs:string" use="required"/>
+			<xs:attribute name="ContactProfileType" type="xs:string" use="required"/>
+			<xs:attribute name="LastUpdated" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The date and time when the contact information for this hotel was last updated. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ContactName">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The contact name for the hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="NameInfo" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Contacts">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The HotelContact class defines the contact information for a hotel facility.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelContacts"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CreditCardCode" type="xs:string"/>
+	<xs:element name="CreditCardCodes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of credit card code strings identifying the credit cards accepted for payment at the hotel.  This attribute is used if the PaymtMethodType is Credit Card, Debit Card, or Voucher. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CreditCardCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Description" type="xs:string"/>
+	<xs:element name="DistribSystem">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The DistribSystem objects defining the affiliated distribution systems for a hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DistribSystemHotelReference"/>
+				<xs:element ref="DateTimeSpan"/>
+			</xs:sequence>
+			<xs:attribute name="DistribSystemCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A code that serves as the unique identifier for the distribution system or booking engine, such as the specific GDS codes. This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DistribSystemHotelReference">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A HotelReference object that defines a hotel facility included in the distribution system.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="HotelCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code that uniquely identifies a single hotel property. The hotel code is decided between vendors.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ChainCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code that identifies a hotel chain or management group. The hotel chain code is decided between vendors.  This attribute is optional if the hotel is an independent property that can be identified by the HotelCode attribute.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="BrandCode" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DistribSystems">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DistribSystem" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DrivingDirectionsFromRefPoint" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The information describing the driving directions from the reference point to the hotel facility. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DrivingDirectionsToRefPoint" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The information describing the driving directions to the reference point from the hotel facility. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ElectronicAddress">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The ElectronicAddress class is used to store pager phone numbers, email addresses and web page addresses (URL, universal resource locator). The ElectronicAddress class is defined in the Central Res Systems' Profile Synch standard.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="ElectronicAddressType" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Valid values: E-mail, Pager, Web Page.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EAddress" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The electronic address string, such as e-mail address or (.URL) web page location. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FacilityInfo">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The FacilityInfo class that describes the facilities provided at the hotel, including meeting rooms restaurants.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MeetingSrvcInfo"/>
+				<xs:element ref="MeetingRooms"/>
+				<xs:element ref="GuestRooms"/>
+				<xs:element ref="RestaurantSrvcInfo"/>
+				<xs:element ref="RestaurantSrvcInfoCodes"/>
+				<xs:element ref="Restaurants"/>
+				<xs:element ref="SecurityFeatures"/>
+				<xs:element ref="PhyslyChallengedFeatures"/>
+			</xs:sequence>
+			<xs:attribute name="LastUpdated" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The date and time when this hotel information was last updated in the system. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GeographicalInfo">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Defines well-known locations and attractions of local interest in the geographical area of the hotel facility.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PointsOfInterest"/>
+				<xs:element ref="Attractions"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GuestRoom">
+		<xs:complexType>
+			<xs:attribute name="Code" type="xs:string" use="required"/>
+			<xs:attribute name="CodeRequired" type="xs:string" use="required"/>
+			<xs:attribute name="CodeContext" type="xs:string" use="required"/>
+			<xs:attribute name="Composite" type="xs:string" use="required"/>
+			<xs:attribute name="FirstFloor" type="xs:string" use="required"/>
+			<xs:attribute name="MaxOccupancy" type="xs:int" use="required"/>
+			<xs:attribute name="MaxRollaways" type="xs:int" use="required"/>
+			<xs:attribute name="NonSmoking" type="xs:string" use="required"/>
+			<xs:attribute name="Quality" type="xs:string" use="required"/>
+			<xs:attribute name="Configuration" type="xs:string" use="required"/>
+			<xs:attribute name="Size" type="xs:int" use="required"/>
+			<xs:attribute name="SizeMeasurement" type="xs:string" use="required"/>
+			<xs:attribute name="Type" type="xs:string" use="required"/>
+			<xs:attribute name="TypeImplied" type="xs:string" use="required"/>
+			<xs:attribute name="TypeClassName" type="xs:string" use="required"/>
+			<xs:attribute name="TypeCount" type="xs:int" use="required"/>
+			<xs:attribute name="TypeName" type="xs:string" use="required"/>
+			<xs:attribute name="StandardNumBeds" type="xs:int" use="required"/>
+			<xs:attribute name="StandardOccupancy" type="xs:int" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GuestRooms">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="GuestRoom" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelAddress">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PostalAddress" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="AddressPurposeCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code that identifies specific use for the address in correspondence with the hotel facility.  This code list will be maintained by HEDNA. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelAddresses">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The HotelAddress class defines the addresses at this hotel facility.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelAddress"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelAmenities">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The HotelAmenity class provides the codes and description of amenities in the hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelAmenity"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelAmenity">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="OperationSchedules"/>
+				<xs:element ref="UsualCharge"/>
+			</xs:sequence>
+			<xs:attribute name="HotelAmenityCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code for the type of amenity at a hotel facility.  This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="HotelAmenityDescription" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The text information describing the hotel amenity. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AvailableToAnyGuest" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This flag indicates whether the amenity is available to any guest or only to certain guests at the facility.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: 0 = (No) Restricted Avail, 1 = (Yes) Available to All Guests.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InvCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification code of the amenity for inventory and booking purposes if the amenity is an inventoriable item.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelCategoryCode" type="xs:string"/>
+	<xs:element name="HotelCategoryCodes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of HotelCategoryCode strings indicating which primary and/or secondary types of properties are described.  The HotelCategoryCodes are maintained by HEDNA.  </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelCategoryCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelContact">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ContactName"/>
+			</xs:sequence>
+			<xs:attribute name="GenderType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The gender of the contact person in the ContactName attribute. This may be useful for purposes of correspondence to the hotel. </xs:documentation>
+					<xs:documentation xml:lang="en">Values: 0 = Unknown, 1 = Male, 2 = Female.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Unknown"/>
+						<xs:enumeration value="Female"/>
+						<xs:enumeration value="Male"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ContactCategoryCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code that defines the type of contact information for the hotel facility. This code list will be maintained by HEDNA. Types of contacts include: Main chain contact, Res, Marketing, Sales, Technical Support, Cust Support, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ContactSrvcCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The information describing the contact service code for a hotel facility. (e.g., who to contact about golf tours). This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ContactSrvcCategoryCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The category code for the service contact at a hotel facility This provides a reference table of how to interpret the Contact Srvc Code. This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ContactLocation" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The location of the hotel contact. e.g.: at the hotel property, at a central office, etc. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ContactCorporatePosition" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The title or corporate position of the contact. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OKToPublish" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Indicates whether the contact information can be published externally (on a web site for the general public) or whether this is strictly a contact to be used in conjunction with the data feed (limited use). </xs:documentation>
+					<xs:documentation xml:lang="en">Values: 0 = No, Limited Publication, or 1 = Yes, OK for External Publication.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelContacts">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelContact" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelContentType">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="AffiliationInfo"/>
+				<xs:enumeration value="AmenityInfo"/>
+				<xs:enumeration value="Contactinfo"/>
+				<xs:enumeration value="FacilityInfo"/>
+				<xs:enumeration value="GeographicalInfo"/>
+				<xs:enumeration value="HotelInfo"/>
+				<xs:enumeration value="MultimediaInfo"/>
+				<xs:enumeration value="PolicyInfo"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="HotelContentTypes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of HotelContentTypes indicating which types of content are included in this object. Implementation Note: If the types are not set, then this indicates "no change" in the previous information when this object is pushed to the server.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelContentType" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelDescriptiveContent">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The HotelDescriptiveContent element contains the descriptive information about a hotel property.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelReference"/>
+				<xs:element ref="HotelContentTypes"/>
+				<xs:element ref="HotelInfo"/>
+				<xs:element ref="AmenityInfo"/>
+				<xs:element ref="FacilityInfo"/>
+				<xs:element ref="PolicyInfo"/>
+				<xs:element ref="GeographicalInfo"/>
+				<xs:element ref="AffiliationInfo"/>
+				<xs:element ref="ContactInfo"/>
+				<xs:element ref="MultimediaInfo"/>
+			</xs:sequence>
+			<xs:attribute name="LanguageID" type="xs:language" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification of the requested language to be used for the hotel descriptive information. ISO standard for human-readable languages.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OTA_HotelDescriptiveContentNotifRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OTA_HotelDescriptiveContentNotifRQ is the message that sends the notification of the rules and restrictions affecting the availability status of the hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelReference"/>
+				<xs:element ref="HotelDescriptiveContent"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This element defines standard attributes that appear on the root element for all OTA payloads.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+			<xs:attribute name="LanguageCode" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelDescriptiveContents">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelDescriptiveContent"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelElectronicAddress">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ElectronicAddress"/>
+			</xs:sequence>
+			<xs:attribute name="AddressPurposeCode" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelElectronicAddresses">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The HotelElectronicAddress class identifies the electronic addresses used by this hotel facility.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelElectronicAddress" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelInfo">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The HotelInfo class that describes general information about the hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelInfoCodes"/>
+				<xs:element ref="Renovations"/>
+				<xs:element ref="HotelName"/>
+				<xs:element ref="HotelCategoryCodes"/>
+				<xs:element ref="SegmentCategoryCodes"/>
+				<xs:element ref="LocationCategoryCodes"/>
+				<xs:element ref="LocationDescription"/>
+				<xs:element ref="ArchitecturalStyleCodes"/>
+				<xs:element ref="ClosedSeasons"/>
+				<xs:element ref="Position"/>
+				<xs:element ref="PositionFromCity"/>
+				<xs:element ref="PositionFromAirport"/>
+				<xs:element ref="PositionFromRailStation"/>
+				<xs:element ref="BriefDescription"/>
+			</xs:sequence>
+			<xs:attribute name="HotelShortName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The shortened (abbreviated) hotel name that identifies the hotel facility. This attribute could be the name that it is generally known by, or used in a search for the hotel.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="HotelURL" type="xs:anyURI" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The universal resource locator (URL) for the hotel as defined on the Internet. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="WhenBuilt" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The date that the hotel facility was built. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TotalRoomCount" type="xs:byte" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The total room count for the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PhyslyChallengedRoomCount" type="xs:byte" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The total count of rooms with physically-challenged attributes at the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NonSmokingRoomCount" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The total count of rooms designated as non-smoking at the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SuiteAndApartmentCount" type="xs:int" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The total count of rooms that are classified as suites or apartments at the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="BungalowAndVillaCount" type="xs:int" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The total count of rooms that are classified as bungalows or villas at the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FloorCount" type="xs:byte" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The number of floors at the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NearestIntersection" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The text description for the nearest cross streets to the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NearestHighway" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The text description for the nearest highway to the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NearestHighwayExit" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The text description for the closest highway exit to the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NearestMajorCity" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The name of the closest major city to the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NearestAirport" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The airport code for the major airport closest to the hotel facility.  These codes are defined and maintained by IATA (Intl. Air Transport Assn.).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NearestRailStation" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The railway code for the nearest railroad station to the hotel facility.  These codes are defined and maintained by Amtrak (United States).  </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LastUpdated" type="xs:dateTime" use="optional"/>
+			<xs:attribute name="ExecutiveFloor" type="xs:string" use="required"/>
+			<xs:attribute name="NumRoomsThatWork" type="xs:string" use="optional"/>
+			<xs:attribute name="NumAvailableRms" type="xs:int" use="required"/>
+			<xs:attribute name="NumAvailableSuites" type="xs:int" use="required"/>
+			<xs:attribute name="NumDoubleBedRms" type="xs:int" use="required"/>
+			<xs:attribute name="NumFloors" type="xs:int" use="required"/>
+			<xs:attribute name="NumKingBedRms" type="xs:short" use="required"/>
+			<xs:attribute name="NumNonSmoking" type="xs:short" use="required"/>
+			<xs:attribute name="NumPhysRms" type="xs:short" use="required"/>
+			<xs:attribute name="NumPhysSuites" type="xs:short" use="required"/>
+			<xs:attribute name="NumQueenBedRms" type="xs:short" use="required"/>
+			<xs:attribute name="TotalAvailableRms" type="xs:short" use="required"/>
+			<xs:attribute name="TotalNmbrPenthouses" type="xs:short" use="required"/>
+			<xs:attribute name="TotalNmbrStudios" type="xs:short" use="required"/>
+			<xs:attribute name="TotalPhysRms" type="xs:short" use="required"/>
+			<xs:attribute name="AreaUnits" type="xs:string" use="required"/>
+			<xs:attribute name="AreaWeather" type="xs:string" use="optional"/>
+			<xs:attribute name="CurrencyCode" type="xs:string" use="required"/>
+			<xs:attribute name="InterfaceCompliance" type="xs:string" use="optional"/>
+			<xs:attribute name="PMSSystem" type="xs:string" use="optional"/>
+			<xs:attribute name="PropertyEmail" type="xs:string" use="optional"/>
+			<xs:attribute name="ChainEmail" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelInfoCode" type="xs:string"/>
+	<xs:element name="HotelInfoCodes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelInfoCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelName" type="xs:string"/>
+	<xs:element name="HotelPhoneNmbr">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PhoneNmbr"/>
+				<xs:element ref="TollFreeFrom" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="AddressPurposeCode" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelPhoneNmbrs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The HotelPhoneNmbr class identifies telephone numbers at this hotel facility.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelPhoneNmbr" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LargestRoomSeatingCapacity">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The MeetingRoomCapacity object that defines the largest room seating capacity for a meeting room at the hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MeetingRoomCapacity"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LocationCategoryCode" type="xs:string"/>
+	<xs:element name="LocationCategoryCodes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of LocationCategoryCode strings that indicate the type of location of the hotel. Location codes may include settings such as city, rural, suburban, airport, beach, mountain, lake, etc., with a hotel indicating all that apply to a facility.  The LocationCategoryCodes are maintained by HEDNA.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="LocationCategoryCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LocationDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The text description for the location of the hotel facility. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LoyalProgram">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ProgramDescription"/>
+				<xs:element ref="ProgramRestrictions"/>
+			</xs:sequence>
+			<xs:attribute name="ProgramName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The title of the membership program.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SecondaryProgramName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The name of the secondary level of the program, e.g.: gold, silver, etc.. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AffiliateProgramName" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The title of the membership program affiliated with the primary program. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LoyalPrograms">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The LoyalProgram class defines the loyalty programs that this hotel participates in.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="LoyalProgram" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MeetingRoom">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MeetingRoomCodes"/>
+				<xs:element ref="AvailableCapacities"/>
+				<xs:element ref="UsualCharge"/>
+			</xs:sequence>
+			<xs:attribute name="Assess" type="xs:string" use="required"/>
+			<xs:attribute name="DedicatedExhibitSpace" type="xs:string" use="required"/>
+			<xs:attribute name="AVSuppliesFee" type="xs:float" use="optional"/>
+			<xs:attribute name="PC_Fee" type="xs:short" use="optional"/>
+			<xs:attribute name="GuestPCFee" type="xs:float" use="optional"/>
+			<xs:attribute name="GuestPCLeadTime" type="xs:byte" use="optional"/>
+			<xs:attribute name="HelpDeskPhoneNmbr" type="xs:string" use="optional"/>
+			<xs:attribute name="HighSpeedInternetLeadTime" type="xs:byte" use="optional"/>
+			<xs:attribute name="HighSpeedInternetProvider" type="xs:boolean" use="optional"/>
+			<xs:attribute name="HighSpeedInternetProviderName" type="xs:string" use="optional"/>
+			<xs:attribute name="BeerBottleFee" type="xs:float" use="optional"/>
+			<xs:attribute name="WineBottleFee" type="xs:float" use="optional"/>
+			<xs:attribute name="CallBrandCocktailAvgFee" type="xs:float" use="optional"/>
+			<xs:attribute name="CoffeeSodaAvgFee" type="xs:float" use="optional"/>
+			<xs:attribute name="PerPersonCoffeeBreakFee" type="xs:float" use="optional"/>
+			<xs:attribute name="ContinentalBreakfastFee" type="xs:float" use="optional"/>
+			<xs:attribute name="FullBreakfastFee" type="xs:float" use="optional"/>
+			<xs:attribute name="LunchDeliBuffetFee" type="xs:float" use="optional"/>
+			<xs:attribute name="PremiumCocktailsFee" type="xs:float" use="optional"/>
+			<xs:attribute name="LargestRm" type="xs:short" use="required"/>
+			<xs:attribute name="MaxSeatingCapacity" type="xs:short" use="required"/>
+			<xs:attribute name="NumBreakoutRms" type="xs:byte" use="required"/>
+			<xs:attribute name="MeetingPackageAttendeeRange" type="xs:string" use="required"/>
+			<xs:attribute name="MeetingPackageFee" type="xs:float" use="required"/>
+			<xs:attribute name="MeetingPackageInclusions" type="xs:string" use="optional"/>
+			<xs:attribute name="MeetingPackageName" type="xs:string" use="required"/>
+			<xs:attribute name="MeetingRmContact" type="xs:string" use="required"/>
+			<xs:attribute name="MeetingRmNames" type="xs:string" use="required"/>
+			<xs:attribute name="MeetingRmRentalPackages" type="xs:byte" use="optional"/>
+			<xs:attribute name="MeetingRmFee" type="xs:float" use="required"/>
+			<xs:attribute name="MeetingSupportSrvcCodes" type="xs:string" use="optional"/>
+			<xs:attribute name="ThreePackageMinimum" type="xs:byte" use="optional"/>
+			<xs:attribute name="MeetingFloors" type="xs:string" use="optional"/>
+			<xs:attribute name="NumMeetingRms" type="xs:byte" use="required"/>
+			<xs:attribute name="OtherEquipAndFacilities" type="xs:string" use="optional"/>
+			<xs:attribute name="ScreenFee" type="xs:float" use="optional"/>
+			<xs:attribute name="SecondLargestRm" type="xs:short" use="optional"/>
+			<xs:attribute name="SuggestionsAndInfo" type="xs:string" use="optional"/>
+			<xs:attribute name="TeleconferencingSrvcProvider" type="xs:string" use="optional"/>
+			<xs:attribute name="PortableWallRms" type="xs:string" use="optional"/>
+			<xs:attribute name="NonPortableWallRms" type="xs:string" use="optional"/>
+			<xs:attribute name="TotalMeetingSpace" type="xs:int" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MeetingRoomCapacity">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The MeetingRoomCapacity object that defines the largest room seating capacity for a meeting room at the hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="MeetingRoomFormatCode"/>
+				<xs:element ref="MeetingRoomCapacity"/>
+			</xs:choice>
+			<xs:attribute name="MeetingRoomFormatCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code for the format of a meeting room at the hotel facility, such as U-shape, banquet, conference style, etc. A hotel may indicate all formats that apply to the meeting room.  This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MeetingRoomCapacity" type="xs:int">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The total number of people permitted in the meeting room. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Area" type="xs:byte"/>
+			<xs:attribute name="Banquet" type="xs:byte"/>
+			<xs:attribute name="Conf" type="xs:short"/>
+			<xs:attribute name="Height" type="xs:short"/>
+			<xs:attribute name="ID" type="xs:int"/>
+			<xs:attribute name="Irregular" type="xs:boolean"/>
+			<xs:attribute name="Length" type="xs:short"/>
+			<xs:attribute name="MaxOccupancy" type="xs:int"/>
+			<xs:attribute name="PropertySystemName" type="xs:string"/>
+			<xs:attribute name="Reception" type="xs:byte"/>
+			<xs:attribute name="RoomName" type="xs:string"/>
+			<xs:attribute name="School" type="xs:boolean"/>
+			<xs:attribute name="Sort" type="xs:short"/>
+			<xs:attribute name="StandardOccupancy" type="xs:int"/>
+			<xs:attribute name="Theatre" type="xs:boolean"/>
+			<xs:attribute name="Units" type="xs:string"/>
+			<xs:attribute name="UShape" type="xs:boolean"/>
+			<xs:attribute name="Width" type="xs:short"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MeetingRoomCode">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="AV_Equip"/>
+					<xs:enumeration value="AV_Technician"/>
+					<xs:enumeration value="Blackboards"/>
+					<xs:enumeration value="BulletinBoard"/>
+					<xs:enumeration value="Carpenter"/>
+					<xs:enumeration value="CateredBreakfast"/>
+					<xs:enumeration value="CateredDinner"/>
+					<xs:enumeration value="CateredLunch"/>
+					<xs:enumeration value="Copier"/>
+					<xs:enumeration value="Decorator"/>
+					<xs:enumeration value="DirectionSigns"/>
+					<xs:enumeration value="DiscPlayers"/>
+					<xs:enumeration value="EaselsOrTablets"/>
+					<xs:enumeration value="Electrician"/>
+					<xs:enumeration value="FirstAid"/>
+					<xs:enumeration value="FlipChartAndMarkers"/>
+					<xs:enumeration value="HighSpeedInternetAccess"/>
+					<xs:enumeration value="ISDN_Line"/>
+					<xs:enumeration value="InstalledStage"/>
+					<xs:enumeration value="LCDProjector"/>
+					<xs:enumeration value="LCD_Panel"/>
+					<xs:enumeration value="Laborers"/>
+					<xs:enumeration value="Locksmith"/>
+					<xs:enumeration value="MessengerSrvc"/>
+					<xs:enumeration value="Microphone"/>
+					<xs:enumeration value="MusiciansEntertainers"/>
+					<xs:enumeration value="NameCardsHolders"/>
+					<xs:enumeration value="NotaryPublic"/>
+					<xs:enumeration value="Overhead"/>
+					<xs:enumeration value="PA_System"/>
+					<xs:enumeration value="PensPencilsPads"/>
+					<xs:enumeration value="Photographer"/>
+					<xs:enumeration value="Podium"/>
+					<xs:enumeration value="PollingDevices"/>
+					<xs:enumeration value="PortableStage"/>
+					<xs:enumeration value="PrintingSrvcs"/>
+					<xs:enumeration value="Projector"/>
+					<xs:enumeration value="ProjectorAndScreen"/>
+					<xs:enumeration value="RearScreen"/>
+					<xs:enumeration value="RegistrationSrvcs"/>
+					<xs:enumeration value="SecurityGuards"/>
+					<xs:enumeration value="SeparateEntrance"/>
+					<xs:enumeration value="SeparateRegistration"/>
+					<xs:enumeration value="SpotLights"/>
+					<xs:enumeration value="StackChairs"/>
+					<xs:enumeration value="Stenographer"/>
+					<xs:enumeration value="TV"/>
+					<xs:enumeration value="TVProductionSrvcProvider"/>
+					<xs:enumeration value="TablesAvailable"/>
+					<xs:enumeration value="Tours"/>
+					<xs:enumeration value="VCRRental"/>
+					<xs:enumeration value="VideoCamera"/>
+					<xs:enumeration value="VideoConferencing"/>
+					<xs:enumeration value="VideoConferencingSrvcProvider"/>
+					<xs:enumeration value="WalkieTalkiesRadio"/>
+					<xs:enumeration value="WalkieTalkiesRadioSrvcProvider"/>
+					<xs:enumeration value="WallCharts"/>
+					<xs:enumeration value="Whiteboards"/>
+					<xs:attribute name="Fee" type="xs:float"/>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MeetingRoomCodes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MeetingRoomCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MeetingRoomFormatCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The code for the format of a meeting room at the hotel facility, such as U-shape, banquet, conference style, etc. A hotel may indicate all formats that apply to the meeting room.  This code list will be maintained by HEDNA.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MeetingRooms">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of MeetingRoom objects that provide the codes and description of the meeting rooms in the hotel. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MeetingRoom"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MeetingSrvcInfo">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The MeetingSrvcInfo object that defines the meeting service capability at the hotel. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MeetingSrvcInfoCodes"/>
+				<xs:element ref="LargestRoomSeatingCapacity"/>
+				<xs:element ref="SmallestRoomSeatingCapacity"/>
+			</xs:sequence>
+			<xs:attribute name="MeetingRoomCount" type="xs:byte" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The total number of meeting rooms provided at the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LargestRoomSpace" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The amount of room space (measured in square meters) for the largest meeting room at the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Measure" type="xs:string" use="required"/>
+			<xs:attribute name="SmallestRoomSpace" type="xs:short" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The amount of room space (measured in square meters) for the smallest meeting room at the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TotalRoomSpace" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The total amount of room space (measured in square meters) for all of the meeting rooms at the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MeetingSrvcInfoCode">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="AVEquipAvailable"/>
+				<xs:enumeration value="CateringAvailable"/>
+				<xs:enumeration value="ExhibitSpaceAvailable"/>
+				<xs:enumeration value="HostSocialFunction"/>
+				<xs:enumeration value="VideoconferencingAvailable"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="MeetingSrvcInfoCodes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MeetingSrvcInfoCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MultimediaInfo">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The MultimediaInfo class may used by a hotel for floor maps, location maps, property diagrams, sound clips, movie clips, logo files, and other multimedia presentations of the hotel. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MultimediaObjects"/>
+			</xs:sequence>
+			<xs:attribute name="LastUpdated" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The date and time when the multimedia information for this hotel was last updated. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MultimediaObject">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The MultimediaObject class is used to identify the appropriate attributes and file formats for the various types of graphics and multimedia available.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="ContentCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A code that defines the category type for the multimedia object, e.g.: Image, Sound Clip, Movie File, Audio Sound, Animated .GIF, etc. at a hotel facility.  A list of typical category types maintained by HEDNA is based on standard computer industry usage, but is not inclusive.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ContentData" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Vendor-specific format that contains the content data for the multimedia object.  </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Description" type="xs:string" use="optional"/>
+			<xs:attribute name="PictureCategoryCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A code defining the type of picture used by the hotel facility. e.g.:  Exterior, Lobby, Reception area, RoomTypes, Facilities, Dining areas, Meeting Rooms, Logo, etc.</xs:documentation>
+					<xs:documentation xml:lang="en">This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Version" type="xs:float" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The version of the multimedia object used by the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ContentTitle" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The title for the multimedia object used by the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ContentCaption" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The caption to be published with the multimedia file. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CopyrightNotice" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The information describing the copyright notice for the multimedia object at a hotel facility. If this field is filled in, this copyright notice must be printed with the multimedia object.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MultimediaObjects">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MultimediaObject" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NameInfo">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The NameInfo class defines the parts of an individual’s name. The NameOrdered attribute may be used by itself or in conjunction with the other components of the name. The NameInfo class is defined in the Central Res Systems' Profile Synch standard. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NamePrefix" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The prefix name (e.g., Mr., Mrs., Ms., Miss, Dr., etc.).</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Mr."/>
+						<xs:enumeration value="Mrs."/>
+						<xs:enumeration value="Ms."/>
+						<xs:enumeration value="Miss"/>
+						<xs:enumeration value="Dr."/>
+						<xs:enumeration value="Sir"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="NameFirst" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The guest's first name.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameMiddle" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Guest's middle name.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameSur" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Guest's last name.  (Implementation note: systems that do not parse guest names into component parts should store the entire name in this field.)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameSuffix" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Guest's suffix (e.g., Jr., Sr., III, etc.).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameTitle" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Guest's title (e.g., Ph.D., etc.).</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameOrdered" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The proper name in the correct order.  To be used in correspondence, or when the CRS ships a guest name as a single string.  The PMS may store the name as a string, or parse it into the parts of a name in the elements above.  Neither is mutually exclusive of the other, and both may be used in a given implementation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OperationSchedule">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OperationSchedule class defines the dates and hours of operation of the hotel amenity. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DateTimeSpan"/>
+				<xs:element ref="OperationTimes"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OperationSchedules">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="OperationSchedule"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OperationTime">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DateTimeSpan"/>
+				<xs:element ref="DOWPattern" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OperationTimes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The OperationTime class indicates the times and availability of the services or amenities provided at a hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="OperationTime" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PaymtPolicy">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The AcceptedPaymtForms class defines the policy regarding forms of payment accepted by the hotel. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AcceptedPaymtForms"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PersonalSrvc">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The PersonalSrvc class provides the codes and description of personal services available at the hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PersonalSrvcDescription"/>
+				<xs:element ref="PositionFromHotel"/>
+				<xs:element ref="OperationSchedules"/>
+				<xs:element ref="UsualCharge"/>
+			</xs:sequence>
+			<xs:attribute name="PersonalSrvcCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code for the type of personal service offered in a room at a hotel facility.  This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AvailableToAnyGuest" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This flag indicates whether the personal service is available to all guests or only to certain guests at the facility.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: 0 = (No) Not Available to All Guests, 1 = (Yes) Available to All Guests.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InvCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification code of the personal service for inventory and booking purposes if the service is an inventoriable item.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PersonalSrvcDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The text information describing the personal service. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PersonalSrvcs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PersonalSrvc" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PhoneNmbr">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Phone numbers for a guest or agency profile. The PhoneNmbr class is defined in the Central Res Systems' Profile Synch standard.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="PhoneNmbrType" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This enumerated element describes the telephone number type assigned to the specific profile. Valid values: Home Phone, Business Phone, Mobile Phone, HomeFax, BusinessFax, Pager, Telex, TTY.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="BusinessPhone"/>
+						<xs:enumeration value="HomePhone"/>
+						<xs:enumeration value="MobilePhone"/>
+						<xs:enumeration value="HomeFax"/>
+						<xs:enumeration value="BusinessFax"/>
+						<xs:enumeration value="Pager"/>
+						<xs:enumeration value="Telex"/>
+						<xs:enumeration value="TTY"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="CountryAccessNmbr" type="xs:int" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This is the international country access identifier at the beginning of the telephone number that identifies the country to which the telephone call is made.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CityCode" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">In the U.S., Canada, etc., this is the area code.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PhoneNmbr" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This is the telephone number assigned to the specific profile.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PhoneExtension" type="xs:int" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This is the telephone number extension assigned to the specific profile.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PhyslyChallengedFeature">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UsualCharge"/>
+			</xs:sequence>
+			<xs:attribute name="PhyslyChallengedFeatureCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code for the type of physically challenged feature offered at the hotel facility.  This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AvailableToAnyGuest" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This flag indicates whether the physically challenged feature is available to all guests or only to certain guests at the facility.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: 0 = (No) Not Available to All Guests, 1 = (Yes) Available to All Guests.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InvCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification code of the physically challenged feature for inventory and booking purposes if the feature is an inventoriable item.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PhyslyChallengedFeatures">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of PhyslyChallengedFeature objects that provide the codes and description of the physically challenged (handicap accessibility) features provided at a hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PhyslyChallengedFeature" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PointsOfInterest">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of RefPoint objects defining the relative position and distance of well-known points of interest in the vicinity of the hotel facility.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RefPoints"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PolicyInfo">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The PolicyInfo class that describes the policies of the hotel, such as the type of payments, or whether children or pets are accepted.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PolicyInfoCodes"/>
+				<xs:element ref="UsualEarlyCheckoutCharge"/>
+				<xs:element ref="UsualCancelPolicy"/>
+				<xs:element ref="PaymtPolicy"/>
+			</xs:sequence>
+			<xs:attribute name="CheckInTime" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The usual check-in time for the hotel. Note that the ‘date’ portion of DateTime is not relevant, and the TimeType of the DateTime attribute would be set to 1 = time relevant.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CheckOutTime" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The usual check-out time for the hotel. Note that the ‘date’ portion of DateTime is not relevant, and the TimeType of the DateTime attribute value would be set to 1 = time relevant.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MinGuestAge" type="xs:byte" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The minimum guest age allowed for a guest at the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MinRecommendedGuestAge" type="xs:byte" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The minimum age recommended as a policy guideline for a guest at the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="UsualStayFreeCutoffAge" type="xs:byte" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The usual age limit at which a child can stay free with an adult at the hotel facility.  If this value is not set, then there is no cutoff limit.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="UsualStayFreeChildPerAdult" type="xs:int" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The usual number of children meeting the UsualStayFreeCutoffAge allowed to stay free with an adult at the hotel. If this value is not set, then there is no cutoff limit.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TotalGuestCount" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The total guest count allowed in a room at the hotel. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PetsPolicyCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code for the type of pet policy maintained at the hotel facility.  This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LastUpdated" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The date and time when the policy information for this hotel was last updated. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PolicyInfoCode">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="AdditionalOversoldPolicy"/>
+				<xs:enumeration value="EarlyCheckinAvailable"/>
+				<xs:enumeration value="LateCheckoutAvailable"/>
+				<xs:enumeration value="OversoldArrangeAccomodations"/>
+				<xs:enumeration value="OversoldArrangeTransportation"/>
+				<xs:enumeration value="OversoldNotifyContacts"/>
+				<xs:enumeration value="OversoldPayOneNightRoom"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PolicyInfoCodes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PolicyInfoCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Position">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The Position object defining the latitude and longitude of the reference point.  This is an optional attribute.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Latitude" type="xs:string" use="required"/>
+			<xs:attribute name="Longitude" type="xs:string" use="required"/>
+			<xs:attribute name="Altitude" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PositionFromAirport">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The RelativePosition object that indicates the direction and distance from the closest airport to the hotel facility. This is an optional attribute.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RelativePosition"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PositionFromCity">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The RelativePosition object that indicates the direction and distance from the nearest city to the hotel facility. This is an optional attribute.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RelativePosition"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PositionFromHotel">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The RelativePosition object that defines the relative distance and direction of the recreational service from the hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RelativePosition"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PositionFromRailStation">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The RelativePosition object that indicates the direction and distance from the closest rail station to the hotel facility. This is an optional attribute.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RelativePosition"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PostalAddress">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The PostalAddress class defines the parts of a postal addresses for a profile or hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="AddressType" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Valid values: Home, Business, Mailing, ShippingReceiving, Billing.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Address1" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Line 1 of the address.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Address2" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Line 2 of the address.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Address3" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Line 3 of the address.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Addres4" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Line 4 of the address.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="City" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The city locale for the postal address.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StateCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The ISO/postal service standard for state codes.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PostalCode" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The postal service standard (e.g., Zip codes) for locality codes.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CountryCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The ISO 3-character standard country code.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProgramDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Text description for membership program supported by the hotel. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ProgramRestrictions" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Description of the restrictions and policies for the loyalty program supported by the hotel. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PropertyCourtesyPhone">
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="RecreationalFacilities" type="xs:string"/>
+	<xs:element name="RecreationalSrvc">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The RecreationalSrvc class provides the codes and description of recreation available at the hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RecreationalFacilities" minOccurs="0"/>
+				<xs:element ref="RecreationalSrvcDescription"/>
+				<xs:element ref="PositionFromHotel"/>
+				<xs:element ref="OperationSchedules"/>
+				<xs:element ref="UsualCharge"/>
+			</xs:sequence>
+			<xs:attribute name="RecreationalSrvcCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code for the type of recreational service offered in a room at a hotel facility.  This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AvailableToAnyGuest" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This flag indicates whether the recreational service is available to all guests or only to certain guests at the facility.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: 0 = (No) Not Available to All Guests, 1 = (Yes) Available to All Guests.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InvCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification code of the recreational service for inventory and booking purposes if the service is an inventoriable item.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RecreationalSrvcDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The text information describing the recreational service. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RecreationalSrvcs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RecreationalSrvc" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RefPoint">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Position" minOccurs="0"/>
+				<xs:element ref="PositionFromHotel"/>
+				<xs:element ref="UsualShuttleCost"/>
+				<xs:element ref="UsualTaxiCost"/>
+				<xs:element ref="DrivingDirectionsFromRefPoint"/>
+				<xs:element ref="DrivingDirectionsToRefPoint"/>
+			</xs:sequence>
+			<xs:attribute name="RefPointCategoryCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code for the type of reference point in the proximity of the hotel facility.  This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RefPointName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The name of the reference point. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NearestCrossStreet" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The information describing the nearest cross streets from a hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ShuttleAvailable" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A flag indicating whether a shuttle is available for this hotel facility. </xs:documentation>
+					<xs:documentation xml:lang="en">Values: 0 = (No) Shuttle Not Available, 1 = (Yes) Shuttle Available.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RefPoints">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RefPoint" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RelatedRefPoint">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A searchable reference point that is related to the attraction and provides a means to determine the relative position, and driving directions to the attraction from the hotel.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RefPoint" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RelativePosition">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The RelativePosition object contains information about the direction, distance and travel time to the hotel facility from a designated location.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Direction" type="xs:string" use="required"/>
+			<xs:attribute name="Distance" type="xs:string" use="required"/>
+			<xs:attribute name="TypicalTravelTime" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The normal (average) travel time required to get to or from the location, measured in minutes. (This attribute assumes the most efficient or typical mode of transportation.)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Renovation">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Description"/>
+			</xs:sequence>
+			<xs:attribute name="ImmediatePlans" type="xs:boolean" use="required"/>
+			<xs:attribute name="AreaCode" type="xs:int" use="required"/>
+			<xs:attribute name="AreaDate" type="xs:dateTime" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Renovations">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Renovation"/>
+			</xs:sequence>
+			<xs:attribute name="WhenLastRenovated" type="xs:dateTime" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RestPolicyCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A code indicating the reservations policy of this restaurant. This code list will be maintained by HEDNA.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Restaurant">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RestaurantCodes"/>
+				<xs:element ref="RestaurantDescription"/>
+				<xs:element ref="PositionFromHotel"/>
+				<xs:element ref="AvailableMealCategoryCodes"/>
+				<xs:element ref="OperationSchedules"/>
+				<xs:element ref="AvailableMealTimeCodes"/>
+				<xs:element ref="RestPolicyCode"/>
+				<xs:element ref="BeverageCodes"/>
+			</xs:sequence>
+			<xs:attribute name="RestaurantCategoryCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code for the type of restaurant at the hotel facility.  This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RestaurantName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The name of the restaurant at the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MainCuisineCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code for the primary type of cuisine served at the restaurant. This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SeatingCapacity" type="xs:short" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The total seating capacity for this restaurant at the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MaximumSingleParty" type="xs:byte" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The maximum number of people that can be seated as a single party in this restaurant. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InvCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification code of the restaurant service or facility for inventory and booking purposes if the service is an inventoriable item.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RestaurantCode" type="xs:string"/>
+	<xs:element name="RestaurantCodes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RestaurantCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RestaurantDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The text information describing the restaurant. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RestaurantSrvcInfo">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The RestaurantSrvcInfo object that defines the restaurant services offered at the hotel. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="RestaurantCount" type="xs:short" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The total number of restaurants provided at a hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LargestRestaurantSeatingCapacity" type="xs:short" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The seating capacity of the largest restaurant at the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SmallestRestaurantSeatingCapacity" type="xs:byte" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The seating capacity of the smallest restaurant at the hotel facility. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RestaurantSrvcInfoCode" type="xs:string"/>
+	<xs:element name="RestaurantSrvcInfoCodes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RestaurantSrvcInfoCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Restaurants">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Restaurant" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RoomAmenities">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The RoomAmenity class provides the codes and description of amenities in the hotel rooms. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RoomAmenity" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RoomAmenity">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UsualCharge"/>
+			</xs:sequence>
+			<xs:attribute name="RoomAmenityCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code for the type of amenity offered in a room at a hotel facility.  This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RoomAmenityDescription" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The text information describing the room amenity. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InEachRoom" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This flag indicates whether the amenity is available in any room or only in certain rooms at the facility.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: 0 = (No) Not Available in Each Room, 1 = (Yes) Available in Each Room.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InvCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification code of the amenity for inventory and booking purposes if the room amenity is an inventoriable item.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SecurityFeature">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UsualCharge"/>
+			</xs:sequence>
+			<xs:attribute name="SecurityFeatureCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The code for the type of security feature offered in a room at a hotel facility.  This code list will be maintained by HEDNA.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AvailableToAnyGuest" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">This flag indicates whether the security feature is available to all guests or only to certain guests at the facility.</xs:documentation>
+					<xs:documentation xml:lang="en">Values: 0 = (No) Not Available to All Guests, 1 = (Yes) Available to All Guests.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InvCode" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identification code of the security feature for inventory and booking purposes if the feature is an inventoriable item.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SecurityFeatures">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of SecurityFeature objects that provide the codes and description of the security features in the hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="SecurityFeature" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SegmentCategoryCode" type="xs:string"/>
+	<xs:element name="SegmentCategoryCodes">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of SegmentCategoryCode strings that indicate a subdivision of the hotel categories. The segment types indicate the relative class of accommodations, e.g.: luxury, deluxe, first class, moderate, budget, economy, tourist, etc. with a hotel indicating all that apply to any given facility.  The SegmentCategoryCodes are maintained by HEDNA.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="SegmentCategoryCode" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SmallestRoomSeatingCapacity">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The information describing the smallest room seating capacity for a meeting room at the hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MeetingRoomCapacity"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TollFreeFrom" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A collection of strings (3 each) defining the lists of country codes from which the hotel can be dialed using the toll free number.  This attribute uses the ISO country codes.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UsualCancelPolicy">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The CancelPenalty class defines the cancellation policy of the hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CancelPenalties"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UsualCharge">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The usual charge for the amenity. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:float">
+					<xs:attribute name="CurrencyCode" type="xs:string" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">CurrencyCode, a 3-character string indicating the ISO currency code (e.g., "USD", etc.) indicating the country of origin and type of currency represented.</xs:documentation>
+							<xs:documentation xml:lang="en">The currency code is ISO standard # 4217 (1995).</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UsualEarlyCheckoutCharge">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The amount usually charged to a guest for an early check-out at the hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:float">
+					<xs:attribute name="CurrencyCode" type="xs:string" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">CurrencyCode, a 3-character string indicating the ISO currency code (e.g., "USD", etc.) indicating the country of origin and type of currency represented.</xs:documentation>
+							<xs:documentation xml:lang="en">The currency code is ISO standard # 4217 (1995).</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UsualShuttleCost">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The amount of the usual cost of a shuttle to this hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:float">
+					<xs:attribute name="CurrencyCode" type="xs:string" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">CurrencyCode, a 3-character string indicating the ISO currency code (e.g., "USD", etc.) indicating the country of origin and type of currency represented.</xs:documentation>
+							<xs:documentation xml:lang="en">The currency code is ISO standard # 4217 (1995).</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UsualTaxiCost">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The amount of the usual cost of a taxi to this hotel facility. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:float">
+					<xs:attribute name="CurrencyCode" type="xs:string" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">CurrencyCode, a 3-character string indicating the ISO currency code (e.g., "USD", etc.) indicating the country of origin and type of currency represented.</xs:documentation>
+							<xs:documentation xml:lang="en">The currency code is ISO standard # 4217 (1995).</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:restriction>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

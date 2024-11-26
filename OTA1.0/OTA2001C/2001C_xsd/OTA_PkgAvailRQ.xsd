@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:include schemaLocation="PackageRequest.xsd"/>
+	<xs:include schemaLocation="PkgReservation.xsd"/>
+	<xs:include schemaLocation="OTA_POS.xsd"/>
+	<xs:element name="OTA_PkgAvailRQ">
+		<xs:annotation>
+			<xs:documentation>A request for availability of a specific package.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="POS" minOccurs="0"/>
+				<xs:element name="PackageRequest" type="PackageRequest"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			<xs:attributeGroup ref="ReqRespVersion"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

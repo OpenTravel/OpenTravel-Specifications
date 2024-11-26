@@ -1,0 +1,414 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Organization",
+  "x-otm-library": {
+    "LibraryName": "Organization",
+    "LibraryVersion": "4.1.0",
+    "LibraryStatus": "DRAFT",
+    "SourceFile": "/Organization_4_1_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2020-05-15T11:16:19.023-0500"
+  },
+  "definitions": {
+    "FacilityID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "FacilityRef": {
+          "description": "Refers to the obj ID on an object defined elsewhere in the current document.",
+          "type": "string"
+        },
+        "FacilityKey": {
+          "description": "Assigned Type: org-0400:FacilityKey",
+          "$ref": "Organization_4_0_0_Trim.schema.json#/definitions/FacilityKey"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Facility": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FacilityID"
+        },
+        {
+          "properties": {
+            "name": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "Location": {
+              "description": "Assigned Type: ota2-0500:Location_Summary",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Location"
+            },
+            "OperationSchedule": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_5_0_0_Trim.schema.json#/definitions/OperationSchedule"
+              },
+              "maxItems": 30
+            },
+            "MultimediaCollection": {
+              "description": "Assigned Type: ota2-0500:MultimediaCollection_Summary",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/MultimediaCollection"
+            },
+            "Rating": {
+              "description": "Assigned Type: ota2-0500:Rating",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Rating"
+            },
+            "Telephone": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Telephone"
+              },
+              "maxItems": 5
+            },
+            "Email": {
+              "description": "Assigned Type: ota2-0500:Email_Summary",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Email"
+            },
+            "Description": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Text"
+              },
+              "maxItems": 10
+            },
+            "Property": {
+              "description": "Assigned Type: org-0400:Property",
+              "$ref": "Organization_4_0_0_Trim.schema.json#/definitions/PropertyID"
+            },
+            "SiteURL": {
+              "description": "Assigned Type: ota2-0500:URL",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/URL"
+            },
+            "RelativePosition": {
+              "description": "Assigned Type: ota2-0500:RelativePosition_Summary",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/RelativePosition"
+            },
+            "FeatureAccessibility": {
+              "type": "array",
+              "items": {
+                "$ref": "Organization_4_0_0_Trim.schema.json#/definitions/FeatureAccessibility"
+              },
+              "maxItems": 100
+            },
+            "FeatureSecurity": {
+              "type": "array",
+              "items": {
+                "$ref": "Organization_4_0_0_Trim.schema.json#/definitions/FeatureSecurity"
+              },
+              "maxItems": 100
+            },
+            "FacilityUnitCount": {
+              "description": "Assigned Type: org-0400:FacilityUnitCount",
+              "$ref": "Organization_4_0_0_Trim.schema.json#/definitions/FacilityUnitCount"
+            },
+            "Notice": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_5_1_0_Trim.schema.json#/definitions/NoticeID"
+              },
+              "maxItems": 100
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "FacilityGolf": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "allOf": [
+        {
+          "$ref": "Organization_4_1_0_Trim.schema.json#/definitions/Facility"
+        },
+        {
+          "properties": {
+            "GolfFacility": {
+              "description": "Assigned Type: orggf-0300:GolfFacility",
+              "$ref": "#/definitions/GolfFacility"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    },
+    "FacilityHotel": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "allOf": [
+        {
+          "$ref": "Organization_4_1_0_Trim.schema.json#/definitions/Facility"
+        },
+        {
+          "properties": {
+            "BasicPropertyInfo": {
+              "description": "Assigned Type: ph-0200:BasicPropertyInfo",
+              "$ref": "Hospitality_2_0_0_Trim.schema.json#/definitions/BasicPropertyInfo"
+            },
+            "SegmentCategory": {
+              "description": "Assigned Type: ota2-0400:SegmentCategory_Enum",
+              "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/SegmentCategory_Enum"
+            },
+            "HotelDetails": {
+              "description": "Assigned Type: orghs-0400:HotelDetails",
+              "$ref": "#/definitions/HotelDetails"
+            },
+            "RateRange": {
+              "description": "Assigned Type: ota2-0500:RateRange",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/RateRange"
+            },
+            "GDS_Codes": {
+              "description": "Assigned Type: orghs-0400:GDS_Codes",
+              "$ref": "#/definitions/GDS_Codes"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    },
+    "FacilityMeeting": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Facility"
+        },
+        {
+          "properties": {
+            "MeetingCenter": {
+              "description": "Assigned Type: org-0400:MeetingCenter",
+              "$ref": "Organization_4_0_0_Trim.schema.json#/definitions/MeetingCenter"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    },
+    "FacilityQueryHotel": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "HotelName": {
+          "description": "A name or partial name of hotel used in searching for a hotel facility.",
+          "type": "string",
+          "maxLength": 128
+        },
+        "BrandCode": {
+          "description": "A code that identifies the brand or flag of a hotel, often used for independently-owned or franchised properties who are known by a specific brand.",
+          "type": "string",
+          "maxLength": 128
+        },
+        "BrandName": {
+          "description": "The name of a brand of hotels (e.g., Courtyard, Hampton Inn).",
+          "type": "string",
+          "maxLength": 128
+        },
+        "ChainCode": {
+          "description": "The code that identifies a hotel chain or management group. The hotel chain code is decided between vendors. This attribute is optional if the hotel is an independent property that can be identified by the HotelCode attribute.",
+          "type": "string",
+          "maxLength": 128
+        },
+        "ChainName": {
+          "description": "The name of the hotel chain (e.g., Hilton, Marriott, Hyatt, Starwood).",
+          "type": "string",
+          "maxLength": 128
+        },
+        "Radius": {
+          "description": "Assigned Type: ota2-0500:Radius",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Radius"
+        },
+        "ReferencePointSummary": {
+          "description": "Assigned Type: ota2-0500:ReferencePoint_Summary",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/ReferencePoint"
+        },
+        "DetailedHotelSearchCriteria": {
+          "description": "Assigned Type: orghs-0400:DetailedHotelSearchCriteria",
+          "$ref": "#/definitions/DetailedHotelSearchCriteria"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "FacilityQueryHotelAvail": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "BaseHospitalityFacilityQuery": {
+          "description": "Assigned Type: orghs-0400:BaseHospitalityFacilityQuery",
+          "$ref": "#/definitions/BaseHospitalityFacilityQuery"
+        },
+        "PropertyInfo": {
+          "description": "Assigned Type: prod-0500:PropertyInfo",
+          "$ref": "Product_5_0_0_Trim.schema.json#/definitions/PropertyInfo"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "FacilityQueryHotelAvailRetrieve": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "FacilityIdentifier": {
+          "type": "array",
+          "items": {
+            "$ref": "Organization_4_0_0_Trim.schema.json#/definitions/FacilityID"
+          },
+          "maxItems": 100,
+          "minItems": 1
+        },
+        "BaseHospitalityFacilityQuery": {
+          "description": "Assigned Type: orghs-0400:BaseHospitalityFacilityQuery",
+          "$ref": "#/definitions/BaseHospitalityFacilityQuery"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type",
+        "FacilityIdentifier"
+      ],
+      "discriminator": "@type"
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "FacilityIdentifier": {
+          "$ref": "#/definitions/FacilityID"
+        }
+      },
+      "required": [
+        "FacilityIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "FacilitySummary": {
+          "$ref": "#/definitions/Facility"
+        }
+      },
+      "required": [
+        "FacilitySummary"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityGolf": {
+          "$ref": "#/definitions/FacilityGolf"
+        }
+      },
+      "required": [
+        "FacilityGolf"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityHotel": {
+          "$ref": "#/definitions/FacilityHotel"
+        }
+      },
+      "required": [
+        "FacilityHotel"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityMeeting": {
+          "$ref": "#/definitions/FacilityMeeting"
+        }
+      },
+      "required": [
+        "FacilityMeeting"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityQueryHotel": {
+          "$ref": "#/definitions/FacilityQueryHotel"
+        }
+      },
+      "required": [
+        "FacilityQueryHotel"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityQueryHotelAvail": {
+          "$ref": "#/definitions/FacilityQueryHotelAvail"
+        }
+      },
+      "required": [
+        "FacilityQueryHotelAvail"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityQueryHotelAvailRetrieve": {
+          "$ref": "#/definitions/FacilityQueryHotelAvailRetrieve"
+        }
+      },
+      "required": [
+        "FacilityQueryHotelAvailRetrieve"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:include schemaLocation="HotelReference.xsd"/>
+	<xs:element name="OTA_HotelSearchRS">
+		<xs:complexType>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element ref="Success"/>
+					<xs:element ref="Warnings" minOccurs="0"/>
+					<xs:element ref="HotelSearchRecord" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="TotalReturns" type="xs:string"/>
+				</xs:sequence>
+				<xs:element ref="Errors"/>
+			</xs:choice>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelSearchRecord">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HotelReference"/>
+				<xs:element ref="LocationDescription" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Position" minOccurs="0"/>
+				<xs:element ref="SearchValueMatch" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="MarketingText" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="HotelName" type="xs:string"/>
+			<xs:attribute name="Relevance" type="xs:decimal"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LocationDescription" type="xs:string"/>
+	<xs:element name="Position">
+		<xs:complexType>
+			<xs:attribute name="Latitude" type="xs:string"/>
+			<xs:attribute name="Longitude" type="xs:string"/>
+			<xs:attribute name="Altitude" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SearchValueMatch">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="Match" type="xs:boolean" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MarketingText" type="xs:string"/>
+</xs:schema>

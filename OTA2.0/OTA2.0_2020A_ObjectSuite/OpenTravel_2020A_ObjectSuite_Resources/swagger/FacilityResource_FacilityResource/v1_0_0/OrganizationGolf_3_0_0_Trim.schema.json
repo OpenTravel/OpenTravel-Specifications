@@ -1,0 +1,1270 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "OrganizationGolf",
+  "x-otm-library": {
+    "LibraryName": "OrganizationGolf",
+    "LibraryVersion": "3.0.0",
+    "LibraryStatus": "FINAL",
+    "SourceFile": "/OrganizationGolf_3_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2020-05-15T11:16:18.990-0500"
+  },
+  "definitions": {
+    "CourseID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Course"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0500:Identifier",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Identifier"
+        },
+        "CourseRef": {
+          "description": "Refers to the obj ID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "Course": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Course"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CourseID"
+        },
+        {
+          "properties": {
+            "numberOfHoles": {
+              "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0,
+              "exclusiveMinimum": false
+            },
+            "par": {
+              "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0,
+              "exclusiveMinimum": false
+            },
+            "totalYardage": {
+              "description": "Assigned Type: ota2-0500:NonNegativeInteger",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0,
+              "exclusiveMinimum": false
+            },
+            "yearBuilt": {
+              "description": "The year the course was built.",
+              "type": "string",
+              "format": "date"
+            },
+            "name": {
+              "description": "Assigned Type: ota2-0500:StringShort",
+              "type": "string",
+              "maxLength": 128
+            },
+            "CourseClosure": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CourseClosure"
+              },
+              "maxItems": 50
+            },
+            "CourseConditions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CourseConditions"
+              },
+              "maxItems": 20
+            },
+            "CourseRestrictions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CourseRestrictions"
+              },
+              "maxItems": 20
+            },
+            "ScoreCard": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ScoreCard"
+              },
+              "maxItems": 50
+            },
+            "OperationSchedule": {
+              "type": "array",
+              "items": {
+                "$ref": "Common_5_0_0_Trim.schema.json#/definitions/OperationSchedule"
+              },
+              "maxItems": 30
+            },
+            "FeeStructure": {
+              "description": "Assigned Type: ota2-0500:RateRange",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/RateRange"
+            },
+            "CourseArchitect": {
+              "description": "Assigned Type: orggf-0300:CourseArchitect",
+              "$ref": "#/definitions/CourseArchitect"
+            },
+            "golfCarRequiredInd": {
+              "description": "When true, a golf car is required on this golf course.",
+              "type": "boolean"
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "CourseDetail": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Course"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Course"
+        },
+        {
+          "properties": {
+            "NineHoleName": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 128
+              },
+              "maxItems": 10
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "CourseClosure": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "CourseClosure"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "TimeSpan": {
+          "description": "Assigned Type: ota2-0500:TimeSpan",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/TimeSpan"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "CourseClosureDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "CourseClosure"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CourseClosure"
+        },
+        {
+          "properties": {
+            "StartWindow": {
+              "description": "Assigned Type: ota2-0500:TimeSpan",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/TimeSpan"
+            },
+            "EndWindow": {
+              "description": "Assigned Type: ota2-0500:TimeSpan",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/TimeSpan"
+            },
+            "Duration": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 100
+            },
+            "DurationUnit": {
+              "description": "Assigned Type: ota2-0400:DurationUnit_Enum",
+              "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/DurationUnit_Enum"
+            },
+            "Description": {
+              "description": "Assigned Type: ota2-0500:Description",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Description"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "CourseConditions": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "CourseConditions"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "source": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "type": "string",
+          "maxLength": 128
+        },
+        "anyURI": {
+          "description": "The URL that provided the course conditions.",
+          "type": "string"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "CourseRestrictions": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "CourseRestrictions"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of facility and\\/or tee time restriction.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            }
+          },
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the facility and\\/or tee time restriction.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            }
+          },
+          "type": "string"
+        },
+        "TimeSpan": {
+          "description": "Assigned Type: ota2-0500:TimeSpan",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/TimeSpan"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "CourseRestrictionsDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "CourseRestrictions"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CourseRestrictions"
+        },
+        {
+          "properties": {
+            "StartWindow": {
+              "description": "Assigned Type: ota2-0500:TimeSpan",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/TimeSpan"
+            },
+            "EndWindow": {
+              "description": "Assigned Type: ota2-0500:TimeSpan",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/TimeSpan"
+            },
+            "Duration": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 100
+            },
+            "DurationUnit": {
+              "description": "Assigned Type: ota2-0400:DurationUnit_Enum",
+              "$ref": "CodeList_4_0_0_Trim.schema.json#/definitions/DurationUnit_Enum"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "DrivingRange": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "DrivingRange"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "turfType": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "orggf",
+                "value": "Grass"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "distance": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "orggf",
+                "value": "500 ft"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "numberOfStations": {
+          "description": "The number of stations at the driving range.",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "orggf",
+                "value": "10"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "drivingRangeType": {
+          "description": "Describes the type of driving range (e.g. Covered, Indoor, Outdoor).",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "orggf",
+                "value": "Outdoor"
+              }
+            ]
+          },
+          "$ref": "#/definitions/DrivingRangeType_Enum"
+        },
+        "nightLightingInd": {
+          "description": "When true, night lighting is provided.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "GolfFacilityFeatures": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GolfFacilityFeatures"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "description": {
+          "description": "Assigned Type: ota2-0500:String",
+          "type": "string",
+          "maxLength": 512
+        },
+        "FacilityHighlights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FacilityHighlights_Enum"
+          },
+          "maxItems": 10
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "PracticeFacilities": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "PracticeFacilities"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "OperationSchedule": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_5_0_0_Trim.schema.json#/definitions/OperationSchedule"
+          },
+          "maxItems": 30
+        },
+        "DrivingRange": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DrivingRange"
+          },
+          "maxItems": 10
+        },
+        "FeeStructure": {
+          "description": "Assigned Type: ota2-0500:RateRange",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/RateRange"
+        },
+        "PracticeFacilityFeatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PracticeFacilityFeatures_Enum"
+          },
+          "maxItems": 20
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "ProShopID": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "ProShop"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "objID": {
+          "description": "A unique identifier within this document for this object.",
+          "type": "string"
+        },
+        "Identifier": {
+          "description": "Assigned Type: ota2-0500:Identifier",
+          "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Identifier"
+        },
+        "ProShopRef": {
+          "description": "Refers to the obj ID on an object defined elsewhere in the current document.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "ProShop": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "ProShop"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProShopID"
+        },
+        {
+          "properties": {
+            "RentalEquipment": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RentalEquipment"
+              },
+              "maxItems": 30
+            },
+            "Services": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GolfServices_Enum"
+              },
+              "maxItems": 30
+            },
+            "ExtensionPoint": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+            }
+          }
+        }
+      ]
+    },
+    "ClubHouse": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "ClubHouse"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "ClubHouseFeatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClubHouseFeatures_Enum"
+          },
+          "maxItems": 20
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "CourseType_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "CourseType_Enum"
+      },
+      "description": "The course type at the facility.",
+      "type": "string",
+      "enum": [
+        "DailyFee",
+        "Municipal/Government/Military",
+        "Private",
+        "Private Limited Access",
+        "Resort"
+      ]
+    },
+    "DrivingRangeType_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationClosed",
+        "EntityName": "DrivingRangeType_Enum"
+      },
+      "description": "Describes the type of driving range.",
+      "type": "string",
+      "enum": [
+        "Covered",
+        "Indoor",
+        "Outdoor"
+      ]
+    },
+    "GolfFacility": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GolfFacility"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "courseType": {
+          "description": "The course type at the facility.",
+          "$ref": "#/definitions/CourseType_Enum"
+        },
+        "dressPolicy": {
+          "description": "Assigned Type: ota2-0500:StringShort",
+          "type": "string",
+          "maxLength": 128
+        },
+        "GolfFacilityFeatures": {
+          "description": "Assigned Type: orggf-0300:GolfFacilityFeatures",
+          "$ref": "#/definitions/GolfFacilityFeatures"
+        },
+        "ClubHouse": {
+          "description": "Assigned Type: orggf-0300:ClubHouse",
+          "$ref": "#/definitions/ClubHouse"
+        },
+        "Course": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CourseID"
+          },
+          "maxItems": 10
+        },
+        "ProShop": {
+          "description": "Assigned Type: orggf-0300:ProShop",
+          "$ref": "#/definitions/ProShopID"
+        },
+        "PracticeFacilities": {
+          "description": "Assigned Type: orggf-0300:PracticeFacilities",
+          "$ref": "#/definitions/PracticeFacilities"
+        },
+        "Amenity": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Amenity"
+          },
+          "maxItems": 99
+        },
+        "Ancillary": {
+          "type": "array",
+          "items": {
+            "$ref": "Common_5_0_0_Trim.schema.json#/definitions/Ancillary"
+          },
+          "maxItems": 99
+        },
+        "featuredInd": {
+          "description": "If true, this facility has been marked as a featured course by the supplier.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type",
+        "GolfFacilityFeatures"
+      ],
+      "discriminator": "@type"
+    },
+    "GolfFacilityDetail": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "GolfFacility"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GolfFacility"
+        },
+        {
+          "properties": {
+            "MeetingCenter": {
+              "description": "Assigned Type: org-0400:MeetingCenter",
+              "$ref": "Organization_4_0_0_Trim.schema.json#/definitions/MeetingCenter"
+            },
+            "RateRange": {
+              "description": "Assigned Type: ota2-0500:RateRange",
+              "$ref": "Common_5_0_0_Trim.schema.json#/definitions/RateRange"
+            },
+            "ExtensionPoint_Detail": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Detail"
+            }
+          }
+        }
+      ]
+    },
+    "RentalEquipment": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "RentalEquipment"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "Type": {
+          "description": "Assigned Type: orggf-0300:GolfRentalEquipment_Enum",
+          "$ref": "#/definitions/GolfRentalEquipment_Enum"
+        },
+        "PersonCategory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PersonCategory_Enum"
+          },
+          "maxItems": 10
+        },
+        "accessibleInd": {
+          "description": "When true, this equipment offered is accessible.",
+          "type": "boolean"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "GolfRentalEquipment_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "GolfRentalEquipment_Enum"
+      },
+      "description": "Rental equipment.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/GolfRentalEquipment_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "GolfRentalEquipment_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "GolfRentalEquipment_Enum"
+      },
+      "description": "Rental equipment.",
+      "type": "string",
+      "enum": [
+        "RightHandedClubs",
+        "LeftHandedClubs",
+        "GolfCars",
+        "StandupTransportation",
+        "Shoes",
+        "Other_"
+      ]
+    },
+    "PersonCategory_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "PersonCategory_Enum"
+      },
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/PersonCategory_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "PersonCategory_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "PersonCategory_Enum"
+      },
+      "type": "string",
+      "enum": [
+        "Juniors",
+        "Womens",
+        "Mens",
+        "Other_"
+      ]
+    },
+    "FacilityHighlights_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "FacilityHighlights_Enum"
+      },
+      "description": "Items offered at a facility.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/FacilityHighlights_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "FacilityHighlights_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "FacilityHighlights_Enum"
+      },
+      "description": "Items offered at a facility.",
+      "type": "string",
+      "enum": [
+        "Accessible",
+        "ClubRental",
+        "DayLockers",
+        "Dining",
+        "DrivingRange",
+        "GolfLessons",
+        "GolfSchool",
+        "MetalSpilesAllowed",
+        "PracticeFacilities",
+        "Other_"
+      ]
+    },
+    "GolfServices_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "GolfServices_Enum"
+      },
+      "description": "Services offered at a golf facility.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/GolfServices_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "GolfServices_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "GolfServices_Enum"
+      },
+      "description": "Services offered at a golf facility.",
+      "type": "string",
+      "enum": [
+        "ClubRegripping",
+        "ClubFitting",
+        "Lessons",
+        "RetailStore",
+        "CaddyForHire",
+        "Other_"
+      ]
+    },
+    "TeePosition": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "TeePosition"
+      },
+      "description": "The tee position for the hole.",
+      "properties": {
+        "teePositionName": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "orggf",
+                "value": "Champion"
+              }
+            ]
+          },
+          "type": "string",
+          "maxLength": 32
+        },
+        "yardage": {
+          "description": "The yardage for this hole from this tee position.",
+          "x-otm-annotations": {
+            "examples": [
+              {
+                "context": "orggf",
+                "value": "120"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ScoreCard": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "ScoreCard"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "courseSlope": {
+          "description": "The slope rating of the golf course.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}string"
+              ]
+            },
+            "examples": [
+              {
+                "context": "orggf",
+                "value": "60"
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "number": {
+          "description": "The hole number.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}positiveInteger"
+              ]
+            },
+            "examples": [
+              {
+                "context": "orggf",
+                "value": "2"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "par": {
+          "description": "The par for the hole.",
+          "x-otm-annotations": {
+            "documentation": {
+              "implementers": [
+                "Assigned XSD Type: {http:\\/\\/www.w3.org\\/2001\\/XMLSchema}positiveInteger"
+              ]
+            },
+            "examples": [
+              {
+                "context": "orggf",
+                "value": "3"
+              }
+            ]
+          },
+          "type": "integer",
+          "format": "int32"
+        },
+        "TeePosition": {
+          "description": "Assigned Type: orggf-0300:TeePosition",
+          "$ref": "#/definitions/TeePosition"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "CourseArchitect": {
+      "x-otm-entity": {
+        "EntityType": "ValueWithAttributes",
+        "EntityName": "CourseArchitect"
+      },
+      "description": "Information regarding the architect of the course.",
+      "properties": {
+        "name": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "year": {
+          "description": "Assigned Type: ota2-0500:StringTiny",
+          "type": "string",
+          "maxLength": 32
+        },
+        "description": {
+          "description": "Assigned Type: ota2-0500:StringLong",
+          "type": "string",
+          "maxLength": 4096
+        },
+        "originalInd": {
+          "description": "When true, this is the orginal course architect, when false this is the course architect for a renovation.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ClubHouseFeatures_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "ClubHouseFeatures_Enum"
+      },
+      "description": "Features related to the club house.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ClubHouseFeatures_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "ClubHouseFeatures_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "ClubHouseFeatures_Enum"
+      },
+      "description": "Features related to the club house.",
+      "type": "string",
+      "enum": [
+        "FitnessCenter",
+        "LockerRoom",
+        "Lounge",
+        "MeetingFacilities",
+        "Restaurant",
+        "SnackShop",
+        "Other_"
+      ]
+    },
+    "PracticeFacilityFeatures_Enum": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "PracticeFacilityFeatures_Enum"
+      },
+      "description": "Features of the practice facility.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/PracticeFacilityFeatures_Enum_Base"
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      }
+    },
+    "PracticeFacilityFeatures_Enum_Base": {
+      "x-otm-entity": {
+        "EntityType": "EnumerationOpen",
+        "EntityName": "PracticeFacilityFeatures_Enum"
+      },
+      "description": "Features of the practice facility.",
+      "type": "string",
+      "enum": [
+        "PuttingGreen",
+        "PracticeHoles",
+        "ShortGamePracticeArea",
+        "GolfSchool",
+        "Other_"
+      ]
+    },
+    "FacilityGolf": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "Facility"
+      },
+      "allOf": [
+        {
+          "$ref": "Organization_4_0_0_Trim.schema.json#/definitions/Facility"
+        },
+        {
+          "properties": {
+            "GolfFacility": {
+              "description": "Assigned Type: orggf-0300:GolfFacility",
+              "$ref": "#/definitions/GolfFacility"
+            },
+            "ExtensionPoint_Custom": {
+              "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint_Custom"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "CourseIdentifier": {
+          "$ref": "#/definitions/CourseID"
+        }
+      },
+      "required": [
+        "CourseIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "CourseSummary": {
+          "$ref": "#/definitions/Course"
+        }
+      },
+      "required": [
+        "CourseSummary"
+      ]
+    },
+    {
+      "properties": {
+        "CourseDetail": {
+          "$ref": "#/definitions/CourseDetail"
+        }
+      },
+      "required": [
+        "CourseDetail"
+      ]
+    },
+    {
+      "properties": {
+        "CourseClosureSummary": {
+          "$ref": "#/definitions/CourseClosure"
+        }
+      },
+      "required": [
+        "CourseClosureSummary"
+      ]
+    },
+    {
+      "properties": {
+        "CourseClosureDetail": {
+          "$ref": "#/definitions/CourseClosureDetail"
+        }
+      },
+      "required": [
+        "CourseClosureDetail"
+      ]
+    },
+    {
+      "properties": {
+        "CourseConditions": {
+          "$ref": "#/definitions/CourseConditions"
+        }
+      },
+      "required": [
+        "CourseConditions"
+      ]
+    },
+    {
+      "properties": {
+        "CourseRestrictionsSummary": {
+          "$ref": "#/definitions/CourseRestrictions"
+        }
+      },
+      "required": [
+        "CourseRestrictionsSummary"
+      ]
+    },
+    {
+      "properties": {
+        "CourseRestrictionsDetail": {
+          "$ref": "#/definitions/CourseRestrictionsDetail"
+        }
+      },
+      "required": [
+        "CourseRestrictionsDetail"
+      ]
+    },
+    {
+      "properties": {
+        "DrivingRange": {
+          "$ref": "#/definitions/DrivingRange"
+        }
+      },
+      "required": [
+        "DrivingRange"
+      ]
+    },
+    {
+      "properties": {
+        "GolfFacilityFeatures": {
+          "$ref": "#/definitions/GolfFacilityFeatures"
+        }
+      },
+      "required": [
+        "GolfFacilityFeatures"
+      ]
+    },
+    {
+      "properties": {
+        "PracticeFacilities": {
+          "$ref": "#/definitions/PracticeFacilities"
+        }
+      },
+      "required": [
+        "PracticeFacilities"
+      ]
+    },
+    {
+      "properties": {
+        "ProShopIdentifier": {
+          "$ref": "#/definitions/ProShopID"
+        }
+      },
+      "required": [
+        "ProShopIdentifier"
+      ]
+    },
+    {
+      "properties": {
+        "ProShopSummary": {
+          "$ref": "#/definitions/ProShop"
+        }
+      },
+      "required": [
+        "ProShopSummary"
+      ]
+    },
+    {
+      "properties": {
+        "ClubHouse": {
+          "$ref": "#/definitions/ClubHouse"
+        }
+      },
+      "required": [
+        "ClubHouse"
+      ]
+    },
+    {
+      "properties": {
+        "GolfFacilitySummary": {
+          "$ref": "#/definitions/GolfFacility"
+        }
+      },
+      "required": [
+        "GolfFacilitySummary"
+      ]
+    },
+    {
+      "properties": {
+        "GolfFacilityDetail": {
+          "$ref": "#/definitions/GolfFacilityDetail"
+        }
+      },
+      "required": [
+        "GolfFacilityDetail"
+      ]
+    },
+    {
+      "properties": {
+        "RentalEquipment": {
+          "$ref": "#/definitions/RentalEquipment"
+        }
+      },
+      "required": [
+        "RentalEquipment"
+      ]
+    },
+    {
+      "properties": {
+        "ScoreCard": {
+          "$ref": "#/definitions/ScoreCard"
+        }
+      },
+      "required": [
+        "ScoreCard"
+      ]
+    },
+    {
+      "properties": {
+        "FacilityGolf": {
+          "$ref": "#/definitions/FacilityGolf"
+        }
+      },
+      "required": [
+        "FacilityGolf"
+      ]
+    }
+  ]
+}

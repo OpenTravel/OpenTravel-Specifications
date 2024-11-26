@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA/2002/11" xmlns="http://www.opentravel.org/OTA/2002/11" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="2002B">
+	<xs:include schemaLocation="OTA_AirCommonTypes.xsd"/>
+	<xs:include schemaLocation="OTA_AirPreferences.xsd"/>
+	<xs:element name="OTA_AirAvailRQ">
+		<xs:annotation>
+			<xs:documentation>
+The Availability Request message requests Flight Availability for a city pair on a specific date for a specific number and type of passengers. Optional request information can include:
+- Time / Time Window
+- Connecting cities.
+- Client Preferences (airlines, cabin, flight types etc.)
+The request can be narrowed to request availability for a specific airline, specific flight, or specific booking class on a specific flight.
+The availability request message contains similar information to a standard Airline CRS or GDS availability request message.
+</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="POS" type="POS_Type">
+					<xs:annotation>
+						<xs:documentation>Point of sale object. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="OriginDestinationInformation" type="OriginDestinationInformationType"/>
+				<xs:element name="SpecificFlightInfo" type="SpecificFlightInfoType" minOccurs="0"/>
+				<xs:element name="TravelPreferences" type="AirSearchPrefsType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Air Availability Request preference information.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="TravelerInfoSummary" type="TravelerInfoSummaryType" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			<xs:attributeGroup ref="MaxResponsesGroup">
+				<xs:annotation>
+					<xs:documentation> Maximum number of responses desired in the response message.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+			<xs:attributeGroup ref="DirectandStopsGroup"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+

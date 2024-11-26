@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Copyright (C) 2000 Open Travel Alliance-->
+<!--Publication 2001A-->
+<!--OTA V2001A specification - Control Document-->
+<!--Contains elements to identify and authenticate the connection between trading partners.-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2000/10/XMLSchema" elementFormDefault="qualified">
+	<xsd:include schemaLocation="OTA_v2ent.xsd"/>
+	<xsd:element name="Control">
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:element ref="Session"/>
+				<xsd:element ref="SendBy"/>
+			</xsd:choice>
+			<xsd:attribute name="EchoToken" type="xsd:string"/>
+			<xsd:attribute name="TimeStamp" type="xsd:string"/>
+			<xsd:attribute name="Target" use="default" value="Production">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="Test"/>
+						<xsd:enumeration value="Production"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="Version" type="xsd:string"/>
+			<xsd:attribute name="SequenceNmbr" type="xsd:integer"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Session">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Credential"/>
+				<xsd:element ref="Principal"/>
+				<xsd:element ref="ReplyTo" minOccurs="0"/>
+				<xsd:element ref="CC_To" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="Identity" type="xsd:string" use="required"/>
+			<xsd:attribute name="URI" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Principal">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Credential" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="Identity" type="xsd:string" use="required"/>
+			<xsd:attribute name="URI" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SendBy">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Credential" minOccurs="0"/>
+				<xsd:element ref="ReplyTo" minOccurs="0"/>
+				<xsd:element ref="CC_To" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="Identity" type="xsd:string" use="required"/>
+			<xsd:attribute name="URI" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Credential">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:restriction base="xsd:string">
+					<xsd:attribute name="Method" type="xsd:string" use="required"/>
+				</xsd:restriction>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ReplyTo">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:restriction base="xsd:string">
+					<xsd:attribute name="OrigBodyReq" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:NMTOKEN">
+								<xsd:enumeration value="Yes"/>
+								<xsd:enumeration value="No"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:restriction>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CC_To">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:restriction base="xsd:string">
+					<xsd:attribute name="OrigBodyReq" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:NMTOKEN">
+								<xsd:enumeration value="Yes"/>
+								<xsd:enumeration value="No"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:restriction>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

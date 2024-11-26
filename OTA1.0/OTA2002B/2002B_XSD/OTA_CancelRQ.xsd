@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA/2002/11" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA/2002/11" elementFormDefault="qualified" version="2002B">
+	<xs:include schemaLocation="OTA_CommonTypes.xsd"/>
+	<xs:element name="OTA_CancelRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+A generic message, available as an action on several OTA services which
+requests a server to cancel the booking identified by the UniqueId element.	</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="POS" type="POS_Type" minOccurs="0"/>
+				<xs:element name="UniqueId" type="UniqueIdType" maxOccurs="5"/>
+				<xs:element name="Customer" type="PersonNameType" minOccurs="0"/>
+				<xs:element ref="TPA_Extensions" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			<xs:attributeGroup ref="ReqRespVersion"/>
+			<xs:attribute name="CancelType" type="TransactionActionType" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+

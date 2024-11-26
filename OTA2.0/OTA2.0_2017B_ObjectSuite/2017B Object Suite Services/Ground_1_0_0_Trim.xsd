@@ -1,0 +1,1043 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/product/Ground/v1"
+    version="1.0.0"
+    xmlns:fin-0200="http://www.opentravel.org/OTM/finance/v2"
+    xmlns:order-0200="http://www.opentravel.org/OTM/order/v2"
+    xmlns:org-0200="http://www.opentravel.org/OTM/organization/v2"
+    xmlns:orggf-0200="http://www.opentravel.org/OTM/organization/golf/v2"
+    xmlns:orghs-0200="http://www.opentravel.org/OTM/organization/hospitality/v2"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0200="http://www.opentravel.org/OTM/Common/v2"
+    xmlns:ota2-0201="http://www.opentravel.org/OTM/Common/v2_1"
+    xmlns:ota2-0300="http://www.opentravel.org/OTM/Common/v3"
+    xmlns:ota2msg="http://opentravel.org/common/message/v02"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00"
+    xmlns:pg-0200="http://www.opentravel.org/OTM/product/golf/v2"
+    xmlns:pgt-0100="http://www.opentravel.org/OTM/product/Ground/v1"
+    xmlns:prod-0300="http://www.opentravel.org/OTM/product/v3" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:ProjectName>Groundv3.otp</otm:ProjectName>
+                <otm:LibraryName>Ground</otm:LibraryName>
+                <otm:LibraryVersion>1.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                <otm:SourceFile>/Ground_1_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2017-05-24T10:17:02.639-04:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://opentravel.org/common/message/v02" schemaLocation="built-ins/OTA2_Message_v2.0.0.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/finance/v2" schemaLocation="Finance_2_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v2_1" schemaLocation="CodeList_2_1_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/golf/v2" schemaLocation="OrganizationGolf_2_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v2" schemaLocation="CodeList_2_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/order/v2" schemaLocation="Order_2_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/v2" schemaLocation="Organization_2_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v3" schemaLocation="Common_3_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/organization/hospitality/v2" schemaLocation="OrganizationHospitality_2_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/product/v3" schemaLocation="Product_3_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.opentravel.org/OTM/product/golf/v2" schemaLocation="Golf_2_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:simpleType name="VehicleCategory_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Size category of ground transportation vehicle - extracted from 1.0 SIZ code table</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">VehicleCategory_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Luxury"/>
+            <xsd:enumeration value="Premium"/>
+            <xsd:enumeration value="Minivan"/>
+            <xsd:enumeration value="12 passenger van"/>
+            <xsd:enumeration value="Stretch"/>
+            <xsd:enumeration value="Car"/>
+            <xsd:enumeration value="Minibus"/>
+            <xsd:enumeration value="SUV"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:element abstract="true" name="DriverSubGrp" type="pgt-0100:Driver_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Driver information.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Driver</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="DriverID"
+        substitutionGroup="pgt-0100:DriverSubGrp" type="pgt-0100:Driver_ID"/>
+    <xsd:element name="DriverIdentifier" type="pgt-0100:Driver_ID"/>
+    <xsd:element name="Driver" substitutionGroup="pgt-0100:DriverSubGrp" type="pgt-0100:Driver"/>
+    <xsd:element name="DriverSummary" type="pgt-0100:Driver"/>
+    
+    <xsd:complexType name="Driver_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Driver information.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Driver</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0300:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The unique identifier element allows the trading partners to  uniquely identify each Booking Rule, for transaction tracability.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="DriverRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="number" type="ota2-0300:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The driver's identification.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Driver">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Driver information.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Driver</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="pgt-0100:Driver_ID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" ref="ota2-0300:PersonNameSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">This provides name information for a person.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="4" minOccurs="0" ref="ota2-0300:TelephoneDetail">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Information about a telephone number, including the actual number and its usage.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SpokenLanguages" type="pgt-0100:LanguagesSpoken">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">One or more languages spoken by a person.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="Review" type="pgt-0100:Review">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Review's score from 0 to 5, where 5 is the best.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="LanguageInfo">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Language details pertaining to the service.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">LanguageInfo</otm:OTA2Entity>
+                <otm:Example context="pgt">en</otm:Example>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:language">
+                <xsd:attribute name="primaryLanguageInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">If true, this is the primary language spoken by the driver or the guide.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="requestedInd" type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">If true, it is preferred that the driver speak this language.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="TransferRequests">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Additional equirements for a transfer, e.g. child seat or meet and greet service.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Simple">TransferRequests</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:list itemType="pgt-0100:TransferRequests_Enum"/>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="Review">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Review's score from 0 to 5, where 5 is the best.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">Review</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="text" type="ota2-0300:StringText" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Description of the review score.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">5: Excellent</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="language" type="xsd:language" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The language in which the text is provided.</xsd:documentation>
+                        <xsd:documentation source="Implementer">AttributeGroup: LanguageGroup</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="Common">en</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="textFormat"
+                    type="ota2-0300:TextFormatType" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Indicates the format of text used in the description e.g. unformatted  or html.</xsd:documentation>
+                        <xsd:documentation source="Implementer">LocalAnonymousType: FormattedTextTextType_TextFormat</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="Common">TextFormat</otm:Equivalent>
+                            <otm:Example context="Common">Sample Formatted text</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:element name="FlightInfo" type="pgt-0100:FlightInfo"/>
+    
+    <xsd:complexType name="FlightInfo">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">FlightInfo</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="TransportNumber" type="prod-0300:TransportNumber">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The Airline code and flight identity number,</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="flightDate" type="ota2-0300:DateTimeLocal" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Departure or arrival time according to context.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="pgt">2017-01-20T15:20:00</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="LanguagesSpoken">
+        <xsd:annotation>
+            <xsd:documentation source="Description">One or more languages spoken by a person. Query: could the value be a text list of the language names, with 'best practice' having the primary language alwys first? e,g English French Spanish. Or is it sufficient for the relevant api to access and display it as required?</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">LanguagesSpoken</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="primaryLanguage"
+                    type="ota2-0300:LanguageCode" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The primary language spoken.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">en</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="alternateLanguages"
+                    type="ota2-0300:Languages" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Other languages spoken.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">es fr de</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="VehicleSubGrp" type="pgt-0100:Vehicle_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Defines a specific vehicle (make, model, seats etc.)</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Vehicle</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="VehicleID"
+        substitutionGroup="pgt-0100:VehicleSubGrp" type="pgt-0100:Vehicle_ID"/>
+    <xsd:element name="VehicleIdentifier" type="pgt-0100:Vehicle_ID"/>
+    <xsd:element name="Vehicle"
+        substitutionGroup="pgt-0100:VehicleSubGrp" type="pgt-0100:Vehicle"/>
+    <xsd:element name="VehicleSummary" type="pgt-0100:Vehicle"/>
+    <xsd:element name="VehicleDetail"
+        substitutionGroup="pgt-0100:VehicleSubGrp" type="pgt-0100:Vehicle_Detail"/>
+    
+    <xsd:complexType name="Vehicle_ID">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Defines a specific vehicle (make, model, seats etc.)</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Vehicle</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0300:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">a unique identifier defined by an external authority for this object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="VehicleRef" type="xsd:IDREF">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Refers to the objID on an object defined elsewhere in the current document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="objID" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A unique identifier within this document for this object.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="pgt"/>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Vehicle">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Defines a specific vehicle (make, model, seats etc.)</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Vehicle</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="pgt-0100:Vehicle_ID">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="5" minOccurs="0" ref="ota2-0300:Description">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A description or image of the vehicle.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="5" minOccurs="0"
+                        name="Luggage" type="pgt-0100:Luggage">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Type and quantity of luggage.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="10" minOccurs="0" ref="ota2-0300:Amenity">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Feature available in the vehicle</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+                </xsd:sequence>
+                <xsd:attribute name="seats" type="xsd:int" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The maximum seats in the vehicle - usually This figure is based on the quantity of seat belts in the vehicle.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">4</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="category"
+                    type="pgt-0100:VehicleCategory_Enum" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">e.g. car, van, limo etc.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">Premium</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="bkgClass"
+                    type="ota2-0300:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The class of service, e.g. Business.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">Business</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="modelYear"
+                    type="xsd:positiveInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The year the vehicle was registered</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">2016</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Vehicle_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Defines a specific vehicle (make, model, seats etc.)</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="BusinessObject">Vehicle</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="pgt-0100:Vehicle">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="Description" type="ota2-0300:TextFree">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">A description of the vehicle(s) available for a transfer.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="LicensePlate" type="pgt-0100:LicensePlate">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The license plate/registration of the vehicle.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="make" type="ota2-0300:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The make of the vehicle.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="pgt">Town Car</otm:Equivalent>
+                            <otm:Example context="pgt">Lincoln</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="model" type="ota2-0300:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The model of the vehicle.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Equivalent context="pgt"/>
+                            <otm:Example context="pgt">Suburban</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="year" type="xsd:int" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The model year of the vehicle.
+Query: should this be a yyyy pattern?</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">2016</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="maxPassengers" type="xsd:int" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The maximum passengers allowed in  the vehicle.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">7</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="maxAccessible" type="xsd:int" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The maximum accessible capacity of the vehicle.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">2</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="color" type="ota2-0300:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The colour of the vehicle.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">Blue</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="disabilityVehicleInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">If true, this vehicle is disability compatible.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="Operator" type="pgt-0100:Operator">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The company or driver operating a ground service.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Operator</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="OperatorCompany"
+        substitutionGroup="pgt-0100:Operator" type="pgt-0100:Operator_Company"/>
+    <xsd:element name="OperatorDriver"
+        substitutionGroup="pgt-0100:Operator" type="pgt-0100:Operator_Driver"/>
+    
+    <xsd:complexType abstract="true" name="Operator">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The company or driver operating a ground service.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Operator</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Identifier" type="ota2-0300:Identifier">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">An identifier for the Operator or Driver</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2-0300:Description">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Descriptive text for the operator or driver</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Shared"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Operator_Company">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The company or driver operating a ground service.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Operator</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="pgt-0100:Operator">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="CompanyName" type="ota2-0300:CompanyName">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The company operating a service.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="URL" type="ota2-0300:URL">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Link to the opertor's website.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Operator_Driver">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The company or driver operating a ground service.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ChoiceObject">Operator</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="pgt-0100:Operator">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="pgt-0100:DriverSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Details of the driver for a ground service,</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="LicensePlate">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Offical vehicle identification.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">LicensePlate</otm:OTA2Entity>
+                <otm:Example context="pgt">ABC123</otm:Example>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0300:StringTiny">
+                <xsd:attribute name="region" type="ota2-0300:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The region code of the license (e.g State or Country).</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">TN</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="category"
+                    type="ota2-0300:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Category of the license e.g. Military, Diplomatic etc.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">Standard</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="PassengerPrefs">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Passenger preferences including service type, physically challenged vehicle and other vehicle preferences.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">PassengerPrefs</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="maximumPassengers"
+                    type="xsd:positiveInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The maximum quantity of passengers this vehicle can accommodate. NOTE: This figure is based on the quantity of seat belts in the vehicle.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">3</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="maximumBaggage"
+                    type="xsd:positiveInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The (recommended) maximum baggage that can be stored in the vehicle's trunk.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">3</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="shortDescription"
+                    type="ota2-0300:StringText" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">A short description of the service type and vehicle.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="notes" type="ota2-0300:StringText" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Other notes related to the ground service, such as "Driver will meet you in baggage claim.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="transferRequests"
+                    type="pgt-0100:TransferRequests" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">One or more requests, e.g. Child Seat</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">ChildSeat GuideDog FuelEfficientVehicle PetFriendly</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="GroundService_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Type of gound service e.g. Private, Shared or Hourly</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">GroundService_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Private"/>
+            <xsd:enumeration value="Shared"/>
+            <xsd:enumeration value="Hourly"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:element abstract="true" name="CustomerCountSubGrp" type="pgt-0100:CustomerCount">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A count of the number of customers in an age band.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">CustomerCount</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="CustomerCount"
+        substitutionGroup="pgt-0100:CustomerCountSubGrp" type="pgt-0100:CustomerCount"/>
+    <xsd:element name="CustomerCountSummary" type="pgt-0100:CustomerCount"/>
+    <xsd:element name="CustomerCountDetail"
+        substitutionGroup="pgt-0100:CustomerCountSubGrp" type="pgt-0100:CustomerCount_Detail"/>
+    
+    <xsd:complexType name="CustomerCount">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A count of the number of customers in an age band.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">CustomerCount</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="ageQualifyingCode"
+            type="ota2-0300:StringTiny" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The code for a customer age band.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="pgt">A</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="description" type="ota2-0300:StringShort" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">A description of the age band, e.g. Adult.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="pgt">Adult</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="quantity" type="xsd:positiveInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The number of customers in this age band in the party.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="pgt">2</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="CustomerCount_Detail">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A count of the number of customers in an age band.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">CustomerCount</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="pgt-0100:CustomerCount">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Detail"/>
+                </xsd:sequence>
+                <xsd:attribute name="minAge" type="xsd:int" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The minimum age for this age band of customer.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">16</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="maxAge" type="xsd:positiveInteger" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The maximum age for this age band of customer .</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">120</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Luggage">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Quantity of luggage.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">Luggage</otm:OTA2Entity>
+                <otm:Example context="pgt">2</otm:Example>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:int">
+                <xsd:attribute name="luggageType"
+                    type="ota2-0300:StringTiny" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">e.g. small. medium etc. Should this be an enumeration?</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">Medium</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="remark" type="ota2-0300:StringText" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Textual information to provide descriptions and/or additional information.</xsd:documentation>
+                        <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="language" type="xsd:language" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Language of the text.</xsd:documentation>
+                        <xsd:documentation source="Implementer">AttributeGroup: LanguageGroup</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="Common">en</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:element name="GroundServiceQuery" type="pgt-0100:GroundServiceQuery"/>
+    
+    <xsd:complexType name="GroundServiceQuery">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Query criteria for a Ground Service</xsd:documentation>
+            <xsd:documentation source="Description">Query criteria for a Ground Service</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">GroundServiceQuery</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="1" ref="prod-0300:DepartureSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The departure point of a ground service.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="1" ref="prod-0300:ArrivalSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The destination of a ground service.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="5" minOccurs="0" ref="pgt-0100:CustomerCountSubGrp">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">A count of the number of customers in an age band.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="prod-0300:TransportTransfer">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Details of the transfer method.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="3" minOccurs="0" name="Luggage" type="pgt-0100:Luggage">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Type and quantity of luggage.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="PassengerPrefs" type="pgt-0100:PassengerPrefs">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Passenger preferences including service type, physically challenged vehicle and other vehicle preferences.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="order-0200:Gratuity">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Provides details for a gratuity to be added to the service price.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="MeetAndGreet" type="pgt-0100:MeetAndGreet">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Details of a meet and greet service.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="2" minOccurs="0" name="LanguageInfo" type="pgt-0100:LanguageInfo">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Language details pertaining to the service.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="Comments" type="ota2-0300:Text">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Comments related to the service.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="10" minOccurs="0" ref="prod-0300:ProductAncillary">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Amentities and services available with a ground servic (either included in the price or available for an extra fee). Note, includes pricing.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="MeetAndGreet">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Details of a meet and greet service.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">MeetAndGreet</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2:Empty">
+                <xsd:attribute name="greetingSignName"
+                    type="ota2-0300:StringShort" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">The name to be on the greeting sign.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="pgt">John Smith</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="complimentaryInd"
+                    type="xsd:boolean" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">When true, this service is complimentary.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="TransferRequests_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Additional equirements for a transfer, e.g. child seat or meet and greet service.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">TransferRequests_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="GuideDog"/>
+            <xsd:enumeration value="Multilingual"/>
+            <xsd:enumeration value="Guide"/>
+            <xsd:enumeration value="UnaccompaniedMinor"/>
+            <xsd:enumeration value="PersonalGreeter"/>
+            <xsd:enumeration value="MeetAndGreet"/>
+            <xsd:enumeration value="GreetingSign"/>
+            <xsd:enumeration value="FuelEfficientVehicle"/>
+            <xsd:enumeration value="PetFriendly"/>
+            <xsd:enumeration value="ChildSeat"/>
+            <xsd:enumeration value="FlightMonitoring"/>
+            <xsd:enumeration value="BabyStroller"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="DeadlineDropTime_Enum">
+        <xsd:annotation>
+            <xsd:documentation source="Description">An enumerated type indicating when the deadline drop time goes into effect.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">DeadlineDropTime_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="BeforeArrival"/>
+            <xsd:enumeration value="AfterBooking"/>
+            <xsd:enumeration value="AfterConfirmation">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The deadline information applies from when the reservation was confirmed.  In some systems the confirmation time will differ from the booking time.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="AfterArrival">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The deadline applies after the scheduled arrival time.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="AfterDeparture">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The deadline applies after the scheduled departure time.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="BeforeDeparture">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The deadline applies before departure.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:element name="GetGroundOffersRQ"
+        substitutionGroup="ota2msg:OTA2_Request_Payload" type="pgt-0100:GetGroundOffers_RQ"/>
+    
+    <xsd:complexType name="GetGroundOffers_RQ">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">GetGroundOffers_GetGroundOffers</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Request_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1"
+                        name="PayloadStdAttributes" type="ota2-0300:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0300:POS">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Point of Sale (POS) identifies the party or connection channel making the request.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="ProcessingInfo" type="ota2-0300:ProcessingInfo">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Transaction processing directives, including display currency overrides. If no display currency information is provided, the display and pricing currency will default to the value in POS/Source/@ISOCurrency.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="prod-0300:ProductQueries">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">Ground service search criteria.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="GetGroundOffersRS"
+        substitutionGroup="ota2msg:OTA2_Response_Payload" type="pgt-0100:GetGroundOffers_RS"/>
+    
+    <xsd:complexType name="GetGroundOffers_RS">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">GetGroundOffers_GetGroundOffers</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Response_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1"
+                        name="PayloadStdAttributes" type="ota2-0300:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0300:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element maxOccurs="99" minOccurs="0" ref="order-0200:OfferSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">One or more Ground Service products available at the given price and terms.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:element name="GetGroundOffersNotif"
+        substitutionGroup="ota2msg:OTA2_Notif_Payload" type="pgt-0100:GetGroundOffers_Notif"/>
+    
+    <xsd:complexType name="GetGroundOffers_Notif">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Operation">GetGroundOffers_GetGroundOffers</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ota2msg:OTA2_Notif_Payload">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1"
+                        name="PayloadStdAttributes" type="ota2-0300:PayloadStdAttributes">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">The standard attributes that appear on the root element for all OpenTravel messages.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2-0300:Result">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">When present indicates that errors or warnings occurred during processing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="order-0200:OfferSubGrp">
+                        <xsd:annotation>
+                            <xsd:documentation source="Description">One or mare Ground Service products available at the given price and terms.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+</xsd:schema>

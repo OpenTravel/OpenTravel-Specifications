@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.opentravel.org/OTM/finance/v3"
+    version="3.0.0"
+    xmlns:fin-0300="http://www.opentravel.org/OTM/finance/v3"
+    xmlns:ota2="http://www.opentravel.org/OTM/Common/v0"
+    xmlns:ota2-0300="http://www.opentravel.org/OTM/Common/v3"
+    xmlns:ota2-0400="http://www.opentravel.org/OTM/Common/v4"
+    xmlns:otm="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation>
+        <xsd:appinfo>
+            <otm:Library>
+                <otm:LibraryName>Finance</otm:LibraryName>
+                <otm:LibraryVersion>3.0.0</otm:LibraryVersion>
+                <otm:LibraryStatus>FINAL</otm:LibraryStatus>
+                <otm:SourceFile>/Finance_3_0_0.otm</otm:SourceFile>
+                <otm:CompilerVersion>4.0-SNAPSHOT</otm:CompilerVersion>
+                <otm:CompileDate>2018-04-05T08:59:59.621-04:00</otm:CompileDate>
+            </otm:Library>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v0" schemaLocation="built-ins/OTM_BuiltIns.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v3" schemaLocation="CodeList_3_0_0_Trim.xsd"/>
+    <xsd:import namespace="http://www.opentravel.org/OTM/Common/v4" schemaLocation="Common_4_0_0_Trim.xsd"/>
+    <xsd:import
+        namespace="http://www.OpenTravel.org/ns/OTA2/AppInfo_v01_00" schemaLocation="built-ins/OTA2_AppInfo_v1.0.0.xsd"/>
+    
+    <xsd:element name="EncryptionToken" type="fin-0300:EncryptionToken"/>
+    <xsd:element name="CardNumber" type="fin-0300:EncryptionToken"/>
+    <xsd:element name="SeriesCode" type="fin-0300:EncryptionToken"/>
+    <xsd:element name="MagneticStripe" type="fin-0300:EncryptionToken"/>
+    <xsd:element name="AuthenticationVerification" type="fin-0300:EncryptionToken"/>
+    
+    <xsd:complexType name="EncryptionToken">
+        <xsd:annotation>
+            <xsd:documentation source="Description">OpenTravel Best Practice: Use of Encrypted, Masked or Tokenized Information: Certain OpenTravel schema may have combinations payment and/or account information with other personally identifying information, such as customer name and date of birth. For enhanced customer privacy and security, it is RECOMMENDED that the payment and account information be protected, using tokenization or some other encryption method and displayed in a masked format.</xsd:documentation>
+            <xsd:documentation source="Description">OpenTravel Best Practice: Use of Encrypted, Masked or Tokenized Information: Certain OpenTravel schema may have combinations payment and/or account information with other personally identifying information, such as customer name and date of birth. For enhanced customer privacy and security, it is RECOMMENDED that the payment and account information be protected, using tokenization or some other encryption method and displayed in a masked format.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">EncryptionToken</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" name="PlainText" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Non-secure (plain text) value.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Warning" type="ota2-0400:ErrorWarning">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Identifies an error that occurred in the processing of the payment card.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}WarningType</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint"/>
+        </xsd:sequence>
+        <xsd:attribute name="encryptionKey" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">This contains a key required to retrieve the full payment instrument details compliant with PCI DSS standards.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="fin">KHC32198gt4</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="encryptionKeyMethod" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">This contains a reference to the key generation method being used - this is NOT the key value.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="fin">RotatingKeyEnvironment_DailyKey</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="encryptionMethod" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">When using the OpenTravel Encryption element, it is RECOMMENDED that all trading partners be informed of all encryption methods being used in advance of implementation to ensure message processing compatibility.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="fin">Triple DES</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="encryptedValue" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">The value in an encrypted format.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="fin">5dfc52b51bd35553df8592078de921bc</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="mask"
+            type="ota2-0400:EncryptionTokenTypeMask" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Masked data.</xsd:documentation>
+                <xsd:documentation source="Implementer">LocalAnonymousType: EncryptionTokenType_Mask</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="fin">xxxxxxxxxxxx9922</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="token"
+            type="fin-0300:EncryptionTokenType_Token" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Tokenized Information.</xsd:documentation>
+                <xsd:documentation source="Implementer">LocalAnonymousType: EncryptionTokenType_Token</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="fin">AEGHV234AUD54367</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="tokenProviderID" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">This contains a provider ID if multiple providers are used for secure information exchange.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="fin">Shift4 (payment)</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="authenticationMethod"
+            type="fin-0300:AuthenticationMethod_Enum" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Specifies the method that was used to authenticate the card.</xsd:documentation>
+                <xsd:documentation source="Implementer">LocalAnonymousType: EncryptionTokenType_AuthenticationMethod</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="fin">Check digit</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:element abstract="true" name="PaymentCardSubGrp" type="fin-0300:PaymentCard">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of the debit or credit card.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">PaymentCard</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="PaymentCard"
+        substitutionGroup="fin-0300:PaymentCardSubGrp" type="fin-0300:PaymentCard"/>
+    <xsd:element name="PaymentCardSummary" type="fin-0300:PaymentCard"/>
+    
+    <xsd:simpleType name="PaymentCard_Simple">
+        <xsd:annotation>
+            <xsd:documentation source="Description">The masked payment card number.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">PaymentCard</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2-0400:EncryptionTokenTypeMask"/>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="PaymentCard_Simple_List">
+        <xsd:list itemType="fin-0300:PaymentCard_Simple"/>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="PaymentCard">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Specifies the details of the debit or credit card.</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="CoreObject">PaymentCard</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="Privacy" type="ota2-0400:Privacy">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Data use and sharing permissions.</xsd:documentation>
+                    <xsd:documentation source="Implementer">AttributeGroup: PrivacyGroup</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="CardCode" type="fin-0300:CardAssociationCode">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Card code association such as VI for Visa, MC for Mastercard or AX for American Express, etc.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}PaymentCardCodeType</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">CardCode</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" name="CardType" type="fin-0300:PaymentCardType_Issuer">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Example: BritishAirwaysVisaSignatureCard</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}Issuer</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">Issuer</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Issuer" type="ota2-0400:CodeExternal">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Example: Mastercard</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}List_PaymentCardIssuer</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">CardType</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0"
+                name="CardHolderName" type="ota2-0400:StringShort">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Card holder name.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}StringLength1to64</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">CardHolderName</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" ref="fin-0300:CardNumber">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Credit card number embossed on the card.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}EncryptionTokenType</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">CardNumber</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" ref="fin-0300:AuthenticationVerification">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Verification digits.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}EncryptionTokenType</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">SeriesCode</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="3" minOccurs="0" ref="fin-0300:MagneticStripe">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">Magnetic stripe.</xsd:documentation>
+                    <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}EncryptionTokenType</xsd:documentation>
+                    <xsd:appinfo>
+                        <otm:Equivalent context="fin">MagneticStripe</otm:Equivalent>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="fin-0300:SeriesCode">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">The 3 character CVV code or series code found on the back of the payment card.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="ota2:ExtensionPoint_Summary"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:ID" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">XML ID only for use within the document.</xsd:documentation>
+                <xsd:documentation source="Implementer">Assigned XSD Type: {http://chameleon.anonymous/ns}RPH_Type</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Equivalent context="fin">RPH</otm:Equivalent>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="effectiveDate" type="ota2-0400:DateMMYY" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">Start month and year.</xsd:documentation>
+                <xsd:documentation source="Implementer">AttributeGroup: PaymentCardDateGroup</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="fin">0116</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="expireDate" type="ota2-0400:DateMMYY" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">End month and year.</xsd:documentation>
+                <xsd:appinfo>
+                    <otm:Example context="fin">0117</otm:Example>
+                </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="secureInd" type="xsd:boolean" use="optional">
+            <xsd:annotation>
+                <xsd:documentation source="Description">If true, all or a portion of this data is secure, via tokenization, encryption and/or masking.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="PaymentCardType_Issuer">
+        <xsd:annotation>
+            <xsd:documentation source="Description">Code of the payment card issuer.</xsd:documentation>
+            <xsd:documentation source="Implementer">Extension: List_PaymentCardIssuer</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="ValueWithAttributes">PaymentCardType_Issuer</otm:OTA2Entity>
+                <otm:Example context="fin">786</otm:Example>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="ota2-0400:StringShort">
+                <xsd:attribute name="issuerCode"
+                    type="ota2-0300:PaymentCardIssuer_Enum_Base" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation source="Description">Code Extension fields to exchange a value that is not in the list and is known to your trading partners.</xsd:documentation>
+                        <xsd:appinfo>
+                            <otm:Example context="fin">900</otm:Example>
+                        </xsd:appinfo>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="issuerCodeExtension" type="ota2:String_EnumExtension"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="AuthenticationMethod_Enum">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="EnumerationClosed">AuthenticationMethod_Enum</otm:OTA2Entity>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="SecurityCode">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">This confirms that the security code was used as the type of authentication.  The security code includes items such as CVV, CVV2, CVC, etc.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="MagneticStripe">
+                <xsd:annotation>
+                    <xsd:documentation source="Description">This confirms that the magnetic stripe was used as the type of authentication.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="EncryptionTokenType_Token">
+        <xsd:annotation>
+            <xsd:documentation source="Implementer">Assigned XSD Type: {http://www.w3.org/2001/XMLSchema}string</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Simple">EncryptionTokenType_Token</otm:OTA2Entity>
+                <otm:Equivalent context="fin">EncryptionTokenType_Token</otm:Equivalent>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9a-zA-Z]{1,32}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="CardAssociationCode">
+        <xsd:annotation>
+            <xsd:documentation source="Description">A tiny string  
+Minimum length of 0 and a maximum length of 32</xsd:documentation>
+            <xsd:appinfo>
+                <otm:OTA2Entity type="Simple">CardAssociationCode</otm:OTA2Entity>
+                <otm:Example context="fin">AX</otm:Example>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="ota2-0400:StringTiny">
+            <xsd:pattern value="([a-zA-Z]{2})?"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+</xsd:schema>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="OTA_v2ent.xsd"/>
+	<xs:element name="GolfCourse">
+		<xs:annotation>
+			<xs:documentation>Specific information about the golf course(s) for which the response is being made.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Trait" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="Id" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The Unique Identifier associated with the golf course.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The name of the golf course.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="City" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The city in which the golf course is located.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="State" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>The state in which the golf course is located.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Country" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The country in which the golf course is located.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PostalCode" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>The postal code of the golf course.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="County" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>The county in which the golf course is located.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Province" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Where applicable, the province in which the golf course is located.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PhoneNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The phone number of the golf course.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OTA_CourseSearchRS">
+		<xs:annotation>
+			<xs:documentation>The OTA_CourseSearchRS is a response to the OTA_CourseSearchRQ message.  It includes those courses for which the responding system has knowledge, and that meet the requested criteria.  Only those courses that meet the requested (and required) criteria should be included</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+					<xs:annotation>
+						<xs:documentation>May have either errors or warnings or both, but must have one if there is no success</xs:documentation>
+					</xs:annotation>
+				<xs:sequence>
+					<xs:element ref="Success"/>
+					<xs:element ref="Warnings" minOccurs="0"/>
+					<xs:element ref="GolfCourse" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:element ref="Errors"/>
+			</xs:choice>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+			<xs:attribute name="DetailResponse" type="xs:boolean" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Trait">
+		<xs:annotation>
+			<xs:documentation>Trait is a repeating set of features that are describe the  golf course. A Trait consists of a Name and Value pair  Examples would be:
+				 Name="Architect", Value="Robert Trent Jones". 
+				 Name="Location", Value="Myrtle Beach".
+				 Name="Caddies", Value="Yes".
+				 Name="Length", Value="6600 Yds"
+				 Where the request (OTA_CourseSearchRQ) has the attribute value of DetailResponse="No", all the requested criteria should be returned as Traits with their associated value.  If the criteria is not designated as Required="Yes", that criteria need not be met, but the value associated with that trait should be returned.  Where the DetailResponse="Yes" then all traits of the golf course should be returned with their associated value.
+				</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The code representing a specific trait.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Value" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>The value associated with that trait.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

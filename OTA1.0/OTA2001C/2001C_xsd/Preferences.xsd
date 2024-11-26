@@ -1,0 +1,1254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.opentravel.org/OTA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA" elementFormDefault="qualified">
+	<xs:include schemaLocation="UniqueId.xsd"/>
+	<xs:include schemaLocation="Privacy.xsd"/>
+	<xs:include schemaLocation="PersonName.xsd"/>
+	<xs:include schemaLocation="Address.xsd"/>
+	<xs:include schemaLocation="Telephone.xsd"/>
+	<xs:include schemaLocation="CompanyName.xsd"/>
+	<xs:include schemaLocation="TPA_Extensions.xsd"/>
+	<xs:element name="Preferences">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Needs of the traveler related to travel experiences.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="PrefCollection" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Privacy" type="Privacy"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PrefCollection">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Unique aggregation of customer travel needs.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="CommonPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="VehicleRentalPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AirlinesPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="HotelPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="OtherSrvcPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="TPA_Extensions" minOccurs="0"/>
+				<xs:element name="Privacy" type="Privacy"/>
+			</xs:sequence>
+			<xs:attribute name="TravelType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identifes the category of travel for a group of preferences.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CommonPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Travel needs associated with a collection but independent of specific travel services.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="NamePref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PhonePref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AddressPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PaymentFormPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="InterestPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="InsurancePref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="SeatingPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="TicketDistribPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="MediaEntertainPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PetInfoPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="MealPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="LoyaltyPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="SpecRequestPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="RelatedTravelerPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="TPA_Extensions" minOccurs="0"/>
+				<xs:element name="Privacy" type="Privacy"/>
+			</xs:sequence>
+			<xs:attribute name="SmokingInd">
+				<xs:simpleType>
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Indicates preference of smoking or no-smoking.</xs:documentation>
+					</xs:annotation>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PrimaryLanguage" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identifes the primary language preference for the form of travel represented in a collection.
+					 The human language is identified by ISO 639 codes.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AltLanguage" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Identifes the alternate language preferred by the customer for the form of travel specified in a collection.
+					 The human language is identified by ISO 639 codes.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VehicleRentalPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Vehicle Rental Preferences.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="LoyaltyPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="VendorPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PaymentFormPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="VehicleCoveragePref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="SpecRequestPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="VehicleTypePref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="VehicleClassPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AirConditionPref" minOccurs="0"/>
+				<xs:element ref="TransmissionPref" minOccurs="0"/>
+				<xs:element ref="CellPhonePref" minOccurs="0"/>
+				<xs:element ref="GlobalNavPref" minOccurs="0"/>
+				<xs:element ref="PhysChallEquipPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="ChildSeatPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="TPA_Extensions" minOccurs="0"/>
+				<xs:element name="Privacy" type="Privacy"/>
+			</xs:sequence>
+			<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Preferred" Indicates the level of preference for the vehicle rental collection.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SmokingInd">
+				<xs:simpleType>
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Indicates preference of smoking or no-smoking.</xs:documentation>
+					</xs:annotation>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="CarRenterType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Category of renter.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="GasPrePayInd">
+				<xs:simpleType>
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Indicates preference for prepaid fuel option.</xs:documentation>
+					</xs:annotation>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AirlinesPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifes a collection of preferences for airline travel.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="LoyaltyPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="VendorPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PaymentFormPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AirportOriginPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AirportRoutePref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AirFareRestrictPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="FlightTypePref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AirEquipPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AirCabinPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AirSrvcClassPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AirSeatPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="TicketDistribPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="MediaEntertainPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PetInfoPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="MealPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="SpecRequestPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="AirSSR_Pref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="TPA_Extensions" minOccurs="0"/>
+				<xs:element name="Privacy" type="Privacy"/>
+			</xs:sequence>
+			<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Preferred" Indicates level of preference for the special request.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SmokingInd">
+				<xs:simpleType>
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Indicates preference of smoking or no-smoking.</xs:documentation>
+					</xs:annotation>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="AirPassengerType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Category of airline passenger, using standard ATPCO codes.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AirTicketType">
+				<xs:simpleType>
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Type of airline ticket preferred for this collection.</xs:documentation>
+					</xs:annotation>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Electronic"/>
+						<xs:enumeration value="Paper"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Hotel Preferences used for this collection.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="LoyaltyPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PaymentFormPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="HotelChainPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PropertyNamePref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PropertyLocationPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PropertyTypePref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PropertyClassPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PropertyAmenityPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="RoomAmenityPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="RoomLocationPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="BedTypePref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="FoodSrvcPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="MealPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="MediaEntertainPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PetInfoPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="RecreationSrvcPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="BusinessSrvcPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PersonalSrvcPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="SecurityFeaturePref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PhysChallFeaturePref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="SpecRequestPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="TPA_Extensions" minOccurs="0"/>
+				<xs:element name="Privacy" type="Privacy"/>
+			</xs:sequence>
+			<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Preferred" Indicates the level of preference for the hotel collection.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RatePlanCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Code identifying preferred hotel rate plan for this travel situation</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SmokingInd">
+				<xs:simpleType>
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Indicates preference of smoking or no-smoking.</xs:documentation>
+					</xs:annotation>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="HotelGuestType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Category of hotel guest.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OtherSrvcPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Other travel service preferences.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="OtherSrvcName" minOccurs="0"/>
+				<xs:element ref="VendorPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="LoyaltyPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PaymentFormPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="SpecRequestPref" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="TPA_Extensions" minOccurs="0"/>
+				<xs:element name="Privacy" type="Privacy"/>
+			</xs:sequence>
+			<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Preferred" Indicates the level of preference for other travel services.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OtherServiceType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Category of other travel services.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NamePref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">PersonName to be used with this collection of preferences.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="UniqueId"/>
+				<xs:element name="PersonName" type="PersonName"/>
+			</xs:sequence>
+			<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Preferred" Indicated level of preference for the name indicated.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PhonePref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Telephone number(s) to be used with this collection of preferences.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="Telephone" type="Telephone"/>
+			</xs:sequence>
+			<xs:attribute name="PhoneUseType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Type of telephone number to be used for this preference collection.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddressPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Address(es) to be used with this collection of preferences.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="Address" type="Address"/>
+			</xs:sequence>
+			<xs:attribute name="AddressType">
+				<xs:simpleType>
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Defines what the purpose of the address is, such as home, business, mailing, delivery, shipping/receiving, etc.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Home"/>
+						<xs:enumeration value="Business"/>
+						<xs:enumeration value="Delivery"/>
+						<xs:enumeration value="Mailing"/>
+						<xs:enumeration value="Billing"/>
+						<xs:enumeration value="CreditCard"/>
+						<xs:enumeration value="Other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PaymentFormPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Form(s) of payment to be used with this collection of preferences.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicates the level of preference for the payment form to be used with the indicated preference.
+								</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="RPH" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> Identifies a specific form of payment by index number to be used to reference the payment form used in this travel collection.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InterestPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Traveler interests to be used with this collection of preferences.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicated level of preference for the interest indicated.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InsurancePref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies travel insurance policies to be used with this collection of preferences.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicates level of preference for the insurance indicated.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SeatingPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Seating preferences to be used with this collection of preferences.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicated level of preference for the seating indicated.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="SeatDirection" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Direction seat faces during travel, e.g.: forward, backward, etc., when conveyance allows.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="SeatLocation" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Location of seat in cabin of conveyance. Suggested values include: Forward, Middle, Aft, ExitRow, Bulkhead, Right or Left Side, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="SeatPosition" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Preferred position of seat in a row, such as Aisle, Middle, Center, Window, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="SeatRow" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Preferred row for seating; indicates specific row number and/or seat identifier.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TicketDistribPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Type of ticket distribution to be used with this collection of preferences.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicated level of preference for the type of ticket distribution.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="DistribType" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Ticket distribution method; such as Fax, Email, Courier, Mail, Airport_Pickup, City_Office, Hotel_Desk,
+							 WillCall, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="TicketTime" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Ticket turnaround time desired, amount of time requested to deliver tickets.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MediaEntertainPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Media and entertainment information preferences.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the media and entertainment identified.
+								</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PetInfoPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates the preferences for information about pets that accompany the customer in a given travel situation.
+				</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicated level of preference for the pet information identifiied.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MealPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Food and beverage preferences to be used with this collection.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicates the level of preference for the type of food and beverage indicated.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="MealType" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Type of meal required (e.g.,vegetarian, Kosher, lowfat, etc.)</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="FavoriteFood" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Dining preferences used with this collection.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Beverage" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Type of drink(s) preferred.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LoyaltyPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Loyalty programs to be used with this collection.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicated level of preference for the interest indicated.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="LoyaltyRPH" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Identification of loyalty program by reference number or index.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SpecRequestPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Special request to be used with this collection of preferences.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicated level of preference for special request.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RelatedTravelerPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Name(s) of related travelers to be used with this collection of preferences.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="UniqueId"/>
+			</xs:sequence>
+			<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Preferred" Indicated level of preference for the related traveler.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VendorPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates the preferred vendor company.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="VendorName" type="CompanyName"/>
+			</xs:sequence>
+			<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Preferred" Indicates the customer's level of preference for the vendor identified.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VehicleCoveragePref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Insurance coverage for car rentals associated with this collection.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="CoverSupplement" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="CoverDescription" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="CoverLimits" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Privacy" type="Privacy"/>
+			</xs:sequence>
+			<xs:attribute name="CoverageType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Category of insurance preferred by the customer, such as: Effects, Personal, Baggage, Vehicle damage, Liability,
+					 Theft, Young Driver, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CoverageCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Industry code for type of insurance coverage.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VehicleTypePref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Major category of vehicle, (e.g., car, truck, van, SUV, etc.) </xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicates the customer's level of preference for the vehicle type identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="VehicleType">
+						<xs:simpleType>
+							<xs:annotation>
+								<xs:documentation xml:lang="en">Identifies a major category of vehicle preferred.</xs:documentation>
+							</xs:annotation>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="Car"/>
+								<xs:enumeration value="Van"/>
+								<xs:enumeration value="SUV"/>
+								<xs:enumeration value="Convertible"/>
+								<xs:enumeration value="Truck"/>
+								<xs:enumeration value="Motorcycle"/>
+								<xs:enumeration value="Limo"/>
+								<xs:enumeration value="StationWagon"/>
+								<xs:enumeration value="Pickup"/>
+								<xs:enumeration value="MotorHome"/>
+								<xs:enumeration value="Other"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VehicleClassPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Detailed type of vehicle, such as Mini, Economy, Compact, Midsize, Intermediate, Standard, Luxury, Fullsize, 
+				Convertible, Minivan, etc.).</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicates the customer's level of preference for the vehicle class identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="VehicleClass">
+						<xs:simpleType>
+							<xs:annotation>
+								<xs:documentation xml:lang="en">Detailed category of vehicle preferred.</xs:documentation>
+							</xs:annotation>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="Mini"/>
+								<xs:enumeration value="Subcompact"/>
+								<xs:enumeration value="Economy"/>
+								<xs:enumeration value="Compact"/>
+								<xs:enumeration value="Midsize"/>
+								<xs:enumeration value="Intermediate"/>
+								<xs:enumeration value="Standard"/>
+								<xs:enumeration value="Fullsize"/>
+								<xs:enumeration value="Luxury"/>
+								<xs:enumeration value="Premium"/>
+								<xs:enumeration value="Minivan"/>
+								<xs:enumeration value="12_Passenger_Van"/>
+								<xs:enumeration value="Moving_Van"/>
+								<xs:enumeration value="15_Passenger_Van"/>
+								<xs:enumeration value="Cargo_Van"/>
+								<xs:enumeration value="12_Foot_Truck"/>
+								<xs:enumeration value="24_Foot_Truck"/>
+								<xs:enumeration value="26_Foot_Truck"/>
+								<xs:enumeration value="Moped"/>
+								<xs:enumeration value="Stretch"/>
+								<xs:enumeration value="Regular"/>
+								<xs:enumeration value="Unique"/>
+								<xs:enumeration value="Exotic"/>
+								<xs:enumeration value="Other"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AirConditionPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preference for air conditioning in a rental car.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicates the customer's level of preference for the car rental air conditioning equipment identified.
+						</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TransmissionPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Describes the type of transmission preferred in a rental car (e.g., manual or automatic)</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicates the customer's level of preference for the type of car transmission identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CellPhonePref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates the preference for a cellular phone in a rented car.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicates the customer's level of preference for the car rental cell phone equipment identifed.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GlobalNavPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates a preference for a global navigation system in a rental car.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicates the customer's level of preference for the car rental global navigation equipment identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PhysChallEquipPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Describes the equipment needed for drivers with special physical challenges.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicates the customer's level of preference for the car rental physically challenged equipment identified.
+								</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ChildSeatPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates requirements for child seats in a rental car.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicates the level of preference for the car rental child seat identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="ChildSeatType" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Type of child seat needed in a rental car (e.g., infant, booster, etc.).</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Quantity" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Number of seats of the type indicated in ChildSeat attribute.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CoverSupplement" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Supplemental insurance coverage for rental cars.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CoverDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Description of insurance coverage for rental cars.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CoverLimits" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Limitations on car insurance coverage, such as minimums, maximums, or per occurence.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AirportOriginPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Departure airport preferences, using IATA airport codes.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the origin airport.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AirportRoutePref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates the customer's preference for connecting airport, using IATA airport codes.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the airport routing identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AirFareRestrictPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies preferences for airfare restrictions acceptable or not acceptable for a given travel situation.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the type of fare restriction identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="FareRestrictType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FlightTypePref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preferences for certain types of flights, such as connections or stopovers, when used for a specific travel situation.
+				</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the flight type identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AirEquipPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies the type of make/model of aircraft preferred in a travel situation.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the type of aircraft identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="AirEquipType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AirCabinPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preferences for choice of airline cabin for a given travel situation.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the airline cabin type identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="CabinType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AirSrvcClassPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preference for type of service class for air travel in a given situation, such as First Class, Business, Economy, SuperSaver, etc.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the airline service class identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="ServiceClassCode" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Identifies the type of service class preferred for airline travel, using standard industry codes 
+							for service classes</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AirSeatPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preferences for seating arrangements for air travel.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="SeatingPref"/>
+			</xs:sequence>
+			<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the airline seating identified.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AirSSR_Pref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Identifies preferences for special services required for air travel, using standard industry (SSR-OSI) code list.
+				</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the air travel special service request identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="SSR_Code" type="xs:string">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Code of the special service request to be used for this air travel situation. Refers to standard industry code list.	</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HotelChainPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Company identifier for hotel chain associated with this collection of preferences.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="HotelChainName" type="CompanyName"/>
+			</xs:sequence>
+			<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the hotel chain identified.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PropertyNamePref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Name of preferred hotel property associated with this collection.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the hotel property identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PropertyLocationPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preferences for hotel property locations.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicates the level of preference for the property location identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="PropertyLocationType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PropertyTypePref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preference for hotel property location types.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the hotel location type identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="PropertyType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PropertyClassPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preferences for class of hotel property.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the hotel property class identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="PropertyClassType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PropertyAmenityPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preferences for hotel property amenities.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the hotel property amenity identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="PropertyAmenityType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RoomAmenityPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preferences for hotel room amenities.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the hotel room amenity identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="RoomAmenityType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RoomLocationPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preferences for hotel room locations.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the hotel room location identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="RoomLocationType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BedTypePref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preferences for the size and features of hotel bed types.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Indicates the level of preference for the bed type requested.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="BedType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FoodSrvcPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preferences for type of food service facilities in a hotel.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the hotel food service identified.
+						</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="FoodSrvcType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RecreationSrvcPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preferences for type of recreation services in a hotel.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the hotel recreational service identified.
+						</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="RecreationalSrvcType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BusinessSrvcPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preferences for type of business services in a hotel.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the hotel business service identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="BusinessSrvcType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PersonalSrvcPref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preferences for type of personal services in a hotel.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the hotel personal service identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="PersonalSrvcType" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SecurityFeaturePref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preferences for type of security features in a hotel.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the hotel security feature identified.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PhysChallFeaturePref">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Indicates preferences for type of features required to meet the needs of persons with physical challenges, disabilities, etc.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="PreferLevel" type="PreferLevelType" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="en"> value="Preferred" Identifies the customer's level of preference for the hotel physically challenged feature identified.
+						</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OtherSrvcName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Name of other travel services identified in this collection of preferences.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:simpleType name="PreferLevelType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Only"/>
+			<xs:enumeration value="Unacceptable"/>
+			<xs:enumeration value="Preferred"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

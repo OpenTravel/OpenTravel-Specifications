@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2000 Open Travel Alliance -->
+<!-- Non-versioned messages: OTA_payloadRS.xsd -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2000/10/XMLSchema" elementFormDefault="qualified">
+	<xsd:include schemaLocation="OTA_nvent.xsd"/>
+	<xsd:element name="PayloadsSupportedRS">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Payload" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="EchoToken" type="xsd:string"/>
+			<xsd:attribute name="TimeStamp" type="xsd:string"/>
+			<xsd:attribute name="Target" use="default" value="Production">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="Test"/>
+						<xsd:enumeration value="Production"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="Version" type="xsd:string"/>
+			<xsd:attribute name="SequenceNmbr" type="xsd:integer"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Payload">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:restriction base="xsd:string">
+					<xsd:attribute name="XML_Root" type="xsd:string" use="required"/>
+					<xsd:attribute name="Version" type="xsd:string" use="required"/>
+					<xsd:attribute name="Protocol" type="xsd:string" use="required"/>
+					<xsd:attribute name="Access" type="xsd:string" use="required"/>
+					<xsd:attribute name="Params" type="xsd:string"/>
+					<xsd:attribute name="DocURL" type="xsd:string"/>
+				</xsd:restriction>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

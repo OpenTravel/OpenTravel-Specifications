@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "HospitalityContent",
+  "x-otm-library": {
+    "ProjectName": "HotelDescriptiveContent 103019.otp",
+    "LibraryName": "HospitalityContent",
+    "LibraryVersion": "1.0.0",
+    "LibraryStatus": "DRAFT",
+    "SourceFile": "/HospitalityContent_1_0_0.otm",
+    "CompilerVersion": "4.0-SNAPSHOT",
+    "CompileDate": "2019-10-30T13:33:14.632-0400"
+  },
+  "definitions": {
+    "HotelDescriptiveContentListResponse": {
+      "x-otm-entity": {
+        "EntityType": "CoreObject",
+        "EntityName": "BaseResponse"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "HotelDescriptiveContent": {
+          "type": "array",
+          "items": {
+            "$ref": "OrganizationHospitality_4_0_0.schema.json#/definitions/HotelDescriptiveContentID"
+          }
+        },
+        "PayloadStdAttributes": {
+          "description": "Assigned Type: ota2-0500:PayloadStdAttributes",
+          "$ref": "#/definitions/PayloadStdAttributes"
+        },
+        "Result": {
+          "description": "Assigned Type: ota2-0500:Result",
+          "$ref": "#/definitions/Result"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "HotelDescriptiveContentQueryInfo": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "HotelDescriptiveContent"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "ProcessingInfo": {
+          "description": "Assigned Type: ota2-0500:ProcessingInfo",
+          "$ref": "Common_5_0_0.schema.json#/definitions/ProcessingInfo"
+        },
+        "HotelDescriptiveRequestInfo": {
+          "description": "Assigned Type: orghs-0400:HotelDescriptiveRequestInfo",
+          "$ref": "OrganizationHospitality_4_0_0.schema.json#/definitions/HotelDescriptiveRequestInfo"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type"
+    },
+    "HotelDescriptiveContentQueryGet": {
+      "x-otm-entity": {
+        "EntityType": "BusinessObject",
+        "EntityName": "HotelDescriptiveContent"
+      },
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "BasicPropertyInfo": {
+          "description": "Assigned Type: ph-0200:BasicPropertyInfo",
+          "$ref": "Hospitality_2_0_0.schema.json#/definitions/BasicPropertyInfo"
+        },
+        "ProcessingInfo": {
+          "description": "Assigned Type: ota2-0500:ProcessingInfo",
+          "$ref": "Common_5_0_0.schema.json#/definitions/ProcessingInfo"
+        },
+        "ExtensionPoint": {
+          "$ref": "built-ins/OTM_BuiltIns.schema.json#/definitions/ExtensionPoint"
+        }
+      },
+      "required": [
+        "@type",
+        "BasicPropertyInfo"
+      ],
+      "discriminator": "@type"
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "BaseResponse": {
+          "$ref": "#/definitions/BaseResponse"
+        }
+      },
+      "required": [
+        "BaseResponse"
+      ]
+    },
+    {
+      "properties": {
+        "HotelDescriptiveContentQueryInfo": {
+          "$ref": "#/definitions/HotelDescriptiveContentQueryInfo"
+        }
+      },
+      "required": [
+        "HotelDescriptiveContentQueryInfo"
+      ]
+    },
+    {
+      "properties": {
+        "HotelDescriptiveContentQueryGet": {
+          "$ref": "#/definitions/HotelDescriptiveContentQueryGet"
+        }
+      },
+      "required": [
+        "HotelDescriptiveContentQueryGet"
+      ]
+    }
+  ]
+}
